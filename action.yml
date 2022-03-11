@@ -1,0 +1,22 @@
+name: "S3 ipa/apk slurp"
+description: "Uploads all ipa/apk files (with manifest) to S3"
+runs:
+  using: "node16"
+  main: "index.js"
+inputs:
+  bucket: # id of input
+    description: "s3 uri to populate; such as 's3://mybucket'"
+    required: true
+  destinationPath:
+    description: "s3 path to populate; such as 'subpath'; defaults to the root"
+    required: false
+  sourcePaths:
+    description: "files or directory to slurp, supports globs; defaults to all APK and IPA the current dir"
+    default: "**/*.{apk,ipa}"
+    required: false
+  html:
+    description: "html for download page; 'SLOT' will be replaced with the app icons & download links"
+    required: false
+outputs:
+  url: # id of output
+    description: "url of the generated download page (https://$bucket.s3.amazonaws.com/$path/index.html)"

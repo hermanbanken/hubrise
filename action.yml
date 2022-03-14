@@ -2,7 +2,7 @@ name: "S3 ipa/apk slurp"
 description: "Uploads all ipa/apk files (with manifest) to S3"
 runs:
   using: "node16"
-  main: "index.js"
+  main: "bundle.js"
 inputs:
   bucket:
     description: "s3 uri to populate; such as 's3://mybucket'"

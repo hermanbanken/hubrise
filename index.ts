@@ -1,7 +1,7 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 import * as fs from "fs";
-import * as glob from "glob";
+import glob from "glob";
 import { link, manifest } from "ipa-bundler";
 import * as ABI from "app-bundle-info";
 import * as path from "path";

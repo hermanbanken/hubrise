@@ -4,19 +4,19 @@ runs:
   using: "node16"
   main: "index.js"
 inputs:
-  bucket: # id of input
+  bucket:
     description: "s3 uri to populate; such as 's3://mybucket'"
     required: true
   destinationPath:
     description: "s3 path to populate; such as 'subpath'; defaults to the root"
     required: false
+  destinationUrl:
+    description: "s3 url to use; required if s3 bucket is not at *.s3.amazonaws.com (for example Google Cloud Storage)"
+    required: false
   sourcePaths:
     description: "files or directory to slurp, supports globs; defaults to all APK and IPA the current dir"
     default: "**/*.{apk,ipa}"
     required: false
-  html:
-    description: "html for download page; 'SLOT' will be replaced with the app icons & download links"
-    required: false
 outputs:
-  url: # id of output
+  url:
     description: "url of the generated download page (https://$bucket.s3.amazonaws.com/$path/index.html)"

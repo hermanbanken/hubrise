@@ -20,3 +20,6 @@ inputs:
 outputs:
   url:
     description: "url of the generated download page (https://$bucket.s3.amazonaws.com/$path/index.html)"
+branding:
+  icon: 'upload'  
+  color: 'orange'

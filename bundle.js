@@ -1166,7 +1166,7 @@ var require_core = __commonJS({
     var file_command_1 = require_file_command();
     var utils_1 = require_utils();
     var os2 = __importStar(require("os"));
-    var path2 = __importStar(require("path"));
+    var path3 = __importStar(require("path"));
     var oidc_utils_1 = require_oidc_utils();
     var ExitCode;
     (function(ExitCode2) {
@@ -1197,7 +1197,7 @@ var require_core = __commonJS({
       } else {
         command_1.issueCommand("add-path", {}, inputPath);
       }
-      process.env["PATH"] = `${inputPath}${path2.delimiter}${process.env["PATH"]}`;
+      process.env["PATH"] = `${inputPath}${path3.delimiter}${process.env["PATH"]}`;
     }
     exports.addPath = addPath;
     function getInput2(name, options) {
@@ -1805,7 +1805,7 @@ var require_minimatch = __commonJS({
   "node_modules/minimatch/minimatch.js"(exports, module2) {
     module2.exports = minimatch;
     minimatch.Minimatch = Minimatch;
-    var path2 = function() {
+    var path3 = function() {
       try {
         return require("path");
       } catch (e) {
@@ -1813,7 +1813,7 @@ var require_minimatch = __commonJS({
     }() || {
       sep: "/"
     };
-    minimatch.sep = path2.sep;
+    minimatch.sep = path3.sep;
     var GLOBSTAR = minimatch.GLOBSTAR = Minimatch.GLOBSTAR = {};
     var expand = require_brace_expansion();
     var plTypes = {
@@ -1904,8 +1904,8 @@ var require_minimatch = __commonJS({
       if (!options)
         options = {};
       pattern = pattern.trim();
-      if (!options.allowWindowsEscape && path2.sep !== "/") {
-        pattern = pattern.split(path2.sep).join("/");
+      if (!options.allowWindowsEscape && path3.sep !== "/") {
+        pattern = pattern.split(path3.sep).join("/");
       }
       this.options = options;
       this.set = [];
@@ -2282,8 +2282,8 @@ var require_minimatch = __commonJS({
       if (f === "/" && partial)
         return true;
       var options = this.options;
-      if (path2.sep !== "/") {
-        f = f.split(path2.sep).join("/");
+      if (path3.sep !== "/") {
+        f = f.split(path3.sep).join("/");
       }
       f = f.split(slashSplit);
       this.debug(this.pattern, "split", f);
@@ -2438,12 +2438,12 @@ var require_inherits = __commonJS({
 var require_path_is_absolute = __commonJS({
   "node_modules/path-is-absolute/index.js"(exports, module2) {
     "use strict";
-    function posix(path2) {
-      return path2.charAt(0) === "/";
+    function posix(path3) {
+      return path3.charAt(0) === "/";
     }
-    function win32(path2) {
+    function win32(path3) {
       var splitDeviceRe = /^([a-zA-Z]:|[\\\/]{2}[^\\\/]+[\\\/]+[^\\\/]+)?([\\\/])?([\s\S]*?)$/;
-      var result = splitDeviceRe.exec(path2);
+      var result = splitDeviceRe.exec(path3);
       var device = result[1] || "";
       var isUnc = Boolean(device && device.charAt(1) !== ":");
       return Boolean(result[2] || isUnc);
@@ -2468,7 +2468,7 @@ var require_common = __commonJS({
       return Object.prototype.hasOwnProperty.call(obj, field);
     }
     var fs2 = require("fs");
-    var path2 = require("path");
+    var path3 = require("path");
     var minimatch = require_minimatch();
     var isAbsolute = require_path_is_absolute();
     var Minimatch = minimatch.Minimatch;
@@ -2533,11 +2533,11 @@ var require_common = __commonJS({
       if (!ownProp(options, "cwd"))
         self.cwd = cwd;
       else {
-        self.cwd = path2.resolve(options.cwd);
+        self.cwd = path3.resolve(options.cwd);
         self.changedCwd = self.cwd !== cwd;
       }
-      self.root = options.root || path2.resolve(self.cwd, "/");
-      self.root = path2.resolve(self.root);
+      self.root = options.root || path3.resolve(self.cwd, "/");
+      self.root = path3.resolve(self.root);
       if (process.platform === "win32")
         self.root = self.root.replace(/\\/g, "/");
       self.cwdAbs = isAbsolute(self.cwd) ? self.cwd : makeAbs(self, self.cwd);
@@ -2618,30 +2618,30 @@ var require_common = __commonJS({
     function makeAbs(self, f) {
       var abs = f;
       if (f.charAt(0) === "/") {
-        abs = path2.join(self.root, f);
+        abs = path3.join(self.root, f);
       } else if (isAbsolute(f) || f === "") {
         abs = f;
       } else if (self.changedCwd) {
-        abs = path2.resolve(self.cwd, f);
+        abs = path3.resolve(self.cwd, f);
       } else {
-        abs = path2.resolve(f);
+        abs = path3.resolve(f);
       }
       if (process.platform === "win32")
         abs = abs.replace(/\\/g, "/");
       return abs;
     }
-    function isIgnored(self, path3) {
+    function isIgnored(self, path4) {
       if (!self.ignore.length)
         return false;
       return self.ignore.some(function(item) {
-        return item.matcher.match(path3) || !!(item.gmatcher && item.gmatcher.match(path3));
+        return item.matcher.match(path4) || !!(item.gmatcher && item.gmatcher.match(path4));
       });
     }
-    function childrenIgnored(self, path3) {
+    function childrenIgnored(self, path4) {
       if (!self.ignore.length)
         return false;
       return self.ignore.some(function(item) {
-        return !!(item.gmatcher && item.gmatcher.match(path3));
+        return !!(item.gmatcher && item.gmatcher.match(path4));
       });
     }
   }
@@ -2657,7 +2657,7 @@ var require_sync = __commonJS({
     var Minimatch = minimatch.Minimatch;
     var Glob = require_glob().Glob;
     var util = require("util");
-    var path2 = require("path");
+    var path3 = require("path");
     var assert = require("assert");
     var isAbsolute = require_path_is_absolute();
     var common = require_common();
@@ -2783,7 +2783,7 @@ var require_sync = __commonJS({
               e = prefix + e;
           }
           if (e.charAt(0) === "/" && !this.nomount) {
-            e = path2.join(this.root, e);
+            e = path3.join(this.root, e);
           }
           this._emitMatch(index, e);
         }
@@ -2932,9 +2932,9 @@ var require_sync = __commonJS({
       if (prefix && isAbsolute(prefix) && !this.nomount) {
         var trail = /[\/\\]$/.test(prefix);
         if (prefix.charAt(0) === "/") {
-          prefix = path2.join(this.root, prefix);
+          prefix = path3.join(this.root, prefix);
         } else {
-          prefix = path2.resolve(this.root, prefix);
+          prefix = path3.resolve(this.root, prefix);
           if (trail)
             prefix += "/";
         }
@@ -3129,7 +3129,7 @@ var require_glob = __commonJS({
     var Minimatch = minimatch.Minimatch;
     var inherits = require_inherits();
     var EE = require("events").EventEmitter;
-    var path2 = require("path");
+    var path3 = require("path");
     var assert = require("assert");
     var isAbsolute = require_path_is_absolute();
     var globSync = require_sync();
@@ -3410,7 +3410,7 @@ var require_glob = __commonJS({
               e = prefix + e;
           }
           if (e.charAt(0) === "/" && !this.nomount) {
-            e = path2.join(this.root, e);
+            e = path3.join(this.root, e);
           }
           this._emitMatch(index, e);
         }
@@ -3597,9 +3597,9 @@ var require_glob = __commonJS({
       if (prefix && isAbsolute(prefix) && !this.nomount) {
         var trail = /[\/\\]$/.test(prefix);
         if (prefix.charAt(0) === "/") {
-          prefix = path2.join(this.root, prefix);
+          prefix = path3.join(this.root, prefix);
         } else {
-          prefix = path2.resolve(this.root, prefix);
+          prefix = path3.resolve(this.root, prefix);
           if (trail)
             prefix += "/";
         }
@@ -4325,7 +4325,7 @@ var require_yauzl = __commonJS({
     exports.ZipFile = ZipFile;
     exports.Entry = Entry;
     exports.RandomAccessReader = RandomAccessReader;
-    function open(path2, options, callback) {
+    function open(path3, options, callback) {
       if (typeof options === "function") {
         callback = options;
         options = null;
@@ -4344,7 +4344,7 @@ var require_yauzl = __commonJS({
         options.strictFileNames = false;
       if (callback == null)
         callback = defaultCallback;
-      fs2.open(path2, "r", function(err, fd) {
+      fs2.open(path3, "r", function(err, fd) {
         if (err)
           return callback(err);
         fromFd(fd, options, function(err2, zipfile) {
@@ -5077,7 +5077,7 @@ var require_polyfills = __commonJS({
       fs2.fstatSync = statFixSync(fs2.fstatSync);
       fs2.lstatSync = statFixSync(fs2.lstatSync);
       if (!fs2.lchmod) {
-        fs2.lchmod = function(path2, mode, cb) {
+        fs2.lchmod = function(path3, mode, cb) {
           if (cb)
             process.nextTick(cb);
         };
@@ -5085,7 +5085,7 @@ var require_polyfills = __commonJS({
         };
       }
       if (!fs2.lchown) {
-        fs2.lchown = function(path2, uid, gid, cb) {
+        fs2.lchown = function(path3, uid, gid, cb) {
           if (cb)
             process.nextTick(cb);
         };
@@ -5153,8 +5153,8 @@ var require_polyfills = __commonJS({
         };
       }(fs2.readSync);
       function patchLchmod(fs3) {
-        fs3.lchmod = function(path2, mode, callback) {
-          fs3.open(path2, constants.O_WRONLY | constants.O_SYMLINK, mode, function(err, fd) {
+        fs3.lchmod = function(path3, mode, callback) {
+          fs3.open(path3, constants.O_WRONLY | constants.O_SYMLINK, mode, function(err, fd) {
             if (err) {
               if (callback)
                 callback(err);
@@ -5168,8 +5168,8 @@ var require_polyfills = __commonJS({
             });
           });
         };
-        fs3.lchmodSync = function(path2, mode) {
-          var fd = fs3.openSync(path2, constants.O_WRONLY | constants.O_SYMLINK, mode);
+        fs3.lchmodSync = function(path3, mode) {
+          var fd = fs3.openSync(path3, constants.O_WRONLY | constants.O_SYMLINK, mode);
           var threw = true;
           var ret;
           try {
@@ -5190,8 +5190,8 @@ var require_polyfills = __commonJS({
       }
       function patchLutimes(fs3) {
         if (constants.hasOwnProperty("O_SYMLINK")) {
-          fs3.lutimes = function(path2, at, mt, cb) {
-            fs3.open(path2, constants.O_SYMLINK, function(er, fd) {
+          fs3.lutimes = function(path3, at, mt, cb) {
+            fs3.open(path3, constants.O_SYMLINK, function(er, fd) {
               if (er) {
                 if (cb)
                   cb(er);
@@ -5205,8 +5205,8 @@ var require_polyfills = __commonJS({
               });
             });
           };
-          fs3.lutimesSync = function(path2, at, mt) {
-            var fd = fs3.openSync(path2, constants.O_SYMLINK);
+          fs3.lutimesSync = function(path3, at, mt) {
+            var fd = fs3.openSync(path3, constants.O_SYMLINK);
             var ret;
             var threw = true;
             try {
@@ -5342,12 +5342,12 @@ var require_legacy_streams = __commonJS({
         ReadStream,
         WriteStream
       };
-      function ReadStream(path2, options) {
+      function ReadStream(path3, options) {
         if (!(this instanceof ReadStream))
-          return new ReadStream(path2, options);
+          return new ReadStream(path3, options);
         Stream.call(this);
         var self = this;
-        this.path = path2;
+        this.path = path3;
         this.fd = null;
         this.readable = true;
         this.paused = false;
@@ -5393,11 +5393,11 @@ var require_legacy_streams = __commonJS({
           self._read();
         });
       }
-      function WriteStream(path2, options) {
+      function WriteStream(path3, options) {
         if (!(this instanceof WriteStream))
-          return new WriteStream(path2, options);
+          return new WriteStream(path3, options);
         Stream.call(this);
-        this.path = path2;
+        this.path = path3;
         this.fd = null;
         this.writable = true;
         this.flags = "w";
@@ -5536,18 +5536,18 @@ var require_graceful_fs = __commonJS({
     function patch(fs3) {
       polyfills(fs3);
       fs3.gracefulify = patch;
-      fs3.createReadStream = createReadStream2;
+      fs3.createReadStream = createReadStream;
       fs3.createWriteStream = createWriteStream;
       var fs$readFile = fs3.readFile;
       fs3.readFile = readFile;
-      function readFile(path2, options, cb) {
+      function readFile(path3, options, cb) {
         if (typeof options === "function")
           cb = options, options = null;
-        return go$readFile(path2, options, cb);
-        function go$readFile(path3, options2, cb2, startTime) {
-          return fs$readFile(path3, options2, function(err) {
+        return go$readFile(path3, options, cb);
+        function go$readFile(path4, options2, cb2, startTime) {
+          return fs$readFile(path4, options2, function(err) {
             if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-              enqueue([go$readFile, [path3, options2, cb2], err, startTime || Date.now(), Date.now()]);
+              enqueue([go$readFile, [path4, options2, cb2], err, startTime || Date.now(), Date.now()]);
             else {
               if (typeof cb2 === "function")
                 cb2.apply(this, arguments);
@@ -5557,14 +5557,14 @@ var require_graceful_fs = __commonJS({
       }
       var fs$writeFile = fs3.writeFile;
       fs3.writeFile = writeFile2;
-      function writeFile2(path2, data, options, cb) {
+      function writeFile2(path3, data, options, cb) {
         if (typeof options === "function")
           cb = options, options = null;
-        return go$writeFile(path2, data, options, cb);
-        function go$writeFile(path3, data2, options2, cb2, startTime) {
-          return fs$writeFile(path3, data2, options2, function(err) {
+        return go$writeFile(path3, data, options, cb);
+        function go$writeFile(path4, data2, options2, cb2, startTime) {
+          return fs$writeFile(path4, data2, options2, function(err) {
             if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-              enqueue([go$writeFile, [path3, data2, options2, cb2], err, startTime || Date.now(), Date.now()]);
+              enqueue([go$writeFile, [path4, data2, options2, cb2], err, startTime || Date.now(), Date.now()]);
             else {
               if (typeof cb2 === "function")
                 cb2.apply(this, arguments);
@@ -5575,14 +5575,14 @@ var require_graceful_fs = __commonJS({
       var fs$appendFile = fs3.appendFile;
       if (fs$appendFile)
         fs3.appendFile = appendFile;
-      function appendFile(path2, data, options, cb) {
+      function appendFile(path3, data, options, cb) {
         if (typeof options === "function")
           cb = options, options = null;
-        return go$appendFile(path2, data, options, cb);
-        function go$appendFile(path3, data2, options2, cb2, startTime) {
-          return fs$appendFile(path3, data2, options2, function(err) {
+        return go$appendFile(path3, data, options, cb);
+        function go$appendFile(path4, data2, options2, cb2, startTime) {
+          return fs$appendFile(path4, data2, options2, function(err) {
             if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-              enqueue([go$appendFile, [path3, data2, options2, cb2], err, startTime || Date.now(), Date.now()]);
+              enqueue([go$appendFile, [path4, data2, options2, cb2], err, startTime || Date.now(), Date.now()]);
             else {
               if (typeof cb2 === "function")
                 cb2.apply(this, arguments);
@@ -5612,14 +5612,14 @@ var require_graceful_fs = __commonJS({
       }
       var fs$readdir = fs3.readdir;
       fs3.readdir = readdir;
-      function readdir(path2, options, cb) {
+      function readdir(path3, options, cb) {
         if (typeof options === "function")
           cb = options, options = null;
-        return go$readdir(path2, options, cb);
-        function go$readdir(path3, options2, cb2, startTime) {
-          return fs$readdir(path3, options2, function(err, files) {
+        return go$readdir(path3, options, cb);
+        function go$readdir(path4, options2, cb2, startTime) {
+          return fs$readdir(path4, options2, function(err, files) {
             if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-              enqueue([go$readdir, [path3, options2, cb2], err, startTime || Date.now(), Date.now()]);
+              enqueue([go$readdir, [path4, options2, cb2], err, startTime || Date.now(), Date.now()]);
             else {
               if (files && files.sort)
                 files.sort();
@@ -5686,7 +5686,7 @@ var require_graceful_fs = __commonJS({
         enumerable: true,
         configurable: true
       });
-      function ReadStream(path2, options) {
+      function ReadStream(path3, options) {
         if (this instanceof ReadStream)
           return fs$ReadStream.apply(this, arguments), this;
         else
@@ -5706,7 +5706,7 @@ var require_graceful_fs = __commonJS({
           }
         });
       }
-      function WriteStream(path2, options) {
+      function WriteStream(path3, options) {
         if (this instanceof WriteStream)
           return fs$WriteStream.apply(this, arguments), this;
         else
@@ -5724,22 +5724,22 @@ var require_graceful_fs = __commonJS({
           }
         });
       }
-      function createReadStream2(path2, options) {
-        return new fs3.ReadStream(path2, options);
+      function createReadStream(path3, options) {
+        return new fs3.ReadStream(path3, options);
       }
-      function createWriteStream(path2, options) {
-        return new fs3.WriteStream(path2, options);
+      function createWriteStream(path3, options) {
+        return new fs3.WriteStream(path3, options);
       }
       var fs$open = fs3.open;
       fs3.open = open;
-      function open(path2, flags, mode, cb) {
+      function open(path3, flags, mode, cb) {
         if (typeof mode === "function")
           cb = mode, mode = null;
-        return go$open(path2, flags, mode, cb);
-        function go$open(path3, flags2, mode2, cb2, startTime) {
-          return fs$open(path3, flags2, mode2, function(err, fd) {
+        return go$open(path3, flags, mode, cb);
+        function go$open(path4, flags2, mode2, cb2, startTime) {
+          return fs$open(path4, flags2, mode2, function(err, fd) {
             if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-              enqueue([go$open, [path3, flags2, mode2, cb2], err, startTime || Date.now(), Date.now()]);
+              enqueue([go$open, [path4, flags2, mode2, cb2], err, startTime || Date.now(), Date.now()]);
             else {
               if (typeof cb2 === "function")
                 cb2.apply(this, arguments);
@@ -5806,11 +5806,11 @@ var require_graceful_fs = __commonJS({
 var require_utimes = __commonJS({
   "node_modules/fs-extra/lib/util/utimes.js"(exports, module2) {
     var fs2 = require_graceful_fs();
-    var path2 = require("path");
+    var path3 = require("path");
     var os2 = require("os");
     function hasMillisResSync() {
-      var tmpfile = path2.join("millis-test-sync" + Date.now().toString() + Math.random().toString().slice(2));
-      tmpfile = path2.join(os2.tmpdir(), tmpfile);
+      var tmpfile = path3.join("millis-test-sync" + Date.now().toString() + Math.random().toString().slice(2));
+      tmpfile = path3.join(os2.tmpdir(), tmpfile);
       var d = new Date(1435410243862);
       fs2.writeFileSync(tmpfile, "https://github.com/jprichardson/node-fs-extra/pull/141");
       var fd = fs2.openSync(tmpfile, "r+");
@@ -5819,8 +5819,8 @@ var require_utimes = __commonJS({
       return fs2.statSync(tmpfile).mtime > 1435410243e3;
     }
     function hasMillisRes(callback) {
-      var tmpfile = path2.join("millis-test" + Date.now().toString() + Math.random().toString().slice(2));
-      tmpfile = path2.join(os2.tmpdir(), tmpfile);
+      var tmpfile = path3.join("millis-test" + Date.now().toString() + Math.random().toString().slice(2));
+      tmpfile = path3.join(os2.tmpdir(), tmpfile);
       var d = new Date(1435410243862);
       fs2.writeFile(tmpfile, "https://github.com/jprichardson/node-fs-extra/pull/141", function(err) {
         if (err)
@@ -5853,8 +5853,8 @@ var require_utimes = __commonJS({
         throw new Error("fs-extra: timeRemoveMillis() unknown parameter type");
       }
     }
-    function utimesMillis(path3, atime, mtime, callback) {
-      fs2.open(path3, "r+", function(err, fd) {
+    function utimesMillis(path4, atime, mtime, callback) {
+      fs2.open(path4, "r+", function(err, fd) {
         if (err)
           return callback(err);
         fs2.futimes(fd, atime, mtime, function(err2) {
@@ -5877,7 +5877,7 @@ var require_utimes = __commonJS({
 var require_ncp = __commonJS({
   "node_modules/fs-extra/lib/copy/ncp.js"(exports, module2) {
     var fs2 = require_graceful_fs();
-    var path2 = require("path");
+    var path3 = require("path");
     var utimes = require_utimes();
     function ncp(source, dest, options, callback) {
       if (!callback) {
@@ -5885,8 +5885,8 @@ var require_ncp = __commonJS({
         options = {};
       }
       var basePath = process.cwd();
-      var currentPath = path2.resolve(basePath, source);
-      var targetPath = path2.resolve(basePath, dest);
+      var currentPath = path3.resolve(basePath, source);
+      var targetPath = path3.resolve(basePath, dest);
       var filter = options.filter;
       var transform = options.transform;
       var clobber = options.clobber !== false;
@@ -6016,7 +6016,7 @@ var require_ncp = __commonJS({
           if (err)
             return onError(err);
           items.forEach(function(item) {
-            startCopy(path2.join(dir, item));
+            startCopy(path3.join(dir, item));
           });
           return doneOne();
         });
@@ -6031,7 +6031,7 @@ var require_ncp = __commonJS({
       }
       function checkLink(resolvedPath, target) {
         if (dereference) {
-          resolvedPath = path2.resolve(basePath, resolvedPath);
+          resolvedPath = path3.resolve(basePath, resolvedPath);
         }
         isWritable(target, function(writable) {
           if (writable) {
@@ -6041,7 +6041,7 @@ var require_ncp = __commonJS({
             if (err)
               return onError(err);
             if (dereference) {
-              targetDest = path2.resolve(basePath, targetDest);
+              targetDest = path3.resolve(basePath, targetDest);
             }
             if (targetDest === resolvedPath) {
               return doneOne();
@@ -6059,8 +6059,8 @@ var require_ncp = __commonJS({
           return doneOne();
         });
       }
-      function isWritable(path3, done) {
-        fs2.lstat(path3, function(err) {
+      function isWritable(path4, done) {
+        fs2.lstat(path4, function(err) {
           if (err) {
             if (err.code === "ENOENT")
               return done(true);
@@ -6103,7 +6103,7 @@ var require_ncp = __commonJS({
 var require_mkdirs = __commonJS({
   "node_modules/fs-extra/lib/mkdirs/mkdirs.js"(exports, module2) {
     var fs2 = require_graceful_fs();
-    var path2 = require("path");
+    var path3 = require("path");
     var o777 = parseInt("0777", 8);
     function mkdirs(p, opts, callback, made) {
       if (typeof opts === "function") {
@@ -6121,7 +6121,7 @@ var require_mkdirs = __commonJS({
         made = null;
       callback = callback || function() {
       };
-      p = path2.resolve(p);
+      p = path3.resolve(p);
       xfs.mkdir(p, mode, function(er) {
         if (!er) {
           made = made || p;
@@ -6129,9 +6129,9 @@ var require_mkdirs = __commonJS({
         }
         switch (er.code) {
           case "ENOENT":
-            if (path2.dirname(p) === p)
+            if (path3.dirname(p) === p)
               return callback(er);
-            mkdirs(path2.dirname(p), opts, function(er2, made2) {
+            mkdirs(path3.dirname(p), opts, function(er2, made2) {
               if (er2)
                 callback(er2, made2);
               else
@@ -6157,7 +6157,7 @@ var require_mkdirs = __commonJS({
 var require_mkdirs_sync = __commonJS({
   "node_modules/fs-extra/lib/mkdirs/mkdirs-sync.js"(exports, module2) {
     var fs2 = require_graceful_fs();
-    var path2 = require("path");
+    var path3 = require("path");
     var o777 = parseInt("0777", 8);
     function mkdirsSync(p, opts, made) {
       if (!opts || typeof opts !== "object") {
@@ -6170,14 +6170,14 @@ var require_mkdirs_sync = __commonJS({
       }
       if (!made)
         made = null;
-      p = path2.resolve(p);
+      p = path3.resolve(p);
       try {
         xfs.mkdirSync(p, mode);
         made = made || p;
       } catch (err0) {
         switch (err0.code) {
           case "ENOENT":
-            made = mkdirsSync(path2.dirname(p), opts, made);
+            made = mkdirsSync(path3.dirname(p), opts, made);
             mkdirsSync(p, opts, made);
             break;
           default:
@@ -6216,7 +6216,7 @@ var require_mkdirs2 = __commonJS({
 var require_copy = __commonJS({
   "node_modules/fs-extra/lib/copy/copy.js"(exports, module2) {
     var fs2 = require_graceful_fs();
-    var path2 = require("path");
+    var path3 = require("path");
     var ncp = require_ncp();
     var mkdir = require_mkdirs2();
     function copy(src, dest, options, callback) {
@@ -6233,11 +6233,11 @@ var require_copy = __commonJS({
           return callback(err);
         var dir = null;
         if (stats.isDirectory()) {
-          var parts = dest.split(path2.sep);
+          var parts = dest.split(path3.sep);
           parts.pop();
-          dir = parts.join(path2.sep);
+          dir = parts.join(path3.sep);
         } else {
-          dir = path2.dirname(dest);
+          dir = path3.dirname(dest);
         }
         fs2.exists(dir, function(dirExists) {
           if (dirExists)
@@ -6299,7 +6299,7 @@ var require_copy_file_sync = __commonJS({
 var require_copy_sync = __commonJS({
   "node_modules/fs-extra/lib/copy-sync/copy-sync.js"(exports, module2) {
     var fs2 = require_graceful_fs();
-    var path2 = require("path");
+    var path3 = require("path");
     var copyFileSync = require_copy_file_sync();
     var mkdir = require_mkdirs2();
     function copySync(src, dest, options) {
@@ -6314,7 +6314,7 @@ var require_copy_sync = __commonJS({
         return true;
       };
       var stats = options.recursive ? fs2.lstatSync(src) : fs2.statSync(src);
-      var destFolder = path2.dirname(dest);
+      var destFolder = path3.dirname(dest);
       var destFolderExists = fs2.existsSync(destFolder);
       var performCopy = false;
       if (stats.isFile()) {
@@ -6334,7 +6334,7 @@ var require_copy_sync = __commonJS({
         contents.forEach(function(content) {
           var opts = options;
           opts.recursive = true;
-          copySync(path2.join(src, content), path2.join(dest, content), opts);
+          copySync(path3.join(src, content), path3.join(dest, content), opts);
         });
       } else if (options.recursive && stats.isSymbolicLink()) {
         var srcPath = fs2.readlinkSync(src);
@@ -6360,7 +6360,7 @@ var require_rimraf = __commonJS({
     module2.exports = rimraf;
     rimraf.sync = rimrafSync;
     var assert = require("assert");
-    var path2 = require("path");
+    var path3 = require("path");
     var fs2 = require("fs");
     var glob2 = void 0;
     try {
@@ -6552,7 +6552,7 @@ var require_rimraf = __commonJS({
           return options.rmdir(p, cb);
         var errState;
         files.forEach(function(f) {
-          rimraf(path2.join(p, f), options, function(er2) {
+          rimraf(path3.join(p, f), options, function(er2) {
             if (errState)
               return;
             if (er2)
@@ -6629,7 +6629,7 @@ var require_rimraf = __commonJS({
       assert(p);
       assert(options);
       options.readdirSync(p).forEach(function(f) {
-        rimrafSync(path2.join(p, f), options);
+        rimrafSync(path3.join(p, f), options);
       });
       var retries = isWindows ? 100 : 1;
       var i = 0;
@@ -6779,11 +6779,11 @@ var require_jsonfile = __commonJS({
 var require_output_json_sync = __commonJS({
   "node_modules/fs-extra/lib/json/output-json-sync.js"(exports, module2) {
     var fs2 = require_graceful_fs();
-    var path2 = require("path");
+    var path3 = require("path");
     var jsonFile = require_jsonfile();
     var mkdir = require_mkdirs2();
     function outputJsonSync(file, data, options) {
-      var dir = path2.dirname(file);
+      var dir = path3.dirname(file);
       if (!fs2.existsSync(dir)) {
         mkdir.mkdirsSync(dir);
       }
@@ -6797,7 +6797,7 @@ var require_output_json_sync = __commonJS({
 var require_output_json = __commonJS({
   "node_modules/fs-extra/lib/json/output-json.js"(exports, module2) {
     var fs2 = require_graceful_fs();
-    var path2 = require("path");
+    var path3 = require("path");
     var jsonFile = require_jsonfile();
     var mkdir = require_mkdirs2();
     function outputJson(file, data, options, callback) {
@@ -6805,7 +6805,7 @@ var require_output_json = __commonJS({
         callback = options;
         options = {};
       }
-      var dir = path2.dirname(file);
+      var dir = path3.dirname(file);
       fs2.exists(dir, function(itDoes) {
         if (itDoes)
           return jsonFile.writeFile(file, data, options, callback);
@@ -6847,7 +6847,7 @@ var require_move = __commonJS({
   "node_modules/fs-extra/lib/move/index.js"(exports, module2) {
     var fs2 = require_graceful_fs();
     var ncp = require_ncp();
-    var path2 = require("path");
+    var path3 = require("path");
     var rimraf = require_rimraf();
     var mkdirp = require_mkdirs2().mkdirs;
     function mv(source, dest, options, callback) {
@@ -6864,7 +6864,7 @@ var require_move = __commonJS({
         doRename();
       }
       function mkdirs() {
-        mkdirp(path2.dirname(dest), function(err) {
+        mkdirp(path3.dirname(dest), function(err) {
           if (err)
             return callback(err);
           doRename();
@@ -6987,13 +6987,13 @@ var require_move = __commonJS({
 // node_modules/fs-extra/lib/streams/create-output-stream.js
 var require_create_output_stream = __commonJS({
   "node_modules/fs-extra/lib/streams/create-output-stream.js"(exports, module2) {
-    var path2 = require("path");
+    var path3 = require("path");
     var fs2 = require("fs");
     var mkdir = require_mkdirs2();
     var WriteStream = fs2.WriteStream;
     function createOutputStream(file, options) {
       var dirExists = false;
-      var dir = path2.dirname(file);
+      var dir = path3.dirname(file);
       options = options || {};
       if (options.fd) {
         return fs2.createWriteStream(file, options);
@@ -7036,7 +7036,7 @@ var require_streams = __commonJS({
 var require_empty = __commonJS({
   "node_modules/fs-extra/lib/empty/index.js"(exports, module2) {
     var fs2 = require("fs");
-    var path2 = require("path");
+    var path3 = require("path");
     var mkdir = require_mkdirs2();
     var remove = require_remove();
     function emptyDir(dir, callback) {
@@ -7044,7 +7044,7 @@ var require_empty = __commonJS({
         if (err)
           return mkdir.mkdirs(dir, callback);
         items = items.map(function(item) {
-          return path2.join(dir, item);
+          return path3.join(dir, item);
         });
         deleteItem();
         function deleteItem() {
@@ -7067,7 +7067,7 @@ var require_empty = __commonJS({
         return mkdir.mkdirsSync(dir);
       }
       items.forEach(function(item) {
-        item = path2.join(dir, item);
+        item = path3.join(dir, item);
         remove.removeSync(item);
       });
     }
@@ -7083,7 +7083,7 @@ var require_empty = __commonJS({
 // node_modules/fs-extra/lib/ensure/file.js
 var require_file = __commonJS({
   "node_modules/fs-extra/lib/ensure/file.js"(exports, module2) {
-    var path2 = require("path");
+    var path3 = require("path");
     var fs2 = require_graceful_fs();
     var mkdir = require_mkdirs2();
     function createFile(file, callback) {
@@ -7097,7 +7097,7 @@ var require_file = __commonJS({
       fs2.exists(file, function(fileExists) {
         if (fileExists)
           return callback();
-        var dir = path2.dirname(file);
+        var dir = path3.dirname(file);
         fs2.exists(dir, function(dirExists) {
           if (dirExists)
             return makeFile();
@@ -7112,7 +7112,7 @@ var require_file = __commonJS({
     function createFileSync(file) {
       if (fs2.existsSync(file))
         return;
-      var dir = path2.dirname(file);
+      var dir = path3.dirname(file);
       if (!fs2.existsSync(dir)) {
         mkdir.mkdirsSync(dir);
       }
@@ -7130,7 +7130,7 @@ var require_file = __commonJS({
 // node_modules/fs-extra/lib/ensure/link.js
 var require_link = __commonJS({
   "node_modules/fs-extra/lib/ensure/link.js"(exports, module2) {
-    var path2 = require("path");
+    var path3 = require("path");
     var fs2 = require_graceful_fs();
     var mkdir = require_mkdirs2();
     function createLink(srcpath, dstpath, callback) {
@@ -7149,7 +7149,7 @@ var require_link = __commonJS({
             err.message = err.message.replace("lstat", "ensureLink");
             return callback(err);
           }
-          var dir = path2.dirname(dstpath);
+          var dir = path3.dirname(dstpath);
           fs2.exists(dir, function(dirExists) {
             if (dirExists)
               return makeLink(srcpath, dstpath);
@@ -7172,7 +7172,7 @@ var require_link = __commonJS({
         err.message = err.message.replace("lstat", "ensureLink");
         throw err;
       }
-      var dir = path2.dirname(dstpath);
+      var dir = path3.dirname(dstpath);
       var dirExists = fs2.existsSync(dir);
       if (dirExists)
         return fs2.linkSync(srcpath, dstpath);
@@ -7191,11 +7191,11 @@ var require_link = __commonJS({
 // node_modules/fs-extra/lib/ensure/symlink-paths.js
 var require_symlink_paths = __commonJS({
   "node_modules/fs-extra/lib/ensure/symlink-paths.js"(exports, module2) {
-    var path2 = require("path");
-    path2.isAbsolute = path2.isAbsolute ? path2.isAbsolute : require_path_is_absolute();
+    var path3 = require("path");
+    path3.isAbsolute = path3.isAbsolute ? path3.isAbsolute : require_path_is_absolute();
     var fs2 = require_graceful_fs();
     function symlinkPaths(srcpath, dstpath, callback) {
-      if (path2.isAbsolute(srcpath)) {
+      if (path3.isAbsolute(srcpath)) {
         return fs2.lstat(srcpath, function(err, stat) {
           if (err) {
             err.message = err.message.replace("lstat", "ensureSymlink");
@@ -7207,8 +7207,8 @@ var require_symlink_paths = __commonJS({
           });
         });
       } else {
-        var dstdir = path2.dirname(dstpath);
-        var relativeToDst = path2.join(dstdir, srcpath);
+        var dstdir = path3.dirname(dstpath);
+        var relativeToDst = path3.join(dstdir, srcpath);
         return fs2.exists(relativeToDst, function(exists) {
           if (exists) {
             return callback(null, {
@@ -7223,7 +7223,7 @@ var require_symlink_paths = __commonJS({
               }
               return callback(null, {
                 "toCwd": srcpath,
-                "toDst": path2.relative(dstdir, srcpath)
+                "toDst": path3.relative(dstdir, srcpath)
               });
             });
           }
@@ -7232,7 +7232,7 @@ var require_symlink_paths = __commonJS({
     }
     function symlinkPathsSync(srcpath, dstpath) {
       var exists;
-      if (path2.isAbsolute(srcpath)) {
+      if (path3.isAbsolute(srcpath)) {
         exists = fs2.existsSync(srcpath);
         if (!exists)
           throw new Error("absolute srcpath does not exist");
@@ -7241,8 +7241,8 @@ var require_symlink_paths = __commonJS({
           "toDst": srcpath
         };
       } else {
-        var dstdir = path2.dirname(dstpath);
-        var relativeToDst = path2.join(dstdir, srcpath);
+        var dstdir = path3.dirname(dstpath);
+        var relativeToDst = path3.join(dstdir, srcpath);
         exists = fs2.existsSync(relativeToDst);
         if (exists) {
           return {
@@ -7255,7 +7255,7 @@ var require_symlink_paths = __commonJS({
             throw new Error("relative srcpath does not exist");
           return {
             "toCwd": srcpath,
-            "toDst": path2.relative(dstdir, srcpath)
+            "toDst": path3.relative(dstdir, srcpath)
           };
         }
       }
@@ -7303,7 +7303,7 @@ var require_symlink_type = __commonJS({
 // node_modules/fs-extra/lib/ensure/symlink.js
 var require_symlink = __commonJS({
   "node_modules/fs-extra/lib/ensure/symlink.js"(exports, module2) {
-    var path2 = require("path");
+    var path3 = require("path");
     var fs2 = require_graceful_fs();
     var _mkdirs = require_mkdirs2();
     var mkdirs = _mkdirs.mkdirs;
@@ -7327,7 +7327,7 @@ var require_symlink = __commonJS({
           symlinkType(relative.toCwd, type, function(err2, type2) {
             if (err2)
               return callback(err2);
-            var dir = path2.dirname(dstpath);
+            var dir = path3.dirname(dstpath);
             fs2.exists(dir, function(dirExists) {
               if (dirExists)
                 return fs2.symlink(srcpath, dstpath, type2, callback);
@@ -7350,7 +7350,7 @@ var require_symlink = __commonJS({
       var relative = symlinkPathsSync(srcpath, dstpath);
       srcpath = relative.toDst;
       type = symlinkTypeSync(relative.toCwd, type);
-      var dir = path2.dirname(dstpath);
+      var dir = path3.dirname(dstpath);
       var exists = fs2.existsSync(dir);
       if (exists)
         return fs2.symlinkSync(srcpath, dstpath, type);
@@ -7392,7 +7392,7 @@ var require_ensure = __commonJS({
 // node_modules/fs-extra/lib/output/index.js
 var require_output = __commonJS({
   "node_modules/fs-extra/lib/output/index.js"(exports, module2) {
-    var path2 = require("path");
+    var path3 = require("path");
     var fs2 = require_graceful_fs();
     var mkdir = require_mkdirs2();
     function outputFile(file, data, encoding, callback) {
@@ -7400,7 +7400,7 @@ var require_output = __commonJS({
         callback = encoding;
         encoding = "utf8";
       }
-      var dir = path2.dirname(file);
+      var dir = path3.dirname(file);
       fs2.exists(dir, function(itDoes) {
         if (itDoes)
           return fs2.writeFile(file, data, encoding, callback);
@@ -7412,7 +7412,7 @@ var require_output = __commonJS({
       });
     }
     function outputFileSync(file, data, encoding) {
-      var dir = path2.dirname(file);
+      var dir = path3.dirname(file);
       if (fs2.existsSync(dir)) {
         return fs2.writeFileSync.apply(fs2, arguments);
       }
@@ -7467,16 +7467,16 @@ var require_os_tmpdir = __commonJS({
     var isWindows = process.platform === "win32";
     var trailingSlashRe = isWindows ? /[^:]\\$/ : /.\/$/;
     module2.exports = function() {
-      var path2;
+      var path3;
       if (isWindows) {
-        path2 = process.env.TEMP || process.env.TMP || (process.env.SystemRoot || process.env.windir) + "\\temp";
+        path3 = process.env.TEMP || process.env.TMP || (process.env.SystemRoot || process.env.windir) + "\\temp";
       } else {
-        path2 = process.env.TMPDIR || process.env.TMP || process.env.TEMP || "/tmp";
+        path3 = process.env.TMPDIR || process.env.TMP || process.env.TEMP || "/tmp";
       }
-      if (trailingSlashRe.test(path2)) {
-        path2 = path2.slice(0, -1);
+      if (trailingSlashRe.test(path3)) {
+        path3 = path3.slice(0, -1);
       }
-      return path2;
+      return path3;
     };
   }
 });
@@ -7485,11 +7485,11 @@ var require_os_tmpdir = __commonJS({
 var require_tmp = __commonJS({
   "node_modules/tmp/lib/tmp.js"(exports, module2) {
     var fs2 = require("fs");
-    var path2 = require("path");
+    var path3 = require("path");
     var os2 = require("os");
     var crypto = require("crypto");
-    var exists = fs2.exists || path2.exists;
-    var existsSync = fs2.existsSync || path2.existsSync;
+    var exists = fs2.exists || path3.exists;
+    var existsSync = fs2.existsSync || path3.existsSync;
     var tmpDir = require_os_tmpdir();
     var _c = require("constants");
     var _TMP = tmpDir();
@@ -7529,7 +7529,7 @@ var require_tmp = __commonJS({
     }
     function _generateTmpName(opts) {
       if (opts.name) {
-        return path2.join(opts.dir || _TMP, opts.name);
+        return path3.join(opts.dir || _TMP, opts.name);
       }
       if (opts.template) {
         return opts.template.replace(TEMPLATE_PATTERN, _randomChars(6));
@@ -7540,7 +7540,7 @@ var require_tmp = __commonJS({
         _randomChars(12),
         opts.postfix || ""
       ].join("");
-      return path2.join(opts.dir || _TMP, name);
+      return path3.join(opts.dir || _TMP, name);
     }
     function _getTmpName(options, callback) {
       var args = _parseArguments(options, callback), opts = args[0], cb = args[1], tries = opts.tries || DEFAULT_TRIES;
@@ -7603,7 +7603,7 @@ var require_tmp = __commonJS({
       do {
         var dir = dirs.pop(), deferred = false, files = fs2.readdirSync(dir);
         for (var i = 0, length = files.length; i < length; i++) {
-          var file = path2.join(dir, files[i]), stat = fs2.lstatSync(file);
+          var file = path3.join(dir, files[i]), stat = fs2.lstatSync(file);
           if (stat.isDirectory()) {
             if (!deferred) {
               deferred = true;
@@ -7732,7 +7732,7 @@ var require_common2 = __commonJS({
     function ownProp(obj, field) {
       return Object.prototype.hasOwnProperty.call(obj, field);
     }
-    var path2 = require("path");
+    var path3 = require("path");
     var minimatch = require_minimatch();
     var isAbsolute = require_path_is_absolute();
     var Minimatch = minimatch.Minimatch;
@@ -7799,10 +7799,10 @@ var require_common2 = __commonJS({
         self.cwd = cwd;
       else {
         self.cwd = options.cwd;
-        self.changedCwd = path2.resolve(options.cwd) !== cwd;
+        self.changedCwd = path3.resolve(options.cwd) !== cwd;
       }
-      self.root = options.root || path2.resolve(self.cwd, "/");
-      self.root = path2.resolve(self.root);
+      self.root = options.root || path3.resolve(self.cwd, "/");
+      self.root = path3.resolve(self.root);
       if (process.platform === "win32")
         self.root = self.root.replace(/\\/g, "/");
       self.nomount = !!options.nomount;
@@ -7892,28 +7892,28 @@ var require_common2 = __commonJS({
     function makeAbs(self, f) {
       var abs = f;
       if (f.charAt(0) === "/") {
-        abs = path2.join(self.root, f);
+        abs = path3.join(self.root, f);
       } else if (isAbsolute(f) || f === "") {
         abs = f;
       } else if (self.changedCwd) {
-        abs = path2.resolve(self.cwd, f);
+        abs = path3.resolve(self.cwd, f);
       } else {
-        abs = path2.resolve(f);
+        abs = path3.resolve(f);
       }
       return abs;
     }
-    function isIgnored(self, path3) {
+    function isIgnored(self, path4) {
       if (!self.ignore.length)
         return false;
       return self.ignore.some(function(item) {
-        return item.matcher.match(path3) || !!(item.gmatcher && item.gmatcher.match(path3));
+        return item.matcher.match(path4) || !!(item.gmatcher && item.gmatcher.match(path4));
       });
     }
-    function childrenIgnored(self, path3) {
+    function childrenIgnored(self, path4) {
       if (!self.ignore.length)
         return false;
       return self.ignore.some(function(item) {
-        return !!(item.gmatcher && item.gmatcher.match(path3));
+        return !!(item.gmatcher && item.gmatcher.match(path4));
       });
     }
   }
@@ -7929,7 +7929,7 @@ var require_sync2 = __commonJS({
     var Minimatch = minimatch.Minimatch;
     var Glob = require_glob2().Glob;
     var util = require("util");
-    var path2 = require("path");
+    var path3 = require("path");
     var assert = require("assert");
     var isAbsolute = require_path_is_absolute();
     var common = require_common2();
@@ -8056,7 +8056,7 @@ var require_sync2 = __commonJS({
               e = prefix + e;
           }
           if (e.charAt(0) === "/" && !this.nomount) {
-            e = path2.join(this.root, e);
+            e = path3.join(this.root, e);
           }
           this.matches[index][e] = true;
         }
@@ -8191,9 +8191,9 @@ var require_sync2 = __commonJS({
       if (prefix && isAbsolute(prefix) && !this.nomount) {
         var trail = /[\/\\]$/.test(prefix);
         if (prefix.charAt(0) === "/") {
-          prefix = path2.join(this.root, prefix);
+          prefix = path3.join(this.root, prefix);
         } else {
-          prefix = path2.resolve(this.root, prefix);
+          prefix = path3.resolve(this.root, prefix);
           if (trail)
             prefix += "/";
         }
@@ -8260,7 +8260,7 @@ var require_glob2 = __commonJS({
     var Minimatch = minimatch.Minimatch;
     var inherits = require_inherits();
     var EE = require("events").EventEmitter;
-    var path2 = require("path");
+    var path3 = require("path");
     var assert = require("assert");
     var isAbsolute = require_path_is_absolute();
     var globSync = require_sync2();
@@ -8523,7 +8523,7 @@ var require_glob2 = __commonJS({
               e = prefix + e;
           }
           if (e.charAt(0) === "/" && !this.nomount) {
-            e = path2.join(this.root, e);
+            e = path3.join(this.root, e);
           }
           this._emitMatch(index, e);
         }
@@ -8700,9 +8700,9 @@ var require_glob2 = __commonJS({
       if (prefix && isAbsolute(prefix) && !this.nomount) {
         var trail = /[\/\\]$/.test(prefix);
         if (prefix.charAt(0) === "/") {
-          prefix = path2.join(this.root, prefix);
+          prefix = path3.join(this.root, prefix);
         } else {
-          prefix = path2.resolve(this.root, prefix);
+          prefix = path3.resolve(this.root, prefix);
           if (trail)
             prefix += "/";
         }
@@ -8993,7 +8993,7 @@ var require_dir_reader = __commonJS({
     module2.exports = DirReader;
     var fs2 = require_graceful_fs();
     var inherits = require_inherits();
-    var path2 = require("path");
+    var path3 = require("path");
     var Reader = require_reader();
     var assert = require("assert").ok;
     inherits(DirReader, Reader);
@@ -9053,7 +9053,7 @@ var require_dir_reader = __commonJS({
         }
         return;
       }
-      var p = path2.resolve(self._path, self.entries[self._index]);
+      var p = path3.resolve(self._path, self.entries[self._index]);
       assert(p !== self._path);
       assert(self.entries[self._index]);
       self._currentEntry = p;
@@ -9062,12 +9062,12 @@ var require_dir_reader = __commonJS({
           return self.error(er);
         var who = self._proxy || self;
         stat.path = p;
-        stat.basename = path2.basename(p);
-        stat.dirname = path2.dirname(p);
+        stat.basename = path3.basename(p);
+        stat.dirname = path3.dirname(p);
         var childProps = self.getChildProps.call(who, stat);
         childProps.path = p;
-        childProps.basename = path2.basename(p);
-        childProps.dirname = path2.dirname(p);
+        childProps.basename = path3.basename(p);
+        childProps.dirname = path3.dirname(p);
         var entry = Reader(childProps, stat);
         self._currentEntry = entry;
         entry.on("pause", function(who2) {
@@ -9417,7 +9417,7 @@ var require_reader = __commonJS({
     var fs2 = require_graceful_fs();
     var Stream = require("stream").Stream;
     var inherits = require_inherits();
-    var path2 = require("path");
+    var path3 = require("path");
     var getType = require_get_type();
     var hardLinks = Reader.hardLinks = {};
     var Abstract = require_abstract();
@@ -9476,7 +9476,7 @@ var require_reader = __commonJS({
       self.depth = props.depth = props.depth || 0;
       self.parent = props.parent || null;
       self.root = props.root || props.parent && props.parent.root || self;
-      self._path = self.path = path2.resolve(props.path);
+      self._path = self.path = path3.resolve(props.path);
       if (process.platform === "win32") {
         self.path = self._path = self.path.replace(/\?/g, "_");
         if (self._path.length >= 260) {
@@ -9484,8 +9484,8 @@ var require_reader = __commonJS({
           self._path = "\\\\?\\" + self.path.replace(/\//g, "\\");
         }
       }
-      self.basename = props.basename = path2.basename(self.path);
-      self.dirname = props.dirname = path2.dirname(self.path);
+      self.basename = props.basename = path3.basename(self.path);
+      self.dirname = props.dirname = path3.dirname(self.path);
       props.parent = props.root = null;
       self.size = props.size;
       self.filter = typeof props.filter === "function" ? props.filter : null;
@@ -9598,7 +9598,7 @@ var require_reader = __commonJS({
 // node_modules/mkdirp/index.js
 var require_mkdirp = __commonJS({
   "node_modules/mkdirp/index.js"(exports, module2) {
-    var path2 = require("path");
+    var path3 = require("path");
     var fs2 = require("fs");
     var _0777 = parseInt("0777", 8);
     module2.exports = mkdirP.mkdirp = mkdirP.mkdirP = mkdirP;
@@ -9618,7 +9618,7 @@ var require_mkdirp = __commonJS({
         made = null;
       var cb = f || function() {
       };
-      p = path2.resolve(p);
+      p = path3.resolve(p);
       xfs.mkdir(p, mode, function(er) {
         if (!er) {
           made = made || p;
@@ -9626,9 +9626,9 @@ var require_mkdirp = __commonJS({
         }
         switch (er.code) {
           case "ENOENT":
-            if (path2.dirname(p) === p)
+            if (path3.dirname(p) === p)
               return cb(er);
-            mkdirP(path2.dirname(p), opts, function(er2, made2) {
+            mkdirP(path3.dirname(p), opts, function(er2, made2) {
               if (er2)
                 cb(er2, made2);
               else
@@ -9657,14 +9657,14 @@ var require_mkdirp = __commonJS({
       }
       if (!made)
         made = null;
-      p = path2.resolve(p);
+      p = path3.resolve(p);
       try {
         xfs.mkdirSync(p, mode);
         made = made || p;
       } catch (err0) {
         switch (err0.code) {
           case "ENOENT":
-            made = sync(path2.dirname(p), opts, made);
+            made = sync(path3.dirname(p), opts, made);
             sync(p, opts, made);
             break;
           default:
@@ -9757,7 +9757,7 @@ var require_dir_writer = __commonJS({
     var Writer = require_writer();
     var inherits = require_inherits();
     var mkdir = require_mkdirp();
-    var path2 = require("path");
+    var path3 = require("path");
     var collect = require_collect();
     inherits(DirWriter, Writer);
     function DirWriter(props) {
@@ -9836,7 +9836,7 @@ var require_dir_writer = __commonJS({
       if (entry.parent) {
         pp = pp.substr(entry.parent._path.length + 1);
       }
-      props.path = path2.join(self.path, path2.join("/", pp));
+      props.path = path3.join(self.path, path3.join("/", pp));
       props.filter = self.filter;
       Object.keys(entry.props).forEach(function(k) {
         if (!props.hasOwnProperty(k)) {
@@ -9878,7 +9878,7 @@ var require_link_writer = __commonJS({
     var fs2 = require_graceful_fs();
     var Writer = require_writer();
     var inherits = require_inherits();
-    var path2 = require("path");
+    var path3 = require("path");
     var rimraf = require_rimraf();
     inherits(LinkWriter, Writer);
     function LinkWriter(props) {
@@ -9900,7 +9900,7 @@ var require_link_writer = __commonJS({
       var self = this;
       var hard = self.type === "Link" || process.platform === "win32";
       var link2 = hard ? "link" : "symlink";
-      var lp = hard ? path2.resolve(self.dirname, self.linkpath) : self.linkpath;
+      var lp = hard ? path3.resolve(self.dirname, self.linkpath) : self.linkpath;
       if (hard)
         return clobber(self, lp, link2);
       fs2.readlink(self._path, function(er, p) {
@@ -10134,7 +10134,7 @@ var require_writer = __commonJS({
     var inherits = require_inherits();
     var rimraf = require_rimraf();
     var mkdir = require_mkdirp();
-    var path2 = require("path");
+    var path3 = require("path");
     var umask = process.platform === "win32" ? 0 : process.umask();
     var getType = require_get_type();
     var Abstract = require_abstract();
@@ -10179,7 +10179,7 @@ var require_writer = __commonJS({
       self.clobber = props.clobber === false ? props.clobber : true;
       self.parent = props.parent || null;
       self.root = props.root || props.parent && props.parent.root || self;
-      self._path = self.path = path2.resolve(props.path);
+      self._path = self.path = path3.resolve(props.path);
       if (process.platform === "win32") {
         self.path = self._path = self.path.replace(/\?/g, "_");
         if (self._path.length >= 260) {
@@ -10187,8 +10187,8 @@ var require_writer = __commonJS({
           self._path = "\\\\?\\" + self.path.replace(/\//g, "\\");
         }
       }
-      self.basename = path2.basename(props.path);
-      self.dirname = path2.dirname(props.path);
+      self.basename = path3.basename(props.path);
+      self.dirname = path3.dirname(props.path);
       self.linkpath = props.linkpath || null;
       props.parent = props.root = null;
       self.size = props.size;
@@ -10244,14 +10244,14 @@ var require_writer = __commonJS({
       }
     };
     function create(self) {
-      mkdir(path2.dirname(self._path), Writer.dirmode, function(er, made) {
+      mkdir(path3.dirname(self._path), Writer.dirmode, function(er, made) {
         if (er)
           return self.error(er);
         self._madeDir = made;
         return self._create();
       });
     }
-    function endChmod(self, want, current, path3, cb) {
+    function endChmod(self, want, current, path4, cb) {
       var wantMode = want.mode;
       var chmod = want.follow || self.type !== "SymbolicLink" ? "chmod" : "lchmod";
       if (!fs2[chmod])
@@ -10262,9 +10262,9 @@ var require_writer = __commonJS({
       wantMode = wantMode & parseInt("0777", 8);
       if (wantMode === curMode)
         return cb();
-      fs2[chmod](path3, wantMode, cb);
+      fs2[chmod](path4, wantMode, cb);
     }
-    function endChown(self, want, current, path3, cb) {
+    function endChown(self, want, current, path4, cb) {
       if (process.platform === "win32")
         return cb();
       if (!process.getuid || process.getuid() !== 0)
@@ -10280,9 +10280,9 @@ var require_writer = __commonJS({
         want.uid = current.uid;
       if (typeof want.gid !== "number")
         want.gid = current.gid;
-      fs2[chown](path3, want.uid, want.gid, cb);
+      fs2[chown](path4, want.uid, want.gid, cb);
     }
-    function endUtimes(self, want, current, path3, cb) {
+    function endUtimes(self, want, current, path4, cb) {
       if (!fs2.utimes || process.platform === "win32")
         return cb();
       var utimes = want.follow || self.type !== "SymbolicLink" ? "utimes" : "lutimes";
@@ -10305,7 +10305,7 @@ var require_writer = __commonJS({
         meA = new Date(meM);
       if (meA.getTime() === curA.getTime() && meM.getTime() === curM.getTime())
         return cb();
-      fs2[utimes](path3, meA, meM, cb);
+      fs2[utimes](path4, meA, meM, cb);
     }
     Writer.prototype._finish = function() {
       var self = this;
@@ -10374,7 +10374,7 @@ var require_writer = __commonJS({
     };
     function endMadeDir(self, p, cb) {
       var made = self._madeDir;
-      var d = path2.dirname(p);
+      var d = path3.dirname(p);
       endMadeDir_(self, d, function(er) {
         if (er)
           return cb(er);
@@ -10466,7 +10466,7 @@ var require_fstream = __commonJS({
 var require_AppBundleInfo = __commonJS({
   "node_modules/app-bundle-info/lib/AppBundleInfo.js"(exports, module2) {
     (function() {
-      var AndroidAppBundleInfo, Lock, fs2, fstream, glob2, path2, stream, tmp, yauzl;
+      var AndroidAppBundleInfo, Lock, fs2, fstream, glob2, path3, stream, tmp, yauzl;
       yauzl = require_yauzl();
       fs2 = require_lib();
       stream = require("stream");
@@ -10474,7 +10474,7 @@ var require_AppBundleInfo = __commonJS({
       glob2 = require_glob2();
       Lock = require_lock();
       fstream = require_fstream();
-      path2 = require("path");
+      path3 = require("path");
       AndroidAppBundleInfo = function() {
         function AndroidAppBundleInfo2(pathOrStream) {
           this.pathOrStream = pathOrStream;
@@ -10538,8 +10538,8 @@ var require_AppBundleInfo = __commonJS({
                       }
                       return zipfile.openReadStream(entry, function(err4, readStream) {
                         var filePath;
-                        filePath = path2.join(extractPath, entry.fileName);
-                        return fs2.ensureDir(path2.dirname(filePath), function(err5) {
+                        filePath = path3.join(extractPath, entry.fileName);
+                        return fs2.ensureDir(path3.dirname(filePath), function(err5) {
                           if (err5) {
                             return callback(err5);
                           }
@@ -13693,16 +13693,16 @@ var require_baseMatches = __commonJS({
 var require_baseGet = __commonJS({
   "node_modules/lodash/internal/baseGet.js"(exports, module2) {
     var toObject = require_toObject();
-    function baseGet(object, path2, pathKey) {
+    function baseGet(object, path3, pathKey) {
       if (object == null) {
         return;
       }
       if (pathKey !== void 0 && pathKey in toObject(object)) {
-        path2 = [pathKey];
+        path3 = [pathKey];
       }
-      var index = 0, length = path2.length;
+      var index = 0, length = path3.length;
       while (object != null && index < length) {
-        object = object[path2[index++]];
+        object = object[path3[index++]];
       }
       return index && index == length ? object : void 0;
     }
@@ -13811,9 +13811,9 @@ var require_baseMatchesProperty = __commonJS({
     var last = require_last();
     var toObject = require_toObject();
     var toPath = require_toPath();
-    function baseMatchesProperty(path2, srcValue) {
-      var isArr = isArray(path2), isCommon = isKey(path2) && isStrictComparable(srcValue), pathKey = path2 + "";
-      path2 = toPath(path2);
+    function baseMatchesProperty(path3, srcValue) {
+      var isArr = isArray(path3), isCommon = isKey(path3) && isStrictComparable(srcValue), pathKey = path3 + "";
+      path3 = toPath(path3);
       return function(object) {
         if (object == null) {
           return false;
@@ -13821,11 +13821,11 @@ var require_baseMatchesProperty = __commonJS({
         var key = pathKey;
         object = toObject(object);
         if ((isArr || !isCommon) && !(key in object)) {
-          object = path2.length == 1 ? object : baseGet(object, baseSlice(path2, 0, -1));
+          object = path3.length == 1 ? object : baseGet(object, baseSlice(path3, 0, -1));
           if (object == null) {
             return false;
           }
-          key = last(path2);
+          key = last(path3);
           object = toObject(object);
         }
         return object[key] === srcValue ? srcValue !== void 0 || key in object : baseIsEqual(srcValue, object[key], void 0, true);
@@ -13840,11 +13840,11 @@ var require_basePropertyDeep = __commonJS({
   "node_modules/lodash/internal/basePropertyDeep.js"(exports, module2) {
     var baseGet = require_baseGet();
     var toPath = require_toPath();
-    function basePropertyDeep(path2) {
-      var pathKey = path2 + "";
-      path2 = toPath(path2);
+    function basePropertyDeep(path3) {
+      var pathKey = path3 + "";
+      path3 = toPath(path3);
       return function(object) {
-        return baseGet(object, path2, pathKey);
+        return baseGet(object, path3, pathKey);
       };
     }
     module2.exports = basePropertyDeep;
@@ -13857,8 +13857,8 @@ var require_property = __commonJS({
     var baseProperty = require_baseProperty();
     var basePropertyDeep = require_basePropertyDeep();
     var isKey = require_isKey();
-    function property(path2) {
-      return isKey(path2) ? baseProperty(path2) : basePropertyDeep(path2);
+    function property(path3) {
+      return isKey(path3) ? baseProperty(path3) : basePropertyDeep(path3);
     }
     module2.exports = property;
   }
@@ -18050,20 +18050,20 @@ var require_BinaryXML = __commonJS({
           return this.document;
         };
         BinaryXmlParser2.prototype.simpleParse = function() {
-          var data, document;
-          document = this.parse();
+          var data, document2;
+          document2 = this.parse();
           data = {};
-          this._simplifyDocumentData(data, document);
+          this._simplifyDocumentData(data, document2);
           return data;
         };
-        BinaryXmlParser2.prototype._simplifyDocumentData = function(data, document) {
+        BinaryXmlParser2.prototype._simplifyDocumentData = function(data, document2) {
           var attr, i, len1, ref1, results;
-          data[document.nodeName] = {};
-          ref1 = document.attributes;
+          data[document2.nodeName] = {};
+          ref1 = document2.attributes;
           results = [];
           for (i = 0, len1 = ref1.length; i < len1; i++) {
             attr = ref1[i];
-            results.push(data[document.nodeName][attr.nodeName] = attr.typedValue.value);
+            results.push(data[document2.nodeName][attr.nodeName] = attr.typedValue.value);
           }
           return results;
         };
@@ -18141,12 +18141,12 @@ var require_AndroidAppBundleInfo = __commonJS({
           var find, lookupOrdered;
           find = function(_this) {
             return function(index, cb) {
-              var path2;
+              var path3;
               if (!lookupOrdered[index]) {
                 return cb(new Error("Icon not found"));
               }
-              path2 = lookupOrdered[index];
-              return _this.findFileStream(path2, function(err, datas) {
+              path3 = lookupOrdered[index];
+              return _this.findFileStream(path3, function(err, datas) {
                 if (err) {
                   return find(index + 1, cb);
                 } else {
@@ -18243,14 +18243,14 @@ var require_ipa_bundler = __commonJS({
       const manifestUrl = new URL((0, path_1.basename)(options.manifestFile), options.baseURL).toString();
       const ipaUrl = new URL((0, path_1.basename)(options.manifestFile), options.baseURL).toString();
       if (hasIpaPath(options)) {
-        const { createReadStream: createReadStream2 } = await Promise.resolve().then(() => require("fs"));
+        const { createReadStream } = await Promise.resolve().then(() => require("fs"));
         let module3;
         try {
           module3 = await Promise.resolve().then(() => require_app_bundle_info());
         } catch (e) {
           throw new Error("When setting ipaPath, the optional dependency app-bundle-info must be installed.");
         }
-        const bundle = new module3.iOS(createReadStream2(options.ipaPath));
+        const bundle = new module3.iOS(createReadStream(options.ipaPath));
         const info = await new Promise((resolve, reject) => bundle.loadInfo((err, info2) => err ? reject(err) : resolve(info2)));
         const appDetails = Object.assign(options, {
           bundleIdentifier: info.CFBundleIdentifier,
@@ -18349,6 +18349,11198 @@ var require_ipa_bundler = __commonJS({
   }
 });
 
+// node_modules/isomorphic-unzip/lib/utils.js
+var require_utils2 = __commonJS({
+  "node_modules/isomorphic-unzip/lib/utils.js"(exports, module2) {
+    function toArray(arrayLikeObj) {
+      if (!arrayLikeObj)
+        return [];
+      return Array.prototype.slice.call(arrayLikeObj);
+    }
+    function extend(destObject) {
+      var args = toArray(arguments);
+      var dest;
+      if (args.length == 1) {
+        return destObject;
+      }
+      args.shift();
+      for (var i = 0, l = args.length; i < l; i++) {
+        for (var key in args[i]) {
+          if (args[i].hasOwnProperty(key)) {
+            destObject[key] = args[i][key];
+          }
+        }
+      }
+      return destObject;
+    }
+    function isTypeOf(something, type) {
+      if (!type)
+        return false;
+      type = type.toLowerCase();
+      var realTypeString = Object.prototype.toString.call(something);
+      return realTypeString.toLowerCase() === "[object " + type + "]";
+    }
+    function isArray(something) {
+      return isTypeOf(something, "array");
+    }
+    function isFunction(something) {
+      return typeof something === "function";
+    }
+    function isString(something) {
+      return typeof something === "string";
+    }
+    function isDefined(something) {
+      return !(typeof something === "undefined");
+    }
+    function isObject(something) {
+      return typeof something === "object";
+    }
+    function isReg(something) {
+      return isTypeOf(something, "regexp");
+    }
+    function isThisWhatYouNeed(rule, entryName) {
+      return isFunction(rule) ? rule(entryName) : isString(rule) ? entryName.toLowerCase().indexOf(rule.toLowerCase()) > -1 : isReg(rule) ? rule.test(entryName.toLowerCase()) : false;
+    }
+    function startWith(str, prefix) {
+      return str.indexOf(prefix) === 0;
+    }
+    function isResouces(attrValue) {
+      return startWith(attrValue, "resourceId:");
+    }
+    function transKeyToMatchResourceMap(resourceId) {
+      return "@" + resourceId.replace("resourceId:0x", "").toUpperCase();
+    }
+    function castLogger(doWhat, fromWhen) {
+      console.log(doWhat + " cost: " + (Date.now() - fromWhen) + "ms");
+    }
+    module2.exports = {
+      toArray,
+      extend,
+      startWith,
+      isResouces,
+      transKeyToMatchResourceMap,
+      castLogger,
+      isTypeOf,
+      isArray,
+      isFunction,
+      isString,
+      isDefined,
+      isObject,
+      isReg,
+      isThisWhatYouNeed
+    };
+  }
+});
+
+// node_modules/isomorphic-unzip/zip-node.js
+var require_zip_node = __commonJS({
+  "node_modules/isomorphic-unzip/zip-node.js"(exports, module2) {
+    var yauzl = require_yauzl();
+    var utils = require_utils2();
+    function Unzip(destPath) {
+      if (!(this instanceof Unzip))
+        return new Unzip(path);
+      this.path = destPath;
+    }
+    Unzip.prototype.destroy = function() {
+      this.path = null;
+    };
+    Unzip.prototype.getEntries = function(callback, onEnd) {
+      yauzl.open(this.path, { lazyEntries: true }, function(err, zipfile) {
+        if (err) {
+          callback(err);
+          return;
+        }
+        function next() {
+          zipfile.readEntry();
+        }
+        zipfile.on("entry", function(entry) {
+          callback(null, zipfile, entry, next);
+        });
+        zipfile.on("end", function() {
+          if (utils.isFunction(onEnd)) {
+            onEnd();
+          }
+        });
+        next();
+      });
+    };
+    Unzip.prototype.getBuffer = function(whatYouNeed, options, callback) {
+      var finishedNumber = 0;
+      const output = {};
+      var entryCount = 0;
+      var isMutiple = options && options.multiple || false;
+      var currentIndex = 0;
+      if (utils.isFunction(options)) {
+        callback = options;
+      }
+      whatYouNeed = whatYouNeed.map(function(rule) {
+        if (typeof rule === "string") {
+          rule = rule.split("\0").join("");
+        }
+        return rule;
+      });
+      this.getEntries(function(error, zipfile, entry, next) {
+        if (error)
+          return callback(error);
+        entryCount = zipfile.entryCount;
+        currentIndex++;
+        var findIt = whatYouNeed.some(function(rule) {
+          if (utils.isThisWhatYouNeed(rule, entry.fileName)) {
+            Unzip.getEntryData(zipfile, entry, function(error2, buffer) {
+              if (error2) {
+                callback(error2);
+                return;
+              }
+              if (isMutiple) {
+                var obj = {
+                  fileName: entry.fileName,
+                  buffer
+                };
+                if (output[rule]) {
+                  output[rule].push(obj);
+                } else {
+                  output[rule] = [obj];
+                  finishedNumber++;
+                }
+              } else {
+                output[rule] = buffer;
+                finishedNumber++;
+              }
+              if (finishedNumber >= whatYouNeed.length && !isMutiple) {
+                callback(null, output, entryCount);
+              } else {
+                next();
+              }
+            });
+            return true;
+          }
+        });
+        if (!findIt)
+          next();
+      }, function() {
+        if (finishedNumber < whatYouNeed.length || isMutiple && currentIndex >= entryCount) {
+          callback(null, output, entryCount);
+        }
+      });
+    };
+    Unzip.getEntryData = function(zipfile, entry, callback) {
+      const bufferArr = [];
+      zipfile.openReadStream(entry, function(err, readStream) {
+        if (err) {
+          callback(err);
+          readStream.destroy();
+          return;
+        }
+        readStream.on("data", function(chunk) {
+          bufferArr.push(chunk);
+        });
+        readStream.on("end", function() {
+          const buffer = Buffer.concat(bufferArr);
+          callback(null, buffer);
+        });
+      });
+    };
+    module2.exports = Unzip;
+  }
+});
+
+// node_modules/app-info-parser/src/utils.js
+var require_utils3 = __commonJS({
+  "node_modules/app-info-parser/src/utils.js"(exports, module2) {
+    "use strict";
+    function objectType(o) {
+      return Object.prototype.toString.call(o).slice(8, -1).toLowerCase();
+    }
+    function isArray(o) {
+      return objectType(o) === "array";
+    }
+    function isObject(o) {
+      return objectType(o) === "object";
+    }
+    function isPrimitive(o) {
+      return o === null || ["boolean", "number", "string", "undefined"].includes(objectType(o));
+    }
+    function isBrowser() {
+      return typeof window !== "undefined" && typeof document !== "undefined";
+    }
+    function mapInfoResource(apkInfo, resourceMap) {
+      iteratorObj(apkInfo);
+      return apkInfo;
+      function iteratorObj(obj) {
+        for (var i in obj) {
+          if (isArray(obj[i])) {
+            iteratorArray(obj[i]);
+          } else if (isObject(obj[i])) {
+            iteratorObj(obj[i]);
+          } else if (isPrimitive(obj[i])) {
+            if (isResources(obj[i])) {
+              obj[i] = resourceMap[transKeyToMatchResourceMap(obj[i])];
+            }
+          }
+        }
+      }
+      function iteratorArray(array) {
+        var l = array.length;
+        for (var i = 0; i < l; i++) {
+          if (isArray(array[i])) {
+            iteratorArray(array[i]);
+          } else if (isObject(array[i])) {
+            iteratorObj(array[i]);
+          } else if (isPrimitive(array[i])) {
+            if (isResources(array[i])) {
+              array[i] = resourceMap[transKeyToMatchResourceMap(array[i])];
+            }
+          }
+        }
+      }
+      function isResources(attrValue) {
+        if (!attrValue)
+          return false;
+        if (typeof attrValue !== "string") {
+          attrValue = attrValue.toString();
+        }
+        return attrValue.indexOf("resourceId:") === 0;
+      }
+      function transKeyToMatchResourceMap(resourceId) {
+        return "@" + resourceId.replace("resourceId:0x", "").toUpperCase();
+      }
+    }
+    function findApkIconPath(info) {
+      if (!info.application.icon || !info.application.icon.splice) {
+        return "";
+      }
+      var rulesMap = {
+        mdpi: 48,
+        hdpi: 72,
+        xhdpi: 96,
+        xxdpi: 144,
+        xxxhdpi: 192
+      };
+      var resultMap = {};
+      var maxDpiIcon = {
+        dpi: 120,
+        icon: ""
+      };
+      var _loop = function _loop2(i2) {
+        info.application.icon.some(function(icon) {
+          if (icon && icon.indexOf(i2) !== -1) {
+            resultMap["application-icon-" + rulesMap[i2]] = icon;
+            return true;
+          }
+        });
+        if (resultMap["application-icon-" + rulesMap[i2]] && rulesMap[i2] >= maxDpiIcon.dpi) {
+          maxDpiIcon.dpi = rulesMap[i2];
+          maxDpiIcon.icon = resultMap["application-icon-" + rulesMap[i2]];
+        }
+      };
+      for (var i in rulesMap) {
+        _loop(i);
+      }
+      if (Object.keys(resultMap).length === 0 || !maxDpiIcon.icon) {
+        maxDpiIcon.dpi = 120;
+        maxDpiIcon.icon = info.application.icon[0] || "";
+        resultMap["applicataion-icon-120"] = maxDpiIcon.icon;
+      }
+      return maxDpiIcon.icon;
+    }
+    function findIpaIconPath(info) {
+      if (info.CFBundleIcons && info.CFBundleIcons.CFBundlePrimaryIcon && info.CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles && info.CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles.length) {
+        return info.CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles[info.CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles.length - 1];
+      } else if (info.CFBundleIconFiles && info.CFBundleIconFiles.length) {
+        return info.CFBundleIconFiles[info.CFBundleIconFiles.length - 1];
+      } else {
+        return ".app/Icon.png";
+      }
+    }
+    function getBase64FromBuffer(buffer) {
+      return "data:image/png;base64," + buffer.toString("base64");
+    }
+    function decodeNullUnicode(str) {
+      if (typeof str === "string") {
+        str = str.replace(/\u0000/g, "");
+      }
+      return str;
+    }
+    module2.exports = {
+      isArray,
+      isObject,
+      isPrimitive,
+      isBrowser,
+      mapInfoResource,
+      findApkIconPath,
+      findIpaIconPath,
+      getBase64FromBuffer,
+      decodeNullUnicode
+    };
+  }
+});
+
+// node_modules/app-info-parser/src/zip.js
+var require_zip = __commonJS({
+  "node_modules/app-info-parser/src/zip.js"(exports, module2) {
+    "use strict";
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
+    }
+    function _defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    function _createClass(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        _defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        _defineProperties(Constructor, staticProps);
+      return Constructor;
+    }
+    var Unzip = require_zip_node();
+    var _require = require_utils3();
+    var isBrowser = _require.isBrowser;
+    var decodeNullUnicode = _require.decodeNullUnicode;
+    var Zip = /* @__PURE__ */ function() {
+      function Zip2(file) {
+        _classCallCheck(this, Zip2);
+        if (isBrowser()) {
+          if (!(file instanceof window.Blob || typeof file.size !== "undefined")) {
+            throw new Error("Param error: [file] must be an instance of Blob or File in browser.");
+          }
+          this.file = file;
+        } else {
+          if (typeof file !== "string") {
+            throw new Error("Param error: [file] must be file path in Node.");
+          }
+          this.file = require("path").resolve(file);
+        }
+        this.unzip = new Unzip(this.file);
+      }
+      _createClass(Zip2, [{
+        key: "getEntries",
+        value: function getEntries(regexps) {
+          var _this = this;
+          var type = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : "buffer";
+          regexps = regexps.map(function(regex) {
+            return decodeNullUnicode(regex);
+          });
+          return new Promise(function(resolve, reject) {
+            _this.unzip.getBuffer(regexps, {
+              type
+            }, function(err, buffers) {
+              err ? reject(err) : resolve(buffers);
+            });
+          });
+        }
+      }, {
+        key: "getEntry",
+        value: function getEntry(regex) {
+          var _this2 = this;
+          var type = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : "buffer";
+          regex = decodeNullUnicode(regex);
+          return new Promise(function(resolve, reject) {
+            _this2.unzip.getBuffer([regex], {
+              type
+            }, function(err, buffers) {
+              err ? reject(err) : resolve(buffers[regex]);
+            });
+          });
+        }
+      }]);
+      return Zip2;
+    }();
+    module2.exports = Zip;
+  }
+});
+
+// node_modules/app-info-parser/src/xml-parser/binary.js
+var require_binary = __commonJS({
+  "node_modules/app-info-parser/src/xml-parser/binary.js"(exports, module2) {
+    "use strict";
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
+    }
+    function _defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    function _createClass(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        _defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        _defineProperties(Constructor, staticProps);
+      return Constructor;
+    }
+    var NodeType = {
+      ELEMENT_NODE: 1,
+      ATTRIBUTE_NODE: 2,
+      CDATA_SECTION_NODE: 4
+    };
+    var ChunkType = {
+      NULL: 0,
+      STRING_POOL: 1,
+      TABLE: 2,
+      XML: 3,
+      XML_FIRST_CHUNK: 256,
+      XML_START_NAMESPACE: 256,
+      XML_END_NAMESPACE: 257,
+      XML_START_ELEMENT: 258,
+      XML_END_ELEMENT: 259,
+      XML_CDATA: 260,
+      XML_LAST_CHUNK: 383,
+      XML_RESOURCE_MAP: 384,
+      TABLE_PACKAGE: 512,
+      TABLE_TYPE: 513,
+      TABLE_TYPE_SPEC: 514
+    };
+    var StringFlags = {
+      SORTED: 1 << 0,
+      UTF8: 1 << 8
+    };
+    var TypedValue = {
+      COMPLEX_MANTISSA_MASK: 16777215,
+      COMPLEX_MANTISSA_SHIFT: 8,
+      COMPLEX_RADIX_0p23: 3,
+      COMPLEX_RADIX_16p7: 1,
+      COMPLEX_RADIX_23p0: 0,
+      COMPLEX_RADIX_8p15: 2,
+      COMPLEX_RADIX_MASK: 3,
+      COMPLEX_RADIX_SHIFT: 4,
+      COMPLEX_UNIT_DIP: 1,
+      COMPLEX_UNIT_FRACTION: 0,
+      COMPLEX_UNIT_FRACTION_PARENT: 1,
+      COMPLEX_UNIT_IN: 4,
+      COMPLEX_UNIT_MASK: 15,
+      COMPLEX_UNIT_MM: 5,
+      COMPLEX_UNIT_PT: 3,
+      COMPLEX_UNIT_PX: 0,
+      COMPLEX_UNIT_SHIFT: 0,
+      COMPLEX_UNIT_SP: 2,
+      DENSITY_DEFAULT: 0,
+      DENSITY_NONE: 65535,
+      TYPE_ATTRIBUTE: 2,
+      TYPE_DIMENSION: 5,
+      TYPE_FIRST_COLOR_INT: 28,
+      TYPE_FIRST_INT: 16,
+      TYPE_FLOAT: 4,
+      TYPE_FRACTION: 6,
+      TYPE_INT_BOOLEAN: 18,
+      TYPE_INT_COLOR_ARGB4: 30,
+      TYPE_INT_COLOR_ARGB8: 28,
+      TYPE_INT_COLOR_RGB4: 31,
+      TYPE_INT_COLOR_RGB8: 29,
+      TYPE_INT_DEC: 16,
+      TYPE_INT_HEX: 17,
+      TYPE_LAST_COLOR_INT: 31,
+      TYPE_LAST_INT: 31,
+      TYPE_NULL: 0,
+      TYPE_REFERENCE: 1,
+      TYPE_STRING: 3
+    };
+    var BinaryXmlParser = /* @__PURE__ */ function() {
+      function BinaryXmlParser2(buffer) {
+        var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+        _classCallCheck(this, BinaryXmlParser2);
+        this.buffer = buffer;
+        this.cursor = 0;
+        this.strings = [];
+        this.resources = [];
+        this.document = null;
+        this.parent = null;
+        this.stack = [];
+        this.debug = options.debug || false;
+      }
+      _createClass(BinaryXmlParser2, [{
+        key: "readU8",
+        value: function readU8() {
+          this.debug && console.group("readU8");
+          this.debug && console.debug("cursor:", this.cursor);
+          var val = this.buffer[this.cursor];
+          this.debug && console.debug("value:", val);
+          this.cursor += 1;
+          this.debug && console.groupEnd();
+          return val;
+        }
+      }, {
+        key: "readU16",
+        value: function readU16() {
+          this.debug && console.group("readU16");
+          this.debug && console.debug("cursor:", this.cursor);
+          var val = this.buffer.readUInt16LE(this.cursor);
+          this.debug && console.debug("value:", val);
+          this.cursor += 2;
+          this.debug && console.groupEnd();
+          return val;
+        }
+      }, {
+        key: "readS32",
+        value: function readS32() {
+          this.debug && console.group("readS32");
+          this.debug && console.debug("cursor:", this.cursor);
+          var val = this.buffer.readInt32LE(this.cursor);
+          this.debug && console.debug("value:", val);
+          this.cursor += 4;
+          this.debug && console.groupEnd();
+          return val;
+        }
+      }, {
+        key: "readU32",
+        value: function readU32() {
+          this.debug && console.group("readU32");
+          this.debug && console.debug("cursor:", this.cursor);
+          var val = this.buffer.readUInt32LE(this.cursor);
+          this.debug && console.debug("value:", val);
+          this.cursor += 4;
+          this.debug && console.groupEnd();
+          return val;
+        }
+      }, {
+        key: "readLength8",
+        value: function readLength8() {
+          this.debug && console.group("readLength8");
+          var len = this.readU8();
+          if (len & 128) {
+            len = (len & 127) << 8;
+            len += this.readU8();
+          }
+          this.debug && console.debug("length:", len);
+          this.debug && console.groupEnd();
+          return len;
+        }
+      }, {
+        key: "readLength16",
+        value: function readLength16() {
+          this.debug && console.group("readLength16");
+          var len = this.readU16();
+          if (len & 32768) {
+            len = (len & 32767) << 16;
+            len += this.readU16();
+          }
+          this.debug && console.debug("length:", len);
+          this.debug && console.groupEnd();
+          return len;
+        }
+      }, {
+        key: "readDimension",
+        value: function readDimension() {
+          this.debug && console.group("readDimension");
+          var dimension = {
+            value: null,
+            unit: null,
+            rawUnit: null
+          };
+          var value = this.readU32();
+          var unit = dimension.value & 255;
+          dimension.value = value >> 8;
+          dimension.rawUnit = unit;
+          switch (unit) {
+            case TypedValue.COMPLEX_UNIT_MM:
+              dimension.unit = "mm";
+              break;
+            case TypedValue.COMPLEX_UNIT_PX:
+              dimension.unit = "px";
+              break;
+            case TypedValue.COMPLEX_UNIT_DIP:
+              dimension.unit = "dp";
+              break;
+            case TypedValue.COMPLEX_UNIT_SP:
+              dimension.unit = "sp";
+              break;
+            case TypedValue.COMPLEX_UNIT_PT:
+              dimension.unit = "pt";
+              break;
+            case TypedValue.COMPLEX_UNIT_IN:
+              dimension.unit = "in";
+              break;
+          }
+          this.debug && console.groupEnd();
+          return dimension;
+        }
+      }, {
+        key: "readFraction",
+        value: function readFraction() {
+          this.debug && console.group("readFraction");
+          var fraction = {
+            value: null,
+            type: null,
+            rawType: null
+          };
+          var value = this.readU32();
+          var type = value & 15;
+          fraction.value = this.convertIntToFloat(value >> 4);
+          fraction.rawType = type;
+          switch (type) {
+            case TypedValue.COMPLEX_UNIT_FRACTION:
+              fraction.type = "%";
+              break;
+            case TypedValue.COMPLEX_UNIT_FRACTION_PARENT:
+              fraction.type = "%p";
+              break;
+          }
+          this.debug && console.groupEnd();
+          return fraction;
+        }
+      }, {
+        key: "readHex24",
+        value: function readHex24() {
+          this.debug && console.group("readHex24");
+          var val = (this.readU32() & 16777215).toString(16);
+          this.debug && console.groupEnd();
+          return val;
+        }
+      }, {
+        key: "readHex32",
+        value: function readHex32() {
+          this.debug && console.group("readHex32");
+          var val = this.readU32().toString(16);
+          this.debug && console.groupEnd();
+          return val;
+        }
+      }, {
+        key: "readTypedValue",
+        value: function readTypedValue() {
+          this.debug && console.group("readTypedValue");
+          var typedValue = {
+            value: null,
+            type: null,
+            rawType: null
+          };
+          var start = this.cursor;
+          var size = this.readU16();
+          this.readU8();
+          var dataType = this.readU8();
+          if (size === 0) {
+            size = 8;
+          }
+          typedValue.rawType = dataType;
+          switch (dataType) {
+            case TypedValue.TYPE_INT_DEC:
+              typedValue.value = this.readS32();
+              typedValue.type = "int_dec";
+              break;
+            case TypedValue.TYPE_INT_HEX:
+              typedValue.value = this.readS32();
+              typedValue.type = "int_hex";
+              break;
+            case TypedValue.TYPE_STRING:
+              var ref = this.readS32();
+              typedValue.value = ref > 0 ? this.strings[ref] : "";
+              typedValue.type = "string";
+              break;
+            case TypedValue.TYPE_REFERENCE:
+              var id = this.readU32();
+              typedValue.value = "resourceId:0x".concat(id.toString(16));
+              typedValue.type = "reference";
+              break;
+            case TypedValue.TYPE_INT_BOOLEAN:
+              typedValue.value = this.readS32() !== 0;
+              typedValue.type = "boolean";
+              break;
+            case TypedValue.TYPE_NULL:
+              this.readU32();
+              typedValue.value = null;
+              typedValue.type = "null";
+              break;
+            case TypedValue.TYPE_INT_COLOR_RGB8:
+              typedValue.value = this.readHex24();
+              typedValue.type = "rgb8";
+              break;
+            case TypedValue.TYPE_INT_COLOR_RGB4:
+              typedValue.value = this.readHex24();
+              typedValue.type = "rgb4";
+              break;
+            case TypedValue.TYPE_INT_COLOR_ARGB8:
+              typedValue.value = this.readHex32();
+              typedValue.type = "argb8";
+              break;
+            case TypedValue.TYPE_INT_COLOR_ARGB4:
+              typedValue.value = this.readHex32();
+              typedValue.type = "argb4";
+              break;
+            case TypedValue.TYPE_DIMENSION:
+              typedValue.value = this.readDimension();
+              typedValue.type = "dimension";
+              break;
+            case TypedValue.TYPE_FRACTION:
+              typedValue.value = this.readFraction();
+              typedValue.type = "fraction";
+              break;
+            default: {
+              var type = dataType.toString(16);
+              console.debug("Not sure what to do with typed value of type 0x".concat(type, ", falling back to reading an uint32."));
+              typedValue.value = this.readU32();
+              typedValue.type = "unknown";
+            }
+          }
+          var end = start + size;
+          if (this.cursor !== end) {
+            var _type = dataType.toString(16);
+            var diff = end - this.cursor;
+            console.debug("Cursor is off by ".concat(diff, " bytes at ").concat(this.cursor, " at supposed end of typed value of type 0x").concat(_type, ". The typed value started at offset ").concat(start, " and is supposed to end at offset ").concat(end, ". Ignoring the rest of the value."));
+            this.cursor = end;
+          }
+          this.debug && console.groupEnd();
+          return typedValue;
+        }
+      }, {
+        key: "convertIntToFloat",
+        value: function convertIntToFloat(_int) {
+          var buf = new ArrayBuffer(4);
+          new Int32Array(buf)[0] = _int;
+          return new Float32Array(buf)[0];
+        }
+      }, {
+        key: "readString",
+        value: function readString(encoding) {
+          this.debug && console.group("readString", encoding);
+          switch (encoding) {
+            case "utf-8":
+              var stringLength = this.readLength8(encoding);
+              this.debug && console.debug("stringLength:", stringLength);
+              var byteLength = this.readLength8(encoding);
+              this.debug && console.debug("byteLength:", byteLength);
+              var value = this.buffer.toString(encoding, this.cursor, this.cursor += byteLength);
+              this.debug && console.debug("value:", value);
+              this.debug && console.groupEnd();
+              return value;
+            case "ucs2":
+              stringLength = this.readLength16(encoding);
+              this.debug && console.debug("stringLength:", stringLength);
+              byteLength = stringLength * 2;
+              this.debug && console.debug("byteLength:", byteLength);
+              value = this.buffer.toString(encoding, this.cursor, this.cursor += byteLength);
+              this.debug && console.debug("value:", value);
+              this.debug && console.groupEnd();
+              return value;
+            default:
+              throw new Error("Unsupported encoding '".concat(encoding, "'"));
+          }
+        }
+      }, {
+        key: "readChunkHeader",
+        value: function readChunkHeader() {
+          this.debug && console.group("readChunkHeader");
+          var header = {
+            startOffset: this.cursor,
+            chunkType: this.readU16(),
+            headerSize: this.readU16(),
+            chunkSize: this.readU32()
+          };
+          this.debug && console.debug("startOffset:", header.startOffset);
+          this.debug && console.debug("chunkType:", header.chunkType);
+          this.debug && console.debug("headerSize:", header.headerSize);
+          this.debug && console.debug("chunkSize:", header.chunkSize);
+          this.debug && console.groupEnd();
+          return header;
+        }
+      }, {
+        key: "readStringPool",
+        value: function readStringPool(header) {
+          this.debug && console.group("readStringPool");
+          header.stringCount = this.readU32();
+          this.debug && console.debug("stringCount:", header.stringCount);
+          header.styleCount = this.readU32();
+          this.debug && console.debug("styleCount:", header.styleCount);
+          header.flags = this.readU32();
+          this.debug && console.debug("flags:", header.flags);
+          header.stringsStart = this.readU32();
+          this.debug && console.debug("stringsStart:", header.stringsStart);
+          header.stylesStart = this.readU32();
+          this.debug && console.debug("stylesStart:", header.stylesStart);
+          if (header.chunkType !== ChunkType.STRING_POOL) {
+            throw new Error("Invalid string pool header");
+          }
+          var offsets = [];
+          for (var i = 0, l = header.stringCount; i < l; ++i) {
+            this.debug && console.debug("offset:", i);
+            offsets.push(this.readU32());
+          }
+          var sorted = (header.flags & StringFlags.SORTED) === StringFlags.SORTED;
+          this.debug && console.debug("sorted:", sorted);
+          var encoding = (header.flags & StringFlags.UTF8) === StringFlags.UTF8 ? "utf-8" : "ucs2";
+          this.debug && console.debug("encoding:", encoding);
+          var stringsStart = header.startOffset + header.stringsStart;
+          this.cursor = stringsStart;
+          for (var _i = 0, _l = header.stringCount; _i < _l; ++_i) {
+            this.debug && console.debug("string:", _i);
+            this.debug && console.debug("offset:", offsets[_i]);
+            this.cursor = stringsStart + offsets[_i];
+            this.strings.push(this.readString(encoding));
+          }
+          this.cursor = header.startOffset + header.chunkSize;
+          this.debug && console.groupEnd();
+          return null;
+        }
+      }, {
+        key: "readResourceMap",
+        value: function readResourceMap(header) {
+          this.debug && console.group("readResourceMap");
+          var count = Math.floor((header.chunkSize - header.headerSize) / 4);
+          for (var i = 0; i < count; ++i) {
+            this.resources.push(this.readU32());
+          }
+          this.debug && console.groupEnd();
+          return null;
+        }
+      }, {
+        key: "readXmlNamespaceStart",
+        value: function readXmlNamespaceStart() {
+          this.debug && console.group("readXmlNamespaceStart");
+          this.readU32();
+          this.readU32();
+          this.readS32();
+          this.readS32();
+          this.debug && console.groupEnd();
+          return null;
+        }
+      }, {
+        key: "readXmlNamespaceEnd",
+        value: function readXmlNamespaceEnd() {
+          this.debug && console.group("readXmlNamespaceEnd");
+          this.readU32();
+          this.readU32();
+          this.readS32();
+          this.readS32();
+          this.debug && console.groupEnd();
+          return null;
+        }
+      }, {
+        key: "readXmlElementStart",
+        value: function readXmlElementStart() {
+          this.debug && console.group("readXmlElementStart");
+          var node = {
+            namespaceURI: null,
+            nodeType: NodeType.ELEMENT_NODE,
+            nodeName: null,
+            attributes: [],
+            childNodes: []
+          };
+          this.readU32();
+          this.readU32();
+          var nsRef = this.readS32();
+          var nameRef = this.readS32();
+          if (nsRef > 0) {
+            node.namespaceURI = this.strings[nsRef];
+          }
+          node.nodeName = this.strings[nameRef];
+          this.readU16();
+          this.readU16();
+          var attrCount = this.readU16();
+          this.readU16();
+          this.readU16();
+          this.readU16();
+          for (var i = 0; i < attrCount; ++i) {
+            node.attributes.push(this.readXmlAttribute());
+          }
+          if (this.document) {
+            this.parent.childNodes.push(node);
+            this.parent = node;
+          } else {
+            this.document = this.parent = node;
+          }
+          this.stack.push(node);
+          this.debug && console.groupEnd();
+          return node;
+        }
+      }, {
+        key: "readXmlAttribute",
+        value: function readXmlAttribute() {
+          this.debug && console.group("readXmlAttribute");
+          var attr = {
+            namespaceURI: null,
+            nodeType: NodeType.ATTRIBUTE_NODE,
+            nodeName: null,
+            name: null,
+            value: null,
+            typedValue: null
+          };
+          var nsRef = this.readS32();
+          var nameRef = this.readS32();
+          var valueRef = this.readS32();
+          if (nsRef > 0) {
+            attr.namespaceURI = this.strings[nsRef];
+          }
+          attr.nodeName = attr.name = this.strings[nameRef];
+          if (valueRef > 0) {
+            if (attr.name === "versionName") {
+              this.strings[valueRef] = this.strings[valueRef].replace(/[^\d\w-.]/g, "");
+            }
+            attr.value = this.strings[valueRef];
+          }
+          attr.typedValue = this.readTypedValue();
+          this.debug && console.groupEnd();
+          return attr;
+        }
+      }, {
+        key: "readXmlElementEnd",
+        value: function readXmlElementEnd() {
+          this.debug && console.group("readXmlCData");
+          this.readU32();
+          this.readU32();
+          this.readS32();
+          this.readS32();
+          this.stack.pop();
+          this.parent = this.stack[this.stack.length - 1];
+          this.debug && console.groupEnd();
+          return null;
+        }
+      }, {
+        key: "readXmlCData",
+        value: function readXmlCData() {
+          this.debug && console.group("readXmlCData");
+          var cdata = {
+            namespaceURI: null,
+            nodeType: NodeType.CDATA_SECTION_NODE,
+            nodeName: "#cdata",
+            data: null,
+            typedValue: null
+          };
+          this.readU32();
+          this.readU32();
+          var dataRef = this.readS32();
+          if (dataRef > 0) {
+            cdata.data = this.strings[dataRef];
+          }
+          cdata.typedValue = this.readTypedValue();
+          this.parent.childNodes.push(cdata);
+          this.debug && console.groupEnd();
+          return cdata;
+        }
+      }, {
+        key: "readNull",
+        value: function readNull(header) {
+          this.debug && console.group("readNull");
+          this.cursor += header.chunkSize - header.headerSize;
+          this.debug && console.groupEnd();
+          return null;
+        }
+      }, {
+        key: "parse",
+        value: function parse() {
+          this.debug && console.group("BinaryXmlParser.parse");
+          var xmlHeader = this.readChunkHeader();
+          if (xmlHeader.chunkType !== ChunkType.XML) {
+            throw new Error("Invalid XML header");
+          }
+          while (this.cursor < this.buffer.length) {
+            this.debug && console.group("chunk");
+            var start = this.cursor;
+            var header = this.readChunkHeader();
+            switch (header.chunkType) {
+              case ChunkType.STRING_POOL:
+                this.readStringPool(header);
+                break;
+              case ChunkType.XML_RESOURCE_MAP:
+                this.readResourceMap(header);
+                break;
+              case ChunkType.XML_START_NAMESPACE:
+                this.readXmlNamespaceStart(header);
+                break;
+              case ChunkType.XML_END_NAMESPACE:
+                this.readXmlNamespaceEnd(header);
+                break;
+              case ChunkType.XML_START_ELEMENT:
+                this.readXmlElementStart(header);
+                break;
+              case ChunkType.XML_END_ELEMENT:
+                this.readXmlElementEnd(header);
+                break;
+              case ChunkType.XML_CDATA:
+                this.readXmlCData(header);
+                break;
+              case ChunkType.NULL:
+                this.readNull(header);
+                break;
+              default:
+                throw new Error("Unsupported chunk type '".concat(header.chunkType, "'"));
+            }
+            var end = start + header.chunkSize;
+            if (this.cursor !== end) {
+              var diff = end - this.cursor;
+              var type = header.chunkType.toString(16);
+              console.debug("Cursor is off by ".concat(diff, " bytes at ").concat(this.cursor, " at supposed end of chunk of type 0x").concat(type, ". The chunk started at offset ").concat(start, " and is supposed to end at offset ").concat(end, ". Ignoring the rest of the chunk."));
+              this.cursor = end;
+            }
+            this.debug && console.groupEnd();
+          }
+          this.debug && console.groupEnd();
+          return this.document;
+        }
+      }]);
+      return BinaryXmlParser2;
+    }();
+    module2.exports = BinaryXmlParser;
+  }
+});
+
+// node_modules/app-info-parser/src/xml-parser/manifest.js
+var require_manifest = __commonJS({
+  "node_modules/app-info-parser/src/xml-parser/manifest.js"(exports, module2) {
+    "use strict";
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
+    }
+    function _defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    function _createClass(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        _defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        _defineProperties(Constructor, staticProps);
+      return Constructor;
+    }
+    var BinaryXmlParser = require_binary();
+    var INTENT_MAIN = "android.intent.action.MAIN";
+    var CATEGORY_LAUNCHER = "android.intent.category.LAUNCHER";
+    var ManifestParser = /* @__PURE__ */ function() {
+      function ManifestParser2(buffer) {
+        var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+        _classCallCheck(this, ManifestParser2);
+        this.buffer = buffer;
+        this.xmlParser = new BinaryXmlParser(this.buffer, options);
+      }
+      _createClass(ManifestParser2, [{
+        key: "collapseAttributes",
+        value: function collapseAttributes(element) {
+          var collapsed = /* @__PURE__ */ Object.create(null);
+          for (var _i = 0, _Array$from = Array.from(element.attributes); _i < _Array$from.length; _i++) {
+            var attr = _Array$from[_i];
+            collapsed[attr.name] = attr.typedValue.value;
+          }
+          return collapsed;
+        }
+      }, {
+        key: "parseIntents",
+        value: function parseIntents(element, target) {
+          var _this = this;
+          target.intentFilters = [];
+          target.metaData = [];
+          return element.childNodes.forEach(function(element2) {
+            switch (element2.nodeName) {
+              case "intent-filter": {
+                var intentFilter = _this.collapseAttributes(element2);
+                intentFilter.actions = [];
+                intentFilter.categories = [];
+                intentFilter.data = [];
+                element2.childNodes.forEach(function(element3) {
+                  switch (element3.nodeName) {
+                    case "action":
+                      intentFilter.actions.push(_this.collapseAttributes(element3));
+                      break;
+                    case "category":
+                      intentFilter.categories.push(_this.collapseAttributes(element3));
+                      break;
+                    case "data":
+                      intentFilter.data.push(_this.collapseAttributes(element3));
+                      break;
+                  }
+                });
+                target.intentFilters.push(intentFilter);
+                break;
+              }
+              case "meta-data":
+                target.metaData.push(_this.collapseAttributes(element2));
+                break;
+            }
+          });
+        }
+      }, {
+        key: "parseApplication",
+        value: function parseApplication(element) {
+          var _this2 = this;
+          var app = this.collapseAttributes(element);
+          app.activities = [];
+          app.activityAliases = [];
+          app.launcherActivities = [];
+          app.services = [];
+          app.receivers = [];
+          app.providers = [];
+          app.usesLibraries = [];
+          app.metaData = [];
+          element.childNodes.forEach(function(element2) {
+            switch (element2.nodeName) {
+              case "activity": {
+                var activity = _this2.collapseAttributes(element2);
+                _this2.parseIntents(element2, activity);
+                app.activities.push(activity);
+                if (_this2.isLauncherActivity(activity)) {
+                  app.launcherActivities.push(activity);
+                }
+                break;
+              }
+              case "activity-alias": {
+                var activityAlias = _this2.collapseAttributes(element2);
+                _this2.parseIntents(element2, activityAlias);
+                app.activityAliases.push(activityAlias);
+                if (_this2.isLauncherActivity(activityAlias)) {
+                  app.launcherActivities.push(activityAlias);
+                }
+                break;
+              }
+              case "service": {
+                var service = _this2.collapseAttributes(element2);
+                _this2.parseIntents(element2, service);
+                app.services.push(service);
+                break;
+              }
+              case "receiver": {
+                var receiver = _this2.collapseAttributes(element2);
+                _this2.parseIntents(element2, receiver);
+                app.receivers.push(receiver);
+                break;
+              }
+              case "provider": {
+                var provider = _this2.collapseAttributes(element2);
+                provider.grantUriPermissions = [];
+                provider.metaData = [];
+                provider.pathPermissions = [];
+                element2.childNodes.forEach(function(element3) {
+                  switch (element3.nodeName) {
+                    case "grant-uri-permission":
+                      provider.grantUriPermissions.push(_this2.collapseAttributes(element3));
+                      break;
+                    case "meta-data":
+                      provider.metaData.push(_this2.collapseAttributes(element3));
+                      break;
+                    case "path-permission":
+                      provider.pathPermissions.push(_this2.collapseAttributes(element3));
+                      break;
+                  }
+                });
+                app.providers.push(provider);
+                break;
+              }
+              case "uses-library":
+                app.usesLibraries.push(_this2.collapseAttributes(element2));
+                break;
+              case "meta-data":
+                app.metaData.push(_this2.collapseAttributes(element2));
+                break;
+            }
+          });
+          return app;
+        }
+      }, {
+        key: "isLauncherActivity",
+        value: function isLauncherActivity(activity) {
+          return activity.intentFilters.some(function(filter) {
+            var hasMain = filter.actions.some(function(action) {
+              return action.name === INTENT_MAIN;
+            });
+            if (!hasMain) {
+              return false;
+            }
+            return filter.categories.some(function(category) {
+              return category.name === CATEGORY_LAUNCHER;
+            });
+          });
+        }
+      }, {
+        key: "parse",
+        value: function parse() {
+          var _this3 = this;
+          var document2 = this.xmlParser.parse();
+          var manifest2 = this.collapseAttributes(document2);
+          manifest2.usesPermissions = [];
+          manifest2.usesPermissionsSDK23 = [];
+          manifest2.permissions = [];
+          manifest2.permissionTrees = [];
+          manifest2.permissionGroups = [];
+          manifest2.instrumentation = null;
+          manifest2.usesSdk = null;
+          manifest2.usesConfiguration = null;
+          manifest2.usesFeatures = [];
+          manifest2.supportsScreens = null;
+          manifest2.compatibleScreens = [];
+          manifest2.supportsGlTextures = [];
+          manifest2.application = /* @__PURE__ */ Object.create(null);
+          document2.childNodes.forEach(function(element) {
+            switch (element.nodeName) {
+              case "uses-permission":
+                manifest2.usesPermissions.push(_this3.collapseAttributes(element));
+                break;
+              case "uses-permission-sdk-23":
+                manifest2.usesPermissionsSDK23.push(_this3.collapseAttributes(element));
+                break;
+              case "permission":
+                manifest2.permissions.push(_this3.collapseAttributes(element));
+                break;
+              case "permission-tree":
+                manifest2.permissionTrees.push(_this3.collapseAttributes(element));
+                break;
+              case "permission-group":
+                manifest2.permissionGroups.push(_this3.collapseAttributes(element));
+                break;
+              case "instrumentation":
+                manifest2.instrumentation = _this3.collapseAttributes(element);
+                break;
+              case "uses-sdk":
+                manifest2.usesSdk = _this3.collapseAttributes(element);
+                break;
+              case "uses-configuration":
+                manifest2.usesConfiguration = _this3.collapseAttributes(element);
+                break;
+              case "uses-feature":
+                manifest2.usesFeatures.push(_this3.collapseAttributes(element));
+                break;
+              case "supports-screens":
+                manifest2.supportsScreens = _this3.collapseAttributes(element);
+                break;
+              case "compatible-screens":
+                element.childNodes.forEach(function(screen) {
+                  return manifest2.compatibleScreens.push(_this3.collapseAttributes(screen));
+                });
+                break;
+              case "supports-gl-texture":
+                manifest2.supportsGlTextures.push(_this3.collapseAttributes(element));
+                break;
+              case "application":
+                manifest2.application = _this3.parseApplication(element);
+                break;
+            }
+          });
+          return manifest2;
+        }
+      }]);
+      return ManifestParser2;
+    }();
+    module2.exports = ManifestParser;
+  }
+});
+
+// node_modules/long/dist/long.js
+var require_long = __commonJS({
+  "node_modules/long/dist/long.js"(exports, module2) {
+    (function(global2, factory) {
+      if (typeof define === "function" && define["amd"])
+        define([], factory);
+      else if (typeof require === "function" && typeof module2 === "object" && module2 && module2["exports"])
+        module2["exports"] = factory();
+      else
+        (global2["dcodeIO"] = global2["dcodeIO"] || {})["Long"] = factory();
+    })(exports, function() {
+      "use strict";
+      function Long(low, high, unsigned) {
+        this.low = low | 0;
+        this.high = high | 0;
+        this.unsigned = !!unsigned;
+      }
+      Long.prototype.__isLong__;
+      Object.defineProperty(Long.prototype, "__isLong__", {
+        value: true,
+        enumerable: false,
+        configurable: false
+      });
+      function isLong(obj) {
+        return (obj && obj["__isLong__"]) === true;
+      }
+      Long.isLong = isLong;
+      var INT_CACHE = {};
+      var UINT_CACHE = {};
+      function fromInt(value, unsigned) {
+        var obj, cachedObj, cache;
+        if (unsigned) {
+          value >>>= 0;
+          if (cache = 0 <= value && value < 256) {
+            cachedObj = UINT_CACHE[value];
+            if (cachedObj)
+              return cachedObj;
+          }
+          obj = fromBits(value, (value | 0) < 0 ? -1 : 0, true);
+          if (cache)
+            UINT_CACHE[value] = obj;
+          return obj;
+        } else {
+          value |= 0;
+          if (cache = -128 <= value && value < 128) {
+            cachedObj = INT_CACHE[value];
+            if (cachedObj)
+              return cachedObj;
+          }
+          obj = fromBits(value, value < 0 ? -1 : 0, false);
+          if (cache)
+            INT_CACHE[value] = obj;
+          return obj;
+        }
+      }
+      Long.fromInt = fromInt;
+      function fromNumber(value, unsigned) {
+        if (isNaN(value) || !isFinite(value))
+          return unsigned ? UZERO : ZERO;
+        if (unsigned) {
+          if (value < 0)
+            return UZERO;
+          if (value >= TWO_PWR_64_DBL)
+            return MAX_UNSIGNED_VALUE;
+        } else {
+          if (value <= -TWO_PWR_63_DBL)
+            return MIN_VALUE;
+          if (value + 1 >= TWO_PWR_63_DBL)
+            return MAX_VALUE;
+        }
+        if (value < 0)
+          return fromNumber(-value, unsigned).neg();
+        return fromBits(value % TWO_PWR_32_DBL | 0, value / TWO_PWR_32_DBL | 0, unsigned);
+      }
+      Long.fromNumber = fromNumber;
+      function fromBits(lowBits, highBits, unsigned) {
+        return new Long(lowBits, highBits, unsigned);
+      }
+      Long.fromBits = fromBits;
+      var pow_dbl = Math.pow;
+      function fromString(str, unsigned, radix) {
+        if (str.length === 0)
+          throw Error("empty string");
+        if (str === "NaN" || str === "Infinity" || str === "+Infinity" || str === "-Infinity")
+          return ZERO;
+        if (typeof unsigned === "number") {
+          radix = unsigned, unsigned = false;
+        } else {
+          unsigned = !!unsigned;
+        }
+        radix = radix || 10;
+        if (radix < 2 || 36 < radix)
+          throw RangeError("radix");
+        var p;
+        if ((p = str.indexOf("-")) > 0)
+          throw Error("interior hyphen");
+        else if (p === 0) {
+          return fromString(str.substring(1), unsigned, radix).neg();
+        }
+        var radixToPower = fromNumber(pow_dbl(radix, 8));
+        var result = ZERO;
+        for (var i = 0; i < str.length; i += 8) {
+          var size = Math.min(8, str.length - i), value = parseInt(str.substring(i, i + size), radix);
+          if (size < 8) {
+            var power = fromNumber(pow_dbl(radix, size));
+            result = result.mul(power).add(fromNumber(value));
+          } else {
+            result = result.mul(radixToPower);
+            result = result.add(fromNumber(value));
+          }
+        }
+        result.unsigned = unsigned;
+        return result;
+      }
+      Long.fromString = fromString;
+      function fromValue(val) {
+        if (val instanceof Long)
+          return val;
+        if (typeof val === "number")
+          return fromNumber(val);
+        if (typeof val === "string")
+          return fromString(val);
+        return fromBits(val.low, val.high, val.unsigned);
+      }
+      Long.fromValue = fromValue;
+      var TWO_PWR_16_DBL = 1 << 16;
+      var TWO_PWR_24_DBL = 1 << 24;
+      var TWO_PWR_32_DBL = TWO_PWR_16_DBL * TWO_PWR_16_DBL;
+      var TWO_PWR_64_DBL = TWO_PWR_32_DBL * TWO_PWR_32_DBL;
+      var TWO_PWR_63_DBL = TWO_PWR_64_DBL / 2;
+      var TWO_PWR_24 = fromInt(TWO_PWR_24_DBL);
+      var ZERO = fromInt(0);
+      Long.ZERO = ZERO;
+      var UZERO = fromInt(0, true);
+      Long.UZERO = UZERO;
+      var ONE = fromInt(1);
+      Long.ONE = ONE;
+      var UONE = fromInt(1, true);
+      Long.UONE = UONE;
+      var NEG_ONE = fromInt(-1);
+      Long.NEG_ONE = NEG_ONE;
+      var MAX_VALUE = fromBits(4294967295 | 0, 2147483647 | 0, false);
+      Long.MAX_VALUE = MAX_VALUE;
+      var MAX_UNSIGNED_VALUE = fromBits(4294967295 | 0, 4294967295 | 0, true);
+      Long.MAX_UNSIGNED_VALUE = MAX_UNSIGNED_VALUE;
+      var MIN_VALUE = fromBits(0, 2147483648 | 0, false);
+      Long.MIN_VALUE = MIN_VALUE;
+      var LongPrototype = Long.prototype;
+      LongPrototype.toInt = function toInt() {
+        return this.unsigned ? this.low >>> 0 : this.low;
+      };
+      LongPrototype.toNumber = function toNumber() {
+        if (this.unsigned)
+          return (this.high >>> 0) * TWO_PWR_32_DBL + (this.low >>> 0);
+        return this.high * TWO_PWR_32_DBL + (this.low >>> 0);
+      };
+      LongPrototype.toString = function toString(radix) {
+        radix = radix || 10;
+        if (radix < 2 || 36 < radix)
+          throw RangeError("radix");
+        if (this.isZero())
+          return "0";
+        if (this.isNegative()) {
+          if (this.eq(MIN_VALUE)) {
+            var radixLong = fromNumber(radix), div = this.div(radixLong), rem1 = div.mul(radixLong).sub(this);
+            return div.toString(radix) + rem1.toInt().toString(radix);
+          } else
+            return "-" + this.neg().toString(radix);
+        }
+        var radixToPower = fromNumber(pow_dbl(radix, 6), this.unsigned), rem = this;
+        var result = "";
+        while (true) {
+          var remDiv = rem.div(radixToPower), intval = rem.sub(remDiv.mul(radixToPower)).toInt() >>> 0, digits = intval.toString(radix);
+          rem = remDiv;
+          if (rem.isZero())
+            return digits + result;
+          else {
+            while (digits.length < 6)
+              digits = "0" + digits;
+            result = "" + digits + result;
+          }
+        }
+      };
+      LongPrototype.getHighBits = function getHighBits() {
+        return this.high;
+      };
+      LongPrototype.getHighBitsUnsigned = function getHighBitsUnsigned() {
+        return this.high >>> 0;
+      };
+      LongPrototype.getLowBits = function getLowBits() {
+        return this.low;
+      };
+      LongPrototype.getLowBitsUnsigned = function getLowBitsUnsigned() {
+        return this.low >>> 0;
+      };
+      LongPrototype.getNumBitsAbs = function getNumBitsAbs() {
+        if (this.isNegative())
+          return this.eq(MIN_VALUE) ? 64 : this.neg().getNumBitsAbs();
+        var val = this.high != 0 ? this.high : this.low;
+        for (var bit = 31; bit > 0; bit--)
+          if ((val & 1 << bit) != 0)
+            break;
+        return this.high != 0 ? bit + 33 : bit + 1;
+      };
+      LongPrototype.isZero = function isZero() {
+        return this.high === 0 && this.low === 0;
+      };
+      LongPrototype.isNegative = function isNegative() {
+        return !this.unsigned && this.high < 0;
+      };
+      LongPrototype.isPositive = function isPositive() {
+        return this.unsigned || this.high >= 0;
+      };
+      LongPrototype.isOdd = function isOdd() {
+        return (this.low & 1) === 1;
+      };
+      LongPrototype.isEven = function isEven() {
+        return (this.low & 1) === 0;
+      };
+      LongPrototype.equals = function equals(other) {
+        if (!isLong(other))
+          other = fromValue(other);
+        if (this.unsigned !== other.unsigned && this.high >>> 31 === 1 && other.high >>> 31 === 1)
+          return false;
+        return this.high === other.high && this.low === other.low;
+      };
+      LongPrototype.eq = LongPrototype.equals;
+      LongPrototype.notEquals = function notEquals(other) {
+        return !this.eq(other);
+      };
+      LongPrototype.neq = LongPrototype.notEquals;
+      LongPrototype.lessThan = function lessThan(other) {
+        return this.comp(other) < 0;
+      };
+      LongPrototype.lt = LongPrototype.lessThan;
+      LongPrototype.lessThanOrEqual = function lessThanOrEqual(other) {
+        return this.comp(other) <= 0;
+      };
+      LongPrototype.lte = LongPrototype.lessThanOrEqual;
+      LongPrototype.greaterThan = function greaterThan(other) {
+        return this.comp(other) > 0;
+      };
+      LongPrototype.gt = LongPrototype.greaterThan;
+      LongPrototype.greaterThanOrEqual = function greaterThanOrEqual(other) {
+        return this.comp(other) >= 0;
+      };
+      LongPrototype.gte = LongPrototype.greaterThanOrEqual;
+      LongPrototype.compare = function compare(other) {
+        if (!isLong(other))
+          other = fromValue(other);
+        if (this.eq(other))
+          return 0;
+        var thisNeg = this.isNegative(), otherNeg = other.isNegative();
+        if (thisNeg && !otherNeg)
+          return -1;
+        if (!thisNeg && otherNeg)
+          return 1;
+        if (!this.unsigned)
+          return this.sub(other).isNegative() ? -1 : 1;
+        return other.high >>> 0 > this.high >>> 0 || other.high === this.high && other.low >>> 0 > this.low >>> 0 ? -1 : 1;
+      };
+      LongPrototype.comp = LongPrototype.compare;
+      LongPrototype.negate = function negate() {
+        if (!this.unsigned && this.eq(MIN_VALUE))
+          return MIN_VALUE;
+        return this.not().add(ONE);
+      };
+      LongPrototype.neg = LongPrototype.negate;
+      LongPrototype.add = function add(addend) {
+        if (!isLong(addend))
+          addend = fromValue(addend);
+        var a48 = this.high >>> 16;
+        var a32 = this.high & 65535;
+        var a16 = this.low >>> 16;
+        var a00 = this.low & 65535;
+        var b48 = addend.high >>> 16;
+        var b32 = addend.high & 65535;
+        var b16 = addend.low >>> 16;
+        var b00 = addend.low & 65535;
+        var c48 = 0, c32 = 0, c16 = 0, c00 = 0;
+        c00 += a00 + b00;
+        c16 += c00 >>> 16;
+        c00 &= 65535;
+        c16 += a16 + b16;
+        c32 += c16 >>> 16;
+        c16 &= 65535;
+        c32 += a32 + b32;
+        c48 += c32 >>> 16;
+        c32 &= 65535;
+        c48 += a48 + b48;
+        c48 &= 65535;
+        return fromBits(c16 << 16 | c00, c48 << 16 | c32, this.unsigned);
+      };
+      LongPrototype.subtract = function subtract(subtrahend) {
+        if (!isLong(subtrahend))
+          subtrahend = fromValue(subtrahend);
+        return this.add(subtrahend.neg());
+      };
+      LongPrototype.sub = LongPrototype.subtract;
+      LongPrototype.multiply = function multiply(multiplier) {
+        if (this.isZero())
+          return ZERO;
+        if (!isLong(multiplier))
+          multiplier = fromValue(multiplier);
+        if (multiplier.isZero())
+          return ZERO;
+        if (this.eq(MIN_VALUE))
+          return multiplier.isOdd() ? MIN_VALUE : ZERO;
+        if (multiplier.eq(MIN_VALUE))
+          return this.isOdd() ? MIN_VALUE : ZERO;
+        if (this.isNegative()) {
+          if (multiplier.isNegative())
+            return this.neg().mul(multiplier.neg());
+          else
+            return this.neg().mul(multiplier).neg();
+        } else if (multiplier.isNegative())
+          return this.mul(multiplier.neg()).neg();
+        if (this.lt(TWO_PWR_24) && multiplier.lt(TWO_PWR_24))
+          return fromNumber(this.toNumber() * multiplier.toNumber(), this.unsigned);
+        var a48 = this.high >>> 16;
+        var a32 = this.high & 65535;
+        var a16 = this.low >>> 16;
+        var a00 = this.low & 65535;
+        var b48 = multiplier.high >>> 16;
+        var b32 = multiplier.high & 65535;
+        var b16 = multiplier.low >>> 16;
+        var b00 = multiplier.low & 65535;
+        var c48 = 0, c32 = 0, c16 = 0, c00 = 0;
+        c00 += a00 * b00;
+        c16 += c00 >>> 16;
+        c00 &= 65535;
+        c16 += a16 * b00;
+        c32 += c16 >>> 16;
+        c16 &= 65535;
+        c16 += a00 * b16;
+        c32 += c16 >>> 16;
+        c16 &= 65535;
+        c32 += a32 * b00;
+        c48 += c32 >>> 16;
+        c32 &= 65535;
+        c32 += a16 * b16;
+        c48 += c32 >>> 16;
+        c32 &= 65535;
+        c32 += a00 * b32;
+        c48 += c32 >>> 16;
+        c32 &= 65535;
+        c48 += a48 * b00 + a32 * b16 + a16 * b32 + a00 * b48;
+        c48 &= 65535;
+        return fromBits(c16 << 16 | c00, c48 << 16 | c32, this.unsigned);
+      };
+      LongPrototype.mul = LongPrototype.multiply;
+      LongPrototype.divide = function divide(divisor) {
+        if (!isLong(divisor))
+          divisor = fromValue(divisor);
+        if (divisor.isZero())
+          throw Error("division by zero");
+        if (this.isZero())
+          return this.unsigned ? UZERO : ZERO;
+        var approx, rem, res;
+        if (!this.unsigned) {
+          if (this.eq(MIN_VALUE)) {
+            if (divisor.eq(ONE) || divisor.eq(NEG_ONE))
+              return MIN_VALUE;
+            else if (divisor.eq(MIN_VALUE))
+              return ONE;
+            else {
+              var halfThis = this.shr(1);
+              approx = halfThis.div(divisor).shl(1);
+              if (approx.eq(ZERO)) {
+                return divisor.isNegative() ? ONE : NEG_ONE;
+              } else {
+                rem = this.sub(divisor.mul(approx));
+                res = approx.add(rem.div(divisor));
+                return res;
+              }
+            }
+          } else if (divisor.eq(MIN_VALUE))
+            return this.unsigned ? UZERO : ZERO;
+          if (this.isNegative()) {
+            if (divisor.isNegative())
+              return this.neg().div(divisor.neg());
+            return this.neg().div(divisor).neg();
+          } else if (divisor.isNegative())
+            return this.div(divisor.neg()).neg();
+          res = ZERO;
+        } else {
+          if (!divisor.unsigned)
+            divisor = divisor.toUnsigned();
+          if (divisor.gt(this))
+            return UZERO;
+          if (divisor.gt(this.shru(1)))
+            return UONE;
+          res = UZERO;
+        }
+        rem = this;
+        while (rem.gte(divisor)) {
+          approx = Math.max(1, Math.floor(rem.toNumber() / divisor.toNumber()));
+          var log2 = Math.ceil(Math.log(approx) / Math.LN2), delta = log2 <= 48 ? 1 : pow_dbl(2, log2 - 48), approxRes = fromNumber(approx), approxRem = approxRes.mul(divisor);
+          while (approxRem.isNegative() || approxRem.gt(rem)) {
+            approx -= delta;
+            approxRes = fromNumber(approx, this.unsigned);
+            approxRem = approxRes.mul(divisor);
+          }
+          if (approxRes.isZero())
+            approxRes = ONE;
+          res = res.add(approxRes);
+          rem = rem.sub(approxRem);
+        }
+        return res;
+      };
+      LongPrototype.div = LongPrototype.divide;
+      LongPrototype.modulo = function modulo(divisor) {
+        if (!isLong(divisor))
+          divisor = fromValue(divisor);
+        return this.sub(this.div(divisor).mul(divisor));
+      };
+      LongPrototype.mod = LongPrototype.modulo;
+      LongPrototype.not = function not() {
+        return fromBits(~this.low, ~this.high, this.unsigned);
+      };
+      LongPrototype.and = function and(other) {
+        if (!isLong(other))
+          other = fromValue(other);
+        return fromBits(this.low & other.low, this.high & other.high, this.unsigned);
+      };
+      LongPrototype.or = function or(other) {
+        if (!isLong(other))
+          other = fromValue(other);
+        return fromBits(this.low | other.low, this.high | other.high, this.unsigned);
+      };
+      LongPrototype.xor = function xor(other) {
+        if (!isLong(other))
+          other = fromValue(other);
+        return fromBits(this.low ^ other.low, this.high ^ other.high, this.unsigned);
+      };
+      LongPrototype.shiftLeft = function shiftLeft(numBits) {
+        if (isLong(numBits))
+          numBits = numBits.toInt();
+        if ((numBits &= 63) === 0)
+          return this;
+        else if (numBits < 32)
+          return fromBits(this.low << numBits, this.high << numBits | this.low >>> 32 - numBits, this.unsigned);
+        else
+          return fromBits(0, this.low << numBits - 32, this.unsigned);
+      };
+      LongPrototype.shl = LongPrototype.shiftLeft;
+      LongPrototype.shiftRight = function shiftRight(numBits) {
+        if (isLong(numBits))
+          numBits = numBits.toInt();
+        if ((numBits &= 63) === 0)
+          return this;
+        else if (numBits < 32)
+          return fromBits(this.low >>> numBits | this.high << 32 - numBits, this.high >> numBits, this.unsigned);
+        else
+          return fromBits(this.high >> numBits - 32, this.high >= 0 ? 0 : -1, this.unsigned);
+      };
+      LongPrototype.shr = LongPrototype.shiftRight;
+      LongPrototype.shiftRightUnsigned = function shiftRightUnsigned(numBits) {
+        if (isLong(numBits))
+          numBits = numBits.toInt();
+        numBits &= 63;
+        if (numBits === 0)
+          return this;
+        else {
+          var high = this.high;
+          if (numBits < 32) {
+            var low = this.low;
+            return fromBits(low >>> numBits | high << 32 - numBits, high >>> numBits, this.unsigned);
+          } else if (numBits === 32)
+            return fromBits(high, 0, this.unsigned);
+          else
+            return fromBits(high >>> numBits - 32, 0, this.unsigned);
+        }
+      };
+      LongPrototype.shru = LongPrototype.shiftRightUnsigned;
+      LongPrototype.toSigned = function toSigned() {
+        if (!this.unsigned)
+          return this;
+        return fromBits(this.low, this.high, false);
+      };
+      LongPrototype.toUnsigned = function toUnsigned() {
+        if (this.unsigned)
+          return this;
+        return fromBits(this.low, this.high, true);
+      };
+      LongPrototype.toBytes = function(le) {
+        return le ? this.toBytesLE() : this.toBytesBE();
+      };
+      LongPrototype.toBytesLE = function() {
+        var hi = this.high, lo = this.low;
+        return [
+          lo & 255,
+          lo >>> 8 & 255,
+          lo >>> 16 & 255,
+          lo >>> 24 & 255,
+          hi & 255,
+          hi >>> 8 & 255,
+          hi >>> 16 & 255,
+          hi >>> 24 & 255
+        ];
+      };
+      LongPrototype.toBytesBE = function() {
+        var hi = this.high, lo = this.low;
+        return [
+          hi >>> 24 & 255,
+          hi >>> 16 & 255,
+          hi >>> 8 & 255,
+          hi & 255,
+          lo >>> 24 & 255,
+          lo >>> 16 & 255,
+          lo >>> 8 & 255,
+          lo & 255
+        ];
+      };
+      return Long;
+    });
+  }
+});
+
+// node_modules/bytebuffer/dist/bytebuffer-node.js
+var require_bytebuffer_node = __commonJS({
+  "node_modules/bytebuffer/dist/bytebuffer-node.js"(exports, module2) {
+    module2.exports = function() {
+      "use strict";
+      var buffer = require("buffer"), Buffer2 = buffer["Buffer"], Long = require_long(), memcpy = null;
+      try {
+        memcpy = require("memcpy");
+      } catch (e) {
+      }
+      var ByteBuffer = function(capacity, littleEndian, noAssert) {
+        if (typeof capacity === "undefined")
+          capacity = ByteBuffer.DEFAULT_CAPACITY;
+        if (typeof littleEndian === "undefined")
+          littleEndian = ByteBuffer.DEFAULT_ENDIAN;
+        if (typeof noAssert === "undefined")
+          noAssert = ByteBuffer.DEFAULT_NOASSERT;
+        if (!noAssert) {
+          capacity = capacity | 0;
+          if (capacity < 0)
+            throw RangeError("Illegal capacity");
+          littleEndian = !!littleEndian;
+          noAssert = !!noAssert;
+        }
+        this.buffer = capacity === 0 ? EMPTY_BUFFER : new Buffer2(capacity);
+        this.offset = 0;
+        this.markedOffset = -1;
+        this.limit = capacity;
+        this.littleEndian = littleEndian;
+        this.noAssert = noAssert;
+      };
+      ByteBuffer.VERSION = "5.0.1";
+      ByteBuffer.LITTLE_ENDIAN = true;
+      ByteBuffer.BIG_ENDIAN = false;
+      ByteBuffer.DEFAULT_CAPACITY = 16;
+      ByteBuffer.DEFAULT_ENDIAN = ByteBuffer.BIG_ENDIAN;
+      ByteBuffer.DEFAULT_NOASSERT = false;
+      ByteBuffer.Long = Long;
+      var ByteBufferPrototype = ByteBuffer.prototype;
+      ByteBufferPrototype.__isByteBuffer__;
+      Object.defineProperty(ByteBufferPrototype, "__isByteBuffer__", {
+        value: true,
+        enumerable: false,
+        configurable: false
+      });
+      var EMPTY_BUFFER = new Buffer2(0);
+      var stringFromCharCode = String.fromCharCode;
+      function stringSource(s) {
+        var i = 0;
+        return function() {
+          return i < s.length ? s.charCodeAt(i++) : null;
+        };
+      }
+      function stringDestination() {
+        var cs = [], ps = [];
+        return function() {
+          if (arguments.length === 0)
+            return ps.join("") + stringFromCharCode.apply(String, cs);
+          if (cs.length + arguments.length > 1024)
+            ps.push(stringFromCharCode.apply(String, cs)), cs.length = 0;
+          Array.prototype.push.apply(cs, arguments);
+        };
+      }
+      ByteBuffer.accessor = function() {
+        return Buffer2;
+      };
+      ByteBuffer.allocate = function(capacity, littleEndian, noAssert) {
+        return new ByteBuffer(capacity, littleEndian, noAssert);
+      };
+      ByteBuffer.concat = function(buffers, encoding, littleEndian, noAssert) {
+        if (typeof encoding === "boolean" || typeof encoding !== "string") {
+          noAssert = littleEndian;
+          littleEndian = encoding;
+          encoding = void 0;
+        }
+        var capacity = 0;
+        for (var i = 0, k = buffers.length, length; i < k; ++i) {
+          if (!ByteBuffer.isByteBuffer(buffers[i]))
+            buffers[i] = ByteBuffer.wrap(buffers[i], encoding);
+          length = buffers[i].limit - buffers[i].offset;
+          if (length > 0)
+            capacity += length;
+        }
+        if (capacity === 0)
+          return new ByteBuffer(0, littleEndian, noAssert);
+        var bb2 = new ByteBuffer(capacity, littleEndian, noAssert), bi;
+        i = 0;
+        while (i < k) {
+          bi = buffers[i++];
+          length = bi.limit - bi.offset;
+          if (length <= 0)
+            continue;
+          bi.buffer.copy(bb2.buffer, bb2.offset, bi.offset, bi.limit);
+          bb2.offset += length;
+        }
+        bb2.limit = bb2.offset;
+        bb2.offset = 0;
+        return bb2;
+      };
+      ByteBuffer.isByteBuffer = function(bb2) {
+        return (bb2 && bb2["__isByteBuffer__"]) === true;
+      };
+      ByteBuffer.type = function() {
+        return Buffer2;
+      };
+      ByteBuffer.wrap = function(buffer2, encoding, littleEndian, noAssert) {
+        if (typeof encoding !== "string") {
+          noAssert = littleEndian;
+          littleEndian = encoding;
+          encoding = void 0;
+        }
+        if (typeof buffer2 === "string") {
+          if (typeof encoding === "undefined")
+            encoding = "utf8";
+          switch (encoding) {
+            case "base64":
+              return ByteBuffer.fromBase64(buffer2, littleEndian);
+            case "hex":
+              return ByteBuffer.fromHex(buffer2, littleEndian);
+            case "binary":
+              return ByteBuffer.fromBinary(buffer2, littleEndian);
+            case "utf8":
+              return ByteBuffer.fromUTF8(buffer2, littleEndian);
+            case "debug":
+              return ByteBuffer.fromDebug(buffer2, littleEndian);
+            default:
+              throw Error("Unsupported encoding: " + encoding);
+          }
+        }
+        if (buffer2 === null || typeof buffer2 !== "object")
+          throw TypeError("Illegal buffer");
+        var bb2;
+        if (ByteBuffer.isByteBuffer(buffer2)) {
+          bb2 = ByteBufferPrototype.clone.call(buffer2);
+          bb2.markedOffset = -1;
+          return bb2;
+        }
+        var i = 0, k = 0, b;
+        if (buffer2 instanceof Uint8Array) {
+          b = new Buffer2(buffer2.length);
+          if (memcpy) {
+            memcpy(b, 0, buffer2.buffer, buffer2.byteOffset, buffer2.byteOffset + buffer2.length);
+          } else {
+            for (i = 0, k = buffer2.length; i < k; ++i)
+              b[i] = buffer2[i];
+          }
+          buffer2 = b;
+        } else if (buffer2 instanceof ArrayBuffer) {
+          b = new Buffer2(buffer2.byteLength);
+          if (memcpy) {
+            memcpy(b, 0, buffer2, 0, buffer2.byteLength);
+          } else {
+            buffer2 = new Uint8Array(buffer2);
+            for (i = 0, k = buffer2.length; i < k; ++i) {
+              b[i] = buffer2[i];
+            }
+          }
+          buffer2 = b;
+        } else if (!(buffer2 instanceof Buffer2)) {
+          if (Object.prototype.toString.call(buffer2) !== "[object Array]")
+            throw TypeError("Illegal buffer");
+          buffer2 = new Buffer2(buffer2);
+        }
+        bb2 = new ByteBuffer(0, littleEndian, noAssert);
+        if (buffer2.length > 0) {
+          bb2.buffer = buffer2;
+          bb2.limit = buffer2.length;
+        }
+        return bb2;
+      };
+      ByteBufferPrototype.writeBitSet = function(value, offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (!(value instanceof Array))
+            throw TypeError("Illegal BitSet: Not an array");
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        var start = offset, bits = value.length, bytes = bits >> 3, bit = 0, k;
+        offset += this.writeVarint32(bits, offset);
+        while (bytes--) {
+          k = !!value[bit++] & 1 | (!!value[bit++] & 1) << 1 | (!!value[bit++] & 1) << 2 | (!!value[bit++] & 1) << 3 | (!!value[bit++] & 1) << 4 | (!!value[bit++] & 1) << 5 | (!!value[bit++] & 1) << 6 | (!!value[bit++] & 1) << 7;
+          this.writeByte(k, offset++);
+        }
+        if (bit < bits) {
+          var m = 0;
+          k = 0;
+          while (bit < bits)
+            k = k | (!!value[bit++] & 1) << m++;
+          this.writeByte(k, offset++);
+        }
+        if (relative) {
+          this.offset = offset;
+          return this;
+        }
+        return offset - start;
+      };
+      ByteBufferPrototype.readBitSet = function(offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        var ret = this.readVarint32(offset), bits = ret.value, bytes = bits >> 3, bit = 0, value = [], k;
+        offset += ret.length;
+        while (bytes--) {
+          k = this.readByte(offset++);
+          value[bit++] = !!(k & 1);
+          value[bit++] = !!(k & 2);
+          value[bit++] = !!(k & 4);
+          value[bit++] = !!(k & 8);
+          value[bit++] = !!(k & 16);
+          value[bit++] = !!(k & 32);
+          value[bit++] = !!(k & 64);
+          value[bit++] = !!(k & 128);
+        }
+        if (bit < bits) {
+          var m = 0;
+          k = this.readByte(offset++);
+          while (bit < bits)
+            value[bit++] = !!(k >> m++ & 1);
+        }
+        if (relative) {
+          this.offset = offset;
+        }
+        return value;
+      };
+      ByteBufferPrototype.readBytes = function(length, offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + length > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + length + ") <= " + this.buffer.length);
+        }
+        var slice = this.slice(offset, offset + length);
+        if (relative)
+          this.offset += length;
+        return slice;
+      };
+      ByteBufferPrototype.writeBytes = ByteBufferPrototype.append;
+      ByteBufferPrototype.writeInt8 = function(value, offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof value !== "number" || value % 1 !== 0)
+            throw TypeError("Illegal value: " + value + " (not an integer)");
+          value |= 0;
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        offset += 1;
+        var capacity0 = this.buffer.length;
+        if (offset > capacity0)
+          this.resize((capacity0 *= 2) > offset ? capacity0 : offset);
+        offset -= 1;
+        this.buffer[offset] = value;
+        if (relative)
+          this.offset += 1;
+        return this;
+      };
+      ByteBufferPrototype.writeByte = ByteBufferPrototype.writeInt8;
+      ByteBufferPrototype.readInt8 = function(offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 1 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 1 + ") <= " + this.buffer.length);
+        }
+        var value = this.buffer[offset];
+        if ((value & 128) === 128)
+          value = -(255 - value + 1);
+        if (relative)
+          this.offset += 1;
+        return value;
+      };
+      ByteBufferPrototype.readByte = ByteBufferPrototype.readInt8;
+      ByteBufferPrototype.writeUint8 = function(value, offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof value !== "number" || value % 1 !== 0)
+            throw TypeError("Illegal value: " + value + " (not an integer)");
+          value >>>= 0;
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        offset += 1;
+        var capacity1 = this.buffer.length;
+        if (offset > capacity1)
+          this.resize((capacity1 *= 2) > offset ? capacity1 : offset);
+        offset -= 1;
+        this.buffer[offset] = value;
+        if (relative)
+          this.offset += 1;
+        return this;
+      };
+      ByteBufferPrototype.writeUInt8 = ByteBufferPrototype.writeUint8;
+      ByteBufferPrototype.readUint8 = function(offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 1 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 1 + ") <= " + this.buffer.length);
+        }
+        var value = this.buffer[offset];
+        if (relative)
+          this.offset += 1;
+        return value;
+      };
+      ByteBufferPrototype.readUInt8 = ByteBufferPrototype.readUint8;
+      ByteBufferPrototype.writeInt16 = function(value, offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof value !== "number" || value % 1 !== 0)
+            throw TypeError("Illegal value: " + value + " (not an integer)");
+          value |= 0;
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        offset += 2;
+        var capacity2 = this.buffer.length;
+        if (offset > capacity2)
+          this.resize((capacity2 *= 2) > offset ? capacity2 : offset);
+        offset -= 2;
+        if (this.littleEndian) {
+          this.buffer[offset + 1] = (value & 65280) >>> 8;
+          this.buffer[offset] = value & 255;
+        } else {
+          this.buffer[offset] = (value & 65280) >>> 8;
+          this.buffer[offset + 1] = value & 255;
+        }
+        if (relative)
+          this.offset += 2;
+        return this;
+      };
+      ByteBufferPrototype.writeShort = ByteBufferPrototype.writeInt16;
+      ByteBufferPrototype.readInt16 = function(offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 2 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 2 + ") <= " + this.buffer.length);
+        }
+        var value = 0;
+        if (this.littleEndian) {
+          value = this.buffer[offset];
+          value |= this.buffer[offset + 1] << 8;
+        } else {
+          value = this.buffer[offset] << 8;
+          value |= this.buffer[offset + 1];
+        }
+        if ((value & 32768) === 32768)
+          value = -(65535 - value + 1);
+        if (relative)
+          this.offset += 2;
+        return value;
+      };
+      ByteBufferPrototype.readShort = ByteBufferPrototype.readInt16;
+      ByteBufferPrototype.writeUint16 = function(value, offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof value !== "number" || value % 1 !== 0)
+            throw TypeError("Illegal value: " + value + " (not an integer)");
+          value >>>= 0;
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        offset += 2;
+        var capacity3 = this.buffer.length;
+        if (offset > capacity3)
+          this.resize((capacity3 *= 2) > offset ? capacity3 : offset);
+        offset -= 2;
+        if (this.littleEndian) {
+          this.buffer[offset + 1] = (value & 65280) >>> 8;
+          this.buffer[offset] = value & 255;
+        } else {
+          this.buffer[offset] = (value & 65280) >>> 8;
+          this.buffer[offset + 1] = value & 255;
+        }
+        if (relative)
+          this.offset += 2;
+        return this;
+      };
+      ByteBufferPrototype.writeUInt16 = ByteBufferPrototype.writeUint16;
+      ByteBufferPrototype.readUint16 = function(offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 2 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 2 + ") <= " + this.buffer.length);
+        }
+        var value = 0;
+        if (this.littleEndian) {
+          value = this.buffer[offset];
+          value |= this.buffer[offset + 1] << 8;
+        } else {
+          value = this.buffer[offset] << 8;
+          value |= this.buffer[offset + 1];
+        }
+        if (relative)
+          this.offset += 2;
+        return value;
+      };
+      ByteBufferPrototype.readUInt16 = ByteBufferPrototype.readUint16;
+      ByteBufferPrototype.writeInt32 = function(value, offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof value !== "number" || value % 1 !== 0)
+            throw TypeError("Illegal value: " + value + " (not an integer)");
+          value |= 0;
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        offset += 4;
+        var capacity4 = this.buffer.length;
+        if (offset > capacity4)
+          this.resize((capacity4 *= 2) > offset ? capacity4 : offset);
+        offset -= 4;
+        if (this.littleEndian) {
+          this.buffer[offset + 3] = value >>> 24 & 255;
+          this.buffer[offset + 2] = value >>> 16 & 255;
+          this.buffer[offset + 1] = value >>> 8 & 255;
+          this.buffer[offset] = value & 255;
+        } else {
+          this.buffer[offset] = value >>> 24 & 255;
+          this.buffer[offset + 1] = value >>> 16 & 255;
+          this.buffer[offset + 2] = value >>> 8 & 255;
+          this.buffer[offset + 3] = value & 255;
+        }
+        if (relative)
+          this.offset += 4;
+        return this;
+      };
+      ByteBufferPrototype.writeInt = ByteBufferPrototype.writeInt32;
+      ByteBufferPrototype.readInt32 = function(offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 4 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 4 + ") <= " + this.buffer.length);
+        }
+        var value = 0;
+        if (this.littleEndian) {
+          value = this.buffer[offset + 2] << 16;
+          value |= this.buffer[offset + 1] << 8;
+          value |= this.buffer[offset];
+          value += this.buffer[offset + 3] << 24 >>> 0;
+        } else {
+          value = this.buffer[offset + 1] << 16;
+          value |= this.buffer[offset + 2] << 8;
+          value |= this.buffer[offset + 3];
+          value += this.buffer[offset] << 24 >>> 0;
+        }
+        value |= 0;
+        if (relative)
+          this.offset += 4;
+        return value;
+      };
+      ByteBufferPrototype.readInt = ByteBufferPrototype.readInt32;
+      ByteBufferPrototype.writeUint32 = function(value, offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof value !== "number" || value % 1 !== 0)
+            throw TypeError("Illegal value: " + value + " (not an integer)");
+          value >>>= 0;
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        offset += 4;
+        var capacity5 = this.buffer.length;
+        if (offset > capacity5)
+          this.resize((capacity5 *= 2) > offset ? capacity5 : offset);
+        offset -= 4;
+        if (this.littleEndian) {
+          this.buffer[offset + 3] = value >>> 24 & 255;
+          this.buffer[offset + 2] = value >>> 16 & 255;
+          this.buffer[offset + 1] = value >>> 8 & 255;
+          this.buffer[offset] = value & 255;
+        } else {
+          this.buffer[offset] = value >>> 24 & 255;
+          this.buffer[offset + 1] = value >>> 16 & 255;
+          this.buffer[offset + 2] = value >>> 8 & 255;
+          this.buffer[offset + 3] = value & 255;
+        }
+        if (relative)
+          this.offset += 4;
+        return this;
+      };
+      ByteBufferPrototype.writeUInt32 = ByteBufferPrototype.writeUint32;
+      ByteBufferPrototype.readUint32 = function(offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 4 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 4 + ") <= " + this.buffer.length);
+        }
+        var value = 0;
+        if (this.littleEndian) {
+          value = this.buffer[offset + 2] << 16;
+          value |= this.buffer[offset + 1] << 8;
+          value |= this.buffer[offset];
+          value += this.buffer[offset + 3] << 24 >>> 0;
+        } else {
+          value = this.buffer[offset + 1] << 16;
+          value |= this.buffer[offset + 2] << 8;
+          value |= this.buffer[offset + 3];
+          value += this.buffer[offset] << 24 >>> 0;
+        }
+        if (relative)
+          this.offset += 4;
+        return value;
+      };
+      ByteBufferPrototype.readUInt32 = ByteBufferPrototype.readUint32;
+      if (Long) {
+        ByteBufferPrototype.writeInt64 = function(value, offset) {
+          var relative = typeof offset === "undefined";
+          if (relative)
+            offset = this.offset;
+          if (!this.noAssert) {
+            if (typeof value === "number")
+              value = Long.fromNumber(value);
+            else if (typeof value === "string")
+              value = Long.fromString(value);
+            else if (!(value && value instanceof Long))
+              throw TypeError("Illegal value: " + value + " (not an integer or Long)");
+            if (typeof offset !== "number" || offset % 1 !== 0)
+              throw TypeError("Illegal offset: " + offset + " (not an integer)");
+            offset >>>= 0;
+            if (offset < 0 || offset + 0 > this.buffer.length)
+              throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+          }
+          if (typeof value === "number")
+            value = Long.fromNumber(value);
+          else if (typeof value === "string")
+            value = Long.fromString(value);
+          offset += 8;
+          var capacity6 = this.buffer.length;
+          if (offset > capacity6)
+            this.resize((capacity6 *= 2) > offset ? capacity6 : offset);
+          offset -= 8;
+          var lo = value.low, hi = value.high;
+          if (this.littleEndian) {
+            this.buffer[offset + 3] = lo >>> 24 & 255;
+            this.buffer[offset + 2] = lo >>> 16 & 255;
+            this.buffer[offset + 1] = lo >>> 8 & 255;
+            this.buffer[offset] = lo & 255;
+            offset += 4;
+            this.buffer[offset + 3] = hi >>> 24 & 255;
+            this.buffer[offset + 2] = hi >>> 16 & 255;
+            this.buffer[offset + 1] = hi >>> 8 & 255;
+            this.buffer[offset] = hi & 255;
+          } else {
+            this.buffer[offset] = hi >>> 24 & 255;
+            this.buffer[offset + 1] = hi >>> 16 & 255;
+            this.buffer[offset + 2] = hi >>> 8 & 255;
+            this.buffer[offset + 3] = hi & 255;
+            offset += 4;
+            this.buffer[offset] = lo >>> 24 & 255;
+            this.buffer[offset + 1] = lo >>> 16 & 255;
+            this.buffer[offset + 2] = lo >>> 8 & 255;
+            this.buffer[offset + 3] = lo & 255;
+          }
+          if (relative)
+            this.offset += 8;
+          return this;
+        };
+        ByteBufferPrototype.writeLong = ByteBufferPrototype.writeInt64;
+        ByteBufferPrototype.readInt64 = function(offset) {
+          var relative = typeof offset === "undefined";
+          if (relative)
+            offset = this.offset;
+          if (!this.noAssert) {
+            if (typeof offset !== "number" || offset % 1 !== 0)
+              throw TypeError("Illegal offset: " + offset + " (not an integer)");
+            offset >>>= 0;
+            if (offset < 0 || offset + 8 > this.buffer.length)
+              throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 8 + ") <= " + this.buffer.length);
+          }
+          var lo = 0, hi = 0;
+          if (this.littleEndian) {
+            lo = this.buffer[offset + 2] << 16;
+            lo |= this.buffer[offset + 1] << 8;
+            lo |= this.buffer[offset];
+            lo += this.buffer[offset + 3] << 24 >>> 0;
+            offset += 4;
+            hi = this.buffer[offset + 2] << 16;
+            hi |= this.buffer[offset + 1] << 8;
+            hi |= this.buffer[offset];
+            hi += this.buffer[offset + 3] << 24 >>> 0;
+          } else {
+            hi = this.buffer[offset + 1] << 16;
+            hi |= this.buffer[offset + 2] << 8;
+            hi |= this.buffer[offset + 3];
+            hi += this.buffer[offset] << 24 >>> 0;
+            offset += 4;
+            lo = this.buffer[offset + 1] << 16;
+            lo |= this.buffer[offset + 2] << 8;
+            lo |= this.buffer[offset + 3];
+            lo += this.buffer[offset] << 24 >>> 0;
+          }
+          var value = new Long(lo, hi, false);
+          if (relative)
+            this.offset += 8;
+          return value;
+        };
+        ByteBufferPrototype.readLong = ByteBufferPrototype.readInt64;
+        ByteBufferPrototype.writeUint64 = function(value, offset) {
+          var relative = typeof offset === "undefined";
+          if (relative)
+            offset = this.offset;
+          if (!this.noAssert) {
+            if (typeof value === "number")
+              value = Long.fromNumber(value);
+            else if (typeof value === "string")
+              value = Long.fromString(value);
+            else if (!(value && value instanceof Long))
+              throw TypeError("Illegal value: " + value + " (not an integer or Long)");
+            if (typeof offset !== "number" || offset % 1 !== 0)
+              throw TypeError("Illegal offset: " + offset + " (not an integer)");
+            offset >>>= 0;
+            if (offset < 0 || offset + 0 > this.buffer.length)
+              throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+          }
+          if (typeof value === "number")
+            value = Long.fromNumber(value);
+          else if (typeof value === "string")
+            value = Long.fromString(value);
+          offset += 8;
+          var capacity7 = this.buffer.length;
+          if (offset > capacity7)
+            this.resize((capacity7 *= 2) > offset ? capacity7 : offset);
+          offset -= 8;
+          var lo = value.low, hi = value.high;
+          if (this.littleEndian) {
+            this.buffer[offset + 3] = lo >>> 24 & 255;
+            this.buffer[offset + 2] = lo >>> 16 & 255;
+            this.buffer[offset + 1] = lo >>> 8 & 255;
+            this.buffer[offset] = lo & 255;
+            offset += 4;
+            this.buffer[offset + 3] = hi >>> 24 & 255;
+            this.buffer[offset + 2] = hi >>> 16 & 255;
+            this.buffer[offset + 1] = hi >>> 8 & 255;
+            this.buffer[offset] = hi & 255;
+          } else {
+            this.buffer[offset] = hi >>> 24 & 255;
+            this.buffer[offset + 1] = hi >>> 16 & 255;
+            this.buffer[offset + 2] = hi >>> 8 & 255;
+            this.buffer[offset + 3] = hi & 255;
+            offset += 4;
+            this.buffer[offset] = lo >>> 24 & 255;
+            this.buffer[offset + 1] = lo >>> 16 & 255;
+            this.buffer[offset + 2] = lo >>> 8 & 255;
+            this.buffer[offset + 3] = lo & 255;
+          }
+          if (relative)
+            this.offset += 8;
+          return this;
+        };
+        ByteBufferPrototype.writeUInt64 = ByteBufferPrototype.writeUint64;
+        ByteBufferPrototype.readUint64 = function(offset) {
+          var relative = typeof offset === "undefined";
+          if (relative)
+            offset = this.offset;
+          if (!this.noAssert) {
+            if (typeof offset !== "number" || offset % 1 !== 0)
+              throw TypeError("Illegal offset: " + offset + " (not an integer)");
+            offset >>>= 0;
+            if (offset < 0 || offset + 8 > this.buffer.length)
+              throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 8 + ") <= " + this.buffer.length);
+          }
+          var lo = 0, hi = 0;
+          if (this.littleEndian) {
+            lo = this.buffer[offset + 2] << 16;
+            lo |= this.buffer[offset + 1] << 8;
+            lo |= this.buffer[offset];
+            lo += this.buffer[offset + 3] << 24 >>> 0;
+            offset += 4;
+            hi = this.buffer[offset + 2] << 16;
+            hi |= this.buffer[offset + 1] << 8;
+            hi |= this.buffer[offset];
+            hi += this.buffer[offset + 3] << 24 >>> 0;
+          } else {
+            hi = this.buffer[offset + 1] << 16;
+            hi |= this.buffer[offset + 2] << 8;
+            hi |= this.buffer[offset + 3];
+            hi += this.buffer[offset] << 24 >>> 0;
+            offset += 4;
+            lo = this.buffer[offset + 1] << 16;
+            lo |= this.buffer[offset + 2] << 8;
+            lo |= this.buffer[offset + 3];
+            lo += this.buffer[offset] << 24 >>> 0;
+          }
+          var value = new Long(lo, hi, true);
+          if (relative)
+            this.offset += 8;
+          return value;
+        };
+        ByteBufferPrototype.readUInt64 = ByteBufferPrototype.readUint64;
+      }
+      ByteBufferPrototype.writeFloat32 = function(value, offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof value !== "number")
+            throw TypeError("Illegal value: " + value + " (not a number)");
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        offset += 4;
+        var capacity8 = this.buffer.length;
+        if (offset > capacity8)
+          this.resize((capacity8 *= 2) > offset ? capacity8 : offset);
+        offset -= 4;
+        this.littleEndian ? this.buffer.writeFloatLE(value, offset, true) : this.buffer.writeFloatBE(value, offset, true);
+        if (relative)
+          this.offset += 4;
+        return this;
+      };
+      ByteBufferPrototype.writeFloat = ByteBufferPrototype.writeFloat32;
+      ByteBufferPrototype.readFloat32 = function(offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 4 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 4 + ") <= " + this.buffer.length);
+        }
+        var value = this.littleEndian ? this.buffer.readFloatLE(offset, true) : this.buffer.readFloatBE(offset, true);
+        if (relative)
+          this.offset += 4;
+        return value;
+      };
+      ByteBufferPrototype.readFloat = ByteBufferPrototype.readFloat32;
+      ByteBufferPrototype.writeFloat64 = function(value, offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof value !== "number")
+            throw TypeError("Illegal value: " + value + " (not a number)");
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        offset += 8;
+        var capacity9 = this.buffer.length;
+        if (offset > capacity9)
+          this.resize((capacity9 *= 2) > offset ? capacity9 : offset);
+        offset -= 8;
+        this.littleEndian ? this.buffer.writeDoubleLE(value, offset, true) : this.buffer.writeDoubleBE(value, offset, true);
+        if (relative)
+          this.offset += 8;
+        return this;
+      };
+      ByteBufferPrototype.writeDouble = ByteBufferPrototype.writeFloat64;
+      ByteBufferPrototype.readFloat64 = function(offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 8 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 8 + ") <= " + this.buffer.length);
+        }
+        var value = this.littleEndian ? this.buffer.readDoubleLE(offset, true) : this.buffer.readDoubleBE(offset, true);
+        if (relative)
+          this.offset += 8;
+        return value;
+      };
+      ByteBufferPrototype.readDouble = ByteBufferPrototype.readFloat64;
+      ByteBuffer.MAX_VARINT32_BYTES = 5;
+      ByteBuffer.calculateVarint32 = function(value) {
+        value = value >>> 0;
+        if (value < 1 << 7)
+          return 1;
+        else if (value < 1 << 14)
+          return 2;
+        else if (value < 1 << 21)
+          return 3;
+        else if (value < 1 << 28)
+          return 4;
+        else
+          return 5;
+      };
+      ByteBuffer.zigZagEncode32 = function(n) {
+        return ((n |= 0) << 1 ^ n >> 31) >>> 0;
+      };
+      ByteBuffer.zigZagDecode32 = function(n) {
+        return n >>> 1 ^ -(n & 1) | 0;
+      };
+      ByteBufferPrototype.writeVarint32 = function(value, offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof value !== "number" || value % 1 !== 0)
+            throw TypeError("Illegal value: " + value + " (not an integer)");
+          value |= 0;
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        var size = ByteBuffer.calculateVarint32(value), b;
+        offset += size;
+        var capacity10 = this.buffer.length;
+        if (offset > capacity10)
+          this.resize((capacity10 *= 2) > offset ? capacity10 : offset);
+        offset -= size;
+        value >>>= 0;
+        while (value >= 128) {
+          b = value & 127 | 128;
+          this.buffer[offset++] = b;
+          value >>>= 7;
+        }
+        this.buffer[offset++] = value;
+        if (relative) {
+          this.offset = offset;
+          return this;
+        }
+        return size;
+      };
+      ByteBufferPrototype.writeVarint32ZigZag = function(value, offset) {
+        return this.writeVarint32(ByteBuffer.zigZagEncode32(value), offset);
+      };
+      ByteBufferPrototype.readVarint32 = function(offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 1 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 1 + ") <= " + this.buffer.length);
+        }
+        var c2 = 0, value = 0 >>> 0, b;
+        do {
+          if (!this.noAssert && offset > this.limit) {
+            var err = Error("Truncated");
+            err["truncated"] = true;
+            throw err;
+          }
+          b = this.buffer[offset++];
+          if (c2 < 5)
+            value |= (b & 127) << 7 * c2;
+          ++c2;
+        } while ((b & 128) !== 0);
+        value |= 0;
+        if (relative) {
+          this.offset = offset;
+          return value;
+        }
+        return {
+          "value": value,
+          "length": c2
+        };
+      };
+      ByteBufferPrototype.readVarint32ZigZag = function(offset) {
+        var val = this.readVarint32(offset);
+        if (typeof val === "object")
+          val["value"] = ByteBuffer.zigZagDecode32(val["value"]);
+        else
+          val = ByteBuffer.zigZagDecode32(val);
+        return val;
+      };
+      if (Long) {
+        ByteBuffer.MAX_VARINT64_BYTES = 10;
+        ByteBuffer.calculateVarint64 = function(value) {
+          if (typeof value === "number")
+            value = Long.fromNumber(value);
+          else if (typeof value === "string")
+            value = Long.fromString(value);
+          var part0 = value.toInt() >>> 0, part1 = value.shiftRightUnsigned(28).toInt() >>> 0, part2 = value.shiftRightUnsigned(56).toInt() >>> 0;
+          if (part2 == 0) {
+            if (part1 == 0) {
+              if (part0 < 1 << 14)
+                return part0 < 1 << 7 ? 1 : 2;
+              else
+                return part0 < 1 << 21 ? 3 : 4;
+            } else {
+              if (part1 < 1 << 14)
+                return part1 < 1 << 7 ? 5 : 6;
+              else
+                return part1 < 1 << 21 ? 7 : 8;
+            }
+          } else
+            return part2 < 1 << 7 ? 9 : 10;
+        };
+        ByteBuffer.zigZagEncode64 = function(value) {
+          if (typeof value === "number")
+            value = Long.fromNumber(value, false);
+          else if (typeof value === "string")
+            value = Long.fromString(value, false);
+          else if (value.unsigned !== false)
+            value = value.toSigned();
+          return value.shiftLeft(1).xor(value.shiftRight(63)).toUnsigned();
+        };
+        ByteBuffer.zigZagDecode64 = function(value) {
+          if (typeof value === "number")
+            value = Long.fromNumber(value, false);
+          else if (typeof value === "string")
+            value = Long.fromString(value, false);
+          else if (value.unsigned !== false)
+            value = value.toSigned();
+          return value.shiftRightUnsigned(1).xor(value.and(Long.ONE).toSigned().negate()).toSigned();
+        };
+        ByteBufferPrototype.writeVarint64 = function(value, offset) {
+          var relative = typeof offset === "undefined";
+          if (relative)
+            offset = this.offset;
+          if (!this.noAssert) {
+            if (typeof value === "number")
+              value = Long.fromNumber(value);
+            else if (typeof value === "string")
+              value = Long.fromString(value);
+            else if (!(value && value instanceof Long))
+              throw TypeError("Illegal value: " + value + " (not an integer or Long)");
+            if (typeof offset !== "number" || offset % 1 !== 0)
+              throw TypeError("Illegal offset: " + offset + " (not an integer)");
+            offset >>>= 0;
+            if (offset < 0 || offset + 0 > this.buffer.length)
+              throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+          }
+          if (typeof value === "number")
+            value = Long.fromNumber(value, false);
+          else if (typeof value === "string")
+            value = Long.fromString(value, false);
+          else if (value.unsigned !== false)
+            value = value.toSigned();
+          var size = ByteBuffer.calculateVarint64(value), part0 = value.toInt() >>> 0, part1 = value.shiftRightUnsigned(28).toInt() >>> 0, part2 = value.shiftRightUnsigned(56).toInt() >>> 0;
+          offset += size;
+          var capacity11 = this.buffer.length;
+          if (offset > capacity11)
+            this.resize((capacity11 *= 2) > offset ? capacity11 : offset);
+          offset -= size;
+          switch (size) {
+            case 10:
+              this.buffer[offset + 9] = part2 >>> 7 & 1;
+            case 9:
+              this.buffer[offset + 8] = size !== 9 ? part2 | 128 : part2 & 127;
+            case 8:
+              this.buffer[offset + 7] = size !== 8 ? part1 >>> 21 | 128 : part1 >>> 21 & 127;
+            case 7:
+              this.buffer[offset + 6] = size !== 7 ? part1 >>> 14 | 128 : part1 >>> 14 & 127;
+            case 6:
+              this.buffer[offset + 5] = size !== 6 ? part1 >>> 7 | 128 : part1 >>> 7 & 127;
+            case 5:
+              this.buffer[offset + 4] = size !== 5 ? part1 | 128 : part1 & 127;
+            case 4:
+              this.buffer[offset + 3] = size !== 4 ? part0 >>> 21 | 128 : part0 >>> 21 & 127;
+            case 3:
+              this.buffer[offset + 2] = size !== 3 ? part0 >>> 14 | 128 : part0 >>> 14 & 127;
+            case 2:
+              this.buffer[offset + 1] = size !== 2 ? part0 >>> 7 | 128 : part0 >>> 7 & 127;
+            case 1:
+              this.buffer[offset] = size !== 1 ? part0 | 128 : part0 & 127;
+          }
+          if (relative) {
+            this.offset += size;
+            return this;
+          } else {
+            return size;
+          }
+        };
+        ByteBufferPrototype.writeVarint64ZigZag = function(value, offset) {
+          return this.writeVarint64(ByteBuffer.zigZagEncode64(value), offset);
+        };
+        ByteBufferPrototype.readVarint64 = function(offset) {
+          var relative = typeof offset === "undefined";
+          if (relative)
+            offset = this.offset;
+          if (!this.noAssert) {
+            if (typeof offset !== "number" || offset % 1 !== 0)
+              throw TypeError("Illegal offset: " + offset + " (not an integer)");
+            offset >>>= 0;
+            if (offset < 0 || offset + 1 > this.buffer.length)
+              throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 1 + ") <= " + this.buffer.length);
+          }
+          var start = offset, part0 = 0, part1 = 0, part2 = 0, b = 0;
+          b = this.buffer[offset++];
+          part0 = b & 127;
+          if (b & 128) {
+            b = this.buffer[offset++];
+            part0 |= (b & 127) << 7;
+            if (b & 128 || this.noAssert && typeof b === "undefined") {
+              b = this.buffer[offset++];
+              part0 |= (b & 127) << 14;
+              if (b & 128 || this.noAssert && typeof b === "undefined") {
+                b = this.buffer[offset++];
+                part0 |= (b & 127) << 21;
+                if (b & 128 || this.noAssert && typeof b === "undefined") {
+                  b = this.buffer[offset++];
+                  part1 = b & 127;
+                  if (b & 128 || this.noAssert && typeof b === "undefined") {
+                    b = this.buffer[offset++];
+                    part1 |= (b & 127) << 7;
+                    if (b & 128 || this.noAssert && typeof b === "undefined") {
+                      b = this.buffer[offset++];
+                      part1 |= (b & 127) << 14;
+                      if (b & 128 || this.noAssert && typeof b === "undefined") {
+                        b = this.buffer[offset++];
+                        part1 |= (b & 127) << 21;
+                        if (b & 128 || this.noAssert && typeof b === "undefined") {
+                          b = this.buffer[offset++];
+                          part2 = b & 127;
+                          if (b & 128 || this.noAssert && typeof b === "undefined") {
+                            b = this.buffer[offset++];
+                            part2 |= (b & 127) << 7;
+                            if (b & 128 || this.noAssert && typeof b === "undefined") {
+                              throw Error("Buffer overrun");
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          var value = Long.fromBits(part0 | part1 << 28, part1 >>> 4 | part2 << 24, false);
+          if (relative) {
+            this.offset = offset;
+            return value;
+          } else {
+            return {
+              "value": value,
+              "length": offset - start
+            };
+          }
+        };
+        ByteBufferPrototype.readVarint64ZigZag = function(offset) {
+          var val = this.readVarint64(offset);
+          if (val && val["value"] instanceof Long)
+            val["value"] = ByteBuffer.zigZagDecode64(val["value"]);
+          else
+            val = ByteBuffer.zigZagDecode64(val);
+          return val;
+        };
+      }
+      ByteBufferPrototype.writeCString = function(str, offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        var i, k = str.length;
+        if (!this.noAssert) {
+          if (typeof str !== "string")
+            throw TypeError("Illegal str: Not a string");
+          for (i = 0; i < k; ++i) {
+            if (str.charCodeAt(i) === 0)
+              throw RangeError("Illegal str: Contains NULL-characters");
+          }
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        k = Buffer2.byteLength(str, "utf8");
+        offset += k + 1;
+        var capacity12 = this.buffer.length;
+        if (offset > capacity12)
+          this.resize((capacity12 *= 2) > offset ? capacity12 : offset);
+        offset -= k + 1;
+        offset += this.buffer.write(str, offset, k, "utf8");
+        this.buffer[offset++] = 0;
+        if (relative) {
+          this.offset = offset;
+          return this;
+        }
+        return k;
+      };
+      ByteBufferPrototype.readCString = function(offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 1 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 1 + ") <= " + this.buffer.length);
+        }
+        var start = offset, temp;
+        do {
+          if (offset >= this.buffer.length)
+            throw RangeError("Index out of range: " + offset + " <= " + this.buffer.length);
+          temp = this.buffer[offset++];
+        } while (temp !== 0);
+        var str = this.buffer.toString("utf8", start, offset - 1);
+        if (relative) {
+          this.offset = offset;
+          return str;
+        } else {
+          return {
+            "string": str,
+            "length": offset - start
+          };
+        }
+      };
+      ByteBufferPrototype.writeIString = function(str, offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof str !== "string")
+            throw TypeError("Illegal str: Not a string");
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        var start = offset, k;
+        k = Buffer2.byteLength(str, "utf8");
+        offset += 4 + k;
+        var capacity13 = this.buffer.length;
+        if (offset > capacity13)
+          this.resize((capacity13 *= 2) > offset ? capacity13 : offset);
+        offset -= 4 + k;
+        if (this.littleEndian) {
+          this.buffer[offset + 3] = k >>> 24 & 255;
+          this.buffer[offset + 2] = k >>> 16 & 255;
+          this.buffer[offset + 1] = k >>> 8 & 255;
+          this.buffer[offset] = k & 255;
+        } else {
+          this.buffer[offset] = k >>> 24 & 255;
+          this.buffer[offset + 1] = k >>> 16 & 255;
+          this.buffer[offset + 2] = k >>> 8 & 255;
+          this.buffer[offset + 3] = k & 255;
+        }
+        offset += 4;
+        offset += this.buffer.write(str, offset, k, "utf8");
+        if (relative) {
+          this.offset = offset;
+          return this;
+        }
+        return offset - start;
+      };
+      ByteBufferPrototype.readIString = function(offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 4 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 4 + ") <= " + this.buffer.length);
+        }
+        var start = offset;
+        var len = this.readUint32(offset);
+        var str = this.readUTF8String(len, ByteBuffer.METRICS_BYTES, offset += 4);
+        offset += str["length"];
+        if (relative) {
+          this.offset = offset;
+          return str["string"];
+        } else {
+          return {
+            "string": str["string"],
+            "length": offset - start
+          };
+        }
+      };
+      ByteBuffer.METRICS_CHARS = "c";
+      ByteBuffer.METRICS_BYTES = "b";
+      ByteBufferPrototype.writeUTF8String = function(str, offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        var k;
+        k = Buffer2.byteLength(str, "utf8");
+        offset += k;
+        var capacity14 = this.buffer.length;
+        if (offset > capacity14)
+          this.resize((capacity14 *= 2) > offset ? capacity14 : offset);
+        offset -= k;
+        offset += this.buffer.write(str, offset, k, "utf8");
+        if (relative) {
+          this.offset = offset;
+          return this;
+        }
+        return k;
+      };
+      ByteBufferPrototype.writeString = ByteBufferPrototype.writeUTF8String;
+      ByteBuffer.calculateUTF8Chars = function(str) {
+        return utfx.calculateUTF16asUTF8(stringSource(str))[0];
+      };
+      ByteBuffer.calculateUTF8Bytes = function(str) {
+        if (typeof str !== "string")
+          throw TypeError("Illegal argument: " + typeof str);
+        return Buffer2.byteLength(str, "utf8");
+      };
+      ByteBuffer.calculateString = ByteBuffer.calculateUTF8Bytes;
+      ByteBufferPrototype.readUTF8String = function(length, metrics, offset) {
+        if (typeof metrics === "number") {
+          offset = metrics;
+          metrics = void 0;
+        }
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (typeof metrics === "undefined")
+          metrics = ByteBuffer.METRICS_CHARS;
+        if (!this.noAssert) {
+          if (typeof length !== "number" || length % 1 !== 0)
+            throw TypeError("Illegal length: " + length + " (not an integer)");
+          length |= 0;
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        var i = 0, start = offset, temp, sd;
+        if (metrics === ByteBuffer.METRICS_CHARS) {
+          sd = stringDestination();
+          utfx.decodeUTF8(function() {
+            return i < length && offset < this.limit ? this.buffer[offset++] : null;
+          }.bind(this), function(cp) {
+            ++i;
+            utfx.UTF8toUTF16(cp, sd);
+          });
+          if (i !== length)
+            throw RangeError("Illegal range: Truncated data, " + i + " == " + length);
+          if (relative) {
+            this.offset = offset;
+            return sd();
+          } else {
+            return {
+              "string": sd(),
+              "length": offset - start
+            };
+          }
+        } else if (metrics === ByteBuffer.METRICS_BYTES) {
+          if (!this.noAssert) {
+            if (typeof offset !== "number" || offset % 1 !== 0)
+              throw TypeError("Illegal offset: " + offset + " (not an integer)");
+            offset >>>= 0;
+            if (offset < 0 || offset + length > this.buffer.length)
+              throw RangeError("Illegal offset: 0 <= " + offset + " (+" + length + ") <= " + this.buffer.length);
+          }
+          temp = this.buffer.toString("utf8", offset, offset + length);
+          if (relative) {
+            this.offset += length;
+            return temp;
+          } else {
+            return {
+              "string": temp,
+              "length": length
+            };
+          }
+        } else
+          throw TypeError("Unsupported metrics: " + metrics);
+      };
+      ByteBufferPrototype.readString = ByteBufferPrototype.readUTF8String;
+      ByteBufferPrototype.writeVString = function(str, offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof str !== "string")
+            throw TypeError("Illegal str: Not a string");
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        var start = offset, k, l;
+        k = Buffer2.byteLength(str, "utf8");
+        l = ByteBuffer.calculateVarint32(k);
+        offset += l + k;
+        var capacity15 = this.buffer.length;
+        if (offset > capacity15)
+          this.resize((capacity15 *= 2) > offset ? capacity15 : offset);
+        offset -= l + k;
+        offset += this.writeVarint32(k, offset);
+        offset += this.buffer.write(str, offset, k, "utf8");
+        if (relative) {
+          this.offset = offset;
+          return this;
+        }
+        return offset - start;
+      };
+      ByteBufferPrototype.readVString = function(offset) {
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 1 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 1 + ") <= " + this.buffer.length);
+        }
+        var start = offset;
+        var len = this.readVarint32(offset);
+        var str = this.readUTF8String(len["value"], ByteBuffer.METRICS_BYTES, offset += len["length"]);
+        offset += str["length"];
+        if (relative) {
+          this.offset = offset;
+          return str["string"];
+        } else {
+          return {
+            "string": str["string"],
+            "length": offset - start
+          };
+        }
+      };
+      ByteBufferPrototype.append = function(source, encoding, offset) {
+        if (typeof encoding === "number" || typeof encoding !== "string") {
+          offset = encoding;
+          encoding = void 0;
+        }
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        if (!(source instanceof ByteBuffer))
+          source = ByteBuffer.wrap(source, encoding);
+        var length = source.limit - source.offset;
+        if (length <= 0)
+          return this;
+        offset += length;
+        var capacity16 = this.buffer.length;
+        if (offset > capacity16)
+          this.resize((capacity16 *= 2) > offset ? capacity16 : offset);
+        offset -= length;
+        source.buffer.copy(this.buffer, offset, source.offset, source.limit);
+        source.offset += length;
+        if (relative)
+          this.offset += length;
+        return this;
+      };
+      ByteBufferPrototype.appendTo = function(target, offset) {
+        target.append(this, offset);
+        return this;
+      };
+      ByteBufferPrototype.assert = function(assert) {
+        this.noAssert = !assert;
+        return this;
+      };
+      ByteBufferPrototype.capacity = function() {
+        return this.buffer.length;
+      };
+      ByteBufferPrototype.clear = function() {
+        this.offset = 0;
+        this.limit = this.buffer.length;
+        this.markedOffset = -1;
+        return this;
+      };
+      ByteBufferPrototype.clone = function(copy) {
+        var bb2 = new ByteBuffer(0, this.littleEndian, this.noAssert);
+        if (copy) {
+          var buffer2 = new Buffer2(this.buffer.length);
+          this.buffer.copy(buffer2);
+          bb2.buffer = buffer2;
+        } else {
+          bb2.buffer = this.buffer;
+        }
+        bb2.offset = this.offset;
+        bb2.markedOffset = this.markedOffset;
+        bb2.limit = this.limit;
+        return bb2;
+      };
+      ByteBufferPrototype.compact = function(begin, end) {
+        if (typeof begin === "undefined")
+          begin = this.offset;
+        if (typeof end === "undefined")
+          end = this.limit;
+        if (!this.noAssert) {
+          if (typeof begin !== "number" || begin % 1 !== 0)
+            throw TypeError("Illegal begin: Not an integer");
+          begin >>>= 0;
+          if (typeof end !== "number" || end % 1 !== 0)
+            throw TypeError("Illegal end: Not an integer");
+          end >>>= 0;
+          if (begin < 0 || begin > end || end > this.buffer.length)
+            throw RangeError("Illegal range: 0 <= " + begin + " <= " + end + " <= " + this.buffer.length);
+        }
+        if (begin === 0 && end === this.buffer.length)
+          return this;
+        var len = end - begin;
+        if (len === 0) {
+          this.buffer = EMPTY_BUFFER;
+          if (this.markedOffset >= 0)
+            this.markedOffset -= begin;
+          this.offset = 0;
+          this.limit = 0;
+          return this;
+        }
+        var buffer2 = new Buffer2(len);
+        this.buffer.copy(buffer2, 0, begin, end);
+        this.buffer = buffer2;
+        if (this.markedOffset >= 0)
+          this.markedOffset -= begin;
+        this.offset = 0;
+        this.limit = len;
+        return this;
+      };
+      ByteBufferPrototype.copy = function(begin, end) {
+        if (typeof begin === "undefined")
+          begin = this.offset;
+        if (typeof end === "undefined")
+          end = this.limit;
+        if (!this.noAssert) {
+          if (typeof begin !== "number" || begin % 1 !== 0)
+            throw TypeError("Illegal begin: Not an integer");
+          begin >>>= 0;
+          if (typeof end !== "number" || end % 1 !== 0)
+            throw TypeError("Illegal end: Not an integer");
+          end >>>= 0;
+          if (begin < 0 || begin > end || end > this.buffer.length)
+            throw RangeError("Illegal range: 0 <= " + begin + " <= " + end + " <= " + this.buffer.length);
+        }
+        if (begin === end)
+          return new ByteBuffer(0, this.littleEndian, this.noAssert);
+        var capacity = end - begin, bb2 = new ByteBuffer(capacity, this.littleEndian, this.noAssert);
+        bb2.offset = 0;
+        bb2.limit = capacity;
+        if (bb2.markedOffset >= 0)
+          bb2.markedOffset -= begin;
+        this.copyTo(bb2, 0, begin, end);
+        return bb2;
+      };
+      ByteBufferPrototype.copyTo = function(target, targetOffset, sourceOffset, sourceLimit) {
+        var relative, targetRelative;
+        if (!this.noAssert) {
+          if (!ByteBuffer.isByteBuffer(target))
+            throw TypeError("Illegal target: Not a ByteBuffer");
+        }
+        targetOffset = (targetRelative = typeof targetOffset === "undefined") ? target.offset : targetOffset | 0;
+        sourceOffset = (relative = typeof sourceOffset === "undefined") ? this.offset : sourceOffset | 0;
+        sourceLimit = typeof sourceLimit === "undefined" ? this.limit : sourceLimit | 0;
+        if (targetOffset < 0 || targetOffset > target.buffer.length)
+          throw RangeError("Illegal target range: 0 <= " + targetOffset + " <= " + target.buffer.length);
+        if (sourceOffset < 0 || sourceLimit > this.buffer.length)
+          throw RangeError("Illegal source range: 0 <= " + sourceOffset + " <= " + this.buffer.length);
+        var len = sourceLimit - sourceOffset;
+        if (len === 0)
+          return target;
+        target.ensureCapacity(targetOffset + len);
+        this.buffer.copy(target.buffer, targetOffset, sourceOffset, sourceLimit);
+        if (relative)
+          this.offset += len;
+        if (targetRelative)
+          target.offset += len;
+        return this;
+      };
+      ByteBufferPrototype.ensureCapacity = function(capacity) {
+        var current = this.buffer.length;
+        if (current < capacity)
+          return this.resize((current *= 2) > capacity ? current : capacity);
+        return this;
+      };
+      ByteBufferPrototype.fill = function(value, begin, end) {
+        var relative = typeof begin === "undefined";
+        if (relative)
+          begin = this.offset;
+        if (typeof value === "string" && value.length > 0)
+          value = value.charCodeAt(0);
+        if (typeof begin === "undefined")
+          begin = this.offset;
+        if (typeof end === "undefined")
+          end = this.limit;
+        if (!this.noAssert) {
+          if (typeof value !== "number" || value % 1 !== 0)
+            throw TypeError("Illegal value: " + value + " (not an integer)");
+          value |= 0;
+          if (typeof begin !== "number" || begin % 1 !== 0)
+            throw TypeError("Illegal begin: Not an integer");
+          begin >>>= 0;
+          if (typeof end !== "number" || end % 1 !== 0)
+            throw TypeError("Illegal end: Not an integer");
+          end >>>= 0;
+          if (begin < 0 || begin > end || end > this.buffer.length)
+            throw RangeError("Illegal range: 0 <= " + begin + " <= " + end + " <= " + this.buffer.length);
+        }
+        if (begin >= end)
+          return this;
+        this.buffer.fill(value, begin, end);
+        begin = end;
+        if (relative)
+          this.offset = begin;
+        return this;
+      };
+      ByteBufferPrototype.flip = function() {
+        this.limit = this.offset;
+        this.offset = 0;
+        return this;
+      };
+      ByteBufferPrototype.mark = function(offset) {
+        offset = typeof offset === "undefined" ? this.offset : offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        this.markedOffset = offset;
+        return this;
+      };
+      ByteBufferPrototype.order = function(littleEndian) {
+        if (!this.noAssert) {
+          if (typeof littleEndian !== "boolean")
+            throw TypeError("Illegal littleEndian: Not a boolean");
+        }
+        this.littleEndian = !!littleEndian;
+        return this;
+      };
+      ByteBufferPrototype.LE = function(littleEndian) {
+        this.littleEndian = typeof littleEndian !== "undefined" ? !!littleEndian : true;
+        return this;
+      };
+      ByteBufferPrototype.BE = function(bigEndian) {
+        this.littleEndian = typeof bigEndian !== "undefined" ? !bigEndian : false;
+        return this;
+      };
+      ByteBufferPrototype.prepend = function(source, encoding, offset) {
+        if (typeof encoding === "number" || typeof encoding !== "string") {
+          offset = encoding;
+          encoding = void 0;
+        }
+        var relative = typeof offset === "undefined";
+        if (relative)
+          offset = this.offset;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: " + offset + " (not an integer)");
+          offset >>>= 0;
+          if (offset < 0 || offset + 0 > this.buffer.length)
+            throw RangeError("Illegal offset: 0 <= " + offset + " (+" + 0 + ") <= " + this.buffer.length);
+        }
+        if (!(source instanceof ByteBuffer))
+          source = ByteBuffer.wrap(source, encoding);
+        var len = source.limit - source.offset;
+        if (len <= 0)
+          return this;
+        var diff = len - offset;
+        if (diff > 0) {
+          var buffer2 = new Buffer2(this.buffer.length + diff);
+          this.buffer.copy(buffer2, len, offset, this.buffer.length);
+          this.buffer = buffer2;
+          this.offset += diff;
+          if (this.markedOffset >= 0)
+            this.markedOffset += diff;
+          this.limit += diff;
+          offset += diff;
+        }
+        source.buffer.copy(this.buffer, offset - len, source.offset, source.limit);
+        source.offset = source.limit;
+        if (relative)
+          this.offset -= len;
+        return this;
+      };
+      ByteBufferPrototype.prependTo = function(target, offset) {
+        target.prepend(this, offset);
+        return this;
+      };
+      ByteBufferPrototype.printDebug = function(out) {
+        if (typeof out !== "function")
+          out = console.log.bind(console);
+        out(this.toString() + "\n-------------------------------------------------------------------\n" + this.toDebug(true));
+      };
+      ByteBufferPrototype.remaining = function() {
+        return this.limit - this.offset;
+      };
+      ByteBufferPrototype.reset = function() {
+        if (this.markedOffset >= 0) {
+          this.offset = this.markedOffset;
+          this.markedOffset = -1;
+        } else {
+          this.offset = 0;
+        }
+        return this;
+      };
+      ByteBufferPrototype.resize = function(capacity) {
+        if (!this.noAssert) {
+          if (typeof capacity !== "number" || capacity % 1 !== 0)
+            throw TypeError("Illegal capacity: " + capacity + " (not an integer)");
+          capacity |= 0;
+          if (capacity < 0)
+            throw RangeError("Illegal capacity: 0 <= " + capacity);
+        }
+        if (this.buffer.length < capacity) {
+          var buffer2 = new Buffer2(capacity);
+          this.buffer.copy(buffer2);
+          this.buffer = buffer2;
+        }
+        return this;
+      };
+      ByteBufferPrototype.reverse = function(begin, end) {
+        if (typeof begin === "undefined")
+          begin = this.offset;
+        if (typeof end === "undefined")
+          end = this.limit;
+        if (!this.noAssert) {
+          if (typeof begin !== "number" || begin % 1 !== 0)
+            throw TypeError("Illegal begin: Not an integer");
+          begin >>>= 0;
+          if (typeof end !== "number" || end % 1 !== 0)
+            throw TypeError("Illegal end: Not an integer");
+          end >>>= 0;
+          if (begin < 0 || begin > end || end > this.buffer.length)
+            throw RangeError("Illegal range: 0 <= " + begin + " <= " + end + " <= " + this.buffer.length);
+        }
+        if (begin === end)
+          return this;
+        Array.prototype.reverse.call(this.buffer.slice(begin, end));
+        return this;
+      };
+      ByteBufferPrototype.skip = function(length) {
+        if (!this.noAssert) {
+          if (typeof length !== "number" || length % 1 !== 0)
+            throw TypeError("Illegal length: " + length + " (not an integer)");
+          length |= 0;
+        }
+        var offset = this.offset + length;
+        if (!this.noAssert) {
+          if (offset < 0 || offset > this.buffer.length)
+            throw RangeError("Illegal length: 0 <= " + this.offset + " + " + length + " <= " + this.buffer.length);
+        }
+        this.offset = offset;
+        return this;
+      };
+      ByteBufferPrototype.slice = function(begin, end) {
+        if (typeof begin === "undefined")
+          begin = this.offset;
+        if (typeof end === "undefined")
+          end = this.limit;
+        if (!this.noAssert) {
+          if (typeof begin !== "number" || begin % 1 !== 0)
+            throw TypeError("Illegal begin: Not an integer");
+          begin >>>= 0;
+          if (typeof end !== "number" || end % 1 !== 0)
+            throw TypeError("Illegal end: Not an integer");
+          end >>>= 0;
+          if (begin < 0 || begin > end || end > this.buffer.length)
+            throw RangeError("Illegal range: 0 <= " + begin + " <= " + end + " <= " + this.buffer.length);
+        }
+        var bb2 = this.clone();
+        bb2.offset = begin;
+        bb2.limit = end;
+        return bb2;
+      };
+      ByteBufferPrototype.toBuffer = function(forceCopy) {
+        var offset = this.offset, limit = this.limit;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: Not an integer");
+          offset >>>= 0;
+          if (typeof limit !== "number" || limit % 1 !== 0)
+            throw TypeError("Illegal limit: Not an integer");
+          limit >>>= 0;
+          if (offset < 0 || offset > limit || limit > this.buffer.length)
+            throw RangeError("Illegal range: 0 <= " + offset + " <= " + limit + " <= " + this.buffer.length);
+        }
+        if (forceCopy) {
+          var buffer2 = new Buffer2(limit - offset);
+          this.buffer.copy(buffer2, 0, offset, limit);
+          return buffer2;
+        } else {
+          if (offset === 0 && limit === this.buffer.length)
+            return this.buffer;
+          else
+            return this.buffer.slice(offset, limit);
+        }
+      };
+      ByteBufferPrototype.toArrayBuffer = function() {
+        var offset = this.offset, limit = this.limit;
+        if (!this.noAssert) {
+          if (typeof offset !== "number" || offset % 1 !== 0)
+            throw TypeError("Illegal offset: Not an integer");
+          offset >>>= 0;
+          if (typeof limit !== "number" || limit % 1 !== 0)
+            throw TypeError("Illegal limit: Not an integer");
+          limit >>>= 0;
+          if (offset < 0 || offset > limit || limit > this.buffer.length)
+            throw RangeError("Illegal range: 0 <= " + offset + " <= " + limit + " <= " + this.buffer.length);
+        }
+        var ab = new ArrayBuffer(limit - offset);
+        if (memcpy) {
+          memcpy(ab, 0, this.buffer, offset, limit);
+        } else {
+          var dst = new Uint8Array(ab);
+          for (var i = offset; i < limit; ++i)
+            dst[i - offset] = this.buffer[i];
+        }
+        return ab;
+      };
+      ByteBufferPrototype.toString = function(encoding, begin, end) {
+        if (typeof encoding === "undefined")
+          return "ByteBufferNB(offset=" + this.offset + ",markedOffset=" + this.markedOffset + ",limit=" + this.limit + ",capacity=" + this.capacity() + ")";
+        if (typeof encoding === "number")
+          encoding = "utf8", begin = encoding, end = begin;
+        switch (encoding) {
+          case "utf8":
+            return this.toUTF8(begin, end);
+          case "base64":
+            return this.toBase64(begin, end);
+          case "hex":
+            return this.toHex(begin, end);
+          case "binary":
+            return this.toBinary(begin, end);
+          case "debug":
+            return this.toDebug();
+          case "columns":
+            return this.toColumns();
+          default:
+            throw Error("Unsupported encoding: " + encoding);
+        }
+      };
+      ByteBufferPrototype.toBase64 = function(begin, end) {
+        if (typeof begin === "undefined")
+          begin = this.offset;
+        if (typeof end === "undefined")
+          end = this.limit;
+        begin = begin | 0;
+        end = end | 0;
+        if (begin < 0 || end > this.capacity || begin > end)
+          throw RangeError("begin, end");
+        return this.buffer.toString("base64", begin, end);
+      };
+      ByteBuffer.fromBase64 = function(str, littleEndian) {
+        return ByteBuffer.wrap(new Buffer2(str, "base64"), littleEndian);
+        return bb;
+      };
+      ByteBuffer.btoa = function(str) {
+        return ByteBuffer.fromBinary(str).toBase64();
+      };
+      ByteBuffer.atob = function(b64) {
+        return ByteBuffer.fromBase64(b64).toBinary();
+      };
+      ByteBufferPrototype.toBinary = function(begin, end) {
+        if (typeof begin === "undefined")
+          begin = this.offset;
+        if (typeof end === "undefined")
+          end = this.limit;
+        begin |= 0;
+        end |= 0;
+        if (begin < 0 || end > this.capacity() || begin > end)
+          throw RangeError("begin, end");
+        return this.buffer.toString("binary", begin, end);
+      };
+      ByteBuffer.fromBinary = function(str, littleEndian) {
+        return ByteBuffer.wrap(new Buffer2(str, "binary"), littleEndian);
+        return bb;
+      };
+      ByteBufferPrototype.toDebug = function(columns) {
+        var i = -1, k = this.buffer.length, b, hex = "", asc = "", out = "";
+        while (i < k) {
+          if (i !== -1) {
+            b = this.buffer[i];
+            if (b < 16)
+              hex += "0" + b.toString(16).toUpperCase();
+            else
+              hex += b.toString(16).toUpperCase();
+            if (columns)
+              asc += b > 32 && b < 127 ? String.fromCharCode(b) : ".";
+          }
+          ++i;
+          if (columns) {
+            if (i > 0 && i % 16 === 0 && i !== k) {
+              while (hex.length < 3 * 16 + 3)
+                hex += " ";
+              out += hex + asc + "\n";
+              hex = asc = "";
+            }
+          }
+          if (i === this.offset && i === this.limit)
+            hex += i === this.markedOffset ? "!" : "|";
+          else if (i === this.offset)
+            hex += i === this.markedOffset ? "[" : "<";
+          else if (i === this.limit)
+            hex += i === this.markedOffset ? "]" : ">";
+          else
+            hex += i === this.markedOffset ? "'" : columns || i !== 0 && i !== k ? " " : "";
+        }
+        if (columns && hex !== " ") {
+          while (hex.length < 3 * 16 + 3)
+            hex += " ";
+          out += hex + asc + "\n";
+        }
+        return columns ? out : hex;
+      };
+      ByteBuffer.fromDebug = function(str, littleEndian, noAssert) {
+        var k = str.length, bb2 = new ByteBuffer((k + 1) / 3 | 0, littleEndian, noAssert);
+        var i = 0, j = 0, ch, b, rs = false, ho = false, hm = false, hl = false, fail = false;
+        while (i < k) {
+          switch (ch = str.charAt(i++)) {
+            case "!":
+              if (!noAssert) {
+                if (ho || hm || hl) {
+                  fail = true;
+                  break;
+                }
+                ho = hm = hl = true;
+              }
+              bb2.offset = bb2.markedOffset = bb2.limit = j;
+              rs = false;
+              break;
+            case "|":
+              if (!noAssert) {
+                if (ho || hl) {
+                  fail = true;
+                  break;
+                }
+                ho = hl = true;
+              }
+              bb2.offset = bb2.limit = j;
+              rs = false;
+              break;
+            case "[":
+              if (!noAssert) {
+                if (ho || hm) {
+                  fail = true;
+                  break;
+                }
+                ho = hm = true;
+              }
+              bb2.offset = bb2.markedOffset = j;
+              rs = false;
+              break;
+            case "<":
+              if (!noAssert) {
+                if (ho) {
+                  fail = true;
+                  break;
+                }
+                ho = true;
+              }
+              bb2.offset = j;
+              rs = false;
+              break;
+            case "]":
+              if (!noAssert) {
+                if (hl || hm) {
+                  fail = true;
+                  break;
+                }
+                hl = hm = true;
+              }
+              bb2.limit = bb2.markedOffset = j;
+              rs = false;
+              break;
+            case ">":
+              if (!noAssert) {
+                if (hl) {
+                  fail = true;
+                  break;
+                }
+                hl = true;
+              }
+              bb2.limit = j;
+              rs = false;
+              break;
+            case "'":
+              if (!noAssert) {
+                if (hm) {
+                  fail = true;
+                  break;
+                }
+                hm = true;
+              }
+              bb2.markedOffset = j;
+              rs = false;
+              break;
+            case " ":
+              rs = false;
+              break;
+            default:
+              if (!noAssert) {
+                if (rs) {
+                  fail = true;
+                  break;
+                }
+              }
+              b = parseInt(ch + str.charAt(i++), 16);
+              if (!noAssert) {
+                if (isNaN(b) || b < 0 || b > 255)
+                  throw TypeError("Illegal str: Not a debug encoded string");
+              }
+              bb2.buffer[j++] = b;
+              rs = true;
+          }
+          if (fail)
+            throw TypeError("Illegal str: Invalid symbol at " + i);
+        }
+        if (!noAssert) {
+          if (!ho || !hl)
+            throw TypeError("Illegal str: Missing offset or limit");
+          if (j < bb2.buffer.length)
+            throw TypeError("Illegal str: Not a debug encoded string (is it hex?) " + j + " < " + k);
+        }
+        return bb2;
+      };
+      ByteBufferPrototype.toHex = function(begin, end) {
+        begin = typeof begin === "undefined" ? this.offset : begin;
+        end = typeof end === "undefined" ? this.limit : end;
+        if (!this.noAssert) {
+          if (typeof begin !== "number" || begin % 1 !== 0)
+            throw TypeError("Illegal begin: Not an integer");
+          begin >>>= 0;
+          if (typeof end !== "number" || end % 1 !== 0)
+            throw TypeError("Illegal end: Not an integer");
+          end >>>= 0;
+          if (begin < 0 || begin > end || end > this.buffer.length)
+            throw RangeError("Illegal range: 0 <= " + begin + " <= " + end + " <= " + this.buffer.length);
+        }
+        return this.buffer.toString("hex", begin, end);
+      };
+      ByteBuffer.fromHex = function(str, littleEndian, noAssert) {
+        if (!noAssert) {
+          if (typeof str !== "string")
+            throw TypeError("Illegal str: Not a string");
+          if (str.length % 2 !== 0)
+            throw TypeError("Illegal str: Length not a multiple of 2");
+        }
+        var bb2 = new ByteBuffer(0, littleEndian, true);
+        bb2.buffer = new Buffer2(str, "hex");
+        bb2.limit = bb2.buffer.length;
+        return bb2;
+      };
+      var utfx = function() {
+        "use strict";
+        var utfx2 = {};
+        utfx2.MAX_CODEPOINT = 1114111;
+        utfx2.encodeUTF8 = function(src, dst) {
+          var cp = null;
+          if (typeof src === "number")
+            cp = src, src = function() {
+              return null;
+            };
+          while (cp !== null || (cp = src()) !== null) {
+            if (cp < 128)
+              dst(cp & 127);
+            else if (cp < 2048)
+              dst(cp >> 6 & 31 | 192), dst(cp & 63 | 128);
+            else if (cp < 65536)
+              dst(cp >> 12 & 15 | 224), dst(cp >> 6 & 63 | 128), dst(cp & 63 | 128);
+            else
+              dst(cp >> 18 & 7 | 240), dst(cp >> 12 & 63 | 128), dst(cp >> 6 & 63 | 128), dst(cp & 63 | 128);
+            cp = null;
+          }
+        };
+        utfx2.decodeUTF8 = function(src, dst) {
+          var a, b, c2, d, fail = function(b2) {
+            b2 = b2.slice(0, b2.indexOf(null));
+            var err = Error(b2.toString());
+            err.name = "TruncatedError";
+            err["bytes"] = b2;
+            throw err;
+          };
+          while ((a = src()) !== null) {
+            if ((a & 128) === 0)
+              dst(a);
+            else if ((a & 224) === 192)
+              (b = src()) === null && fail([a, b]), dst((a & 31) << 6 | b & 63);
+            else if ((a & 240) === 224)
+              ((b = src()) === null || (c2 = src()) === null) && fail([a, b, c2]), dst((a & 15) << 12 | (b & 63) << 6 | c2 & 63);
+            else if ((a & 248) === 240)
+              ((b = src()) === null || (c2 = src()) === null || (d = src()) === null) && fail([a, b, c2, d]), dst((a & 7) << 18 | (b & 63) << 12 | (c2 & 63) << 6 | d & 63);
+            else
+              throw RangeError("Illegal starting byte: " + a);
+          }
+        };
+        utfx2.UTF16toUTF8 = function(src, dst) {
+          var c1, c2 = null;
+          while (true) {
+            if ((c1 = c2 !== null ? c2 : src()) === null)
+              break;
+            if (c1 >= 55296 && c1 <= 57343) {
+              if ((c2 = src()) !== null) {
+                if (c2 >= 56320 && c2 <= 57343) {
+                  dst((c1 - 55296) * 1024 + c2 - 56320 + 65536);
+                  c2 = null;
+                  continue;
+                }
+              }
+            }
+            dst(c1);
+          }
+          if (c2 !== null)
+            dst(c2);
+        };
+        utfx2.UTF8toUTF16 = function(src, dst) {
+          var cp = null;
+          if (typeof src === "number")
+            cp = src, src = function() {
+              return null;
+            };
+          while (cp !== null || (cp = src()) !== null) {
+            if (cp <= 65535)
+              dst(cp);
+            else
+              cp -= 65536, dst((cp >> 10) + 55296), dst(cp % 1024 + 56320);
+            cp = null;
+          }
+        };
+        utfx2.encodeUTF16toUTF8 = function(src, dst) {
+          utfx2.UTF16toUTF8(src, function(cp) {
+            utfx2.encodeUTF8(cp, dst);
+          });
+        };
+        utfx2.decodeUTF8toUTF16 = function(src, dst) {
+          utfx2.decodeUTF8(src, function(cp) {
+            utfx2.UTF8toUTF16(cp, dst);
+          });
+        };
+        utfx2.calculateCodePoint = function(cp) {
+          return cp < 128 ? 1 : cp < 2048 ? 2 : cp < 65536 ? 3 : 4;
+        };
+        utfx2.calculateUTF8 = function(src) {
+          var cp, l = 0;
+          while ((cp = src()) !== null)
+            l += cp < 128 ? 1 : cp < 2048 ? 2 : cp < 65536 ? 3 : 4;
+          return l;
+        };
+        utfx2.calculateUTF16asUTF8 = function(src) {
+          var n = 0, l = 0;
+          utfx2.UTF16toUTF8(src, function(cp) {
+            ++n;
+            l += cp < 128 ? 1 : cp < 2048 ? 2 : cp < 65536 ? 3 : 4;
+          });
+          return [n, l];
+        };
+        return utfx2;
+      }();
+      ByteBufferPrototype.toUTF8 = function(begin, end) {
+        if (typeof begin === "undefined")
+          begin = this.offset;
+        if (typeof end === "undefined")
+          end = this.limit;
+        if (!this.noAssert) {
+          if (typeof begin !== "number" || begin % 1 !== 0)
+            throw TypeError("Illegal begin: Not an integer");
+          begin >>>= 0;
+          if (typeof end !== "number" || end % 1 !== 0)
+            throw TypeError("Illegal end: Not an integer");
+          end >>>= 0;
+          if (begin < 0 || begin > end || end > this.buffer.length)
+            throw RangeError("Illegal range: 0 <= " + begin + " <= " + end + " <= " + this.buffer.length);
+        }
+        return this.buffer.toString("utf8", begin, end);
+      };
+      ByteBuffer.fromUTF8 = function(str, littleEndian, noAssert) {
+        if (!noAssert) {
+          if (typeof str !== "string")
+            throw TypeError("Illegal str: Not a string");
+        }
+        var bb2 = new ByteBuffer(0, littleEndian, noAssert);
+        bb2.buffer = new Buffer2(str, "utf8");
+        bb2.limit = bb2.buffer.length;
+        return bb2;
+      };
+      ByteBuffer.memcpy = memcpy;
+      return ByteBuffer;
+    }();
+  }
+});
+
+// node_modules/app-info-parser/src/resource-finder.js
+var require_resource_finder = __commonJS({
+  "node_modules/app-info-parser/src/resource-finder.js"(exports, module2) {
+    "use strict";
+    var ByteBuffer = require_bytebuffer_node();
+    var DEBUG = false;
+    var RES_STRING_POOL_TYPE = 1;
+    var RES_TABLE_TYPE = 2;
+    var RES_TABLE_PACKAGE_TYPE = 512;
+    var RES_TABLE_TYPE_TYPE = 513;
+    var RES_TABLE_TYPE_SPEC_TYPE = 514;
+    var TYPE_REFERENCE = 1;
+    var TYPE_STRING = 3;
+    function ResourceFinder() {
+      this.valueStringPool = null;
+      this.typeStringPool = null;
+      this.keyStringPool = null;
+      this.package_id = 0;
+      this.responseMap = {};
+      this.entryMap = {};
+    }
+    ResourceFinder.readBytes = function(bb2, len) {
+      var uint8Array = new Uint8Array(len);
+      for (var i = 0; i < len; i++) {
+        uint8Array[i] = bb2.readUint8();
+      }
+      return ByteBuffer.wrap(uint8Array, "binary", true);
+    };
+    ResourceFinder.prototype.processResourceTable = function(resourceBuffer) {
+      var bb2 = ByteBuffer.wrap(resourceBuffer, "binary", true);
+      var type = bb2.readShort(), headerSize = bb2.readShort(), size = bb2.readInt(), packageCount = bb2.readInt(), buffer, bb22;
+      if (type != RES_TABLE_TYPE) {
+        throw new Error("No RES_TABLE_TYPE found!");
+      }
+      if (size != bb2.limit) {
+        throw new Error("The buffer size not matches to the resource table size.");
+      }
+      bb2.offset = headerSize;
+      var realStringPoolCount = 0, realPackageCount = 0;
+      while (true) {
+        var pos, t, hs, s;
+        try {
+          pos = bb2.offset;
+          t = bb2.readShort();
+          hs = bb2.readShort();
+          s = bb2.readInt();
+        } catch (e) {
+          break;
+        }
+        if (t == RES_STRING_POOL_TYPE) {
+          if (realStringPoolCount == 0) {
+            if (DEBUG) {
+              console.log("Processing the string pool ...");
+            }
+            buffer = new ByteBuffer(s);
+            bb2.offset = pos;
+            bb2.prependTo(buffer);
+            bb22 = ByteBuffer.wrap(buffer, "binary", true);
+            bb22.LE();
+            this.valueStringPool = this.processStringPool(bb22);
+          }
+          realStringPoolCount++;
+        } else if (t == RES_TABLE_PACKAGE_TYPE) {
+          if (DEBUG) {
+            console.log("Processing the package " + realPackageCount + " ...");
+          }
+          buffer = new ByteBuffer(s);
+          bb2.offset = pos;
+          bb2.prependTo(buffer);
+          bb22 = ByteBuffer.wrap(buffer, "binary", true);
+          bb22.LE();
+          this.processPackage(bb22);
+          realPackageCount++;
+        } else {
+          throw new Error("Unsupported type");
+        }
+        bb2.offset = pos + s;
+        if (!bb2.remaining())
+          break;
+      }
+      if (realStringPoolCount != 1) {
+        throw new Error("More than 1 string pool found!");
+      }
+      if (realPackageCount != packageCount) {
+        throw new Error("Real package count not equals the declared count.");
+      }
+      return this.responseMap;
+    };
+    ResourceFinder.prototype.processPackage = function(bb2) {
+      var type = bb2.readShort(), headerSize = bb2.readShort(), size = bb2.readInt(), id = bb2.readInt();
+      this.package_id = id;
+      for (var i = 0; i < 256; ++i) {
+        bb2.readUint8();
+      }
+      var typeStrings = bb2.readInt(), lastPublicType = bb2.readInt(), keyStrings = bb2.readInt(), lastPublicKey = bb2.readInt();
+      if (typeStrings != headerSize) {
+        throw new Error("TypeStrings must immediately following the package structure header.");
+      }
+      if (DEBUG) {
+        console.log("Type strings:");
+      }
+      var lastPosition = bb2.offset;
+      bb2.offset = typeStrings;
+      var bbTypeStrings = ResourceFinder.readBytes(bb2, bb2.limit - bb2.offset);
+      bb2.offset = lastPosition;
+      this.typeStringPool = this.processStringPool(bbTypeStrings);
+      if (DEBUG) {
+        console.log("Key strings:");
+      }
+      bb2.offset = keyStrings;
+      var key_type = bb2.readShort(), key_headerSize = bb2.readShort(), key_size = bb2.readInt();
+      lastPosition = bb2.offset;
+      bb2.offset = keyStrings;
+      var bbKeyStrings = ResourceFinder.readBytes(bb2, bb2.limit - bb2.offset);
+      bb2.offset = lastPosition;
+      this.keyStringPool = this.processStringPool(bbKeyStrings);
+      var typeSpecCount = 0;
+      var typeCount = 0;
+      bb2.offset = keyStrings + key_size;
+      var bb22;
+      while (true) {
+        var pos = bb2.offset;
+        try {
+          var t = bb2.readShort();
+          var hs = bb2.readShort();
+          var s = bb2.readInt();
+        } catch (e) {
+          break;
+        }
+        if (t == RES_TABLE_TYPE_SPEC_TYPE) {
+          bb2.offset = pos;
+          bb22 = ResourceFinder.readBytes(bb2, s);
+          this.processTypeSpec(bb22);
+          typeSpecCount++;
+        } else if (t == RES_TABLE_TYPE_TYPE) {
+          bb2.offset = pos;
+          bb22 = ResourceFinder.readBytes(bb2, s);
+          this.processType(bb22);
+          typeCount++;
+        }
+        if (s == 0) {
+          break;
+        }
+        bb2.offset = pos + s;
+        if (!bb2.remaining()) {
+          break;
+        }
+      }
+    };
+    ResourceFinder.prototype.processType = function(bb2) {
+      var type = bb2.readShort(), headerSize = bb2.readShort(), size = bb2.readInt(), id = bb2.readByte(), res0 = bb2.readByte(), res1 = bb2.readShort(), entryCount = bb2.readInt(), entriesStart = bb2.readInt();
+      var refKeys = {};
+      var config_size = bb2.readInt();
+      bb2.offset = headerSize;
+      if (headerSize + entryCount * 4 != entriesStart) {
+        throw new Error("HeaderSize, entryCount and entriesStart are not valid.");
+      }
+      var entryIndices = new Array(entryCount);
+      for (var i = 0; i < entryCount; ++i) {
+        entryIndices[i] = bb2.readInt();
+      }
+      for (var i = 0; i < entryCount; ++i) {
+        if (entryIndices[i] == -1)
+          continue;
+        var resource_id = this.package_id << 24 | id << 16 | i;
+        var pos = bb2.offset, entry_size, entry_flag, entry_key, value_size, value_res0, value_dataType, value_data;
+        try {
+          entry_size = bb2.readShort();
+          entry_flag = bb2.readShort();
+          entry_key = bb2.readInt();
+        } catch (e) {
+          break;
+        }
+        var FLAG_COMPLEX = 1;
+        if ((entry_flag & FLAG_COMPLEX) == 0) {
+          value_size = bb2.readShort();
+          value_res0 = bb2.readByte();
+          value_dataType = bb2.readByte();
+          value_data = bb2.readInt();
+          var idStr = Number(resource_id).toString(16);
+          var keyStr = this.keyStringPool[entry_key];
+          var data = null;
+          if (DEBUG) {
+            console.log("Entry 0x" + idStr + ", key: " + keyStr + ", simple value type: ");
+          }
+          var key = parseInt(idStr, 16);
+          var entryArr = this.entryMap[key];
+          if (entryArr == null) {
+            entryArr = [];
+          }
+          entryArr.push(keyStr);
+          this.entryMap[key] = entryArr;
+          if (value_dataType == TYPE_STRING) {
+            data = this.valueStringPool[value_data];
+            if (DEBUG) {
+              console.log(", data: " + this.valueStringPool[value_data]);
+            }
+          } else if (value_dataType == TYPE_REFERENCE) {
+            var hexIndex = Number(value_data).toString(16);
+            refKeys[idStr] = value_data;
+          } else {
+            data = "" + value_data;
+            if (DEBUG) {
+              console.log(", data: " + value_data);
+            }
+          }
+          this.putIntoMap("@" + idStr, data);
+        } else {
+          var entry_parent = bb2.readInt();
+          var entry_count = bb2.readInt();
+          for (var j = 0; j < entry_count; ++j) {
+            var ref_name = bb2.readInt();
+            value_size = bb2.readShort();
+            value_res0 = bb2.readByte();
+            value_dataType = bb2.readByte();
+            value_data = bb2.readInt();
+          }
+          if (DEBUG) {
+            console.log("Entry 0x" + Number(resource_id).toString(16) + ", key: " + this.keyStringPool[entry_key] + ", complex value, not printed.");
+          }
+        }
+      }
+      for (var refK in refKeys) {
+        var values = this.responseMap["@" + Number(refKeys[refK]).toString(16).toUpperCase()];
+        if (values != null && Object.keys(values).length < 1e3) {
+          for (var value in values) {
+            this.putIntoMap("@" + refK, value);
+          }
+        }
+      }
+    };
+    ResourceFinder.prototype.processStringPool = function(bb2) {
+      var type = bb2.readShort(), headerSize = bb2.readShort(), size = bb2.readInt(), stringCount = bb2.readInt(), styleCount = bb2.readInt(), flags = bb2.readInt(), stringsStart = bb2.readInt(), stylesStart = bb2.readInt(), u16len, buffer;
+      var isUTF_8 = (flags & 256) != 0;
+      var offsets = new Array(stringCount);
+      for (var i = 0; i < stringCount; ++i) {
+        offsets[i] = bb2.readInt();
+      }
+      var strings = new Array(stringCount);
+      for (var i = 0; i < stringCount; ++i) {
+        var pos = stringsStart + offsets[i];
+        bb2.offset = pos;
+        strings[i] = "";
+        if (isUTF_8) {
+          u16len = bb2.readUint8();
+          if ((u16len & 128) != 0) {
+            u16len = ((u16len & 127) << 8) + bb2.readUint8();
+          }
+          var u8len = bb2.readUint8();
+          if ((u8len & 128) != 0) {
+            u8len = ((u8len & 127) << 8) + bb2.readUint8();
+          }
+          if (u8len > 0) {
+            buffer = ResourceFinder.readBytes(bb2, u8len);
+            try {
+              strings[i] = ByteBuffer.wrap(buffer, "utf8", true).toString("utf8");
+            } catch (e) {
+              if (DEBUG) {
+                console.error(e);
+                console.log("Error when turning buffer to utf-8 string.");
+              }
+            }
+          } else {
+            strings[i] = "";
+          }
+        } else {
+          u16len = bb2.readUint16();
+          if ((u16len & 32768) != 0) {
+            u16len = ((u16len & 32767) << 16) + bb2.readUint16();
+          }
+          if (u16len > 0) {
+            var len = u16len * 2;
+            buffer = ResourceFinder.readBytes(bb2, len);
+            try {
+              strings[i] = ByteBuffer.wrap(buffer, "utf8", true).toString("utf8");
+            } catch (e) {
+              if (DEBUG) {
+                console.error(e);
+                console.log("Error when turning buffer to utf-8 string.");
+              }
+            }
+          }
+        }
+        if (DEBUG) {
+          console.log("Parsed value: {0}", strings[i]);
+        }
+      }
+      return strings;
+    };
+    ResourceFinder.prototype.processTypeSpec = function(bb2) {
+      var type = bb2.readShort(), headerSize = bb2.readShort(), size = bb2.readInt(), id = bb2.readByte(), res0 = bb2.readByte(), res1 = bb2.readShort(), entryCount = bb2.readInt();
+      if (DEBUG) {
+        console.log("Processing type spec " + this.typeStringPool[id - 1] + "...");
+      }
+      var flags = new Array(entryCount);
+      for (var i = 0; i < entryCount; ++i) {
+        flags[i] = bb2.readInt();
+      }
+    };
+    ResourceFinder.prototype.putIntoMap = function(resId, value) {
+      if (this.responseMap[resId.toUpperCase()] == null) {
+        this.responseMap[resId.toUpperCase()] = [];
+      }
+      this.responseMap[resId.toUpperCase()].push(value);
+    };
+    module2.exports = ResourceFinder;
+  }
+});
+
+// node_modules/app-info-parser/src/apk.js
+var require_apk = __commonJS({
+  "node_modules/app-info-parser/src/apk.js"(exports, module2) {
+    "use strict";
+    function _typeof(obj) {
+      "@babel/helpers - typeof";
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+        _typeof = function _typeof2(obj2) {
+          return typeof obj2;
+        };
+      } else {
+        _typeof = function _typeof2(obj2) {
+          return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+        };
+      }
+      return _typeof(obj);
+    }
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
+    }
+    function _defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    function _createClass(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        _defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        _defineProperties(Constructor, staticProps);
+      return Constructor;
+    }
+    function _inherits(subClass, superClass) {
+      if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function");
+      }
+      subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
+      if (superClass)
+        _setPrototypeOf(subClass, superClass);
+    }
+    function _setPrototypeOf(o, p) {
+      _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf2(o2, p2) {
+        o2.__proto__ = p2;
+        return o2;
+      };
+      return _setPrototypeOf(o, p);
+    }
+    function _createSuper(Derived) {
+      var hasNativeReflectConstruct = _isNativeReflectConstruct();
+      return function _createSuperInternal() {
+        var Super = _getPrototypeOf(Derived), result;
+        if (hasNativeReflectConstruct) {
+          var NewTarget = _getPrototypeOf(this).constructor;
+          result = Reflect.construct(Super, arguments, NewTarget);
+        } else {
+          result = Super.apply(this, arguments);
+        }
+        return _possibleConstructorReturn(this, result);
+      };
+    }
+    function _possibleConstructorReturn(self, call) {
+      if (call && (_typeof(call) === "object" || typeof call === "function")) {
+        return call;
+      }
+      return _assertThisInitialized(self);
+    }
+    function _assertThisInitialized(self) {
+      if (self === void 0) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+      }
+      return self;
+    }
+    function _isNativeReflectConstruct() {
+      if (typeof Reflect === "undefined" || !Reflect.construct)
+        return false;
+      if (Reflect.construct.sham)
+        return false;
+      if (typeof Proxy === "function")
+        return true;
+      try {
+        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
+        }));
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+    function _getPrototypeOf(o) {
+      _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf2(o2) {
+        return o2.__proto__ || Object.getPrototypeOf(o2);
+      };
+      return _getPrototypeOf(o);
+    }
+    var Zip = require_zip();
+    var _require = require_utils3();
+    var mapInfoResource = _require.mapInfoResource;
+    var findApkIconPath = _require.findApkIconPath;
+    var getBase64FromBuffer = _require.getBase64FromBuffer;
+    var ManifestName = /^androidmanifest\.xml$/;
+    var ResourceName = /^resources\.arsc$/;
+    var ManifestXmlParser = require_manifest();
+    var ResourceFinder = require_resource_finder();
+    var ApkParser = /* @__PURE__ */ function(_Zip) {
+      _inherits(ApkParser2, _Zip);
+      var _super = _createSuper(ApkParser2);
+      function ApkParser2(file) {
+        var _this;
+        _classCallCheck(this, ApkParser2);
+        _this = _super.call(this, file);
+        if (!(_assertThisInitialized(_this) instanceof ApkParser2)) {
+          return _possibleConstructorReturn(_this, new ApkParser2(file));
+        }
+        return _this;
+      }
+      _createClass(ApkParser2, [{
+        key: "parse",
+        value: function parse() {
+          var _this2 = this;
+          return new Promise(function(resolve, reject) {
+            _this2.getEntries([ManifestName, ResourceName]).then(function(buffers) {
+              if (!buffers[ManifestName]) {
+                throw new Error("AndroidManifest.xml can't be found.");
+              }
+              var apkInfo = _this2._parseManifest(buffers[ManifestName]);
+              var resourceMap;
+              if (!buffers[ResourceName]) {
+                resolve(apkInfo);
+              } else {
+                resourceMap = _this2._parseResourceMap(buffers[ResourceName]);
+                apkInfo = mapInfoResource(apkInfo, resourceMap);
+                var iconPath = findApkIconPath(apkInfo);
+                if (iconPath) {
+                  _this2.getEntry(iconPath).then(function(iconBuffer) {
+                    apkInfo.icon = iconBuffer ? getBase64FromBuffer(iconBuffer) : null;
+                    resolve(apkInfo);
+                  })["catch"](function(e) {
+                    apkInfo.icon = null;
+                    resolve(apkInfo);
+                    console.warn("[Warning] failed to parse icon: ", e);
+                  });
+                } else {
+                  apkInfo.icon = null;
+                  resolve(apkInfo);
+                }
+              }
+            })["catch"](function(e) {
+              reject(e);
+            });
+          });
+        }
+      }, {
+        key: "_parseManifest",
+        value: function _parseManifest(buffer) {
+          try {
+            var parser = new ManifestXmlParser(buffer, {
+              ignore: ["application.activity", "application.service", "application.receiver", "application.provider", "permission-group"]
+            });
+            return parser.parse();
+          } catch (e) {
+            throw new Error("Parse AndroidManifest.xml error: ", e);
+          }
+        }
+      }, {
+        key: "_parseResourceMap",
+        value: function _parseResourceMap(buffer) {
+          try {
+            return new ResourceFinder().processResourceTable(buffer);
+          } catch (e) {
+            throw new Error("Parser resources.arsc error: " + e);
+          }
+        }
+      }]);
+      return ApkParser2;
+    }(Zip);
+    module2.exports = ApkParser;
+  }
+});
+
+// node_modules/app-info-parser/node_modules/plist/lib/xmldom/entities.js
+var require_entities = __commonJS({
+  "node_modules/app-info-parser/node_modules/plist/lib/xmldom/entities.js"(exports) {
+    exports.entityMap = {
+      lt: "<",
+      gt: ">",
+      amp: "&",
+      quot: '"',
+      apos: "'",
+      Agrave: "\xC0",
+      Aacute: "\xC1",
+      Acirc: "\xC2",
+      Atilde: "\xC3",
+      Auml: "\xC4",
+      Aring: "\xC5",
+      AElig: "\xC6",
+      Ccedil: "\xC7",
+      Egrave: "\xC8",
+      Eacute: "\xC9",
+      Ecirc: "\xCA",
+      Euml: "\xCB",
+      Igrave: "\xCC",
+      Iacute: "\xCD",
+      Icirc: "\xCE",
+      Iuml: "\xCF",
+      ETH: "\xD0",
+      Ntilde: "\xD1",
+      Ograve: "\xD2",
+      Oacute: "\xD3",
+      Ocirc: "\xD4",
+      Otilde: "\xD5",
+      Ouml: "\xD6",
+      Oslash: "\xD8",
+      Ugrave: "\xD9",
+      Uacute: "\xDA",
+      Ucirc: "\xDB",
+      Uuml: "\xDC",
+      Yacute: "\xDD",
+      THORN: "\xDE",
+      szlig: "\xDF",
+      agrave: "\xE0",
+      aacute: "\xE1",
+      acirc: "\xE2",
+      atilde: "\xE3",
+      auml: "\xE4",
+      aring: "\xE5",
+      aelig: "\xE6",
+      ccedil: "\xE7",
+      egrave: "\xE8",
+      eacute: "\xE9",
+      ecirc: "\xEA",
+      euml: "\xEB",
+      igrave: "\xEC",
+      iacute: "\xED",
+      icirc: "\xEE",
+      iuml: "\xEF",
+      eth: "\xF0",
+      ntilde: "\xF1",
+      ograve: "\xF2",
+      oacute: "\xF3",
+      ocirc: "\xF4",
+      otilde: "\xF5",
+      ouml: "\xF6",
+      oslash: "\xF8",
+      ugrave: "\xF9",
+      uacute: "\xFA",
+      ucirc: "\xFB",
+      uuml: "\xFC",
+      yacute: "\xFD",
+      thorn: "\xFE",
+      yuml: "\xFF",
+      nbsp: "\xA0",
+      iexcl: "\xA1",
+      cent: "\xA2",
+      pound: "\xA3",
+      curren: "\xA4",
+      yen: "\xA5",
+      brvbar: "\xA6",
+      sect: "\xA7",
+      uml: "\xA8",
+      copy: "\xA9",
+      ordf: "\xAA",
+      laquo: "\xAB",
+      not: "\xAC",
+      shy: "\xAD\xAD",
+      reg: "\xAE",
+      macr: "\xAF",
+      deg: "\xB0",
+      plusmn: "\xB1",
+      sup2: "\xB2",
+      sup3: "\xB3",
+      acute: "\xB4",
+      micro: "\xB5",
+      para: "\xB6",
+      middot: "\xB7",
+      cedil: "\xB8",
+      sup1: "\xB9",
+      ordm: "\xBA",
+      raquo: "\xBB",
+      frac14: "\xBC",
+      frac12: "\xBD",
+      frac34: "\xBE",
+      iquest: "\xBF",
+      times: "\xD7",
+      divide: "\xF7",
+      forall: "\u2200",
+      part: "\u2202",
+      exist: "\u2203",
+      empty: "\u2205",
+      nabla: "\u2207",
+      isin: "\u2208",
+      notin: "\u2209",
+      ni: "\u220B",
+      prod: "\u220F",
+      sum: "\u2211",
+      minus: "\u2212",
+      lowast: "\u2217",
+      radic: "\u221A",
+      prop: "\u221D",
+      infin: "\u221E",
+      ang: "\u2220",
+      and: "\u2227",
+      or: "\u2228",
+      cap: "\u2229",
+      cup: "\u222A",
+      "int": "\u222B",
+      there4: "\u2234",
+      sim: "\u223C",
+      cong: "\u2245",
+      asymp: "\u2248",
+      ne: "\u2260",
+      equiv: "\u2261",
+      le: "\u2264",
+      ge: "\u2265",
+      sub: "\u2282",
+      sup: "\u2283",
+      nsub: "\u2284",
+      sube: "\u2286",
+      supe: "\u2287",
+      oplus: "\u2295",
+      otimes: "\u2297",
+      perp: "\u22A5",
+      sdot: "\u22C5",
+      Alpha: "\u0391",
+      Beta: "\u0392",
+      Gamma: "\u0393",
+      Delta: "\u0394",
+      Epsilon: "\u0395",
+      Zeta: "\u0396",
+      Eta: "\u0397",
+      Theta: "\u0398",
+      Iota: "\u0399",
+      Kappa: "\u039A",
+      Lambda: "\u039B",
+      Mu: "\u039C",
+      Nu: "\u039D",
+      Xi: "\u039E",
+      Omicron: "\u039F",
+      Pi: "\u03A0",
+      Rho: "\u03A1",
+      Sigma: "\u03A3",
+      Tau: "\u03A4",
+      Upsilon: "\u03A5",
+      Phi: "\u03A6",
+      Chi: "\u03A7",
+      Psi: "\u03A8",
+      Omega: "\u03A9",
+      alpha: "\u03B1",
+      beta: "\u03B2",
+      gamma: "\u03B3",
+      delta: "\u03B4",
+      epsilon: "\u03B5",
+      zeta: "\u03B6",
+      eta: "\u03B7",
+      theta: "\u03B8",
+      iota: "\u03B9",
+      kappa: "\u03BA",
+      lambda: "\u03BB",
+      mu: "\u03BC",
+      nu: "\u03BD",
+      xi: "\u03BE",
+      omicron: "\u03BF",
+      pi: "\u03C0",
+      rho: "\u03C1",
+      sigmaf: "\u03C2",
+      sigma: "\u03C3",
+      tau: "\u03C4",
+      upsilon: "\u03C5",
+      phi: "\u03C6",
+      chi: "\u03C7",
+      psi: "\u03C8",
+      omega: "\u03C9",
+      thetasym: "\u03D1",
+      upsih: "\u03D2",
+      piv: "\u03D6",
+      OElig: "\u0152",
+      oelig: "\u0153",
+      Scaron: "\u0160",
+      scaron: "\u0161",
+      Yuml: "\u0178",
+      fnof: "\u0192",
+      circ: "\u02C6",
+      tilde: "\u02DC",
+      ensp: "\u2002",
+      emsp: "\u2003",
+      thinsp: "\u2009",
+      zwnj: "\u200C",
+      zwj: "\u200D",
+      lrm: "\u200E",
+      rlm: "\u200F",
+      ndash: "\u2013",
+      mdash: "\u2014",
+      lsquo: "\u2018",
+      rsquo: "\u2019",
+      sbquo: "\u201A",
+      ldquo: "\u201C",
+      rdquo: "\u201D",
+      bdquo: "\u201E",
+      dagger: "\u2020",
+      Dagger: "\u2021",
+      bull: "\u2022",
+      hellip: "\u2026",
+      permil: "\u2030",
+      prime: "\u2032",
+      Prime: "\u2033",
+      lsaquo: "\u2039",
+      rsaquo: "\u203A",
+      oline: "\u203E",
+      euro: "\u20AC",
+      trade: "\u2122",
+      larr: "\u2190",
+      uarr: "\u2191",
+      rarr: "\u2192",
+      darr: "\u2193",
+      harr: "\u2194",
+      crarr: "\u21B5",
+      lceil: "\u2308",
+      rceil: "\u2309",
+      lfloor: "\u230A",
+      rfloor: "\u230B",
+      loz: "\u25CA",
+      spades: "\u2660",
+      clubs: "\u2663",
+      hearts: "\u2665",
+      diams: "\u2666"
+    };
+  }
+});
+
+// node_modules/app-info-parser/node_modules/plist/lib/xmldom/sax.js
+var require_sax2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/plist/lib/xmldom/sax.js"(exports) {
+    var nameStartChar = /[A-Z_a-z\xC0-\xD6\xD8-\xF6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]/;
+    var nameChar = new RegExp("[\\-\\.0-9" + nameStartChar.source.slice(1, -1) + "\\u00B7\\u0300-\\u036F\\u203F-\\u2040]");
+    var tagNamePattern = new RegExp("^" + nameStartChar.source + nameChar.source + "*(?::" + nameStartChar.source + nameChar.source + "*)?$");
+    var S_TAG = 0;
+    var S_ATTR = 1;
+    var S_ATTR_SPACE = 2;
+    var S_EQ = 3;
+    var S_ATTR_NOQUOT_VALUE = 4;
+    var S_ATTR_END = 5;
+    var S_TAG_SPACE = 6;
+    var S_TAG_CLOSE = 7;
+    function ParseError(message, locator) {
+      this.message = message;
+      this.locator = locator;
+      if (Error.captureStackTrace)
+        Error.captureStackTrace(this, ParseError);
+    }
+    ParseError.prototype = new Error();
+    ParseError.prototype.name = ParseError.name;
+    function XMLReader() {
+    }
+    XMLReader.prototype = {
+      parse: function(source, defaultNSMap, entityMap) {
+        var domBuilder = this.domBuilder;
+        domBuilder.startDocument();
+        _copy(defaultNSMap, defaultNSMap = {});
+        parse(source, defaultNSMap, entityMap, domBuilder, this.errorHandler);
+        domBuilder.endDocument();
+      }
+    };
+    function parse(source, defaultNSMapCopy, entityMap, domBuilder, errorHandler) {
+      function fixedFromCharCode(code) {
+        if (code > 65535) {
+          code -= 65536;
+          var surrogate1 = 55296 + (code >> 10), surrogate2 = 56320 + (code & 1023);
+          return String.fromCharCode(surrogate1, surrogate2);
+        } else {
+          return String.fromCharCode(code);
+        }
+      }
+      function entityReplacer(a2) {
+        var k = a2.slice(1, -1);
+        if (k in entityMap) {
+          return entityMap[k];
+        } else if (k.charAt(0) === "#") {
+          return fixedFromCharCode(parseInt(k.substr(1).replace("x", "0x")));
+        } else {
+          errorHandler.error("entity not found:" + a2);
+          return a2;
+        }
+      }
+      function appendText(end2) {
+        if (end2 > start) {
+          var xt = source.substring(start, end2).replace(/&#?\w+;/g, entityReplacer);
+          locator && position(start);
+          domBuilder.characters(xt, 0, end2 - start);
+          start = end2;
+        }
+      }
+      function position(p, m) {
+        while (p >= lineEnd && (m = linePattern.exec(source))) {
+          lineStart = m.index;
+          lineEnd = lineStart + m[0].length;
+          locator.lineNumber++;
+        }
+        locator.columnNumber = p - lineStart + 1;
+      }
+      var lineStart = 0;
+      var lineEnd = 0;
+      var linePattern = /.*(?:\r\n?|\n)|.*$/g;
+      var locator = domBuilder.locator;
+      var parseStack = [{ currentNSMap: defaultNSMapCopy }];
+      var closeMap = {};
+      var start = 0;
+      while (true) {
+        try {
+          var tagStart = source.indexOf("<", start);
+          if (tagStart < 0) {
+            if (!source.substr(start).match(/^\s*$/)) {
+              var doc = domBuilder.doc;
+              var text = doc.createTextNode(source.substr(start));
+              doc.appendChild(text);
+              domBuilder.currentElement = text;
+            }
+            return;
+          }
+          if (tagStart > start) {
+            appendText(tagStart);
+          }
+          switch (source.charAt(tagStart + 1)) {
+            case "/":
+              var end = source.indexOf(">", tagStart + 3);
+              var tagName = source.substring(tagStart + 2, end);
+              var config = parseStack.pop();
+              if (end < 0) {
+                tagName = source.substring(tagStart + 2).replace(/[\s<].*/, "");
+                errorHandler.error("end tag name: " + tagName + " is not complete:" + config.tagName);
+                end = tagStart + 1 + tagName.length;
+              } else if (tagName.match(/\s</)) {
+                tagName = tagName.replace(/[\s<].*/, "");
+                errorHandler.error("end tag name: " + tagName + " maybe not complete");
+                end = tagStart + 1 + tagName.length;
+              }
+              var localNSMap = config.localNSMap;
+              var endMatch = config.tagName == tagName;
+              var endIgnoreCaseMach = endMatch || config.tagName && config.tagName.toLowerCase() == tagName.toLowerCase();
+              if (endIgnoreCaseMach) {
+                domBuilder.endElement(config.uri, config.localName, tagName);
+                if (localNSMap) {
+                  for (var prefix in localNSMap) {
+                    domBuilder.endPrefixMapping(prefix);
+                  }
+                }
+                if (!endMatch) {
+                  errorHandler.fatalError("end tag name: " + tagName + " is not match the current start tagName:" + config.tagName);
+                }
+              } else {
+                parseStack.push(config);
+              }
+              end++;
+              break;
+            case "?":
+              locator && position(tagStart);
+              end = parseInstruction(source, tagStart, domBuilder);
+              break;
+            case "!":
+              locator && position(tagStart);
+              end = parseDCC(source, tagStart, domBuilder, errorHandler);
+              break;
+            default:
+              locator && position(tagStart);
+              var el = new ElementAttributes();
+              var currentNSMap = parseStack[parseStack.length - 1].currentNSMap;
+              var end = parseElementStartPart(source, tagStart, el, currentNSMap, entityReplacer, errorHandler);
+              var len = el.length;
+              if (!el.closed && fixSelfClosed(source, end, el.tagName, closeMap)) {
+                el.closed = true;
+                if (!entityMap.nbsp) {
+                  errorHandler.warning("unclosed xml attribute");
+                }
+              }
+              if (locator && len) {
+                var locator2 = copyLocator(locator, {});
+                for (var i = 0; i < len; i++) {
+                  var a = el[i];
+                  position(a.offset);
+                  a.locator = copyLocator(locator, {});
+                }
+                domBuilder.locator = locator2;
+                if (appendElement(el, domBuilder, currentNSMap)) {
+                  parseStack.push(el);
+                }
+                domBuilder.locator = locator;
+              } else {
+                if (appendElement(el, domBuilder, currentNSMap)) {
+                  parseStack.push(el);
+                }
+              }
+              if (el.uri === "http://www.w3.org/1999/xhtml" && !el.closed) {
+                end = parseHtmlSpecialContent(source, end, el.tagName, entityReplacer, domBuilder);
+              } else {
+                end++;
+              }
+          }
+        } catch (e) {
+          if (e instanceof ParseError) {
+            throw e;
+          }
+          errorHandler.error("element parse error: " + e);
+          end = -1;
+        }
+        if (end > start) {
+          start = end;
+        } else {
+          appendText(Math.max(tagStart, start) + 1);
+        }
+      }
+    }
+    function copyLocator(f, t) {
+      t.lineNumber = f.lineNumber;
+      t.columnNumber = f.columnNumber;
+      return t;
+    }
+    function parseElementStartPart(source, start, el, currentNSMap, entityReplacer, errorHandler) {
+      function addAttribute(qname, value2, startIndex) {
+        if (qname in el.attributeNames)
+          errorHandler.fatalError("Attribute " + qname + " redefined");
+        el.addValue(qname, value2, startIndex);
+      }
+      var attrName;
+      var value;
+      var p = ++start;
+      var s = S_TAG;
+      while (true) {
+        var c2 = source.charAt(p);
+        switch (c2) {
+          case "=":
+            if (s === S_ATTR) {
+              attrName = source.slice(start, p);
+              s = S_EQ;
+            } else if (s === S_ATTR_SPACE) {
+              s = S_EQ;
+            } else {
+              throw new Error("attribute equal must after attrName");
+            }
+            break;
+          case "'":
+          case '"':
+            if (s === S_EQ || s === S_ATTR) {
+              if (s === S_ATTR) {
+                errorHandler.warning('attribute value must after "="');
+                attrName = source.slice(start, p);
+              }
+              start = p + 1;
+              p = source.indexOf(c2, start);
+              if (p > 0) {
+                value = source.slice(start, p).replace(/&#?\w+;/g, entityReplacer);
+                addAttribute(attrName, value, start - 1);
+                s = S_ATTR_END;
+              } else {
+                throw new Error("attribute value no end '" + c2 + "' match");
+              }
+            } else if (s == S_ATTR_NOQUOT_VALUE) {
+              value = source.slice(start, p).replace(/&#?\w+;/g, entityReplacer);
+              addAttribute(attrName, value, start);
+              errorHandler.warning('attribute "' + attrName + '" missed start quot(' + c2 + ")!!");
+              start = p + 1;
+              s = S_ATTR_END;
+            } else {
+              throw new Error('attribute value must after "="');
+            }
+            break;
+          case "/":
+            switch (s) {
+              case S_TAG:
+                el.setTagName(source.slice(start, p));
+              case S_ATTR_END:
+              case S_TAG_SPACE:
+              case S_TAG_CLOSE:
+                s = S_TAG_CLOSE;
+                el.closed = true;
+              case S_ATTR_NOQUOT_VALUE:
+              case S_ATTR:
+              case S_ATTR_SPACE:
+                break;
+              default:
+                throw new Error("attribute invalid close char('/')");
+            }
+            break;
+          case "":
+            errorHandler.error("unexpected end of input");
+            if (s == S_TAG) {
+              el.setTagName(source.slice(start, p));
+            }
+            return p;
+          case ">":
+            switch (s) {
+              case S_TAG:
+                el.setTagName(source.slice(start, p));
+              case S_ATTR_END:
+              case S_TAG_SPACE:
+              case S_TAG_CLOSE:
+                break;
+              case S_ATTR_NOQUOT_VALUE:
+              case S_ATTR:
+                value = source.slice(start, p);
+                if (value.slice(-1) === "/") {
+                  el.closed = true;
+                  value = value.slice(0, -1);
+                }
+              case S_ATTR_SPACE:
+                if (s === S_ATTR_SPACE) {
+                  value = attrName;
+                }
+                if (s == S_ATTR_NOQUOT_VALUE) {
+                  errorHandler.warning('attribute "' + value + '" missed quot(")!');
+                  addAttribute(attrName, value.replace(/&#?\w+;/g, entityReplacer), start);
+                } else {
+                  if (currentNSMap[""] !== "http://www.w3.org/1999/xhtml" || !value.match(/^(?:disabled|checked|selected)$/i)) {
+                    errorHandler.warning('attribute "' + value + '" missed value!! "' + value + '" instead!!');
+                  }
+                  addAttribute(value, value, start);
+                }
+                break;
+              case S_EQ:
+                throw new Error("attribute value missed!!");
+            }
+            return p;
+          case "\x80":
+            c2 = " ";
+          default:
+            if (c2 <= " ") {
+              switch (s) {
+                case S_TAG:
+                  el.setTagName(source.slice(start, p));
+                  s = S_TAG_SPACE;
+                  break;
+                case S_ATTR:
+                  attrName = source.slice(start, p);
+                  s = S_ATTR_SPACE;
+                  break;
+                case S_ATTR_NOQUOT_VALUE:
+                  var value = source.slice(start, p).replace(/&#?\w+;/g, entityReplacer);
+                  errorHandler.warning('attribute "' + value + '" missed quot(")!!');
+                  addAttribute(attrName, value, start);
+                case S_ATTR_END:
+                  s = S_TAG_SPACE;
+                  break;
+              }
+            } else {
+              switch (s) {
+                case S_ATTR_SPACE:
+                  var tagName = el.tagName;
+                  if (currentNSMap[""] !== "http://www.w3.org/1999/xhtml" || !attrName.match(/^(?:disabled|checked|selected)$/i)) {
+                    errorHandler.warning('attribute "' + attrName + '" missed value!! "' + attrName + '" instead2!!');
+                  }
+                  addAttribute(attrName, attrName, start);
+                  start = p;
+                  s = S_ATTR;
+                  break;
+                case S_ATTR_END:
+                  errorHandler.warning('attribute space is required"' + attrName + '"!!');
+                case S_TAG_SPACE:
+                  s = S_ATTR;
+                  start = p;
+                  break;
+                case S_EQ:
+                  s = S_ATTR_NOQUOT_VALUE;
+                  start = p;
+                  break;
+                case S_TAG_CLOSE:
+                  throw new Error("elements closed character '/' and '>' must be connected to");
+              }
+            }
+        }
+        p++;
+      }
+    }
+    function appendElement(el, domBuilder, currentNSMap) {
+      var tagName = el.tagName;
+      var localNSMap = null;
+      var i = el.length;
+      while (i--) {
+        var a = el[i];
+        var qName = a.qName;
+        var value = a.value;
+        var nsp = qName.indexOf(":");
+        if (nsp > 0) {
+          var prefix = a.prefix = qName.slice(0, nsp);
+          var localName = qName.slice(nsp + 1);
+          var nsPrefix = prefix === "xmlns" && localName;
+        } else {
+          localName = qName;
+          prefix = null;
+          nsPrefix = qName === "xmlns" && "";
+        }
+        a.localName = localName;
+        if (nsPrefix !== false) {
+          if (localNSMap == null) {
+            localNSMap = {};
+            _copy(currentNSMap, currentNSMap = {});
+          }
+          currentNSMap[nsPrefix] = localNSMap[nsPrefix] = value;
+          a.uri = "http://www.w3.org/2000/xmlns/";
+          domBuilder.startPrefixMapping(nsPrefix, value);
+        }
+      }
+      var i = el.length;
+      while (i--) {
+        a = el[i];
+        var prefix = a.prefix;
+        if (prefix) {
+          if (prefix === "xml") {
+            a.uri = "http://www.w3.org/XML/1998/namespace";
+          }
+          if (prefix !== "xmlns") {
+            a.uri = currentNSMap[prefix || ""];
+          }
+        }
+      }
+      var nsp = tagName.indexOf(":");
+      if (nsp > 0) {
+        prefix = el.prefix = tagName.slice(0, nsp);
+        localName = el.localName = tagName.slice(nsp + 1);
+      } else {
+        prefix = null;
+        localName = el.localName = tagName;
+      }
+      var ns = el.uri = currentNSMap[prefix || ""];
+      domBuilder.startElement(ns, localName, tagName, el);
+      if (el.closed) {
+        domBuilder.endElement(ns, localName, tagName);
+        if (localNSMap) {
+          for (prefix in localNSMap) {
+            domBuilder.endPrefixMapping(prefix);
+          }
+        }
+      } else {
+        el.currentNSMap = currentNSMap;
+        el.localNSMap = localNSMap;
+        return true;
+      }
+    }
+    function parseHtmlSpecialContent(source, elStartEnd, tagName, entityReplacer, domBuilder) {
+      if (/^(?:script|textarea)$/i.test(tagName)) {
+        var elEndStart = source.indexOf("</" + tagName + ">", elStartEnd);
+        var text = source.substring(elStartEnd + 1, elEndStart);
+        if (/[&<]/.test(text)) {
+          if (/^script$/i.test(tagName)) {
+            domBuilder.characters(text, 0, text.length);
+            return elEndStart;
+          }
+          text = text.replace(/&#?\w+;/g, entityReplacer);
+          domBuilder.characters(text, 0, text.length);
+          return elEndStart;
+        }
+      }
+      return elStartEnd + 1;
+    }
+    function fixSelfClosed(source, elStartEnd, tagName, closeMap) {
+      var pos = closeMap[tagName];
+      if (pos == null) {
+        pos = source.lastIndexOf("</" + tagName + ">");
+        if (pos < elStartEnd) {
+          pos = source.lastIndexOf("</" + tagName);
+        }
+        closeMap[tagName] = pos;
+      }
+      return pos < elStartEnd;
+    }
+    function _copy(source, target) {
+      for (var n in source) {
+        target[n] = source[n];
+      }
+    }
+    function parseDCC(source, start, domBuilder, errorHandler) {
+      var next = source.charAt(start + 2);
+      switch (next) {
+        case "-":
+          if (source.charAt(start + 3) === "-") {
+            var end = source.indexOf("-->", start + 4);
+            if (end > start) {
+              domBuilder.comment(source, start + 4, end - start - 4);
+              return end + 3;
+            } else {
+              errorHandler.error("Unclosed comment");
+              return -1;
+            }
+          } else {
+            return -1;
+          }
+        default:
+          if (source.substr(start + 3, 6) == "CDATA[") {
+            var end = source.indexOf("]]>", start + 9);
+            domBuilder.startCDATA();
+            domBuilder.characters(source, start + 9, end - start - 9);
+            domBuilder.endCDATA();
+            return end + 3;
+          }
+          var matchs = split(source, start);
+          var len = matchs.length;
+          if (len > 1 && /!doctype/i.test(matchs[0][0])) {
+            var name = matchs[1][0];
+            var pubid = false;
+            var sysid = false;
+            if (len > 3) {
+              if (/^public$/i.test(matchs[2][0])) {
+                pubid = matchs[3][0];
+                sysid = len > 4 && matchs[4][0];
+              } else if (/^system$/i.test(matchs[2][0])) {
+                sysid = matchs[3][0];
+              }
+            }
+            var lastMatch = matchs[len - 1];
+            domBuilder.startDTD(name, pubid, sysid);
+            domBuilder.endDTD();
+            return lastMatch.index + lastMatch[0].length;
+          }
+      }
+      return -1;
+    }
+    function parseInstruction(source, start, domBuilder) {
+      var end = source.indexOf("?>", start);
+      if (end) {
+        var match = source.substring(start, end).match(/^<\?(\S*)\s*([\s\S]*?)\s*$/);
+        if (match) {
+          var len = match[0].length;
+          domBuilder.processingInstruction(match[1], match[2]);
+          return end + 2;
+        } else {
+          return -1;
+        }
+      }
+      return -1;
+    }
+    function ElementAttributes() {
+      this.attributeNames = {};
+    }
+    ElementAttributes.prototype = {
+      setTagName: function(tagName) {
+        if (!tagNamePattern.test(tagName)) {
+          throw new Error("invalid tagName:" + tagName);
+        }
+        this.tagName = tagName;
+      },
+      addValue: function(qName, value, offset) {
+        if (!tagNamePattern.test(qName)) {
+          throw new Error("invalid attribute:" + qName);
+        }
+        this.attributeNames[qName] = this.length;
+        this[this.length++] = { qName, value, offset };
+      },
+      length: 0,
+      getLocalName: function(i) {
+        return this[i].localName;
+      },
+      getLocator: function(i) {
+        return this[i].locator;
+      },
+      getQName: function(i) {
+        return this[i].qName;
+      },
+      getURI: function(i) {
+        return this[i].uri;
+      },
+      getValue: function(i) {
+        return this[i].value;
+      }
+    };
+    function split(source, start) {
+      var match;
+      var buf = [];
+      var reg = /'[^']+'|"[^"]+"|[^\s<>\/=]+=?|(\/?\s*>|<)/g;
+      reg.lastIndex = start;
+      reg.exec(source);
+      while (match = reg.exec(source)) {
+        buf.push(match);
+        if (match[1])
+          return buf;
+      }
+    }
+    exports.XMLReader = XMLReader;
+    exports.ParseError = ParseError;
+  }
+});
+
+// node_modules/app-info-parser/node_modules/plist/lib/xmldom/dom.js
+var require_dom2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/plist/lib/xmldom/dom.js"(exports) {
+    function copy(src, dest) {
+      for (var p in src) {
+        dest[p] = src[p];
+      }
+    }
+    function _extends(Class, Super) {
+      var pt = Class.prototype;
+      if (!(pt instanceof Super)) {
+        let t2 = function() {
+        };
+        var t = t2;
+        ;
+        t2.prototype = Super.prototype;
+        t2 = new t2();
+        copy(pt, t2);
+        Class.prototype = pt = t2;
+      }
+      if (pt.constructor != Class) {
+        if (typeof Class != "function") {
+          console.error("unknow Class:" + Class);
+        }
+        pt.constructor = Class;
+      }
+    }
+    var htmlns = "http://www.w3.org/1999/xhtml";
+    var NodeType = {};
+    var ELEMENT_NODE = NodeType.ELEMENT_NODE = 1;
+    var ATTRIBUTE_NODE = NodeType.ATTRIBUTE_NODE = 2;
+    var TEXT_NODE = NodeType.TEXT_NODE = 3;
+    var CDATA_SECTION_NODE = NodeType.CDATA_SECTION_NODE = 4;
+    var ENTITY_REFERENCE_NODE = NodeType.ENTITY_REFERENCE_NODE = 5;
+    var ENTITY_NODE = NodeType.ENTITY_NODE = 6;
+    var PROCESSING_INSTRUCTION_NODE = NodeType.PROCESSING_INSTRUCTION_NODE = 7;
+    var COMMENT_NODE = NodeType.COMMENT_NODE = 8;
+    var DOCUMENT_NODE = NodeType.DOCUMENT_NODE = 9;
+    var DOCUMENT_TYPE_NODE = NodeType.DOCUMENT_TYPE_NODE = 10;
+    var DOCUMENT_FRAGMENT_NODE = NodeType.DOCUMENT_FRAGMENT_NODE = 11;
+    var NOTATION_NODE = NodeType.NOTATION_NODE = 12;
+    var ExceptionCode = {};
+    var ExceptionMessage = {};
+    var INDEX_SIZE_ERR = ExceptionCode.INDEX_SIZE_ERR = (ExceptionMessage[1] = "Index size error", 1);
+    var DOMSTRING_SIZE_ERR = ExceptionCode.DOMSTRING_SIZE_ERR = (ExceptionMessage[2] = "DOMString size error", 2);
+    var HIERARCHY_REQUEST_ERR = ExceptionCode.HIERARCHY_REQUEST_ERR = (ExceptionMessage[3] = "Hierarchy request error", 3);
+    var WRONG_DOCUMENT_ERR = ExceptionCode.WRONG_DOCUMENT_ERR = (ExceptionMessage[4] = "Wrong document", 4);
+    var INVALID_CHARACTER_ERR = ExceptionCode.INVALID_CHARACTER_ERR = (ExceptionMessage[5] = "Invalid character", 5);
+    var NO_DATA_ALLOWED_ERR = ExceptionCode.NO_DATA_ALLOWED_ERR = (ExceptionMessage[6] = "No data allowed", 6);
+    var NO_MODIFICATION_ALLOWED_ERR = ExceptionCode.NO_MODIFICATION_ALLOWED_ERR = (ExceptionMessage[7] = "No modification allowed", 7);
+    var NOT_FOUND_ERR = ExceptionCode.NOT_FOUND_ERR = (ExceptionMessage[8] = "Not found", 8);
+    var NOT_SUPPORTED_ERR = ExceptionCode.NOT_SUPPORTED_ERR = (ExceptionMessage[9] = "Not supported", 9);
+    var INUSE_ATTRIBUTE_ERR = ExceptionCode.INUSE_ATTRIBUTE_ERR = (ExceptionMessage[10] = "Attribute in use", 10);
+    var INVALID_STATE_ERR = ExceptionCode.INVALID_STATE_ERR = (ExceptionMessage[11] = "Invalid state", 11);
+    var SYNTAX_ERR = ExceptionCode.SYNTAX_ERR = (ExceptionMessage[12] = "Syntax error", 12);
+    var INVALID_MODIFICATION_ERR = ExceptionCode.INVALID_MODIFICATION_ERR = (ExceptionMessage[13] = "Invalid modification", 13);
+    var NAMESPACE_ERR = ExceptionCode.NAMESPACE_ERR = (ExceptionMessage[14] = "Invalid namespace", 14);
+    var INVALID_ACCESS_ERR = ExceptionCode.INVALID_ACCESS_ERR = (ExceptionMessage[15] = "Invalid access", 15);
+    function DOMException(code, message) {
+      if (message instanceof Error) {
+        var error = message;
+      } else {
+        error = this;
+        Error.call(this, ExceptionMessage[code]);
+        this.message = ExceptionMessage[code];
+        if (Error.captureStackTrace)
+          Error.captureStackTrace(this, DOMException);
+      }
+      error.code = code;
+      if (message)
+        this.message = this.message + ": " + message;
+      return error;
+    }
+    DOMException.prototype = Error.prototype;
+    copy(ExceptionCode, DOMException);
+    function NodeList() {
+    }
+    NodeList.prototype = {
+      length: 0,
+      item: function(index) {
+        return this[index] || null;
+      },
+      toString: function(isHTML, nodeFilter) {
+        for (var buf = [], i = 0; i < this.length; i++) {
+          serializeToString(this[i], buf, isHTML, nodeFilter);
+        }
+        return buf.join("");
+      }
+    };
+    function LiveNodeList(node, refresh) {
+      this._node = node;
+      this._refresh = refresh;
+      _updateLiveList(this);
+    }
+    function _updateLiveList(list) {
+      var inc = list._node._inc || list._node.ownerDocument._inc;
+      if (list._inc != inc) {
+        var ls = list._refresh(list._node);
+        __set__(list, "length", ls.length);
+        copy(ls, list);
+        list._inc = inc;
+      }
+    }
+    LiveNodeList.prototype.item = function(i) {
+      _updateLiveList(this);
+      return this[i];
+    };
+    _extends(LiveNodeList, NodeList);
+    function NamedNodeMap() {
+    }
+    function _findNodeIndex(list, node) {
+      var i = list.length;
+      while (i--) {
+        if (list[i] === node) {
+          return i;
+        }
+      }
+    }
+    function _addNamedNode(el, list, newAttr, oldAttr) {
+      if (oldAttr) {
+        list[_findNodeIndex(list, oldAttr)] = newAttr;
+      } else {
+        list[list.length++] = newAttr;
+      }
+      if (el) {
+        newAttr.ownerElement = el;
+        var doc = el.ownerDocument;
+        if (doc) {
+          oldAttr && _onRemoveAttribute(doc, el, oldAttr);
+          _onAddAttribute(doc, el, newAttr);
+        }
+      }
+    }
+    function _removeNamedNode(el, list, attr) {
+      var i = _findNodeIndex(list, attr);
+      if (i >= 0) {
+        var lastIndex = list.length - 1;
+        while (i < lastIndex) {
+          list[i] = list[++i];
+        }
+        list.length = lastIndex;
+        if (el) {
+          var doc = el.ownerDocument;
+          if (doc) {
+            _onRemoveAttribute(doc, el, attr);
+            attr.ownerElement = null;
+          }
+        }
+      } else {
+        throw DOMException(NOT_FOUND_ERR, new Error(el.tagName + "@" + attr));
+      }
+    }
+    NamedNodeMap.prototype = {
+      length: 0,
+      item: NodeList.prototype.item,
+      getNamedItem: function(key) {
+        var i = this.length;
+        while (i--) {
+          var attr = this[i];
+          if (attr.nodeName == key) {
+            return attr;
+          }
+        }
+      },
+      setNamedItem: function(attr) {
+        var el = attr.ownerElement;
+        if (el && el != this._ownerElement) {
+          throw new DOMException(INUSE_ATTRIBUTE_ERR);
+        }
+        var oldAttr = this.getNamedItem(attr.nodeName);
+        _addNamedNode(this._ownerElement, this, attr, oldAttr);
+        return oldAttr;
+      },
+      setNamedItemNS: function(attr) {
+        var el = attr.ownerElement, oldAttr;
+        if (el && el != this._ownerElement) {
+          throw new DOMException(INUSE_ATTRIBUTE_ERR);
+        }
+        oldAttr = this.getNamedItemNS(attr.namespaceURI, attr.localName);
+        _addNamedNode(this._ownerElement, this, attr, oldAttr);
+        return oldAttr;
+      },
+      removeNamedItem: function(key) {
+        var attr = this.getNamedItem(key);
+        _removeNamedNode(this._ownerElement, this, attr);
+        return attr;
+      },
+      removeNamedItemNS: function(namespaceURI, localName) {
+        var attr = this.getNamedItemNS(namespaceURI, localName);
+        _removeNamedNode(this._ownerElement, this, attr);
+        return attr;
+      },
+      getNamedItemNS: function(namespaceURI, localName) {
+        var i = this.length;
+        while (i--) {
+          var node = this[i];
+          if (node.localName == localName && node.namespaceURI == namespaceURI) {
+            return node;
+          }
+        }
+        return null;
+      }
+    };
+    function DOMImplementation(features) {
+      this._features = {};
+      if (features) {
+        for (var feature in features) {
+          this._features = features[feature];
+        }
+      }
+    }
+    DOMImplementation.prototype = {
+      hasFeature: function(feature, version) {
+        var versions = this._features[feature.toLowerCase()];
+        if (versions && (!version || version in versions)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      createDocument: function(namespaceURI, qualifiedName, doctype) {
+        var doc = new Document();
+        doc.implementation = this;
+        doc.childNodes = new NodeList();
+        doc.doctype = doctype;
+        if (doctype) {
+          doc.appendChild(doctype);
+        }
+        if (qualifiedName) {
+          var root = doc.createElementNS(namespaceURI, qualifiedName);
+          doc.appendChild(root);
+        }
+        return doc;
+      },
+      createDocumentType: function(qualifiedName, publicId, systemId) {
+        var node = new DocumentType();
+        node.name = qualifiedName;
+        node.nodeName = qualifiedName;
+        node.publicId = publicId;
+        node.systemId = systemId;
+        return node;
+      }
+    };
+    function Node() {
+    }
+    Node.prototype = {
+      firstChild: null,
+      lastChild: null,
+      previousSibling: null,
+      nextSibling: null,
+      attributes: null,
+      parentNode: null,
+      childNodes: null,
+      ownerDocument: null,
+      nodeValue: null,
+      namespaceURI: null,
+      prefix: null,
+      localName: null,
+      insertBefore: function(newChild, refChild) {
+        return _insertBefore(this, newChild, refChild);
+      },
+      replaceChild: function(newChild, oldChild) {
+        this.insertBefore(newChild, oldChild);
+        if (oldChild) {
+          this.removeChild(oldChild);
+        }
+      },
+      removeChild: function(oldChild) {
+        return _removeChild(this, oldChild);
+      },
+      appendChild: function(newChild) {
+        return this.insertBefore(newChild, null);
+      },
+      hasChildNodes: function() {
+        return this.firstChild != null;
+      },
+      cloneNode: function(deep) {
+        return cloneNode(this.ownerDocument || this, this, deep);
+      },
+      normalize: function() {
+        var child = this.firstChild;
+        while (child) {
+          var next = child.nextSibling;
+          if (next && next.nodeType == TEXT_NODE && child.nodeType == TEXT_NODE) {
+            this.removeChild(next);
+            child.appendData(next.data);
+          } else {
+            child.normalize();
+            child = next;
+          }
+        }
+      },
+      isSupported: function(feature, version) {
+        return this.ownerDocument.implementation.hasFeature(feature, version);
+      },
+      hasAttributes: function() {
+        return this.attributes.length > 0;
+      },
+      lookupPrefix: function(namespaceURI) {
+        var el = this;
+        while (el) {
+          var map = el._nsMap;
+          if (map) {
+            for (var n in map) {
+              if (map[n] == namespaceURI) {
+                return n;
+              }
+            }
+          }
+          el = el.nodeType == ATTRIBUTE_NODE ? el.ownerDocument : el.parentNode;
+        }
+        return null;
+      },
+      lookupNamespaceURI: function(prefix) {
+        var el = this;
+        while (el) {
+          var map = el._nsMap;
+          if (map) {
+            if (prefix in map) {
+              return map[prefix];
+            }
+          }
+          el = el.nodeType == ATTRIBUTE_NODE ? el.ownerDocument : el.parentNode;
+        }
+        return null;
+      },
+      isDefaultNamespace: function(namespaceURI) {
+        var prefix = this.lookupPrefix(namespaceURI);
+        return prefix == null;
+      }
+    };
+    function _xmlEncoder(c2) {
+      return c2 == "<" && "&lt;" || c2 == ">" && "&gt;" || c2 == "&" && "&amp;" || c2 == '"' && "&quot;" || "&#" + c2.charCodeAt() + ";";
+    }
+    copy(NodeType, Node);
+    copy(NodeType, Node.prototype);
+    function _visitNode(node, callback) {
+      if (callback(node)) {
+        return true;
+      }
+      if (node = node.firstChild) {
+        do {
+          if (_visitNode(node, callback)) {
+            return true;
+          }
+        } while (node = node.nextSibling);
+      }
+    }
+    function Document() {
+    }
+    function _onAddAttribute(doc, el, newAttr) {
+      doc && doc._inc++;
+      var ns = newAttr.namespaceURI;
+      if (ns == "http://www.w3.org/2000/xmlns/") {
+        el._nsMap[newAttr.prefix ? newAttr.localName : ""] = newAttr.value;
+      }
+    }
+    function _onRemoveAttribute(doc, el, newAttr, remove) {
+      doc && doc._inc++;
+      var ns = newAttr.namespaceURI;
+      if (ns == "http://www.w3.org/2000/xmlns/") {
+        delete el._nsMap[newAttr.prefix ? newAttr.localName : ""];
+      }
+    }
+    function _onUpdateChild(doc, el, newChild) {
+      if (doc && doc._inc) {
+        doc._inc++;
+        var cs = el.childNodes;
+        if (newChild) {
+          cs[cs.length++] = newChild;
+        } else {
+          var child = el.firstChild;
+          var i = 0;
+          while (child) {
+            cs[i++] = child;
+            child = child.nextSibling;
+          }
+          cs.length = i;
+        }
+      }
+    }
+    function _removeChild(parentNode, child) {
+      var previous = child.previousSibling;
+      var next = child.nextSibling;
+      if (previous) {
+        previous.nextSibling = next;
+      } else {
+        parentNode.firstChild = next;
+      }
+      if (next) {
+        next.previousSibling = previous;
+      } else {
+        parentNode.lastChild = previous;
+      }
+      _onUpdateChild(parentNode.ownerDocument, parentNode);
+      return child;
+    }
+    function _insertBefore(parentNode, newChild, nextChild) {
+      var cp = newChild.parentNode;
+      if (cp) {
+        cp.removeChild(newChild);
+      }
+      if (newChild.nodeType === DOCUMENT_FRAGMENT_NODE) {
+        var newFirst = newChild.firstChild;
+        if (newFirst == null) {
+          return newChild;
+        }
+        var newLast = newChild.lastChild;
+      } else {
+        newFirst = newLast = newChild;
+      }
+      var pre = nextChild ? nextChild.previousSibling : parentNode.lastChild;
+      newFirst.previousSibling = pre;
+      newLast.nextSibling = nextChild;
+      if (pre) {
+        pre.nextSibling = newFirst;
+      } else {
+        parentNode.firstChild = newFirst;
+      }
+      if (nextChild == null) {
+        parentNode.lastChild = newLast;
+      } else {
+        nextChild.previousSibling = newLast;
+      }
+      do {
+        newFirst.parentNode = parentNode;
+      } while (newFirst !== newLast && (newFirst = newFirst.nextSibling));
+      _onUpdateChild(parentNode.ownerDocument || parentNode, parentNode);
+      if (newChild.nodeType == DOCUMENT_FRAGMENT_NODE) {
+        newChild.firstChild = newChild.lastChild = null;
+      }
+      return newChild;
+    }
+    function _appendSingleChild(parentNode, newChild) {
+      var cp = newChild.parentNode;
+      if (cp) {
+        var pre = parentNode.lastChild;
+        cp.removeChild(newChild);
+        var pre = parentNode.lastChild;
+      }
+      var pre = parentNode.lastChild;
+      newChild.parentNode = parentNode;
+      newChild.previousSibling = pre;
+      newChild.nextSibling = null;
+      if (pre) {
+        pre.nextSibling = newChild;
+      } else {
+        parentNode.firstChild = newChild;
+      }
+      parentNode.lastChild = newChild;
+      _onUpdateChild(parentNode.ownerDocument, parentNode, newChild);
+      return newChild;
+    }
+    Document.prototype = {
+      nodeName: "#document",
+      nodeType: DOCUMENT_NODE,
+      doctype: null,
+      documentElement: null,
+      _inc: 1,
+      insertBefore: function(newChild, refChild) {
+        if (newChild.nodeType == DOCUMENT_FRAGMENT_NODE) {
+          var child = newChild.firstChild;
+          while (child) {
+            var next = child.nextSibling;
+            this.insertBefore(child, refChild);
+            child = next;
+          }
+          return newChild;
+        }
+        if (this.documentElement == null && newChild.nodeType == ELEMENT_NODE) {
+          this.documentElement = newChild;
+        }
+        return _insertBefore(this, newChild, refChild), newChild.ownerDocument = this, newChild;
+      },
+      removeChild: function(oldChild) {
+        if (this.documentElement == oldChild) {
+          this.documentElement = null;
+        }
+        return _removeChild(this, oldChild);
+      },
+      importNode: function(importedNode, deep) {
+        return importNode(this, importedNode, deep);
+      },
+      getElementById: function(id) {
+        var rtv = null;
+        _visitNode(this.documentElement, function(node) {
+          if (node.nodeType == ELEMENT_NODE) {
+            if (node.getAttribute("id") == id) {
+              rtv = node;
+              return true;
+            }
+          }
+        });
+        return rtv;
+      },
+      getElementsByClassName: function(className) {
+        var pattern = new RegExp("(^|\\s)" + className + "(\\s|$)");
+        return new LiveNodeList(this, function(base) {
+          var ls = [];
+          _visitNode(base.documentElement, function(node) {
+            if (node !== base && node.nodeType == ELEMENT_NODE) {
+              if (pattern.test(node.getAttribute("class"))) {
+                ls.push(node);
+              }
+            }
+          });
+          return ls;
+        });
+      },
+      createElement: function(tagName) {
+        var node = new Element();
+        node.ownerDocument = this;
+        node.nodeName = tagName;
+        node.tagName = tagName;
+        node.childNodes = new NodeList();
+        var attrs = node.attributes = new NamedNodeMap();
+        attrs._ownerElement = node;
+        return node;
+      },
+      createDocumentFragment: function() {
+        var node = new DocumentFragment();
+        node.ownerDocument = this;
+        node.childNodes = new NodeList();
+        return node;
+      },
+      createTextNode: function(data) {
+        var node = new Text();
+        node.ownerDocument = this;
+        node.appendData(data);
+        return node;
+      },
+      createComment: function(data) {
+        var node = new Comment();
+        node.ownerDocument = this;
+        node.appendData(data);
+        return node;
+      },
+      createCDATASection: function(data) {
+        var node = new CDATASection();
+        node.ownerDocument = this;
+        node.appendData(data);
+        return node;
+      },
+      createProcessingInstruction: function(target, data) {
+        var node = new ProcessingInstruction();
+        node.ownerDocument = this;
+        node.tagName = node.target = target;
+        node.nodeValue = node.data = data;
+        return node;
+      },
+      createAttribute: function(name) {
+        var node = new Attr();
+        node.ownerDocument = this;
+        node.name = name;
+        node.nodeName = name;
+        node.localName = name;
+        node.specified = true;
+        return node;
+      },
+      createEntityReference: function(name) {
+        var node = new EntityReference();
+        node.ownerDocument = this;
+        node.nodeName = name;
+        return node;
+      },
+      createElementNS: function(namespaceURI, qualifiedName) {
+        var node = new Element();
+        var pl = qualifiedName.split(":");
+        var attrs = node.attributes = new NamedNodeMap();
+        node.childNodes = new NodeList();
+        node.ownerDocument = this;
+        node.nodeName = qualifiedName;
+        node.tagName = qualifiedName;
+        node.namespaceURI = namespaceURI;
+        if (pl.length == 2) {
+          node.prefix = pl[0];
+          node.localName = pl[1];
+        } else {
+          node.localName = qualifiedName;
+        }
+        attrs._ownerElement = node;
+        return node;
+      },
+      createAttributeNS: function(namespaceURI, qualifiedName) {
+        var node = new Attr();
+        var pl = qualifiedName.split(":");
+        node.ownerDocument = this;
+        node.nodeName = qualifiedName;
+        node.name = qualifiedName;
+        node.namespaceURI = namespaceURI;
+        node.specified = true;
+        if (pl.length == 2) {
+          node.prefix = pl[0];
+          node.localName = pl[1];
+        } else {
+          node.localName = qualifiedName;
+        }
+        return node;
+      }
+    };
+    _extends(Document, Node);
+    function Element() {
+      this._nsMap = {};
+    }
+    Element.prototype = {
+      nodeType: ELEMENT_NODE,
+      hasAttribute: function(name) {
+        return this.getAttributeNode(name) != null;
+      },
+      getAttribute: function(name) {
+        var attr = this.getAttributeNode(name);
+        return attr && attr.value || "";
+      },
+      getAttributeNode: function(name) {
+        return this.attributes.getNamedItem(name);
+      },
+      setAttribute: function(name, value) {
+        var attr = this.ownerDocument.createAttribute(name);
+        attr.value = attr.nodeValue = "" + value;
+        this.setAttributeNode(attr);
+      },
+      removeAttribute: function(name) {
+        var attr = this.getAttributeNode(name);
+        attr && this.removeAttributeNode(attr);
+      },
+      appendChild: function(newChild) {
+        if (newChild.nodeType === DOCUMENT_FRAGMENT_NODE) {
+          return this.insertBefore(newChild, null);
+        } else {
+          return _appendSingleChild(this, newChild);
+        }
+      },
+      setAttributeNode: function(newAttr) {
+        return this.attributes.setNamedItem(newAttr);
+      },
+      setAttributeNodeNS: function(newAttr) {
+        return this.attributes.setNamedItemNS(newAttr);
+      },
+      removeAttributeNode: function(oldAttr) {
+        return this.attributes.removeNamedItem(oldAttr.nodeName);
+      },
+      removeAttributeNS: function(namespaceURI, localName) {
+        var old = this.getAttributeNodeNS(namespaceURI, localName);
+        old && this.removeAttributeNode(old);
+      },
+      hasAttributeNS: function(namespaceURI, localName) {
+        return this.getAttributeNodeNS(namespaceURI, localName) != null;
+      },
+      getAttributeNS: function(namespaceURI, localName) {
+        var attr = this.getAttributeNodeNS(namespaceURI, localName);
+        return attr && attr.value || "";
+      },
+      setAttributeNS: function(namespaceURI, qualifiedName, value) {
+        var attr = this.ownerDocument.createAttributeNS(namespaceURI, qualifiedName);
+        attr.value = attr.nodeValue = "" + value;
+        this.setAttributeNode(attr);
+      },
+      getAttributeNodeNS: function(namespaceURI, localName) {
+        return this.attributes.getNamedItemNS(namespaceURI, localName);
+      },
+      getElementsByTagName: function(tagName) {
+        return new LiveNodeList(this, function(base) {
+          var ls = [];
+          _visitNode(base, function(node) {
+            if (node !== base && node.nodeType == ELEMENT_NODE && (tagName === "*" || node.tagName == tagName)) {
+              ls.push(node);
+            }
+          });
+          return ls;
+        });
+      },
+      getElementsByTagNameNS: function(namespaceURI, localName) {
+        return new LiveNodeList(this, function(base) {
+          var ls = [];
+          _visitNode(base, function(node) {
+            if (node !== base && node.nodeType === ELEMENT_NODE && (namespaceURI === "*" || node.namespaceURI === namespaceURI) && (localName === "*" || node.localName == localName)) {
+              ls.push(node);
+            }
+          });
+          return ls;
+        });
+      }
+    };
+    Document.prototype.getElementsByTagName = Element.prototype.getElementsByTagName;
+    Document.prototype.getElementsByTagNameNS = Element.prototype.getElementsByTagNameNS;
+    _extends(Element, Node);
+    function Attr() {
+    }
+    Attr.prototype.nodeType = ATTRIBUTE_NODE;
+    _extends(Attr, Node);
+    function CharacterData() {
+    }
+    CharacterData.prototype = {
+      data: "",
+      substringData: function(offset, count) {
+        return this.data.substring(offset, offset + count);
+      },
+      appendData: function(text) {
+        text = this.data + text;
+        this.nodeValue = this.data = text;
+        this.length = text.length;
+      },
+      insertData: function(offset, text) {
+        this.replaceData(offset, 0, text);
+      },
+      appendChild: function(newChild) {
+        throw new Error(ExceptionMessage[HIERARCHY_REQUEST_ERR]);
+      },
+      deleteData: function(offset, count) {
+        this.replaceData(offset, count, "");
+      },
+      replaceData: function(offset, count, text) {
+        var start = this.data.substring(0, offset);
+        var end = this.data.substring(offset + count);
+        text = start + text + end;
+        this.nodeValue = this.data = text;
+        this.length = text.length;
+      }
+    };
+    _extends(CharacterData, Node);
+    function Text() {
+    }
+    Text.prototype = {
+      nodeName: "#text",
+      nodeType: TEXT_NODE,
+      splitText: function(offset) {
+        var text = this.data;
+        var newText = text.substring(offset);
+        text = text.substring(0, offset);
+        this.data = this.nodeValue = text;
+        this.length = text.length;
+        var newNode = this.ownerDocument.createTextNode(newText);
+        if (this.parentNode) {
+          this.parentNode.insertBefore(newNode, this.nextSibling);
+        }
+        return newNode;
+      }
+    };
+    _extends(Text, CharacterData);
+    function Comment() {
+    }
+    Comment.prototype = {
+      nodeName: "#comment",
+      nodeType: COMMENT_NODE
+    };
+    _extends(Comment, CharacterData);
+    function CDATASection() {
+    }
+    CDATASection.prototype = {
+      nodeName: "#cdata-section",
+      nodeType: CDATA_SECTION_NODE
+    };
+    _extends(CDATASection, CharacterData);
+    function DocumentType() {
+    }
+    DocumentType.prototype.nodeType = DOCUMENT_TYPE_NODE;
+    _extends(DocumentType, Node);
+    function Notation() {
+    }
+    Notation.prototype.nodeType = NOTATION_NODE;
+    _extends(Notation, Node);
+    function Entity() {
+    }
+    Entity.prototype.nodeType = ENTITY_NODE;
+    _extends(Entity, Node);
+    function EntityReference() {
+    }
+    EntityReference.prototype.nodeType = ENTITY_REFERENCE_NODE;
+    _extends(EntityReference, Node);
+    function DocumentFragment() {
+    }
+    DocumentFragment.prototype.nodeName = "#document-fragment";
+    DocumentFragment.prototype.nodeType = DOCUMENT_FRAGMENT_NODE;
+    _extends(DocumentFragment, Node);
+    function ProcessingInstruction() {
+    }
+    ProcessingInstruction.prototype.nodeType = PROCESSING_INSTRUCTION_NODE;
+    _extends(ProcessingInstruction, Node);
+    function XMLSerializer() {
+    }
+    XMLSerializer.prototype.serializeToString = function(node, isHtml, nodeFilter) {
+      return nodeSerializeToString.call(node, isHtml, nodeFilter);
+    };
+    Node.prototype.toString = nodeSerializeToString;
+    function nodeSerializeToString(isHtml, nodeFilter) {
+      var buf = [];
+      var refNode = this.nodeType == 9 && this.documentElement || this;
+      var prefix = refNode.prefix;
+      var uri = refNode.namespaceURI;
+      if (uri && prefix == null) {
+        var prefix = refNode.lookupPrefix(uri);
+        if (prefix == null) {
+          var visibleNamespaces = [
+            { namespace: uri, prefix: null }
+          ];
+        }
+      }
+      serializeToString(this, buf, isHtml, nodeFilter, visibleNamespaces);
+      return buf.join("");
+    }
+    function needNamespaceDefine(node, isHTML, visibleNamespaces) {
+      var prefix = node.prefix || "";
+      var uri = node.namespaceURI;
+      if (!prefix && !uri) {
+        return false;
+      }
+      if (prefix === "xml" && uri === "http://www.w3.org/XML/1998/namespace" || uri == "http://www.w3.org/2000/xmlns/") {
+        return false;
+      }
+      var i = visibleNamespaces.length;
+      while (i--) {
+        var ns = visibleNamespaces[i];
+        if (ns.prefix == prefix) {
+          return ns.namespace != uri;
+        }
+      }
+      return true;
+    }
+    function serializeToString(node, buf, isHTML, nodeFilter, visibleNamespaces) {
+      if (nodeFilter) {
+        node = nodeFilter(node);
+        if (node) {
+          if (typeof node == "string") {
+            buf.push(node);
+            return;
+          }
+        } else {
+          return;
+        }
+      }
+      switch (node.nodeType) {
+        case ELEMENT_NODE:
+          if (!visibleNamespaces)
+            visibleNamespaces = [];
+          var startVisibleNamespaces = visibleNamespaces.length;
+          var attrs = node.attributes;
+          var len = attrs.length;
+          var child = node.firstChild;
+          var nodeName = node.tagName;
+          isHTML = htmlns === node.namespaceURI || isHTML;
+          buf.push("<", nodeName);
+          for (var i = 0; i < len; i++) {
+            var attr = attrs.item(i);
+            if (attr.prefix == "xmlns") {
+              visibleNamespaces.push({ prefix: attr.localName, namespace: attr.value });
+            } else if (attr.nodeName == "xmlns") {
+              visibleNamespaces.push({ prefix: "", namespace: attr.value });
+            }
+          }
+          for (var i = 0; i < len; i++) {
+            var attr = attrs.item(i);
+            if (needNamespaceDefine(attr, isHTML, visibleNamespaces)) {
+              var prefix = attr.prefix || "";
+              var uri = attr.namespaceURI;
+              var ns = prefix ? " xmlns:" + prefix : " xmlns";
+              buf.push(ns, '="', uri, '"');
+              visibleNamespaces.push({ prefix, namespace: uri });
+            }
+            serializeToString(attr, buf, isHTML, nodeFilter, visibleNamespaces);
+          }
+          if (needNamespaceDefine(node, isHTML, visibleNamespaces)) {
+            var prefix = node.prefix || "";
+            var uri = node.namespaceURI;
+            if (uri) {
+              var ns = prefix ? " xmlns:" + prefix : " xmlns";
+              buf.push(ns, '="', uri, '"');
+              visibleNamespaces.push({ prefix, namespace: uri });
+            }
+          }
+          if (child || isHTML && !/^(?:meta|link|img|br|hr|input)$/i.test(nodeName)) {
+            buf.push(">");
+            if (isHTML && /^script$/i.test(nodeName)) {
+              while (child) {
+                if (child.data) {
+                  buf.push(child.data);
+                } else {
+                  serializeToString(child, buf, isHTML, nodeFilter, visibleNamespaces);
+                }
+                child = child.nextSibling;
+              }
+            } else {
+              while (child) {
+                serializeToString(child, buf, isHTML, nodeFilter, visibleNamespaces);
+                child = child.nextSibling;
+              }
+            }
+            buf.push("</", nodeName, ">");
+          } else {
+            buf.push("/>");
+          }
+          return;
+        case DOCUMENT_NODE:
+        case DOCUMENT_FRAGMENT_NODE:
+          var child = node.firstChild;
+          while (child) {
+            serializeToString(child, buf, isHTML, nodeFilter, visibleNamespaces);
+            child = child.nextSibling;
+          }
+          return;
+        case ATTRIBUTE_NODE:
+          return buf.push(" ", node.name, '="', node.value.replace(/[<&"]/g, _xmlEncoder), '"');
+        case TEXT_NODE:
+          return buf.push(node.data.replace(/[<&]/g, _xmlEncoder).replace(/]]>/g, "]]&gt;"));
+        case CDATA_SECTION_NODE:
+          return buf.push("<![CDATA[", node.data, "]]>");
+        case COMMENT_NODE:
+          return buf.push("<!--", node.data, "-->");
+        case DOCUMENT_TYPE_NODE:
+          var pubid = node.publicId;
+          var sysid = node.systemId;
+          buf.push("<!DOCTYPE ", node.name);
+          if (pubid) {
+            buf.push(" PUBLIC ", pubid);
+            if (sysid && sysid != ".") {
+              buf.push(" ", sysid);
+            }
+            buf.push(">");
+          } else if (sysid && sysid != ".") {
+            buf.push(" SYSTEM ", sysid, ">");
+          } else {
+            var sub = node.internalSubset;
+            if (sub) {
+              buf.push(" [", sub, "]");
+            }
+            buf.push(">");
+          }
+          return;
+        case PROCESSING_INSTRUCTION_NODE:
+          return buf.push("<?", node.target, " ", node.data, "?>");
+        case ENTITY_REFERENCE_NODE:
+          return buf.push("&", node.nodeName, ";");
+        default:
+          buf.push("??", node.nodeName);
+      }
+    }
+    function importNode(doc, node, deep) {
+      var node2;
+      switch (node.nodeType) {
+        case ELEMENT_NODE:
+          node2 = node.cloneNode(false);
+          node2.ownerDocument = doc;
+        case DOCUMENT_FRAGMENT_NODE:
+          break;
+        case ATTRIBUTE_NODE:
+          deep = true;
+          break;
+      }
+      if (!node2) {
+        node2 = node.cloneNode(false);
+      }
+      node2.ownerDocument = doc;
+      node2.parentNode = null;
+      if (deep) {
+        var child = node.firstChild;
+        while (child) {
+          node2.appendChild(importNode(doc, child, deep));
+          child = child.nextSibling;
+        }
+      }
+      return node2;
+    }
+    function cloneNode(doc, node, deep) {
+      var node2 = new node.constructor();
+      for (var n in node) {
+        var v = node[n];
+        if (typeof v != "object") {
+          if (v != node2[n]) {
+            node2[n] = v;
+          }
+        }
+      }
+      if (node.childNodes) {
+        node2.childNodes = new NodeList();
+      }
+      node2.ownerDocument = doc;
+      switch (node2.nodeType) {
+        case ELEMENT_NODE:
+          var attrs = node.attributes;
+          var attrs2 = node2.attributes = new NamedNodeMap();
+          var len = attrs.length;
+          attrs2._ownerElement = node2;
+          for (var i = 0; i < len; i++) {
+            node2.setAttributeNode(cloneNode(doc, attrs.item(i), true));
+          }
+          break;
+          ;
+        case ATTRIBUTE_NODE:
+          deep = true;
+      }
+      if (deep) {
+        var child = node.firstChild;
+        while (child) {
+          node2.appendChild(cloneNode(doc, child, deep));
+          child = child.nextSibling;
+        }
+      }
+      return node2;
+    }
+    function __set__(object, key, value) {
+      object[key] = value;
+    }
+    try {
+      if (Object.defineProperty) {
+        let getTextContent2 = function(node) {
+          switch (node.nodeType) {
+            case ELEMENT_NODE:
+            case DOCUMENT_FRAGMENT_NODE:
+              var buf = [];
+              node = node.firstChild;
+              while (node) {
+                if (node.nodeType !== 7 && node.nodeType !== 8) {
+                  buf.push(getTextContent2(node));
+                }
+                node = node.nextSibling;
+              }
+              return buf.join("");
+            default:
+              return node.nodeValue;
+          }
+        };
+        getTextContent = getTextContent2;
+        Object.defineProperty(LiveNodeList.prototype, "length", {
+          get: function() {
+            _updateLiveList(this);
+            return this.$$length;
+          }
+        });
+        Object.defineProperty(Node.prototype, "textContent", {
+          get: function() {
+            return getTextContent2(this);
+          },
+          set: function(data) {
+            switch (this.nodeType) {
+              case ELEMENT_NODE:
+              case DOCUMENT_FRAGMENT_NODE:
+                while (this.firstChild) {
+                  this.removeChild(this.firstChild);
+                }
+                if (data || String(data)) {
+                  this.appendChild(this.ownerDocument.createTextNode(data));
+                }
+                break;
+              default:
+                this.data = data;
+                this.value = data;
+                this.nodeValue = data;
+            }
+          }
+        });
+        __set__ = function(object, key, value) {
+          object["$$" + key] = value;
+        };
+      }
+    } catch (e) {
+    }
+    var getTextContent;
+    exports.Node = Node;
+    exports.DOMException = DOMException;
+    exports.DOMImplementation = DOMImplementation;
+    exports.XMLSerializer = XMLSerializer;
+  }
+});
+
+// node_modules/app-info-parser/node_modules/plist/lib/xmldom/dom-parser.js
+var require_dom_parser2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/plist/lib/xmldom/dom-parser.js"(exports) {
+    function DOMParser(options) {
+      this.options = options || { locator: {} };
+    }
+    DOMParser.prototype.parseFromString = function(source, mimeType) {
+      var options = this.options;
+      var sax2 = new XMLReader();
+      var domBuilder = options.domBuilder || new DOMHandler();
+      var errorHandler = options.errorHandler;
+      var locator = options.locator;
+      var defaultNSMap = options.xmlns || {};
+      var isHTML = /\/x?html?$/.test(mimeType);
+      var entityMap = isHTML ? htmlEntity.entityMap : { "lt": "<", "gt": ">", "amp": "&", "quot": '"', "apos": "'" };
+      if (locator) {
+        domBuilder.setDocumentLocator(locator);
+      }
+      sax2.errorHandler = buildErrorHandler(errorHandler, domBuilder, locator);
+      sax2.domBuilder = options.domBuilder || domBuilder;
+      if (isHTML) {
+        defaultNSMap[""] = "http://www.w3.org/1999/xhtml";
+      }
+      defaultNSMap.xml = defaultNSMap.xml || "http://www.w3.org/XML/1998/namespace";
+      if (source && typeof source === "string") {
+        sax2.parse(source, defaultNSMap, entityMap);
+      } else {
+        sax2.errorHandler.error("invalid doc source");
+      }
+      return domBuilder.doc;
+    };
+    function buildErrorHandler(errorImpl, domBuilder, locator) {
+      if (!errorImpl) {
+        if (domBuilder instanceof DOMHandler) {
+          return domBuilder;
+        }
+        errorImpl = domBuilder;
+      }
+      var errorHandler = {};
+      var isCallback = errorImpl instanceof Function;
+      locator = locator || {};
+      function build(key) {
+        var fn = errorImpl[key];
+        if (!fn && isCallback) {
+          fn = errorImpl.length == 2 ? function(msg) {
+            errorImpl(key, msg);
+          } : errorImpl;
+        }
+        errorHandler[key] = fn && function(msg) {
+          fn("[xmldom " + key + "]	" + msg + _locator(locator));
+        } || function() {
+        };
+      }
+      build("warning");
+      build("error");
+      build("fatalError");
+      return errorHandler;
+    }
+    function DOMHandler() {
+      this.cdata = false;
+    }
+    function position(locator, node) {
+      node.lineNumber = locator.lineNumber;
+      node.columnNumber = locator.columnNumber;
+    }
+    DOMHandler.prototype = {
+      startDocument: function() {
+        this.doc = new DOMImplementation().createDocument(null, null, null);
+        if (this.locator) {
+          this.doc.documentURI = this.locator.systemId;
+        }
+      },
+      startElement: function(namespaceURI, localName, qName, attrs) {
+        var doc = this.doc;
+        var el = doc.createElementNS(namespaceURI, qName || localName);
+        var len = attrs.length;
+        appendElement(this, el);
+        this.currentElement = el;
+        this.locator && position(this.locator, el);
+        for (var i = 0; i < len; i++) {
+          var namespaceURI = attrs.getURI(i);
+          var value = attrs.getValue(i);
+          var qName = attrs.getQName(i);
+          var attr = doc.createAttributeNS(namespaceURI, qName);
+          this.locator && position(attrs.getLocator(i), attr);
+          attr.value = attr.nodeValue = value;
+          el.setAttributeNode(attr);
+        }
+      },
+      endElement: function(namespaceURI, localName, qName) {
+        var current = this.currentElement;
+        var tagName = current.tagName;
+        this.currentElement = current.parentNode;
+      },
+      startPrefixMapping: function(prefix, uri) {
+      },
+      endPrefixMapping: function(prefix) {
+      },
+      processingInstruction: function(target, data) {
+        var ins = this.doc.createProcessingInstruction(target, data);
+        this.locator && position(this.locator, ins);
+        appendElement(this, ins);
+      },
+      ignorableWhitespace: function(ch, start, length) {
+      },
+      characters: function(chars, start, length) {
+        chars = _toString.apply(this, arguments);
+        if (chars) {
+          if (this.cdata) {
+            var charNode = this.doc.createCDATASection(chars);
+          } else {
+            var charNode = this.doc.createTextNode(chars);
+          }
+          if (this.currentElement) {
+            this.currentElement.appendChild(charNode);
+          } else if (/^\s*$/.test(chars)) {
+            this.doc.appendChild(charNode);
+          }
+          this.locator && position(this.locator, charNode);
+        }
+      },
+      skippedEntity: function(name) {
+      },
+      endDocument: function() {
+        this.doc.normalize();
+      },
+      setDocumentLocator: function(locator) {
+        if (this.locator = locator) {
+          locator.lineNumber = 0;
+        }
+      },
+      comment: function(chars, start, length) {
+        chars = _toString.apply(this, arguments);
+        var comm = this.doc.createComment(chars);
+        this.locator && position(this.locator, comm);
+        appendElement(this, comm);
+      },
+      startCDATA: function() {
+        this.cdata = true;
+      },
+      endCDATA: function() {
+        this.cdata = false;
+      },
+      startDTD: function(name, publicId, systemId) {
+        var impl = this.doc.implementation;
+        if (impl && impl.createDocumentType) {
+          var dt = impl.createDocumentType(name, publicId, systemId);
+          this.locator && position(this.locator, dt);
+          appendElement(this, dt);
+        }
+      },
+      warning: function(error) {
+        console.warn("[xmldom warning]	" + error, _locator(this.locator));
+      },
+      error: function(error) {
+        console.error("[xmldom error]	" + error, _locator(this.locator));
+      },
+      fatalError: function(error) {
+        throw new ParseError(error, this.locator);
+      }
+    };
+    function _locator(l) {
+      if (l) {
+        return "\n@" + (l.systemId || "") + "#[line:" + l.lineNumber + ",col:" + l.columnNumber + "]";
+      }
+    }
+    function _toString(chars, start, length) {
+      if (typeof chars == "string") {
+        return chars.substr(start, length);
+      } else {
+        if (chars.length >= start + length || start) {
+          return new java.lang.String(chars, start, length) + "";
+        }
+        return chars;
+      }
+    }
+    "endDTD,startEntity,endEntity,attributeDecl,elementDecl,externalEntityDecl,internalEntityDecl,resolveEntity,getExternalSubset,notationDecl,unparsedEntityDecl".replace(/\w+/g, function(key) {
+      DOMHandler.prototype[key] = function() {
+        return null;
+      };
+    });
+    function appendElement(hander, node) {
+      if (!hander.currentElement) {
+        hander.doc.appendChild(node);
+      } else {
+        hander.currentElement.appendChild(node);
+      }
+    }
+    var htmlEntity = require_entities();
+    var sax = require_sax2();
+    var XMLReader = sax.XMLReader;
+    var ParseError = sax.ParseError;
+    var DOMImplementation = exports.DOMImplementation = require_dom2().DOMImplementation;
+    exports.XMLSerializer = require_dom2().XMLSerializer;
+    exports.DOMParser = DOMParser;
+    exports.__DOMHandler = DOMHandler;
+  }
+});
+
+// node_modules/app-info-parser/node_modules/plist/lib/parse.js
+var require_parse2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/plist/lib/parse.js"(exports) {
+    var DOMParser = require_dom_parser2().DOMParser;
+    exports.parse = parse;
+    var TEXT_NODE = 3;
+    var CDATA_NODE = 4;
+    var COMMENT_NODE = 8;
+    function shouldIgnoreNode(node) {
+      return node.nodeType === TEXT_NODE || node.nodeType === COMMENT_NODE || node.nodeType === CDATA_NODE;
+    }
+    function isEmptyNode(node) {
+      if (!node.childNodes || node.childNodes.length === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    function invariant(test, message) {
+      if (!test) {
+        throw new Error(message);
+      }
+    }
+    function parse(xml) {
+      var doc = new DOMParser().parseFromString(xml);
+      invariant(doc.documentElement.nodeName === "plist", "malformed document. First element should be <plist>");
+      var plist = parsePlistXML(doc.documentElement);
+      if (plist.length == 1)
+        plist = plist[0];
+      return plist;
+    }
+    function parsePlistXML(node) {
+      var i, new_obj, key, val, new_arr, res, counter, type;
+      if (!node)
+        return null;
+      if (node.nodeName === "plist") {
+        new_arr = [];
+        if (isEmptyNode(node)) {
+          return new_arr;
+        }
+        for (i = 0; i < node.childNodes.length; i++) {
+          if (!shouldIgnoreNode(node.childNodes[i])) {
+            new_arr.push(parsePlistXML(node.childNodes[i]));
+          }
+        }
+        return new_arr;
+      } else if (node.nodeName === "dict") {
+        new_obj = {};
+        key = null;
+        counter = 0;
+        if (isEmptyNode(node)) {
+          return new_obj;
+        }
+        for (i = 0; i < node.childNodes.length; i++) {
+          if (shouldIgnoreNode(node.childNodes[i]))
+            continue;
+          if (counter % 2 === 0) {
+            invariant(node.childNodes[i].nodeName === "key", "Missing key while parsing <dict/>.");
+            key = parsePlistXML(node.childNodes[i]);
+          } else {
+            invariant(node.childNodes[i].nodeName !== "key", 'Unexpected key "' + parsePlistXML(node.childNodes[i]) + '" while parsing <dict/>.');
+            new_obj[key] = parsePlistXML(node.childNodes[i]);
+          }
+          counter += 1;
+        }
+        if (counter % 2 === 1) {
+          throw new Error('Missing value for "' + key + '" while parsing <dict/>');
+        }
+        return new_obj;
+      } else if (node.nodeName === "array") {
+        new_arr = [];
+        if (isEmptyNode(node)) {
+          return new_arr;
+        }
+        for (i = 0; i < node.childNodes.length; i++) {
+          if (!shouldIgnoreNode(node.childNodes[i])) {
+            res = parsePlistXML(node.childNodes[i]);
+            if (res != null)
+              new_arr.push(res);
+          }
+        }
+        return new_arr;
+      } else if (node.nodeName === "#text") {
+      } else if (node.nodeName === "key") {
+        if (isEmptyNode(node)) {
+          return "";
+        }
+        return node.childNodes[0].nodeValue;
+      } else if (node.nodeName === "string") {
+        res = "";
+        if (isEmptyNode(node)) {
+          return res;
+        }
+        for (i = 0; i < node.childNodes.length; i++) {
+          var type = node.childNodes[i].nodeType;
+          if (type === TEXT_NODE || type === CDATA_NODE) {
+            res += node.childNodes[i].nodeValue;
+          }
+        }
+        return res;
+      } else if (node.nodeName === "integer") {
+        invariant(!isEmptyNode(node), 'Cannot parse "" as integer.');
+        return parseInt(node.childNodes[0].nodeValue, 10);
+      } else if (node.nodeName === "real") {
+        invariant(!isEmptyNode(node), 'Cannot parse "" as real.');
+        res = "";
+        for (i = 0; i < node.childNodes.length; i++) {
+          if (node.childNodes[i].nodeType === TEXT_NODE) {
+            res += node.childNodes[i].nodeValue;
+          }
+        }
+        return parseFloat(res);
+      } else if (node.nodeName === "data") {
+        res = "";
+        if (isEmptyNode(node)) {
+          return Buffer.from(res, "base64");
+        }
+        for (i = 0; i < node.childNodes.length; i++) {
+          if (node.childNodes[i].nodeType === TEXT_NODE) {
+            res += node.childNodes[i].nodeValue.replace(/\s+/g, "");
+          }
+        }
+        return Buffer.from(res, "base64");
+      } else if (node.nodeName === "date") {
+        invariant(!isEmptyNode(node), 'Cannot parse "" as Date.');
+        return new Date(node.childNodes[0].nodeValue);
+      } else if (node.nodeName === "true") {
+        return true;
+      } else if (node.nodeName === "false") {
+        return false;
+      }
+    }
+  }
+});
+
+// node_modules/base64-js/index.js
+var require_base64_js = __commonJS({
+  "node_modules/base64-js/index.js"(exports) {
+    "use strict";
+    exports.byteLength = byteLength;
+    exports.toByteArray = toByteArray;
+    exports.fromByteArray = fromByteArray;
+    var lookup = [];
+    var revLookup = [];
+    var Arr = typeof Uint8Array !== "undefined" ? Uint8Array : Array;
+    var code = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    for (i = 0, len = code.length; i < len; ++i) {
+      lookup[i] = code[i];
+      revLookup[code.charCodeAt(i)] = i;
+    }
+    var i;
+    var len;
+    revLookup["-".charCodeAt(0)] = 62;
+    revLookup["_".charCodeAt(0)] = 63;
+    function getLens(b64) {
+      var len2 = b64.length;
+      if (len2 % 4 > 0) {
+        throw new Error("Invalid string. Length must be a multiple of 4");
+      }
+      var validLen = b64.indexOf("=");
+      if (validLen === -1)
+        validLen = len2;
+      var placeHoldersLen = validLen === len2 ? 0 : 4 - validLen % 4;
+      return [validLen, placeHoldersLen];
+    }
+    function byteLength(b64) {
+      var lens = getLens(b64);
+      var validLen = lens[0];
+      var placeHoldersLen = lens[1];
+      return (validLen + placeHoldersLen) * 3 / 4 - placeHoldersLen;
+    }
+    function _byteLength(b64, validLen, placeHoldersLen) {
+      return (validLen + placeHoldersLen) * 3 / 4 - placeHoldersLen;
+    }
+    function toByteArray(b64) {
+      var tmp;
+      var lens = getLens(b64);
+      var validLen = lens[0];
+      var placeHoldersLen = lens[1];
+      var arr = new Arr(_byteLength(b64, validLen, placeHoldersLen));
+      var curByte = 0;
+      var len2 = placeHoldersLen > 0 ? validLen - 4 : validLen;
+      var i2;
+      for (i2 = 0; i2 < len2; i2 += 4) {
+        tmp = revLookup[b64.charCodeAt(i2)] << 18 | revLookup[b64.charCodeAt(i2 + 1)] << 12 | revLookup[b64.charCodeAt(i2 + 2)] << 6 | revLookup[b64.charCodeAt(i2 + 3)];
+        arr[curByte++] = tmp >> 16 & 255;
+        arr[curByte++] = tmp >> 8 & 255;
+        arr[curByte++] = tmp & 255;
+      }
+      if (placeHoldersLen === 2) {
+        tmp = revLookup[b64.charCodeAt(i2)] << 2 | revLookup[b64.charCodeAt(i2 + 1)] >> 4;
+        arr[curByte++] = tmp & 255;
+      }
+      if (placeHoldersLen === 1) {
+        tmp = revLookup[b64.charCodeAt(i2)] << 10 | revLookup[b64.charCodeAt(i2 + 1)] << 4 | revLookup[b64.charCodeAt(i2 + 2)] >> 2;
+        arr[curByte++] = tmp >> 8 & 255;
+        arr[curByte++] = tmp & 255;
+      }
+      return arr;
+    }
+    function tripletToBase64(num) {
+      return lookup[num >> 18 & 63] + lookup[num >> 12 & 63] + lookup[num >> 6 & 63] + lookup[num & 63];
+    }
+    function encodeChunk(uint8, start, end) {
+      var tmp;
+      var output = [];
+      for (var i2 = start; i2 < end; i2 += 3) {
+        tmp = (uint8[i2] << 16 & 16711680) + (uint8[i2 + 1] << 8 & 65280) + (uint8[i2 + 2] & 255);
+        output.push(tripletToBase64(tmp));
+      }
+      return output.join("");
+    }
+    function fromByteArray(uint8) {
+      var tmp;
+      var len2 = uint8.length;
+      var extraBytes = len2 % 3;
+      var parts = [];
+      var maxChunkLength = 16383;
+      for (var i2 = 0, len22 = len2 - extraBytes; i2 < len22; i2 += maxChunkLength) {
+        parts.push(encodeChunk(uint8, i2, i2 + maxChunkLength > len22 ? len22 : i2 + maxChunkLength));
+      }
+      if (extraBytes === 1) {
+        tmp = uint8[len2 - 1];
+        parts.push(lookup[tmp >> 2] + lookup[tmp << 4 & 63] + "==");
+      } else if (extraBytes === 2) {
+        tmp = (uint8[len2 - 2] << 8) + uint8[len2 - 1];
+        parts.push(lookup[tmp >> 10] + lookup[tmp >> 4 & 63] + lookup[tmp << 2 & 63] + "=");
+      }
+      return parts.join("");
+    }
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/Utility.js
+var require_Utility = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/Utility.js"(exports, module2) {
+    (function() {
+      var assign, isArray, isEmpty, isFunction, isObject, isPlainObject, slice = [].slice, hasProp = {}.hasOwnProperty;
+      assign = function() {
+        var i, key, len, source, sources, target;
+        target = arguments[0], sources = 2 <= arguments.length ? slice.call(arguments, 1) : [];
+        if (isFunction(Object.assign)) {
+          Object.assign.apply(null, arguments);
+        } else {
+          for (i = 0, len = sources.length; i < len; i++) {
+            source = sources[i];
+            if (source != null) {
+              for (key in source) {
+                if (!hasProp.call(source, key))
+                  continue;
+                target[key] = source[key];
+              }
+            }
+          }
+        }
+        return target;
+      };
+      isFunction = function(val) {
+        return !!val && Object.prototype.toString.call(val) === "[object Function]";
+      };
+      isObject = function(val) {
+        var ref;
+        return !!val && ((ref = typeof val) === "function" || ref === "object");
+      };
+      isArray = function(val) {
+        if (isFunction(Array.isArray)) {
+          return Array.isArray(val);
+        } else {
+          return Object.prototype.toString.call(val) === "[object Array]";
+        }
+      };
+      isEmpty = function(val) {
+        var key;
+        if (isArray(val)) {
+          return !val.length;
+        } else {
+          for (key in val) {
+            if (!hasProp.call(val, key))
+              continue;
+            return false;
+          }
+          return true;
+        }
+      };
+      isPlainObject = function(val) {
+        var ctor, proto;
+        return isObject(val) && (proto = Object.getPrototypeOf(val)) && (ctor = proto.constructor) && typeof ctor === "function" && ctor instanceof ctor && Function.prototype.toString.call(ctor) === Function.prototype.toString.call(Object);
+      };
+      module2.exports.assign = assign;
+      module2.exports.isFunction = isFunction;
+      module2.exports.isObject = isObject;
+      module2.exports.isArray = isArray;
+      module2.exports.isEmpty = isEmpty;
+      module2.exports.isPlainObject = isPlainObject;
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLAttribute.js
+var require_XMLAttribute2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLAttribute.js"(exports, module2) {
+    (function() {
+      var XMLAttribute;
+      module2.exports = XMLAttribute = function() {
+        function XMLAttribute2(parent, name, value) {
+          this.options = parent.options;
+          this.stringify = parent.stringify;
+          if (name == null) {
+            throw new Error("Missing attribute name of element " + parent.name);
+          }
+          if (value == null) {
+            throw new Error("Missing attribute value for attribute " + name + " of element " + parent.name);
+          }
+          this.name = this.stringify.attName(name);
+          this.value = this.stringify.attValue(value);
+        }
+        XMLAttribute2.prototype.clone = function() {
+          return Object.create(this);
+        };
+        XMLAttribute2.prototype.toString = function(options) {
+          return this.options.writer.set(options).attribute(this);
+        };
+        return XMLAttribute2;
+      }();
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLElement.js
+var require_XMLElement2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLElement.js"(exports, module2) {
+    (function() {
+      var XMLAttribute, XMLElement, XMLNode, isFunction, isObject, ref, extend = function(child, parent) {
+        for (var key in parent) {
+          if (hasProp.call(parent, key))
+            child[key] = parent[key];
+        }
+        function ctor() {
+          this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child.__super__ = parent.prototype;
+        return child;
+      }, hasProp = {}.hasOwnProperty;
+      ref = require_Utility(), isObject = ref.isObject, isFunction = ref.isFunction;
+      XMLNode = require_XMLNode2();
+      XMLAttribute = require_XMLAttribute2();
+      module2.exports = XMLElement = function(superClass) {
+        extend(XMLElement2, superClass);
+        function XMLElement2(parent, name, attributes) {
+          XMLElement2.__super__.constructor.call(this, parent);
+          if (name == null) {
+            throw new Error("Missing element name");
+          }
+          this.name = this.stringify.eleName(name);
+          this.attributes = {};
+          if (attributes != null) {
+            this.attribute(attributes);
+          }
+          if (parent.isDocument) {
+            this.isRoot = true;
+            this.documentObject = parent;
+            parent.rootObject = this;
+          }
+        }
+        XMLElement2.prototype.clone = function() {
+          var att, attName, clonedSelf, ref1;
+          clonedSelf = Object.create(this);
+          if (clonedSelf.isRoot) {
+            clonedSelf.documentObject = null;
+          }
+          clonedSelf.attributes = {};
+          ref1 = this.attributes;
+          for (attName in ref1) {
+            if (!hasProp.call(ref1, attName))
+              continue;
+            att = ref1[attName];
+            clonedSelf.attributes[attName] = att.clone();
+          }
+          clonedSelf.children = [];
+          this.children.forEach(function(child) {
+            var clonedChild;
+            clonedChild = child.clone();
+            clonedChild.parent = clonedSelf;
+            return clonedSelf.children.push(clonedChild);
+          });
+          return clonedSelf;
+        };
+        XMLElement2.prototype.attribute = function(name, value) {
+          var attName, attValue;
+          if (name != null) {
+            name = name.valueOf();
+          }
+          if (isObject(name)) {
+            for (attName in name) {
+              if (!hasProp.call(name, attName))
+                continue;
+              attValue = name[attName];
+              this.attribute(attName, attValue);
+            }
+          } else {
+            if (isFunction(value)) {
+              value = value.apply();
+            }
+            if (!this.options.skipNullAttributes || value != null) {
+              this.attributes[name] = new XMLAttribute(this, name, value);
+            }
+          }
+          return this;
+        };
+        XMLElement2.prototype.removeAttribute = function(name) {
+          var attName, i, len;
+          if (name == null) {
+            throw new Error("Missing attribute name");
+          }
+          name = name.valueOf();
+          if (Array.isArray(name)) {
+            for (i = 0, len = name.length; i < len; i++) {
+              attName = name[i];
+              delete this.attributes[attName];
+            }
+          } else {
+            delete this.attributes[name];
+          }
+          return this;
+        };
+        XMLElement2.prototype.toString = function(options) {
+          return this.options.writer.set(options).element(this);
+        };
+        XMLElement2.prototype.att = function(name, value) {
+          return this.attribute(name, value);
+        };
+        XMLElement2.prototype.a = function(name, value) {
+          return this.attribute(name, value);
+        };
+        return XMLElement2;
+      }(XMLNode);
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLCData.js
+var require_XMLCData2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLCData.js"(exports, module2) {
+    (function() {
+      var XMLCData, XMLNode, extend = function(child, parent) {
+        for (var key in parent) {
+          if (hasProp.call(parent, key))
+            child[key] = parent[key];
+        }
+        function ctor() {
+          this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child.__super__ = parent.prototype;
+        return child;
+      }, hasProp = {}.hasOwnProperty;
+      XMLNode = require_XMLNode2();
+      module2.exports = XMLCData = function(superClass) {
+        extend(XMLCData2, superClass);
+        function XMLCData2(parent, text) {
+          XMLCData2.__super__.constructor.call(this, parent);
+          if (text == null) {
+            throw new Error("Missing CDATA text");
+          }
+          this.text = this.stringify.cdata(text);
+        }
+        XMLCData2.prototype.clone = function() {
+          return Object.create(this);
+        };
+        XMLCData2.prototype.toString = function(options) {
+          return this.options.writer.set(options).cdata(this);
+        };
+        return XMLCData2;
+      }(XMLNode);
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLComment.js
+var require_XMLComment2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLComment.js"(exports, module2) {
+    (function() {
+      var XMLComment, XMLNode, extend = function(child, parent) {
+        for (var key in parent) {
+          if (hasProp.call(parent, key))
+            child[key] = parent[key];
+        }
+        function ctor() {
+          this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child.__super__ = parent.prototype;
+        return child;
+      }, hasProp = {}.hasOwnProperty;
+      XMLNode = require_XMLNode2();
+      module2.exports = XMLComment = function(superClass) {
+        extend(XMLComment2, superClass);
+        function XMLComment2(parent, text) {
+          XMLComment2.__super__.constructor.call(this, parent);
+          if (text == null) {
+            throw new Error("Missing comment text");
+          }
+          this.text = this.stringify.comment(text);
+        }
+        XMLComment2.prototype.clone = function() {
+          return Object.create(this);
+        };
+        XMLComment2.prototype.toString = function(options) {
+          return this.options.writer.set(options).comment(this);
+        };
+        return XMLComment2;
+      }(XMLNode);
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDeclaration.js
+var require_XMLDeclaration2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDeclaration.js"(exports, module2) {
+    (function() {
+      var XMLDeclaration, XMLNode, isObject, extend = function(child, parent) {
+        for (var key in parent) {
+          if (hasProp.call(parent, key))
+            child[key] = parent[key];
+        }
+        function ctor() {
+          this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child.__super__ = parent.prototype;
+        return child;
+      }, hasProp = {}.hasOwnProperty;
+      isObject = require_Utility().isObject;
+      XMLNode = require_XMLNode2();
+      module2.exports = XMLDeclaration = function(superClass) {
+        extend(XMLDeclaration2, superClass);
+        function XMLDeclaration2(parent, version, encoding, standalone) {
+          var ref;
+          XMLDeclaration2.__super__.constructor.call(this, parent);
+          if (isObject(version)) {
+            ref = version, version = ref.version, encoding = ref.encoding, standalone = ref.standalone;
+          }
+          if (!version) {
+            version = "1.0";
+          }
+          this.version = this.stringify.xmlVersion(version);
+          if (encoding != null) {
+            this.encoding = this.stringify.xmlEncoding(encoding);
+          }
+          if (standalone != null) {
+            this.standalone = this.stringify.xmlStandalone(standalone);
+          }
+        }
+        XMLDeclaration2.prototype.toString = function(options) {
+          return this.options.writer.set(options).declaration(this);
+        };
+        return XMLDeclaration2;
+      }(XMLNode);
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDTDAttList.js
+var require_XMLDTDAttList2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDTDAttList.js"(exports, module2) {
+    (function() {
+      var XMLDTDAttList, XMLNode, extend = function(child, parent) {
+        for (var key in parent) {
+          if (hasProp.call(parent, key))
+            child[key] = parent[key];
+        }
+        function ctor() {
+          this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child.__super__ = parent.prototype;
+        return child;
+      }, hasProp = {}.hasOwnProperty;
+      XMLNode = require_XMLNode2();
+      module2.exports = XMLDTDAttList = function(superClass) {
+        extend(XMLDTDAttList2, superClass);
+        function XMLDTDAttList2(parent, elementName, attributeName, attributeType, defaultValueType, defaultValue) {
+          XMLDTDAttList2.__super__.constructor.call(this, parent);
+          if (elementName == null) {
+            throw new Error("Missing DTD element name");
+          }
+          if (attributeName == null) {
+            throw new Error("Missing DTD attribute name");
+          }
+          if (!attributeType) {
+            throw new Error("Missing DTD attribute type");
+          }
+          if (!defaultValueType) {
+            throw new Error("Missing DTD attribute default");
+          }
+          if (defaultValueType.indexOf("#") !== 0) {
+            defaultValueType = "#" + defaultValueType;
+          }
+          if (!defaultValueType.match(/^(#REQUIRED|#IMPLIED|#FIXED|#DEFAULT)$/)) {
+            throw new Error("Invalid default value type; expected: #REQUIRED, #IMPLIED, #FIXED or #DEFAULT");
+          }
+          if (defaultValue && !defaultValueType.match(/^(#FIXED|#DEFAULT)$/)) {
+            throw new Error("Default value only applies to #FIXED or #DEFAULT");
+          }
+          this.elementName = this.stringify.eleName(elementName);
+          this.attributeName = this.stringify.attName(attributeName);
+          this.attributeType = this.stringify.dtdAttType(attributeType);
+          this.defaultValue = this.stringify.dtdAttDefault(defaultValue);
+          this.defaultValueType = defaultValueType;
+        }
+        XMLDTDAttList2.prototype.toString = function(options) {
+          return this.options.writer.set(options).dtdAttList(this);
+        };
+        return XMLDTDAttList2;
+      }(XMLNode);
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDTDEntity.js
+var require_XMLDTDEntity2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDTDEntity.js"(exports, module2) {
+    (function() {
+      var XMLDTDEntity, XMLNode, isObject, extend = function(child, parent) {
+        for (var key in parent) {
+          if (hasProp.call(parent, key))
+            child[key] = parent[key];
+        }
+        function ctor() {
+          this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child.__super__ = parent.prototype;
+        return child;
+      }, hasProp = {}.hasOwnProperty;
+      isObject = require_Utility().isObject;
+      XMLNode = require_XMLNode2();
+      module2.exports = XMLDTDEntity = function(superClass) {
+        extend(XMLDTDEntity2, superClass);
+        function XMLDTDEntity2(parent, pe, name, value) {
+          XMLDTDEntity2.__super__.constructor.call(this, parent);
+          if (name == null) {
+            throw new Error("Missing entity name");
+          }
+          if (value == null) {
+            throw new Error("Missing entity value");
+          }
+          this.pe = !!pe;
+          this.name = this.stringify.eleName(name);
+          if (!isObject(value)) {
+            this.value = this.stringify.dtdEntityValue(value);
+          } else {
+            if (!value.pubID && !value.sysID) {
+              throw new Error("Public and/or system identifiers are required for an external entity");
+            }
+            if (value.pubID && !value.sysID) {
+              throw new Error("System identifier is required for a public external entity");
+            }
+            if (value.pubID != null) {
+              this.pubID = this.stringify.dtdPubID(value.pubID);
+            }
+            if (value.sysID != null) {
+              this.sysID = this.stringify.dtdSysID(value.sysID);
+            }
+            if (value.nData != null) {
+              this.nData = this.stringify.dtdNData(value.nData);
+            }
+            if (this.pe && this.nData) {
+              throw new Error("Notation declaration is not allowed in a parameter entity");
+            }
+          }
+        }
+        XMLDTDEntity2.prototype.toString = function(options) {
+          return this.options.writer.set(options).dtdEntity(this);
+        };
+        return XMLDTDEntity2;
+      }(XMLNode);
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDTDElement.js
+var require_XMLDTDElement2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDTDElement.js"(exports, module2) {
+    (function() {
+      var XMLDTDElement, XMLNode, extend = function(child, parent) {
+        for (var key in parent) {
+          if (hasProp.call(parent, key))
+            child[key] = parent[key];
+        }
+        function ctor() {
+          this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child.__super__ = parent.prototype;
+        return child;
+      }, hasProp = {}.hasOwnProperty;
+      XMLNode = require_XMLNode2();
+      module2.exports = XMLDTDElement = function(superClass) {
+        extend(XMLDTDElement2, superClass);
+        function XMLDTDElement2(parent, name, value) {
+          XMLDTDElement2.__super__.constructor.call(this, parent);
+          if (name == null) {
+            throw new Error("Missing DTD element name");
+          }
+          if (!value) {
+            value = "(#PCDATA)";
+          }
+          if (Array.isArray(value)) {
+            value = "(" + value.join(",") + ")";
+          }
+          this.name = this.stringify.eleName(name);
+          this.value = this.stringify.dtdElementValue(value);
+        }
+        XMLDTDElement2.prototype.toString = function(options) {
+          return this.options.writer.set(options).dtdElement(this);
+        };
+        return XMLDTDElement2;
+      }(XMLNode);
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDTDNotation.js
+var require_XMLDTDNotation2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDTDNotation.js"(exports, module2) {
+    (function() {
+      var XMLDTDNotation, XMLNode, extend = function(child, parent) {
+        for (var key in parent) {
+          if (hasProp.call(parent, key))
+            child[key] = parent[key];
+        }
+        function ctor() {
+          this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child.__super__ = parent.prototype;
+        return child;
+      }, hasProp = {}.hasOwnProperty;
+      XMLNode = require_XMLNode2();
+      module2.exports = XMLDTDNotation = function(superClass) {
+        extend(XMLDTDNotation2, superClass);
+        function XMLDTDNotation2(parent, name, value) {
+          XMLDTDNotation2.__super__.constructor.call(this, parent);
+          if (name == null) {
+            throw new Error("Missing notation name");
+          }
+          if (!value.pubID && !value.sysID) {
+            throw new Error("Public or system identifiers are required for an external entity");
+          }
+          this.name = this.stringify.eleName(name);
+          if (value.pubID != null) {
+            this.pubID = this.stringify.dtdPubID(value.pubID);
+          }
+          if (value.sysID != null) {
+            this.sysID = this.stringify.dtdSysID(value.sysID);
+          }
+        }
+        XMLDTDNotation2.prototype.toString = function(options) {
+          return this.options.writer.set(options).dtdNotation(this);
+        };
+        return XMLDTDNotation2;
+      }(XMLNode);
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDocType.js
+var require_XMLDocType2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDocType.js"(exports, module2) {
+    (function() {
+      var XMLDTDAttList, XMLDTDElement, XMLDTDEntity, XMLDTDNotation, XMLDocType, XMLNode, isObject, extend = function(child, parent) {
+        for (var key in parent) {
+          if (hasProp.call(parent, key))
+            child[key] = parent[key];
+        }
+        function ctor() {
+          this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child.__super__ = parent.prototype;
+        return child;
+      }, hasProp = {}.hasOwnProperty;
+      isObject = require_Utility().isObject;
+      XMLNode = require_XMLNode2();
+      XMLDTDAttList = require_XMLDTDAttList2();
+      XMLDTDEntity = require_XMLDTDEntity2();
+      XMLDTDElement = require_XMLDTDElement2();
+      XMLDTDNotation = require_XMLDTDNotation2();
+      module2.exports = XMLDocType = function(superClass) {
+        extend(XMLDocType2, superClass);
+        function XMLDocType2(parent, pubID, sysID) {
+          var ref, ref1;
+          XMLDocType2.__super__.constructor.call(this, parent);
+          this.documentObject = parent;
+          if (isObject(pubID)) {
+            ref = pubID, pubID = ref.pubID, sysID = ref.sysID;
+          }
+          if (sysID == null) {
+            ref1 = [pubID, sysID], sysID = ref1[0], pubID = ref1[1];
+          }
+          if (pubID != null) {
+            this.pubID = this.stringify.dtdPubID(pubID);
+          }
+          if (sysID != null) {
+            this.sysID = this.stringify.dtdSysID(sysID);
+          }
+        }
+        XMLDocType2.prototype.element = function(name, value) {
+          var child;
+          child = new XMLDTDElement(this, name, value);
+          this.children.push(child);
+          return this;
+        };
+        XMLDocType2.prototype.attList = function(elementName, attributeName, attributeType, defaultValueType, defaultValue) {
+          var child;
+          child = new XMLDTDAttList(this, elementName, attributeName, attributeType, defaultValueType, defaultValue);
+          this.children.push(child);
+          return this;
+        };
+        XMLDocType2.prototype.entity = function(name, value) {
+          var child;
+          child = new XMLDTDEntity(this, false, name, value);
+          this.children.push(child);
+          return this;
+        };
+        XMLDocType2.prototype.pEntity = function(name, value) {
+          var child;
+          child = new XMLDTDEntity(this, true, name, value);
+          this.children.push(child);
+          return this;
+        };
+        XMLDocType2.prototype.notation = function(name, value) {
+          var child;
+          child = new XMLDTDNotation(this, name, value);
+          this.children.push(child);
+          return this;
+        };
+        XMLDocType2.prototype.toString = function(options) {
+          return this.options.writer.set(options).docType(this);
+        };
+        XMLDocType2.prototype.ele = function(name, value) {
+          return this.element(name, value);
+        };
+        XMLDocType2.prototype.att = function(elementName, attributeName, attributeType, defaultValueType, defaultValue) {
+          return this.attList(elementName, attributeName, attributeType, defaultValueType, defaultValue);
+        };
+        XMLDocType2.prototype.ent = function(name, value) {
+          return this.entity(name, value);
+        };
+        XMLDocType2.prototype.pent = function(name, value) {
+          return this.pEntity(name, value);
+        };
+        XMLDocType2.prototype.not = function(name, value) {
+          return this.notation(name, value);
+        };
+        XMLDocType2.prototype.up = function() {
+          return this.root() || this.documentObject;
+        };
+        return XMLDocType2;
+      }(XMLNode);
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLRaw.js
+var require_XMLRaw2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLRaw.js"(exports, module2) {
+    (function() {
+      var XMLNode, XMLRaw, extend = function(child, parent) {
+        for (var key in parent) {
+          if (hasProp.call(parent, key))
+            child[key] = parent[key];
+        }
+        function ctor() {
+          this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child.__super__ = parent.prototype;
+        return child;
+      }, hasProp = {}.hasOwnProperty;
+      XMLNode = require_XMLNode2();
+      module2.exports = XMLRaw = function(superClass) {
+        extend(XMLRaw2, superClass);
+        function XMLRaw2(parent, text) {
+          XMLRaw2.__super__.constructor.call(this, parent);
+          if (text == null) {
+            throw new Error("Missing raw text");
+          }
+          this.value = this.stringify.raw(text);
+        }
+        XMLRaw2.prototype.clone = function() {
+          return Object.create(this);
+        };
+        XMLRaw2.prototype.toString = function(options) {
+          return this.options.writer.set(options).raw(this);
+        };
+        return XMLRaw2;
+      }(XMLNode);
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLText.js
+var require_XMLText2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLText.js"(exports, module2) {
+    (function() {
+      var XMLNode, XMLText, extend = function(child, parent) {
+        for (var key in parent) {
+          if (hasProp.call(parent, key))
+            child[key] = parent[key];
+        }
+        function ctor() {
+          this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child.__super__ = parent.prototype;
+        return child;
+      }, hasProp = {}.hasOwnProperty;
+      XMLNode = require_XMLNode2();
+      module2.exports = XMLText = function(superClass) {
+        extend(XMLText2, superClass);
+        function XMLText2(parent, text) {
+          XMLText2.__super__.constructor.call(this, parent);
+          if (text == null) {
+            throw new Error("Missing element text");
+          }
+          this.value = this.stringify.eleText(text);
+        }
+        XMLText2.prototype.clone = function() {
+          return Object.create(this);
+        };
+        XMLText2.prototype.toString = function(options) {
+          return this.options.writer.set(options).text(this);
+        };
+        return XMLText2;
+      }(XMLNode);
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLProcessingInstruction.js
+var require_XMLProcessingInstruction2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLProcessingInstruction.js"(exports, module2) {
+    (function() {
+      var XMLNode, XMLProcessingInstruction, extend = function(child, parent) {
+        for (var key in parent) {
+          if (hasProp.call(parent, key))
+            child[key] = parent[key];
+        }
+        function ctor() {
+          this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child.__super__ = parent.prototype;
+        return child;
+      }, hasProp = {}.hasOwnProperty;
+      XMLNode = require_XMLNode2();
+      module2.exports = XMLProcessingInstruction = function(superClass) {
+        extend(XMLProcessingInstruction2, superClass);
+        function XMLProcessingInstruction2(parent, target, value) {
+          XMLProcessingInstruction2.__super__.constructor.call(this, parent);
+          if (target == null) {
+            throw new Error("Missing instruction target");
+          }
+          this.target = this.stringify.insTarget(target);
+          if (value) {
+            this.value = this.stringify.insValue(value);
+          }
+        }
+        XMLProcessingInstruction2.prototype.clone = function() {
+          return Object.create(this);
+        };
+        XMLProcessingInstruction2.prototype.toString = function(options) {
+          return this.options.writer.set(options).processingInstruction(this);
+        };
+        return XMLProcessingInstruction2;
+      }(XMLNode);
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLNode.js
+var require_XMLNode2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLNode.js"(exports, module2) {
+    (function() {
+      var XMLCData, XMLComment, XMLDeclaration, XMLDocType, XMLElement, XMLNode, XMLProcessingInstruction, XMLRaw, XMLText, isEmpty, isFunction, isObject, ref, hasProp = {}.hasOwnProperty;
+      ref = require_Utility(), isObject = ref.isObject, isFunction = ref.isFunction, isEmpty = ref.isEmpty;
+      XMLElement = null;
+      XMLCData = null;
+      XMLComment = null;
+      XMLDeclaration = null;
+      XMLDocType = null;
+      XMLRaw = null;
+      XMLText = null;
+      XMLProcessingInstruction = null;
+      module2.exports = XMLNode = function() {
+        function XMLNode2(parent) {
+          this.parent = parent;
+          if (this.parent) {
+            this.options = this.parent.options;
+            this.stringify = this.parent.stringify;
+          }
+          this.children = [];
+          if (!XMLElement) {
+            XMLElement = require_XMLElement2();
+            XMLCData = require_XMLCData2();
+            XMLComment = require_XMLComment2();
+            XMLDeclaration = require_XMLDeclaration2();
+            XMLDocType = require_XMLDocType2();
+            XMLRaw = require_XMLRaw2();
+            XMLText = require_XMLText2();
+            XMLProcessingInstruction = require_XMLProcessingInstruction2();
+          }
+        }
+        XMLNode2.prototype.element = function(name, attributes, text) {
+          var childNode, item, j, k, key, lastChild, len, len1, ref1, val;
+          lastChild = null;
+          if (attributes == null) {
+            attributes = {};
+          }
+          attributes = attributes.valueOf();
+          if (!isObject(attributes)) {
+            ref1 = [attributes, text], text = ref1[0], attributes = ref1[1];
+          }
+          if (name != null) {
+            name = name.valueOf();
+          }
+          if (Array.isArray(name)) {
+            for (j = 0, len = name.length; j < len; j++) {
+              item = name[j];
+              lastChild = this.element(item);
+            }
+          } else if (isFunction(name)) {
+            lastChild = this.element(name.apply());
+          } else if (isObject(name)) {
+            for (key in name) {
+              if (!hasProp.call(name, key))
+                continue;
+              val = name[key];
+              if (isFunction(val)) {
+                val = val.apply();
+              }
+              if (isObject(val) && isEmpty(val)) {
+                val = null;
+              }
+              if (!this.options.ignoreDecorators && this.stringify.convertAttKey && key.indexOf(this.stringify.convertAttKey) === 0) {
+                lastChild = this.attribute(key.substr(this.stringify.convertAttKey.length), val);
+              } else if (!this.options.separateArrayItems && Array.isArray(val)) {
+                for (k = 0, len1 = val.length; k < len1; k++) {
+                  item = val[k];
+                  childNode = {};
+                  childNode[key] = item;
+                  lastChild = this.element(childNode);
+                }
+              } else if (isObject(val)) {
+                lastChild = this.element(key);
+                lastChild.element(val);
+              } else {
+                lastChild = this.element(key, val);
+              }
+            }
+          } else {
+            if (!this.options.ignoreDecorators && this.stringify.convertTextKey && name.indexOf(this.stringify.convertTextKey) === 0) {
+              lastChild = this.text(text);
+            } else if (!this.options.ignoreDecorators && this.stringify.convertCDataKey && name.indexOf(this.stringify.convertCDataKey) === 0) {
+              lastChild = this.cdata(text);
+            } else if (!this.options.ignoreDecorators && this.stringify.convertCommentKey && name.indexOf(this.stringify.convertCommentKey) === 0) {
+              lastChild = this.comment(text);
+            } else if (!this.options.ignoreDecorators && this.stringify.convertRawKey && name.indexOf(this.stringify.convertRawKey) === 0) {
+              lastChild = this.raw(text);
+            } else if (!this.options.ignoreDecorators && this.stringify.convertPIKey && name.indexOf(this.stringify.convertPIKey) === 0) {
+              lastChild = this.instruction(name.substr(this.stringify.convertPIKey.length), text);
+            } else {
+              lastChild = this.node(name, attributes, text);
+            }
+          }
+          if (lastChild == null) {
+            throw new Error("Could not create any elements with: " + name);
+          }
+          return lastChild;
+        };
+        XMLNode2.prototype.insertBefore = function(name, attributes, text) {
+          var child, i, removed;
+          if (this.isRoot) {
+            throw new Error("Cannot insert elements at root level");
+          }
+          i = this.parent.children.indexOf(this);
+          removed = this.parent.children.splice(i);
+          child = this.parent.element(name, attributes, text);
+          Array.prototype.push.apply(this.parent.children, removed);
+          return child;
+        };
+        XMLNode2.prototype.insertAfter = function(name, attributes, text) {
+          var child, i, removed;
+          if (this.isRoot) {
+            throw new Error("Cannot insert elements at root level");
+          }
+          i = this.parent.children.indexOf(this);
+          removed = this.parent.children.splice(i + 1);
+          child = this.parent.element(name, attributes, text);
+          Array.prototype.push.apply(this.parent.children, removed);
+          return child;
+        };
+        XMLNode2.prototype.remove = function() {
+          var i, ref1;
+          if (this.isRoot) {
+            throw new Error("Cannot remove the root element");
+          }
+          i = this.parent.children.indexOf(this);
+          [].splice.apply(this.parent.children, [i, i - i + 1].concat(ref1 = [])), ref1;
+          return this.parent;
+        };
+        XMLNode2.prototype.node = function(name, attributes, text) {
+          var child, ref1;
+          if (name != null) {
+            name = name.valueOf();
+          }
+          attributes || (attributes = {});
+          attributes = attributes.valueOf();
+          if (!isObject(attributes)) {
+            ref1 = [attributes, text], text = ref1[0], attributes = ref1[1];
+          }
+          child = new XMLElement(this, name, attributes);
+          if (text != null) {
+            child.text(text);
+          }
+          this.children.push(child);
+          return child;
+        };
+        XMLNode2.prototype.text = function(value) {
+          var child;
+          child = new XMLText(this, value);
+          this.children.push(child);
+          return this;
+        };
+        XMLNode2.prototype.cdata = function(value) {
+          var child;
+          child = new XMLCData(this, value);
+          this.children.push(child);
+          return this;
+        };
+        XMLNode2.prototype.comment = function(value) {
+          var child;
+          child = new XMLComment(this, value);
+          this.children.push(child);
+          return this;
+        };
+        XMLNode2.prototype.commentBefore = function(value) {
+          var child, i, removed;
+          i = this.parent.children.indexOf(this);
+          removed = this.parent.children.splice(i);
+          child = this.parent.comment(value);
+          Array.prototype.push.apply(this.parent.children, removed);
+          return this;
+        };
+        XMLNode2.prototype.commentAfter = function(value) {
+          var child, i, removed;
+          i = this.parent.children.indexOf(this);
+          removed = this.parent.children.splice(i + 1);
+          child = this.parent.comment(value);
+          Array.prototype.push.apply(this.parent.children, removed);
+          return this;
+        };
+        XMLNode2.prototype.raw = function(value) {
+          var child;
+          child = new XMLRaw(this, value);
+          this.children.push(child);
+          return this;
+        };
+        XMLNode2.prototype.instruction = function(target, value) {
+          var insTarget, insValue, instruction, j, len;
+          if (target != null) {
+            target = target.valueOf();
+          }
+          if (value != null) {
+            value = value.valueOf();
+          }
+          if (Array.isArray(target)) {
+            for (j = 0, len = target.length; j < len; j++) {
+              insTarget = target[j];
+              this.instruction(insTarget);
+            }
+          } else if (isObject(target)) {
+            for (insTarget in target) {
+              if (!hasProp.call(target, insTarget))
+                continue;
+              insValue = target[insTarget];
+              this.instruction(insTarget, insValue);
+            }
+          } else {
+            if (isFunction(value)) {
+              value = value.apply();
+            }
+            instruction = new XMLProcessingInstruction(this, target, value);
+            this.children.push(instruction);
+          }
+          return this;
+        };
+        XMLNode2.prototype.instructionBefore = function(target, value) {
+          var child, i, removed;
+          i = this.parent.children.indexOf(this);
+          removed = this.parent.children.splice(i);
+          child = this.parent.instruction(target, value);
+          Array.prototype.push.apply(this.parent.children, removed);
+          return this;
+        };
+        XMLNode2.prototype.instructionAfter = function(target, value) {
+          var child, i, removed;
+          i = this.parent.children.indexOf(this);
+          removed = this.parent.children.splice(i + 1);
+          child = this.parent.instruction(target, value);
+          Array.prototype.push.apply(this.parent.children, removed);
+          return this;
+        };
+        XMLNode2.prototype.declaration = function(version, encoding, standalone) {
+          var doc, xmldec;
+          doc = this.document();
+          xmldec = new XMLDeclaration(doc, version, encoding, standalone);
+          if (doc.children[0] instanceof XMLDeclaration) {
+            doc.children[0] = xmldec;
+          } else {
+            doc.children.unshift(xmldec);
+          }
+          return doc.root() || doc;
+        };
+        XMLNode2.prototype.doctype = function(pubID, sysID) {
+          var child, doc, doctype, i, j, k, len, len1, ref1, ref2;
+          doc = this.document();
+          doctype = new XMLDocType(doc, pubID, sysID);
+          ref1 = doc.children;
+          for (i = j = 0, len = ref1.length; j < len; i = ++j) {
+            child = ref1[i];
+            if (child instanceof XMLDocType) {
+              doc.children[i] = doctype;
+              return doctype;
+            }
+          }
+          ref2 = doc.children;
+          for (i = k = 0, len1 = ref2.length; k < len1; i = ++k) {
+            child = ref2[i];
+            if (child.isRoot) {
+              doc.children.splice(i, 0, doctype);
+              return doctype;
+            }
+          }
+          doc.children.push(doctype);
+          return doctype;
+        };
+        XMLNode2.prototype.up = function() {
+          if (this.isRoot) {
+            throw new Error("The root node has no parent. Use doc() if you need to get the document object.");
+          }
+          return this.parent;
+        };
+        XMLNode2.prototype.root = function() {
+          var node;
+          node = this;
+          while (node) {
+            if (node.isDocument) {
+              return node.rootObject;
+            } else if (node.isRoot) {
+              return node;
+            } else {
+              node = node.parent;
+            }
+          }
+        };
+        XMLNode2.prototype.document = function() {
+          var node;
+          node = this;
+          while (node) {
+            if (node.isDocument) {
+              return node;
+            } else {
+              node = node.parent;
+            }
+          }
+        };
+        XMLNode2.prototype.end = function(options) {
+          return this.document().end(options);
+        };
+        XMLNode2.prototype.prev = function() {
+          var i;
+          i = this.parent.children.indexOf(this);
+          if (i < 1) {
+            throw new Error("Already at the first node");
+          }
+          return this.parent.children[i - 1];
+        };
+        XMLNode2.prototype.next = function() {
+          var i;
+          i = this.parent.children.indexOf(this);
+          if (i === -1 || i === this.parent.children.length - 1) {
+            throw new Error("Already at the last node");
+          }
+          return this.parent.children[i + 1];
+        };
+        XMLNode2.prototype.importDocument = function(doc) {
+          var clonedRoot;
+          clonedRoot = doc.root().clone();
+          clonedRoot.parent = this;
+          clonedRoot.isRoot = false;
+          this.children.push(clonedRoot);
+          return this;
+        };
+        XMLNode2.prototype.ele = function(name, attributes, text) {
+          return this.element(name, attributes, text);
+        };
+        XMLNode2.prototype.nod = function(name, attributes, text) {
+          return this.node(name, attributes, text);
+        };
+        XMLNode2.prototype.txt = function(value) {
+          return this.text(value);
+        };
+        XMLNode2.prototype.dat = function(value) {
+          return this.cdata(value);
+        };
+        XMLNode2.prototype.com = function(value) {
+          return this.comment(value);
+        };
+        XMLNode2.prototype.ins = function(target, value) {
+          return this.instruction(target, value);
+        };
+        XMLNode2.prototype.doc = function() {
+          return this.document();
+        };
+        XMLNode2.prototype.dec = function(version, encoding, standalone) {
+          return this.declaration(version, encoding, standalone);
+        };
+        XMLNode2.prototype.dtd = function(pubID, sysID) {
+          return this.doctype(pubID, sysID);
+        };
+        XMLNode2.prototype.e = function(name, attributes, text) {
+          return this.element(name, attributes, text);
+        };
+        XMLNode2.prototype.n = function(name, attributes, text) {
+          return this.node(name, attributes, text);
+        };
+        XMLNode2.prototype.t = function(value) {
+          return this.text(value);
+        };
+        XMLNode2.prototype.d = function(value) {
+          return this.cdata(value);
+        };
+        XMLNode2.prototype.c = function(value) {
+          return this.comment(value);
+        };
+        XMLNode2.prototype.r = function(value) {
+          return this.raw(value);
+        };
+        XMLNode2.prototype.i = function(target, value) {
+          return this.instruction(target, value);
+        };
+        XMLNode2.prototype.u = function() {
+          return this.up();
+        };
+        XMLNode2.prototype.importXMLBuilder = function(doc) {
+          return this.importDocument(doc);
+        };
+        return XMLNode2;
+      }();
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLStringifier.js
+var require_XMLStringifier2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLStringifier.js"(exports, module2) {
+    (function() {
+      var XMLStringifier, bind = function(fn, me) {
+        return function() {
+          return fn.apply(me, arguments);
+        };
+      }, hasProp = {}.hasOwnProperty;
+      module2.exports = XMLStringifier = function() {
+        function XMLStringifier2(options) {
+          this.assertLegalChar = bind(this.assertLegalChar, this);
+          var key, ref, value;
+          options || (options = {});
+          this.noDoubleEncoding = options.noDoubleEncoding;
+          ref = options.stringify || {};
+          for (key in ref) {
+            if (!hasProp.call(ref, key))
+              continue;
+            value = ref[key];
+            this[key] = value;
+          }
+        }
+        XMLStringifier2.prototype.eleName = function(val) {
+          val = "" + val || "";
+          return this.assertLegalChar(val);
+        };
+        XMLStringifier2.prototype.eleText = function(val) {
+          val = "" + val || "";
+          return this.assertLegalChar(this.elEscape(val));
+        };
+        XMLStringifier2.prototype.cdata = function(val) {
+          val = "" + val || "";
+          val = val.replace("]]>", "]]]]><![CDATA[>");
+          return this.assertLegalChar(val);
+        };
+        XMLStringifier2.prototype.comment = function(val) {
+          val = "" + val || "";
+          if (val.match(/--/)) {
+            throw new Error("Comment text cannot contain double-hypen: " + val);
+          }
+          return this.assertLegalChar(val);
+        };
+        XMLStringifier2.prototype.raw = function(val) {
+          return "" + val || "";
+        };
+        XMLStringifier2.prototype.attName = function(val) {
+          return val = "" + val || "";
+        };
+        XMLStringifier2.prototype.attValue = function(val) {
+          val = "" + val || "";
+          return this.attEscape(val);
+        };
+        XMLStringifier2.prototype.insTarget = function(val) {
+          return "" + val || "";
+        };
+        XMLStringifier2.prototype.insValue = function(val) {
+          val = "" + val || "";
+          if (val.match(/\?>/)) {
+            throw new Error("Invalid processing instruction value: " + val);
+          }
+          return val;
+        };
+        XMLStringifier2.prototype.xmlVersion = function(val) {
+          val = "" + val || "";
+          if (!val.match(/1\.[0-9]+/)) {
+            throw new Error("Invalid version number: " + val);
+          }
+          return val;
+        };
+        XMLStringifier2.prototype.xmlEncoding = function(val) {
+          val = "" + val || "";
+          if (!val.match(/^[A-Za-z](?:[A-Za-z0-9._-])*$/)) {
+            throw new Error("Invalid encoding: " + val);
+          }
+          return val;
+        };
+        XMLStringifier2.prototype.xmlStandalone = function(val) {
+          if (val) {
+            return "yes";
+          } else {
+            return "no";
+          }
+        };
+        XMLStringifier2.prototype.dtdPubID = function(val) {
+          return "" + val || "";
+        };
+        XMLStringifier2.prototype.dtdSysID = function(val) {
+          return "" + val || "";
+        };
+        XMLStringifier2.prototype.dtdElementValue = function(val) {
+          return "" + val || "";
+        };
+        XMLStringifier2.prototype.dtdAttType = function(val) {
+          return "" + val || "";
+        };
+        XMLStringifier2.prototype.dtdAttDefault = function(val) {
+          if (val != null) {
+            return "" + val || "";
+          } else {
+            return val;
+          }
+        };
+        XMLStringifier2.prototype.dtdEntityValue = function(val) {
+          return "" + val || "";
+        };
+        XMLStringifier2.prototype.dtdNData = function(val) {
+          return "" + val || "";
+        };
+        XMLStringifier2.prototype.convertAttKey = "@";
+        XMLStringifier2.prototype.convertPIKey = "?";
+        XMLStringifier2.prototype.convertTextKey = "#text";
+        XMLStringifier2.prototype.convertCDataKey = "#cdata";
+        XMLStringifier2.prototype.convertCommentKey = "#comment";
+        XMLStringifier2.prototype.convertRawKey = "#raw";
+        XMLStringifier2.prototype.assertLegalChar = function(str) {
+          var res;
+          res = str.match(/[\0\uFFFE\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]/);
+          if (res) {
+            throw new Error("Invalid character in string: " + str + " at index " + res.index);
+          }
+          return str;
+        };
+        XMLStringifier2.prototype.elEscape = function(str) {
+          var ampregex;
+          ampregex = this.noDoubleEncoding ? /(?!&\S+;)&/g : /&/g;
+          return str.replace(ampregex, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\r/g, "&#xD;");
+        };
+        XMLStringifier2.prototype.attEscape = function(str) {
+          var ampregex;
+          ampregex = this.noDoubleEncoding ? /(?!&\S+;)&/g : /&/g;
+          return str.replace(ampregex, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;").replace(/\t/g, "&#x9;").replace(/\n/g, "&#xA;").replace(/\r/g, "&#xD;");
+        };
+        return XMLStringifier2;
+      }();
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLWriterBase.js
+var require_XMLWriterBase = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLWriterBase.js"(exports, module2) {
+    (function() {
+      var XMLWriterBase, hasProp = {}.hasOwnProperty;
+      module2.exports = XMLWriterBase = function() {
+        function XMLWriterBase2(options) {
+          var key, ref, ref1, ref2, ref3, ref4, ref5, ref6, value;
+          options || (options = {});
+          this.pretty = options.pretty || false;
+          this.allowEmpty = (ref = options.allowEmpty) != null ? ref : false;
+          if (this.pretty) {
+            this.indent = (ref1 = options.indent) != null ? ref1 : "  ";
+            this.newline = (ref2 = options.newline) != null ? ref2 : "\n";
+            this.offset = (ref3 = options.offset) != null ? ref3 : 0;
+            this.dontprettytextnodes = (ref4 = options.dontprettytextnodes) != null ? ref4 : 0;
+          } else {
+            this.indent = "";
+            this.newline = "";
+            this.offset = 0;
+            this.dontprettytextnodes = 0;
+          }
+          this.spacebeforeslash = (ref5 = options.spacebeforeslash) != null ? ref5 : "";
+          if (this.spacebeforeslash === true) {
+            this.spacebeforeslash = " ";
+          }
+          this.newlinedefault = this.newline;
+          this.prettydefault = this.pretty;
+          ref6 = options.writer || {};
+          for (key in ref6) {
+            if (!hasProp.call(ref6, key))
+              continue;
+            value = ref6[key];
+            this[key] = value;
+          }
+        }
+        XMLWriterBase2.prototype.set = function(options) {
+          var key, ref, value;
+          options || (options = {});
+          if ("pretty" in options) {
+            this.pretty = options.pretty;
+          }
+          if ("allowEmpty" in options) {
+            this.allowEmpty = options.allowEmpty;
+          }
+          if (this.pretty) {
+            this.indent = "indent" in options ? options.indent : "  ";
+            this.newline = "newline" in options ? options.newline : "\n";
+            this.offset = "offset" in options ? options.offset : 0;
+            this.dontprettytextnodes = "dontprettytextnodes" in options ? options.dontprettytextnodes : 0;
+          } else {
+            this.indent = "";
+            this.newline = "";
+            this.offset = 0;
+            this.dontprettytextnodes = 0;
+          }
+          this.spacebeforeslash = "spacebeforeslash" in options ? options.spacebeforeslash : "";
+          if (this.spacebeforeslash === true) {
+            this.spacebeforeslash = " ";
+          }
+          this.newlinedefault = this.newline;
+          this.prettydefault = this.pretty;
+          ref = options.writer || {};
+          for (key in ref) {
+            if (!hasProp.call(ref, key))
+              continue;
+            value = ref[key];
+            this[key] = value;
+          }
+          return this;
+        };
+        XMLWriterBase2.prototype.space = function(level) {
+          var indent;
+          if (this.pretty) {
+            indent = (level || 0) + this.offset + 1;
+            if (indent > 0) {
+              return new Array(indent).join(this.indent);
+            } else {
+              return "";
+            }
+          } else {
+            return "";
+          }
+        };
+        return XMLWriterBase2;
+      }();
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLStringWriter.js
+var require_XMLStringWriter = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLStringWriter.js"(exports, module2) {
+    (function() {
+      var XMLCData, XMLComment, XMLDTDAttList, XMLDTDElement, XMLDTDEntity, XMLDTDNotation, XMLDeclaration, XMLDocType, XMLElement, XMLProcessingInstruction, XMLRaw, XMLStringWriter, XMLText, XMLWriterBase, extend = function(child, parent) {
+        for (var key in parent) {
+          if (hasProp.call(parent, key))
+            child[key] = parent[key];
+        }
+        function ctor() {
+          this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child.__super__ = parent.prototype;
+        return child;
+      }, hasProp = {}.hasOwnProperty;
+      XMLDeclaration = require_XMLDeclaration2();
+      XMLDocType = require_XMLDocType2();
+      XMLCData = require_XMLCData2();
+      XMLComment = require_XMLComment2();
+      XMLElement = require_XMLElement2();
+      XMLRaw = require_XMLRaw2();
+      XMLText = require_XMLText2();
+      XMLProcessingInstruction = require_XMLProcessingInstruction2();
+      XMLDTDAttList = require_XMLDTDAttList2();
+      XMLDTDElement = require_XMLDTDElement2();
+      XMLDTDEntity = require_XMLDTDEntity2();
+      XMLDTDNotation = require_XMLDTDNotation2();
+      XMLWriterBase = require_XMLWriterBase();
+      module2.exports = XMLStringWriter = function(superClass) {
+        extend(XMLStringWriter2, superClass);
+        function XMLStringWriter2(options) {
+          XMLStringWriter2.__super__.constructor.call(this, options);
+        }
+        XMLStringWriter2.prototype.document = function(doc) {
+          var child, i, len, r, ref;
+          this.textispresent = false;
+          r = "";
+          ref = doc.children;
+          for (i = 0, len = ref.length; i < len; i++) {
+            child = ref[i];
+            r += function() {
+              switch (false) {
+                case !(child instanceof XMLDeclaration):
+                  return this.declaration(child);
+                case !(child instanceof XMLDocType):
+                  return this.docType(child);
+                case !(child instanceof XMLComment):
+                  return this.comment(child);
+                case !(child instanceof XMLProcessingInstruction):
+                  return this.processingInstruction(child);
+                default:
+                  return this.element(child, 0);
+              }
+            }.call(this);
+          }
+          if (this.pretty && r.slice(-this.newline.length) === this.newline) {
+            r = r.slice(0, -this.newline.length);
+          }
+          return r;
+        };
+        XMLStringWriter2.prototype.attribute = function(att) {
+          return " " + att.name + '="' + att.value + '"';
+        };
+        XMLStringWriter2.prototype.cdata = function(node, level) {
+          return this.space(level) + "<![CDATA[" + node.text + "]]>" + this.newline;
+        };
+        XMLStringWriter2.prototype.comment = function(node, level) {
+          return this.space(level) + "<!-- " + node.text + " -->" + this.newline;
+        };
+        XMLStringWriter2.prototype.declaration = function(node, level) {
+          var r;
+          r = this.space(level);
+          r += '<?xml version="' + node.version + '"';
+          if (node.encoding != null) {
+            r += ' encoding="' + node.encoding + '"';
+          }
+          if (node.standalone != null) {
+            r += ' standalone="' + node.standalone + '"';
+          }
+          r += this.spacebeforeslash + "?>";
+          r += this.newline;
+          return r;
+        };
+        XMLStringWriter2.prototype.docType = function(node, level) {
+          var child, i, len, r, ref;
+          level || (level = 0);
+          r = this.space(level);
+          r += "<!DOCTYPE " + node.root().name;
+          if (node.pubID && node.sysID) {
+            r += ' PUBLIC "' + node.pubID + '" "' + node.sysID + '"';
+          } else if (node.sysID) {
+            r += ' SYSTEM "' + node.sysID + '"';
+          }
+          if (node.children.length > 0) {
+            r += " [";
+            r += this.newline;
+            ref = node.children;
+            for (i = 0, len = ref.length; i < len; i++) {
+              child = ref[i];
+              r += function() {
+                switch (false) {
+                  case !(child instanceof XMLDTDAttList):
+                    return this.dtdAttList(child, level + 1);
+                  case !(child instanceof XMLDTDElement):
+                    return this.dtdElement(child, level + 1);
+                  case !(child instanceof XMLDTDEntity):
+                    return this.dtdEntity(child, level + 1);
+                  case !(child instanceof XMLDTDNotation):
+                    return this.dtdNotation(child, level + 1);
+                  case !(child instanceof XMLCData):
+                    return this.cdata(child, level + 1);
+                  case !(child instanceof XMLComment):
+                    return this.comment(child, level + 1);
+                  case !(child instanceof XMLProcessingInstruction):
+                    return this.processingInstruction(child, level + 1);
+                  default:
+                    throw new Error("Unknown DTD node type: " + child.constructor.name);
+                }
+              }.call(this);
+            }
+            r += "]";
+          }
+          r += this.spacebeforeslash + ">";
+          r += this.newline;
+          return r;
+        };
+        XMLStringWriter2.prototype.element = function(node, level) {
+          var att, child, i, j, len, len1, name, r, ref, ref1, ref2, space, textispresentwasset;
+          level || (level = 0);
+          textispresentwasset = false;
+          if (this.textispresent) {
+            this.newline = "";
+            this.pretty = false;
+          } else {
+            this.newline = this.newlinedefault;
+            this.pretty = this.prettydefault;
+          }
+          space = this.space(level);
+          r = "";
+          r += space + "<" + node.name;
+          ref = node.attributes;
+          for (name in ref) {
+            if (!hasProp.call(ref, name))
+              continue;
+            att = ref[name];
+            r += this.attribute(att);
+          }
+          if (node.children.length === 0 || node.children.every(function(e) {
+            return e.value === "";
+          })) {
+            if (this.allowEmpty) {
+              r += "></" + node.name + ">" + this.newline;
+            } else {
+              r += this.spacebeforeslash + "/>" + this.newline;
+            }
+          } else if (this.pretty && node.children.length === 1 && node.children[0].value != null) {
+            r += ">";
+            r += node.children[0].value;
+            r += "</" + node.name + ">" + this.newline;
+          } else {
+            if (this.dontprettytextnodes) {
+              ref1 = node.children;
+              for (i = 0, len = ref1.length; i < len; i++) {
+                child = ref1[i];
+                if (child.value != null) {
+                  this.textispresent++;
+                  textispresentwasset = true;
+                  break;
+                }
+              }
+            }
+            if (this.textispresent) {
+              this.newline = "";
+              this.pretty = false;
+              space = this.space(level);
+            }
+            r += ">" + this.newline;
+            ref2 = node.children;
+            for (j = 0, len1 = ref2.length; j < len1; j++) {
+              child = ref2[j];
+              r += function() {
+                switch (false) {
+                  case !(child instanceof XMLCData):
+                    return this.cdata(child, level + 1);
+                  case !(child instanceof XMLComment):
+                    return this.comment(child, level + 1);
+                  case !(child instanceof XMLElement):
+                    return this.element(child, level + 1);
+                  case !(child instanceof XMLRaw):
+                    return this.raw(child, level + 1);
+                  case !(child instanceof XMLText):
+                    return this.text(child, level + 1);
+                  case !(child instanceof XMLProcessingInstruction):
+                    return this.processingInstruction(child, level + 1);
+                  default:
+                    throw new Error("Unknown XML node type: " + child.constructor.name);
+                }
+              }.call(this);
+            }
+            if (textispresentwasset) {
+              this.textispresent--;
+            }
+            if (!this.textispresent) {
+              this.newline = this.newlinedefault;
+              this.pretty = this.prettydefault;
+            }
+            r += space + "</" + node.name + ">" + this.newline;
+          }
+          return r;
+        };
+        XMLStringWriter2.prototype.processingInstruction = function(node, level) {
+          var r;
+          r = this.space(level) + "<?" + node.target;
+          if (node.value) {
+            r += " " + node.value;
+          }
+          r += this.spacebeforeslash + "?>" + this.newline;
+          return r;
+        };
+        XMLStringWriter2.prototype.raw = function(node, level) {
+          return this.space(level) + node.value + this.newline;
+        };
+        XMLStringWriter2.prototype.text = function(node, level) {
+          return this.space(level) + node.value + this.newline;
+        };
+        XMLStringWriter2.prototype.dtdAttList = function(node, level) {
+          var r;
+          r = this.space(level) + "<!ATTLIST " + node.elementName + " " + node.attributeName + " " + node.attributeType;
+          if (node.defaultValueType !== "#DEFAULT") {
+            r += " " + node.defaultValueType;
+          }
+          if (node.defaultValue) {
+            r += ' "' + node.defaultValue + '"';
+          }
+          r += this.spacebeforeslash + ">" + this.newline;
+          return r;
+        };
+        XMLStringWriter2.prototype.dtdElement = function(node, level) {
+          return this.space(level) + "<!ELEMENT " + node.name + " " + node.value + this.spacebeforeslash + ">" + this.newline;
+        };
+        XMLStringWriter2.prototype.dtdEntity = function(node, level) {
+          var r;
+          r = this.space(level) + "<!ENTITY";
+          if (node.pe) {
+            r += " %";
+          }
+          r += " " + node.name;
+          if (node.value) {
+            r += ' "' + node.value + '"';
+          } else {
+            if (node.pubID && node.sysID) {
+              r += ' PUBLIC "' + node.pubID + '" "' + node.sysID + '"';
+            } else if (node.sysID) {
+              r += ' SYSTEM "' + node.sysID + '"';
+            }
+            if (node.nData) {
+              r += " NDATA " + node.nData;
+            }
+          }
+          r += this.spacebeforeslash + ">" + this.newline;
+          return r;
+        };
+        XMLStringWriter2.prototype.dtdNotation = function(node, level) {
+          var r;
+          r = this.space(level) + "<!NOTATION " + node.name;
+          if (node.pubID && node.sysID) {
+            r += ' PUBLIC "' + node.pubID + '" "' + node.sysID + '"';
+          } else if (node.pubID) {
+            r += ' PUBLIC "' + node.pubID + '"';
+          } else if (node.sysID) {
+            r += ' SYSTEM "' + node.sysID + '"';
+          }
+          r += this.spacebeforeslash + ">" + this.newline;
+          return r;
+        };
+        XMLStringWriter2.prototype.openNode = function(node, level) {
+          var att, name, r, ref;
+          level || (level = 0);
+          if (node instanceof XMLElement) {
+            r = this.space(level) + "<" + node.name;
+            ref = node.attributes;
+            for (name in ref) {
+              if (!hasProp.call(ref, name))
+                continue;
+              att = ref[name];
+              r += this.attribute(att);
+            }
+            r += (node.children ? ">" : "/>") + this.newline;
+            return r;
+          } else {
+            r = this.space(level) + "<!DOCTYPE " + node.rootNodeName;
+            if (node.pubID && node.sysID) {
+              r += ' PUBLIC "' + node.pubID + '" "' + node.sysID + '"';
+            } else if (node.sysID) {
+              r += ' SYSTEM "' + node.sysID + '"';
+            }
+            r += (node.children ? " [" : ">") + this.newline;
+            return r;
+          }
+        };
+        XMLStringWriter2.prototype.closeNode = function(node, level) {
+          level || (level = 0);
+          switch (false) {
+            case !(node instanceof XMLElement):
+              return this.space(level) + "</" + node.name + ">" + this.newline;
+            case !(node instanceof XMLDocType):
+              return this.space(level) + "]>" + this.newline;
+          }
+        };
+        return XMLStringWriter2;
+      }(XMLWriterBase);
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDocument.js
+var require_XMLDocument = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDocument.js"(exports, module2) {
+    (function() {
+      var XMLDocument, XMLNode, XMLStringWriter, XMLStringifier, isPlainObject, extend = function(child, parent) {
+        for (var key in parent) {
+          if (hasProp.call(parent, key))
+            child[key] = parent[key];
+        }
+        function ctor() {
+          this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child.__super__ = parent.prototype;
+        return child;
+      }, hasProp = {}.hasOwnProperty;
+      isPlainObject = require_Utility().isPlainObject;
+      XMLNode = require_XMLNode2();
+      XMLStringifier = require_XMLStringifier2();
+      XMLStringWriter = require_XMLStringWriter();
+      module2.exports = XMLDocument = function(superClass) {
+        extend(XMLDocument2, superClass);
+        function XMLDocument2(options) {
+          XMLDocument2.__super__.constructor.call(this, null);
+          options || (options = {});
+          if (!options.writer) {
+            options.writer = new XMLStringWriter();
+          }
+          this.options = options;
+          this.stringify = new XMLStringifier(options);
+          this.isDocument = true;
+        }
+        XMLDocument2.prototype.end = function(writer) {
+          var writerOptions;
+          if (!writer) {
+            writer = this.options.writer;
+          } else if (isPlainObject(writer)) {
+            writerOptions = writer;
+            writer = this.options.writer.set(writerOptions);
+          }
+          return writer.document(this);
+        };
+        XMLDocument2.prototype.toString = function(options) {
+          return this.options.writer.set(options).document(this);
+        };
+        return XMLDocument2;
+      }(XMLNode);
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDocumentCB.js
+var require_XMLDocumentCB = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLDocumentCB.js"(exports, module2) {
+    (function() {
+      var XMLAttribute, XMLCData, XMLComment, XMLDTDAttList, XMLDTDElement, XMLDTDEntity, XMLDTDNotation, XMLDeclaration, XMLDocType, XMLDocumentCB, XMLElement, XMLProcessingInstruction, XMLRaw, XMLStringWriter, XMLStringifier, XMLText, isFunction, isObject, isPlainObject, ref, hasProp = {}.hasOwnProperty;
+      ref = require_Utility(), isObject = ref.isObject, isFunction = ref.isFunction, isPlainObject = ref.isPlainObject;
+      XMLElement = require_XMLElement2();
+      XMLCData = require_XMLCData2();
+      XMLComment = require_XMLComment2();
+      XMLRaw = require_XMLRaw2();
+      XMLText = require_XMLText2();
+      XMLProcessingInstruction = require_XMLProcessingInstruction2();
+      XMLDeclaration = require_XMLDeclaration2();
+      XMLDocType = require_XMLDocType2();
+      XMLDTDAttList = require_XMLDTDAttList2();
+      XMLDTDEntity = require_XMLDTDEntity2();
+      XMLDTDElement = require_XMLDTDElement2();
+      XMLDTDNotation = require_XMLDTDNotation2();
+      XMLAttribute = require_XMLAttribute2();
+      XMLStringifier = require_XMLStringifier2();
+      XMLStringWriter = require_XMLStringWriter();
+      module2.exports = XMLDocumentCB = function() {
+        function XMLDocumentCB2(options, onData, onEnd) {
+          var writerOptions;
+          options || (options = {});
+          if (!options.writer) {
+            options.writer = new XMLStringWriter(options);
+          } else if (isPlainObject(options.writer)) {
+            writerOptions = options.writer;
+            options.writer = new XMLStringWriter(writerOptions);
+          }
+          this.options = options;
+          this.writer = options.writer;
+          this.stringify = new XMLStringifier(options);
+          this.onDataCallback = onData || function() {
+          };
+          this.onEndCallback = onEnd || function() {
+          };
+          this.currentNode = null;
+          this.currentLevel = -1;
+          this.openTags = {};
+          this.documentStarted = false;
+          this.documentCompleted = false;
+          this.root = null;
+        }
+        XMLDocumentCB2.prototype.node = function(name, attributes, text) {
+          var ref1;
+          if (name == null) {
+            throw new Error("Missing node name");
+          }
+          if (this.root && this.currentLevel === -1) {
+            throw new Error("Document can only have one root node");
+          }
+          this.openCurrent();
+          name = name.valueOf();
+          if (attributes == null) {
+            attributes = {};
+          }
+          attributes = attributes.valueOf();
+          if (!isObject(attributes)) {
+            ref1 = [attributes, text], text = ref1[0], attributes = ref1[1];
+          }
+          this.currentNode = new XMLElement(this, name, attributes);
+          this.currentNode.children = false;
+          this.currentLevel++;
+          this.openTags[this.currentLevel] = this.currentNode;
+          if (text != null) {
+            this.text(text);
+          }
+          return this;
+        };
+        XMLDocumentCB2.prototype.element = function(name, attributes, text) {
+          if (this.currentNode && this.currentNode instanceof XMLDocType) {
+            return this.dtdElement.apply(this, arguments);
+          } else {
+            return this.node(name, attributes, text);
+          }
+        };
+        XMLDocumentCB2.prototype.attribute = function(name, value) {
+          var attName, attValue;
+          if (!this.currentNode || this.currentNode.children) {
+            throw new Error("att() can only be used immediately after an ele() call in callback mode");
+          }
+          if (name != null) {
+            name = name.valueOf();
+          }
+          if (isObject(name)) {
+            for (attName in name) {
+              if (!hasProp.call(name, attName))
+                continue;
+              attValue = name[attName];
+              this.attribute(attName, attValue);
+            }
+          } else {
+            if (isFunction(value)) {
+              value = value.apply();
+            }
+            if (!this.options.skipNullAttributes || value != null) {
+              this.currentNode.attributes[name] = new XMLAttribute(this, name, value);
+            }
+          }
+          return this;
+        };
+        XMLDocumentCB2.prototype.text = function(value) {
+          var node;
+          this.openCurrent();
+          node = new XMLText(this, value);
+          this.onData(this.writer.text(node, this.currentLevel + 1));
+          return this;
+        };
+        XMLDocumentCB2.prototype.cdata = function(value) {
+          var node;
+          this.openCurrent();
+          node = new XMLCData(this, value);
+          this.onData(this.writer.cdata(node, this.currentLevel + 1));
+          return this;
+        };
+        XMLDocumentCB2.prototype.comment = function(value) {
+          var node;
+          this.openCurrent();
+          node = new XMLComment(this, value);
+          this.onData(this.writer.comment(node, this.currentLevel + 1));
+          return this;
+        };
+        XMLDocumentCB2.prototype.raw = function(value) {
+          var node;
+          this.openCurrent();
+          node = new XMLRaw(this, value);
+          this.onData(this.writer.raw(node, this.currentLevel + 1));
+          return this;
+        };
+        XMLDocumentCB2.prototype.instruction = function(target, value) {
+          var i, insTarget, insValue, len, node;
+          this.openCurrent();
+          if (target != null) {
+            target = target.valueOf();
+          }
+          if (value != null) {
+            value = value.valueOf();
+          }
+          if (Array.isArray(target)) {
+            for (i = 0, len = target.length; i < len; i++) {
+              insTarget = target[i];
+              this.instruction(insTarget);
+            }
+          } else if (isObject(target)) {
+            for (insTarget in target) {
+              if (!hasProp.call(target, insTarget))
+                continue;
+              insValue = target[insTarget];
+              this.instruction(insTarget, insValue);
+            }
+          } else {
+            if (isFunction(value)) {
+              value = value.apply();
+            }
+            node = new XMLProcessingInstruction(this, target, value);
+            this.onData(this.writer.processingInstruction(node, this.currentLevel + 1));
+          }
+          return this;
+        };
+        XMLDocumentCB2.prototype.declaration = function(version, encoding, standalone) {
+          var node;
+          this.openCurrent();
+          if (this.documentStarted) {
+            throw new Error("declaration() must be the first node");
+          }
+          node = new XMLDeclaration(this, version, encoding, standalone);
+          this.onData(this.writer.declaration(node, this.currentLevel + 1));
+          return this;
+        };
+        XMLDocumentCB2.prototype.doctype = function(root, pubID, sysID) {
+          this.openCurrent();
+          if (root == null) {
+            throw new Error("Missing root node name");
+          }
+          if (this.root) {
+            throw new Error("dtd() must come before the root node");
+          }
+          this.currentNode = new XMLDocType(this, pubID, sysID);
+          this.currentNode.rootNodeName = root;
+          this.currentNode.children = false;
+          this.currentLevel++;
+          this.openTags[this.currentLevel] = this.currentNode;
+          return this;
+        };
+        XMLDocumentCB2.prototype.dtdElement = function(name, value) {
+          var node;
+          this.openCurrent();
+          node = new XMLDTDElement(this, name, value);
+          this.onData(this.writer.dtdElement(node, this.currentLevel + 1));
+          return this;
+        };
+        XMLDocumentCB2.prototype.attList = function(elementName, attributeName, attributeType, defaultValueType, defaultValue) {
+          var node;
+          this.openCurrent();
+          node = new XMLDTDAttList(this, elementName, attributeName, attributeType, defaultValueType, defaultValue);
+          this.onData(this.writer.dtdAttList(node, this.currentLevel + 1));
+          return this;
+        };
+        XMLDocumentCB2.prototype.entity = function(name, value) {
+          var node;
+          this.openCurrent();
+          node = new XMLDTDEntity(this, false, name, value);
+          this.onData(this.writer.dtdEntity(node, this.currentLevel + 1));
+          return this;
+        };
+        XMLDocumentCB2.prototype.pEntity = function(name, value) {
+          var node;
+          this.openCurrent();
+          node = new XMLDTDEntity(this, true, name, value);
+          this.onData(this.writer.dtdEntity(node, this.currentLevel + 1));
+          return this;
+        };
+        XMLDocumentCB2.prototype.notation = function(name, value) {
+          var node;
+          this.openCurrent();
+          node = new XMLDTDNotation(this, name, value);
+          this.onData(this.writer.dtdNotation(node, this.currentLevel + 1));
+          return this;
+        };
+        XMLDocumentCB2.prototype.up = function() {
+          if (this.currentLevel < 0) {
+            throw new Error("The document node has no parent");
+          }
+          if (this.currentNode) {
+            if (this.currentNode.children) {
+              this.closeNode(this.currentNode);
+            } else {
+              this.openNode(this.currentNode);
+            }
+            this.currentNode = null;
+          } else {
+            this.closeNode(this.openTags[this.currentLevel]);
+          }
+          delete this.openTags[this.currentLevel];
+          this.currentLevel--;
+          return this;
+        };
+        XMLDocumentCB2.prototype.end = function() {
+          while (this.currentLevel >= 0) {
+            this.up();
+          }
+          return this.onEnd();
+        };
+        XMLDocumentCB2.prototype.openCurrent = function() {
+          if (this.currentNode) {
+            this.currentNode.children = true;
+            return this.openNode(this.currentNode);
+          }
+        };
+        XMLDocumentCB2.prototype.openNode = function(node) {
+          if (!node.isOpen) {
+            if (!this.root && this.currentLevel === 0 && node instanceof XMLElement) {
+              this.root = node;
+            }
+            this.onData(this.writer.openNode(node, this.currentLevel));
+            return node.isOpen = true;
+          }
+        };
+        XMLDocumentCB2.prototype.closeNode = function(node) {
+          if (!node.isClosed) {
+            this.onData(this.writer.closeNode(node, this.currentLevel));
+            return node.isClosed = true;
+          }
+        };
+        XMLDocumentCB2.prototype.onData = function(chunk) {
+          this.documentStarted = true;
+          return this.onDataCallback(chunk);
+        };
+        XMLDocumentCB2.prototype.onEnd = function() {
+          this.documentCompleted = true;
+          return this.onEndCallback();
+        };
+        XMLDocumentCB2.prototype.ele = function() {
+          return this.element.apply(this, arguments);
+        };
+        XMLDocumentCB2.prototype.nod = function(name, attributes, text) {
+          return this.node(name, attributes, text);
+        };
+        XMLDocumentCB2.prototype.txt = function(value) {
+          return this.text(value);
+        };
+        XMLDocumentCB2.prototype.dat = function(value) {
+          return this.cdata(value);
+        };
+        XMLDocumentCB2.prototype.com = function(value) {
+          return this.comment(value);
+        };
+        XMLDocumentCB2.prototype.ins = function(target, value) {
+          return this.instruction(target, value);
+        };
+        XMLDocumentCB2.prototype.dec = function(version, encoding, standalone) {
+          return this.declaration(version, encoding, standalone);
+        };
+        XMLDocumentCB2.prototype.dtd = function(root, pubID, sysID) {
+          return this.doctype(root, pubID, sysID);
+        };
+        XMLDocumentCB2.prototype.e = function(name, attributes, text) {
+          return this.element(name, attributes, text);
+        };
+        XMLDocumentCB2.prototype.n = function(name, attributes, text) {
+          return this.node(name, attributes, text);
+        };
+        XMLDocumentCB2.prototype.t = function(value) {
+          return this.text(value);
+        };
+        XMLDocumentCB2.prototype.d = function(value) {
+          return this.cdata(value);
+        };
+        XMLDocumentCB2.prototype.c = function(value) {
+          return this.comment(value);
+        };
+        XMLDocumentCB2.prototype.r = function(value) {
+          return this.raw(value);
+        };
+        XMLDocumentCB2.prototype.i = function(target, value) {
+          return this.instruction(target, value);
+        };
+        XMLDocumentCB2.prototype.att = function() {
+          if (this.currentNode && this.currentNode instanceof XMLDocType) {
+            return this.attList.apply(this, arguments);
+          } else {
+            return this.attribute.apply(this, arguments);
+          }
+        };
+        XMLDocumentCB2.prototype.a = function() {
+          if (this.currentNode && this.currentNode instanceof XMLDocType) {
+            return this.attList.apply(this, arguments);
+          } else {
+            return this.attribute.apply(this, arguments);
+          }
+        };
+        XMLDocumentCB2.prototype.ent = function(name, value) {
+          return this.entity(name, value);
+        };
+        XMLDocumentCB2.prototype.pent = function(name, value) {
+          return this.pEntity(name, value);
+        };
+        XMLDocumentCB2.prototype.not = function(name, value) {
+          return this.notation(name, value);
+        };
+        return XMLDocumentCB2;
+      }();
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLStreamWriter.js
+var require_XMLStreamWriter = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/XMLStreamWriter.js"(exports, module2) {
+    (function() {
+      var XMLCData, XMLComment, XMLDTDAttList, XMLDTDElement, XMLDTDEntity, XMLDTDNotation, XMLDeclaration, XMLDocType, XMLElement, XMLProcessingInstruction, XMLRaw, XMLStreamWriter, XMLText, XMLWriterBase, extend = function(child, parent) {
+        for (var key in parent) {
+          if (hasProp.call(parent, key))
+            child[key] = parent[key];
+        }
+        function ctor() {
+          this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child.__super__ = parent.prototype;
+        return child;
+      }, hasProp = {}.hasOwnProperty;
+      XMLDeclaration = require_XMLDeclaration2();
+      XMLDocType = require_XMLDocType2();
+      XMLCData = require_XMLCData2();
+      XMLComment = require_XMLComment2();
+      XMLElement = require_XMLElement2();
+      XMLRaw = require_XMLRaw2();
+      XMLText = require_XMLText2();
+      XMLProcessingInstruction = require_XMLProcessingInstruction2();
+      XMLDTDAttList = require_XMLDTDAttList2();
+      XMLDTDElement = require_XMLDTDElement2();
+      XMLDTDEntity = require_XMLDTDEntity2();
+      XMLDTDNotation = require_XMLDTDNotation2();
+      XMLWriterBase = require_XMLWriterBase();
+      module2.exports = XMLStreamWriter = function(superClass) {
+        extend(XMLStreamWriter2, superClass);
+        function XMLStreamWriter2(stream, options) {
+          XMLStreamWriter2.__super__.constructor.call(this, options);
+          this.stream = stream;
+        }
+        XMLStreamWriter2.prototype.document = function(doc) {
+          var child, i, j, len, len1, ref, ref1, results;
+          ref = doc.children;
+          for (i = 0, len = ref.length; i < len; i++) {
+            child = ref[i];
+            child.isLastRootNode = false;
+          }
+          doc.children[doc.children.length - 1].isLastRootNode = true;
+          ref1 = doc.children;
+          results = [];
+          for (j = 0, len1 = ref1.length; j < len1; j++) {
+            child = ref1[j];
+            switch (false) {
+              case !(child instanceof XMLDeclaration):
+                results.push(this.declaration(child));
+                break;
+              case !(child instanceof XMLDocType):
+                results.push(this.docType(child));
+                break;
+              case !(child instanceof XMLComment):
+                results.push(this.comment(child));
+                break;
+              case !(child instanceof XMLProcessingInstruction):
+                results.push(this.processingInstruction(child));
+                break;
+              default:
+                results.push(this.element(child));
+            }
+          }
+          return results;
+        };
+        XMLStreamWriter2.prototype.attribute = function(att) {
+          return this.stream.write(" " + att.name + '="' + att.value + '"');
+        };
+        XMLStreamWriter2.prototype.cdata = function(node, level) {
+          return this.stream.write(this.space(level) + "<![CDATA[" + node.text + "]]>" + this.endline(node));
+        };
+        XMLStreamWriter2.prototype.comment = function(node, level) {
+          return this.stream.write(this.space(level) + "<!-- " + node.text + " -->" + this.endline(node));
+        };
+        XMLStreamWriter2.prototype.declaration = function(node, level) {
+          this.stream.write(this.space(level));
+          this.stream.write('<?xml version="' + node.version + '"');
+          if (node.encoding != null) {
+            this.stream.write(' encoding="' + node.encoding + '"');
+          }
+          if (node.standalone != null) {
+            this.stream.write(' standalone="' + node.standalone + '"');
+          }
+          this.stream.write(this.spacebeforeslash + "?>");
+          return this.stream.write(this.endline(node));
+        };
+        XMLStreamWriter2.prototype.docType = function(node, level) {
+          var child, i, len, ref;
+          level || (level = 0);
+          this.stream.write(this.space(level));
+          this.stream.write("<!DOCTYPE " + node.root().name);
+          if (node.pubID && node.sysID) {
+            this.stream.write(' PUBLIC "' + node.pubID + '" "' + node.sysID + '"');
+          } else if (node.sysID) {
+            this.stream.write(' SYSTEM "' + node.sysID + '"');
+          }
+          if (node.children.length > 0) {
+            this.stream.write(" [");
+            this.stream.write(this.endline(node));
+            ref = node.children;
+            for (i = 0, len = ref.length; i < len; i++) {
+              child = ref[i];
+              switch (false) {
+                case !(child instanceof XMLDTDAttList):
+                  this.dtdAttList(child, level + 1);
+                  break;
+                case !(child instanceof XMLDTDElement):
+                  this.dtdElement(child, level + 1);
+                  break;
+                case !(child instanceof XMLDTDEntity):
+                  this.dtdEntity(child, level + 1);
+                  break;
+                case !(child instanceof XMLDTDNotation):
+                  this.dtdNotation(child, level + 1);
+                  break;
+                case !(child instanceof XMLCData):
+                  this.cdata(child, level + 1);
+                  break;
+                case !(child instanceof XMLComment):
+                  this.comment(child, level + 1);
+                  break;
+                case !(child instanceof XMLProcessingInstruction):
+                  this.processingInstruction(child, level + 1);
+                  break;
+                default:
+                  throw new Error("Unknown DTD node type: " + child.constructor.name);
+              }
+            }
+            this.stream.write("]");
+          }
+          this.stream.write(this.spacebeforeslash + ">");
+          return this.stream.write(this.endline(node));
+        };
+        XMLStreamWriter2.prototype.element = function(node, level) {
+          var att, child, i, len, name, ref, ref1, space;
+          level || (level = 0);
+          space = this.space(level);
+          this.stream.write(space + "<" + node.name);
+          ref = node.attributes;
+          for (name in ref) {
+            if (!hasProp.call(ref, name))
+              continue;
+            att = ref[name];
+            this.attribute(att);
+          }
+          if (node.children.length === 0 || node.children.every(function(e) {
+            return e.value === "";
+          })) {
+            if (this.allowEmpty) {
+              this.stream.write("></" + node.name + ">");
+            } else {
+              this.stream.write(this.spacebeforeslash + "/>");
+            }
+          } else if (this.pretty && node.children.length === 1 && node.children[0].value != null) {
+            this.stream.write(">");
+            this.stream.write(node.children[0].value);
+            this.stream.write("</" + node.name + ">");
+          } else {
+            this.stream.write(">" + this.newline);
+            ref1 = node.children;
+            for (i = 0, len = ref1.length; i < len; i++) {
+              child = ref1[i];
+              switch (false) {
+                case !(child instanceof XMLCData):
+                  this.cdata(child, level + 1);
+                  break;
+                case !(child instanceof XMLComment):
+                  this.comment(child, level + 1);
+                  break;
+                case !(child instanceof XMLElement):
+                  this.element(child, level + 1);
+                  break;
+                case !(child instanceof XMLRaw):
+                  this.raw(child, level + 1);
+                  break;
+                case !(child instanceof XMLText):
+                  this.text(child, level + 1);
+                  break;
+                case !(child instanceof XMLProcessingInstruction):
+                  this.processingInstruction(child, level + 1);
+                  break;
+                default:
+                  throw new Error("Unknown XML node type: " + child.constructor.name);
+              }
+            }
+            this.stream.write(space + "</" + node.name + ">");
+          }
+          return this.stream.write(this.endline(node));
+        };
+        XMLStreamWriter2.prototype.processingInstruction = function(node, level) {
+          this.stream.write(this.space(level) + "<?" + node.target);
+          if (node.value) {
+            this.stream.write(" " + node.value);
+          }
+          return this.stream.write(this.spacebeforeslash + "?>" + this.endline(node));
+        };
+        XMLStreamWriter2.prototype.raw = function(node, level) {
+          return this.stream.write(this.space(level) + node.value + this.endline(node));
+        };
+        XMLStreamWriter2.prototype.text = function(node, level) {
+          return this.stream.write(this.space(level) + node.value + this.endline(node));
+        };
+        XMLStreamWriter2.prototype.dtdAttList = function(node, level) {
+          this.stream.write(this.space(level) + "<!ATTLIST " + node.elementName + " " + node.attributeName + " " + node.attributeType);
+          if (node.defaultValueType !== "#DEFAULT") {
+            this.stream.write(" " + node.defaultValueType);
+          }
+          if (node.defaultValue) {
+            this.stream.write(' "' + node.defaultValue + '"');
+          }
+          return this.stream.write(this.spacebeforeslash + ">" + this.endline(node));
+        };
+        XMLStreamWriter2.prototype.dtdElement = function(node, level) {
+          this.stream.write(this.space(level) + "<!ELEMENT " + node.name + " " + node.value);
+          return this.stream.write(this.spacebeforeslash + ">" + this.endline(node));
+        };
+        XMLStreamWriter2.prototype.dtdEntity = function(node, level) {
+          this.stream.write(this.space(level) + "<!ENTITY");
+          if (node.pe) {
+            this.stream.write(" %");
+          }
+          this.stream.write(" " + node.name);
+          if (node.value) {
+            this.stream.write(' "' + node.value + '"');
+          } else {
+            if (node.pubID && node.sysID) {
+              this.stream.write(' PUBLIC "' + node.pubID + '" "' + node.sysID + '"');
+            } else if (node.sysID) {
+              this.stream.write(' SYSTEM "' + node.sysID + '"');
+            }
+            if (node.nData) {
+              this.stream.write(" NDATA " + node.nData);
+            }
+          }
+          return this.stream.write(this.spacebeforeslash + ">" + this.endline(node));
+        };
+        XMLStreamWriter2.prototype.dtdNotation = function(node, level) {
+          this.stream.write(this.space(level) + "<!NOTATION " + node.name);
+          if (node.pubID && node.sysID) {
+            this.stream.write(' PUBLIC "' + node.pubID + '" "' + node.sysID + '"');
+          } else if (node.pubID) {
+            this.stream.write(' PUBLIC "' + node.pubID + '"');
+          } else if (node.sysID) {
+            this.stream.write(' SYSTEM "' + node.sysID + '"');
+          }
+          return this.stream.write(this.spacebeforeslash + ">" + this.endline(node));
+        };
+        XMLStreamWriter2.prototype.endline = function(node) {
+          if (!node.isLastRootNode) {
+            return this.newline;
+          } else {
+            return "";
+          }
+        };
+        return XMLStreamWriter2;
+      }(XMLWriterBase);
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/xmlbuilder/lib/index.js
+var require_lib6 = __commonJS({
+  "node_modules/app-info-parser/node_modules/xmlbuilder/lib/index.js"(exports, module2) {
+    (function() {
+      var XMLDocument, XMLDocumentCB, XMLStreamWriter, XMLStringWriter, assign, isFunction, ref;
+      ref = require_Utility(), assign = ref.assign, isFunction = ref.isFunction;
+      XMLDocument = require_XMLDocument();
+      XMLDocumentCB = require_XMLDocumentCB();
+      XMLStringWriter = require_XMLStringWriter();
+      XMLStreamWriter = require_XMLStreamWriter();
+      module2.exports.create = function(name, xmldec, doctype, options) {
+        var doc, root;
+        if (name == null) {
+          throw new Error("Root element needs a name");
+        }
+        options = assign({}, xmldec, doctype, options);
+        doc = new XMLDocument(options);
+        root = doc.element(name);
+        if (!options.headless) {
+          doc.declaration(options);
+          if (options.pubID != null || options.sysID != null) {
+            doc.doctype(options);
+          }
+        }
+        return root;
+      };
+      module2.exports.begin = function(options, onData, onEnd) {
+        var ref1;
+        if (isFunction(options)) {
+          ref1 = [options, onData], onData = ref1[0], onEnd = ref1[1];
+          options = {};
+        }
+        if (onData) {
+          return new XMLDocumentCB(options, onData, onEnd);
+        } else {
+          return new XMLDocument(options);
+        }
+      };
+      module2.exports.stringWriter = function(options) {
+        return new XMLStringWriter(options);
+      };
+      module2.exports.streamWriter = function(stream, options) {
+        return new XMLStreamWriter(stream, options);
+      };
+    }).call(exports);
+  }
+});
+
+// node_modules/app-info-parser/node_modules/plist/lib/build.js
+var require_build2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/plist/lib/build.js"(exports) {
+    var base64 = require_base64_js();
+    var xmlbuilder = require_lib6();
+    exports.build = build;
+    function ISODateString(d) {
+      function pad(n) {
+        return n < 10 ? "0" + n : n;
+      }
+      return d.getUTCFullYear() + "-" + pad(d.getUTCMonth() + 1) + "-" + pad(d.getUTCDate()) + "T" + pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes()) + ":" + pad(d.getUTCSeconds()) + "Z";
+    }
+    var toString = Object.prototype.toString;
+    function type(obj) {
+      var m = toString.call(obj).match(/\[object (.*)\]/);
+      return m ? m[1] : m;
+    }
+    function build(obj, opts) {
+      var XMLHDR = {
+        version: "1.0",
+        encoding: "UTF-8"
+      };
+      var XMLDTD = {
+        pubid: "-//Apple//DTD PLIST 1.0//EN",
+        sysid: "http://www.apple.com/DTDs/PropertyList-1.0.dtd"
+      };
+      var doc = xmlbuilder.create("plist");
+      doc.dec(XMLHDR.version, XMLHDR.encoding, XMLHDR.standalone);
+      doc.dtd(XMLDTD.pubid, XMLDTD.sysid);
+      doc.att("version", "1.0");
+      walk_obj(obj, doc);
+      if (!opts)
+        opts = {};
+      opts.pretty = opts.pretty !== false;
+      return doc.end(opts);
+    }
+    function walk_obj(next, next_child) {
+      var tag_type, i, prop;
+      var name = type(next);
+      if (name == "Undefined") {
+        return;
+      } else if (Array.isArray(next)) {
+        next_child = next_child.ele("array");
+        for (i = 0; i < next.length; i++) {
+          walk_obj(next[i], next_child);
+        }
+      } else if (Buffer.isBuffer(next)) {
+        next_child.ele("data").raw(next.toString("base64"));
+      } else if (name == "Object") {
+        next_child = next_child.ele("dict");
+        for (prop in next) {
+          if (next.hasOwnProperty(prop)) {
+            next_child.ele("key").txt(prop);
+            walk_obj(next[prop], next_child);
+          }
+        }
+      } else if (name == "Number") {
+        tag_type = next % 1 === 0 ? "integer" : "real";
+        next_child.ele(tag_type).txt(next.toString());
+      } else if (name == "Date") {
+        next_child.ele("date").txt(ISODateString(new Date(next)));
+      } else if (name == "Boolean") {
+        next_child.ele(next ? "true" : "false");
+      } else if (name == "String") {
+        next_child.ele("string").txt(next);
+      } else if (name == "ArrayBuffer") {
+        next_child.ele("data").raw(base64.fromByteArray(next));
+      } else if (next && next.buffer && type(next.buffer) == "ArrayBuffer") {
+        next_child.ele("data").raw(base64.fromByteArray(new Uint8Array(next.buffer), next_child));
+      }
+    }
+  }
+});
+
+// node_modules/app-info-parser/node_modules/plist/index.js
+var require_plist2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/plist/index.js"(exports) {
+    var parserFunctions = require_parse2();
+    Object.keys(parserFunctions).forEach(function(k) {
+      exports[k] = parserFunctions[k];
+    });
+    var builderFunctions = require_build2();
+    Object.keys(builderFunctions).forEach(function(k) {
+      exports[k] = builderFunctions[k];
+    });
+  }
+});
+
+// node_modules/big-integer/BigInteger.js
+var require_BigInteger = __commonJS({
+  "node_modules/big-integer/BigInteger.js"(exports, module2) {
+    var bigInt = function(undefined2) {
+      "use strict";
+      var BASE = 1e7, LOG_BASE = 7, MAX_INT = 9007199254740992, MAX_INT_ARR = smallToArray(MAX_INT), DEFAULT_ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyz";
+      var supportsNativeBigInt = typeof BigInt === "function";
+      function Integer(v, radix, alphabet, caseSensitive) {
+        if (typeof v === "undefined")
+          return Integer[0];
+        if (typeof radix !== "undefined")
+          return +radix === 10 && !alphabet ? parseValue(v) : parseBase(v, radix, alphabet, caseSensitive);
+        return parseValue(v);
+      }
+      function BigInteger(value, sign) {
+        this.value = value;
+        this.sign = sign;
+        this.isSmall = false;
+      }
+      BigInteger.prototype = Object.create(Integer.prototype);
+      function SmallInteger(value) {
+        this.value = value;
+        this.sign = value < 0;
+        this.isSmall = true;
+      }
+      SmallInteger.prototype = Object.create(Integer.prototype);
+      function NativeBigInt(value) {
+        this.value = value;
+      }
+      NativeBigInt.prototype = Object.create(Integer.prototype);
+      function isPrecise(n) {
+        return -MAX_INT < n && n < MAX_INT;
+      }
+      function smallToArray(n) {
+        if (n < 1e7)
+          return [n];
+        if (n < 1e14)
+          return [n % 1e7, Math.floor(n / 1e7)];
+        return [n % 1e7, Math.floor(n / 1e7) % 1e7, Math.floor(n / 1e14)];
+      }
+      function arrayToSmall(arr) {
+        trim(arr);
+        var length = arr.length;
+        if (length < 4 && compareAbs(arr, MAX_INT_ARR) < 0) {
+          switch (length) {
+            case 0:
+              return 0;
+            case 1:
+              return arr[0];
+            case 2:
+              return arr[0] + arr[1] * BASE;
+            default:
+              return arr[0] + (arr[1] + arr[2] * BASE) * BASE;
+          }
+        }
+        return arr;
+      }
+      function trim(v) {
+        var i2 = v.length;
+        while (v[--i2] === 0)
+          ;
+        v.length = i2 + 1;
+      }
+      function createArray(length) {
+        var x = new Array(length);
+        var i2 = -1;
+        while (++i2 < length) {
+          x[i2] = 0;
+        }
+        return x;
+      }
+      function truncate(n) {
+        if (n > 0)
+          return Math.floor(n);
+        return Math.ceil(n);
+      }
+      function add(a, b) {
+        var l_a = a.length, l_b = b.length, r = new Array(l_a), carry = 0, base = BASE, sum, i2;
+        for (i2 = 0; i2 < l_b; i2++) {
+          sum = a[i2] + b[i2] + carry;
+          carry = sum >= base ? 1 : 0;
+          r[i2] = sum - carry * base;
+        }
+        while (i2 < l_a) {
+          sum = a[i2] + carry;
+          carry = sum === base ? 1 : 0;
+          r[i2++] = sum - carry * base;
+        }
+        if (carry > 0)
+          r.push(carry);
+        return r;
+      }
+      function addAny(a, b) {
+        if (a.length >= b.length)
+          return add(a, b);
+        return add(b, a);
+      }
+      function addSmall(a, carry) {
+        var l = a.length, r = new Array(l), base = BASE, sum, i2;
+        for (i2 = 0; i2 < l; i2++) {
+          sum = a[i2] - base + carry;
+          carry = Math.floor(sum / base);
+          r[i2] = sum - carry * base;
+          carry += 1;
+        }
+        while (carry > 0) {
+          r[i2++] = carry % base;
+          carry = Math.floor(carry / base);
+        }
+        return r;
+      }
+      BigInteger.prototype.add = function(v) {
+        var n = parseValue(v);
+        if (this.sign !== n.sign) {
+          return this.subtract(n.negate());
+        }
+        var a = this.value, b = n.value;
+        if (n.isSmall) {
+          return new BigInteger(addSmall(a, Math.abs(b)), this.sign);
+        }
+        return new BigInteger(addAny(a, b), this.sign);
+      };
+      BigInteger.prototype.plus = BigInteger.prototype.add;
+      SmallInteger.prototype.add = function(v) {
+        var n = parseValue(v);
+        var a = this.value;
+        if (a < 0 !== n.sign) {
+          return this.subtract(n.negate());
+        }
+        var b = n.value;
+        if (n.isSmall) {
+          if (isPrecise(a + b))
+            return new SmallInteger(a + b);
+          b = smallToArray(Math.abs(b));
+        }
+        return new BigInteger(addSmall(b, Math.abs(a)), a < 0);
+      };
+      SmallInteger.prototype.plus = SmallInteger.prototype.add;
+      NativeBigInt.prototype.add = function(v) {
+        return new NativeBigInt(this.value + parseValue(v).value);
+      };
+      NativeBigInt.prototype.plus = NativeBigInt.prototype.add;
+      function subtract(a, b) {
+        var a_l = a.length, b_l = b.length, r = new Array(a_l), borrow = 0, base = BASE, i2, difference;
+        for (i2 = 0; i2 < b_l; i2++) {
+          difference = a[i2] - borrow - b[i2];
+          if (difference < 0) {
+            difference += base;
+            borrow = 1;
+          } else
+            borrow = 0;
+          r[i2] = difference;
+        }
+        for (i2 = b_l; i2 < a_l; i2++) {
+          difference = a[i2] - borrow;
+          if (difference < 0)
+            difference += base;
+          else {
+            r[i2++] = difference;
+            break;
+          }
+          r[i2] = difference;
+        }
+        for (; i2 < a_l; i2++) {
+          r[i2] = a[i2];
+        }
+        trim(r);
+        return r;
+      }
+      function subtractAny(a, b, sign) {
+        var value;
+        if (compareAbs(a, b) >= 0) {
+          value = subtract(a, b);
+        } else {
+          value = subtract(b, a);
+          sign = !sign;
+        }
+        value = arrayToSmall(value);
+        if (typeof value === "number") {
+          if (sign)
+            value = -value;
+          return new SmallInteger(value);
+        }
+        return new BigInteger(value, sign);
+      }
+      function subtractSmall(a, b, sign) {
+        var l = a.length, r = new Array(l), carry = -b, base = BASE, i2, difference;
+        for (i2 = 0; i2 < l; i2++) {
+          difference = a[i2] + carry;
+          carry = Math.floor(difference / base);
+          difference %= base;
+          r[i2] = difference < 0 ? difference + base : difference;
+        }
+        r = arrayToSmall(r);
+        if (typeof r === "number") {
+          if (sign)
+            r = -r;
+          return new SmallInteger(r);
+        }
+        return new BigInteger(r, sign);
+      }
+      BigInteger.prototype.subtract = function(v) {
+        var n = parseValue(v);
+        if (this.sign !== n.sign) {
+          return this.add(n.negate());
+        }
+        var a = this.value, b = n.value;
+        if (n.isSmall)
+          return subtractSmall(a, Math.abs(b), this.sign);
+        return subtractAny(a, b, this.sign);
+      };
+      BigInteger.prototype.minus = BigInteger.prototype.subtract;
+      SmallInteger.prototype.subtract = function(v) {
+        var n = parseValue(v);
+        var a = this.value;
+        if (a < 0 !== n.sign) {
+          return this.add(n.negate());
+        }
+        var b = n.value;
+        if (n.isSmall) {
+          return new SmallInteger(a - b);
+        }
+        return subtractSmall(b, Math.abs(a), a >= 0);
+      };
+      SmallInteger.prototype.minus = SmallInteger.prototype.subtract;
+      NativeBigInt.prototype.subtract = function(v) {
+        return new NativeBigInt(this.value - parseValue(v).value);
+      };
+      NativeBigInt.prototype.minus = NativeBigInt.prototype.subtract;
+      BigInteger.prototype.negate = function() {
+        return new BigInteger(this.value, !this.sign);
+      };
+      SmallInteger.prototype.negate = function() {
+        var sign = this.sign;
+        var small = new SmallInteger(-this.value);
+        small.sign = !sign;
+        return small;
+      };
+      NativeBigInt.prototype.negate = function() {
+        return new NativeBigInt(-this.value);
+      };
+      BigInteger.prototype.abs = function() {
+        return new BigInteger(this.value, false);
+      };
+      SmallInteger.prototype.abs = function() {
+        return new SmallInteger(Math.abs(this.value));
+      };
+      NativeBigInt.prototype.abs = function() {
+        return new NativeBigInt(this.value >= 0 ? this.value : -this.value);
+      };
+      function multiplyLong(a, b) {
+        var a_l = a.length, b_l = b.length, l = a_l + b_l, r = createArray(l), base = BASE, product, carry, i2, a_i, b_j;
+        for (i2 = 0; i2 < a_l; ++i2) {
+          a_i = a[i2];
+          for (var j = 0; j < b_l; ++j) {
+            b_j = b[j];
+            product = a_i * b_j + r[i2 + j];
+            carry = Math.floor(product / base);
+            r[i2 + j] = product - carry * base;
+            r[i2 + j + 1] += carry;
+          }
+        }
+        trim(r);
+        return r;
+      }
+      function multiplySmall(a, b) {
+        var l = a.length, r = new Array(l), base = BASE, carry = 0, product, i2;
+        for (i2 = 0; i2 < l; i2++) {
+          product = a[i2] * b + carry;
+          carry = Math.floor(product / base);
+          r[i2] = product - carry * base;
+        }
+        while (carry > 0) {
+          r[i2++] = carry % base;
+          carry = Math.floor(carry / base);
+        }
+        return r;
+      }
+      function shiftLeft(x, n) {
+        var r = [];
+        while (n-- > 0)
+          r.push(0);
+        return r.concat(x);
+      }
+      function multiplyKaratsuba(x, y) {
+        var n = Math.max(x.length, y.length);
+        if (n <= 30)
+          return multiplyLong(x, y);
+        n = Math.ceil(n / 2);
+        var b = x.slice(n), a = x.slice(0, n), d = y.slice(n), c2 = y.slice(0, n);
+        var ac = multiplyKaratsuba(a, c2), bd = multiplyKaratsuba(b, d), abcd = multiplyKaratsuba(addAny(a, b), addAny(c2, d));
+        var product = addAny(addAny(ac, shiftLeft(subtract(subtract(abcd, ac), bd), n)), shiftLeft(bd, 2 * n));
+        trim(product);
+        return product;
+      }
+      function useKaratsuba(l1, l2) {
+        return -0.012 * l1 - 0.012 * l2 + 15e-6 * l1 * l2 > 0;
+      }
+      BigInteger.prototype.multiply = function(v) {
+        var n = parseValue(v), a = this.value, b = n.value, sign = this.sign !== n.sign, abs;
+        if (n.isSmall) {
+          if (b === 0)
+            return Integer[0];
+          if (b === 1)
+            return this;
+          if (b === -1)
+            return this.negate();
+          abs = Math.abs(b);
+          if (abs < BASE) {
+            return new BigInteger(multiplySmall(a, abs), sign);
+          }
+          b = smallToArray(abs);
+        }
+        if (useKaratsuba(a.length, b.length))
+          return new BigInteger(multiplyKaratsuba(a, b), sign);
+        return new BigInteger(multiplyLong(a, b), sign);
+      };
+      BigInteger.prototype.times = BigInteger.prototype.multiply;
+      function multiplySmallAndArray(a, b, sign) {
+        if (a < BASE) {
+          return new BigInteger(multiplySmall(b, a), sign);
+        }
+        return new BigInteger(multiplyLong(b, smallToArray(a)), sign);
+      }
+      SmallInteger.prototype._multiplyBySmall = function(a) {
+        if (isPrecise(a.value * this.value)) {
+          return new SmallInteger(a.value * this.value);
+        }
+        return multiplySmallAndArray(Math.abs(a.value), smallToArray(Math.abs(this.value)), this.sign !== a.sign);
+      };
+      BigInteger.prototype._multiplyBySmall = function(a) {
+        if (a.value === 0)
+          return Integer[0];
+        if (a.value === 1)
+          return this;
+        if (a.value === -1)
+          return this.negate();
+        return multiplySmallAndArray(Math.abs(a.value), this.value, this.sign !== a.sign);
+      };
+      SmallInteger.prototype.multiply = function(v) {
+        return parseValue(v)._multiplyBySmall(this);
+      };
+      SmallInteger.prototype.times = SmallInteger.prototype.multiply;
+      NativeBigInt.prototype.multiply = function(v) {
+        return new NativeBigInt(this.value * parseValue(v).value);
+      };
+      NativeBigInt.prototype.times = NativeBigInt.prototype.multiply;
+      function square(a) {
+        var l = a.length, r = createArray(l + l), base = BASE, product, carry, i2, a_i, a_j;
+        for (i2 = 0; i2 < l; i2++) {
+          a_i = a[i2];
+          carry = 0 - a_i * a_i;
+          for (var j = i2; j < l; j++) {
+            a_j = a[j];
+            product = 2 * (a_i * a_j) + r[i2 + j] + carry;
+            carry = Math.floor(product / base);
+            r[i2 + j] = product - carry * base;
+          }
+          r[i2 + l] = carry;
+        }
+        trim(r);
+        return r;
+      }
+      BigInteger.prototype.square = function() {
+        return new BigInteger(square(this.value), false);
+      };
+      SmallInteger.prototype.square = function() {
+        var value = this.value * this.value;
+        if (isPrecise(value))
+          return new SmallInteger(value);
+        return new BigInteger(square(smallToArray(Math.abs(this.value))), false);
+      };
+      NativeBigInt.prototype.square = function(v) {
+        return new NativeBigInt(this.value * this.value);
+      };
+      function divMod1(a, b) {
+        var a_l = a.length, b_l = b.length, base = BASE, result = createArray(b.length), divisorMostSignificantDigit = b[b_l - 1], lambda = Math.ceil(base / (2 * divisorMostSignificantDigit)), remainder = multiplySmall(a, lambda), divisor = multiplySmall(b, lambda), quotientDigit, shift, carry, borrow, i2, l, q;
+        if (remainder.length <= a_l)
+          remainder.push(0);
+        divisor.push(0);
+        divisorMostSignificantDigit = divisor[b_l - 1];
+        for (shift = a_l - b_l; shift >= 0; shift--) {
+          quotientDigit = base - 1;
+          if (remainder[shift + b_l] !== divisorMostSignificantDigit) {
+            quotientDigit = Math.floor((remainder[shift + b_l] * base + remainder[shift + b_l - 1]) / divisorMostSignificantDigit);
+          }
+          carry = 0;
+          borrow = 0;
+          l = divisor.length;
+          for (i2 = 0; i2 < l; i2++) {
+            carry += quotientDigit * divisor[i2];
+            q = Math.floor(carry / base);
+            borrow += remainder[shift + i2] - (carry - q * base);
+            carry = q;
+            if (borrow < 0) {
+              remainder[shift + i2] = borrow + base;
+              borrow = -1;
+            } else {
+              remainder[shift + i2] = borrow;
+              borrow = 0;
+            }
+          }
+          while (borrow !== 0) {
+            quotientDigit -= 1;
+            carry = 0;
+            for (i2 = 0; i2 < l; i2++) {
+              carry += remainder[shift + i2] - base + divisor[i2];
+              if (carry < 0) {
+                remainder[shift + i2] = carry + base;
+                carry = 0;
+              } else {
+                remainder[shift + i2] = carry;
+                carry = 1;
+              }
+            }
+            borrow += carry;
+          }
+          result[shift] = quotientDigit;
+        }
+        remainder = divModSmall(remainder, lambda)[0];
+        return [arrayToSmall(result), arrayToSmall(remainder)];
+      }
+      function divMod2(a, b) {
+        var a_l = a.length, b_l = b.length, result = [], part = [], base = BASE, guess, xlen, highx, highy, check;
+        while (a_l) {
+          part.unshift(a[--a_l]);
+          trim(part);
+          if (compareAbs(part, b) < 0) {
+            result.push(0);
+            continue;
+          }
+          xlen = part.length;
+          highx = part[xlen - 1] * base + part[xlen - 2];
+          highy = b[b_l - 1] * base + b[b_l - 2];
+          if (xlen > b_l) {
+            highx = (highx + 1) * base;
+          }
+          guess = Math.ceil(highx / highy);
+          do {
+            check = multiplySmall(b, guess);
+            if (compareAbs(check, part) <= 0)
+              break;
+            guess--;
+          } while (guess);
+          result.push(guess);
+          part = subtract(part, check);
+        }
+        result.reverse();
+        return [arrayToSmall(result), arrayToSmall(part)];
+      }
+      function divModSmall(value, lambda) {
+        var length = value.length, quotient = createArray(length), base = BASE, i2, q, remainder, divisor;
+        remainder = 0;
+        for (i2 = length - 1; i2 >= 0; --i2) {
+          divisor = remainder * base + value[i2];
+          q = truncate(divisor / lambda);
+          remainder = divisor - q * lambda;
+          quotient[i2] = q | 0;
+        }
+        return [quotient, remainder | 0];
+      }
+      function divModAny(self, v) {
+        var value, n = parseValue(v);
+        if (supportsNativeBigInt) {
+          return [new NativeBigInt(self.value / n.value), new NativeBigInt(self.value % n.value)];
+        }
+        var a = self.value, b = n.value;
+        var quotient;
+        if (b === 0)
+          throw new Error("Cannot divide by zero");
+        if (self.isSmall) {
+          if (n.isSmall) {
+            return [new SmallInteger(truncate(a / b)), new SmallInteger(a % b)];
+          }
+          return [Integer[0], self];
+        }
+        if (n.isSmall) {
+          if (b === 1)
+            return [self, Integer[0]];
+          if (b == -1)
+            return [self.negate(), Integer[0]];
+          var abs = Math.abs(b);
+          if (abs < BASE) {
+            value = divModSmall(a, abs);
+            quotient = arrayToSmall(value[0]);
+            var remainder = value[1];
+            if (self.sign)
+              remainder = -remainder;
+            if (typeof quotient === "number") {
+              if (self.sign !== n.sign)
+                quotient = -quotient;
+              return [new SmallInteger(quotient), new SmallInteger(remainder)];
+            }
+            return [new BigInteger(quotient, self.sign !== n.sign), new SmallInteger(remainder)];
+          }
+          b = smallToArray(abs);
+        }
+        var comparison = compareAbs(a, b);
+        if (comparison === -1)
+          return [Integer[0], self];
+        if (comparison === 0)
+          return [Integer[self.sign === n.sign ? 1 : -1], Integer[0]];
+        if (a.length + b.length <= 200)
+          value = divMod1(a, b);
+        else
+          value = divMod2(a, b);
+        quotient = value[0];
+        var qSign = self.sign !== n.sign, mod = value[1], mSign = self.sign;
+        if (typeof quotient === "number") {
+          if (qSign)
+            quotient = -quotient;
+          quotient = new SmallInteger(quotient);
+        } else
+          quotient = new BigInteger(quotient, qSign);
+        if (typeof mod === "number") {
+          if (mSign)
+            mod = -mod;
+          mod = new SmallInteger(mod);
+        } else
+          mod = new BigInteger(mod, mSign);
+        return [quotient, mod];
+      }
+      BigInteger.prototype.divmod = function(v) {
+        var result = divModAny(this, v);
+        return {
+          quotient: result[0],
+          remainder: result[1]
+        };
+      };
+      NativeBigInt.prototype.divmod = SmallInteger.prototype.divmod = BigInteger.prototype.divmod;
+      BigInteger.prototype.divide = function(v) {
+        return divModAny(this, v)[0];
+      };
+      NativeBigInt.prototype.over = NativeBigInt.prototype.divide = function(v) {
+        return new NativeBigInt(this.value / parseValue(v).value);
+      };
+      SmallInteger.prototype.over = SmallInteger.prototype.divide = BigInteger.prototype.over = BigInteger.prototype.divide;
+      BigInteger.prototype.mod = function(v) {
+        return divModAny(this, v)[1];
+      };
+      NativeBigInt.prototype.mod = NativeBigInt.prototype.remainder = function(v) {
+        return new NativeBigInt(this.value % parseValue(v).value);
+      };
+      SmallInteger.prototype.remainder = SmallInteger.prototype.mod = BigInteger.prototype.remainder = BigInteger.prototype.mod;
+      BigInteger.prototype.pow = function(v) {
+        var n = parseValue(v), a = this.value, b = n.value, value, x, y;
+        if (b === 0)
+          return Integer[1];
+        if (a === 0)
+          return Integer[0];
+        if (a === 1)
+          return Integer[1];
+        if (a === -1)
+          return n.isEven() ? Integer[1] : Integer[-1];
+        if (n.sign) {
+          return Integer[0];
+        }
+        if (!n.isSmall)
+          throw new Error("The exponent " + n.toString() + " is too large.");
+        if (this.isSmall) {
+          if (isPrecise(value = Math.pow(a, b)))
+            return new SmallInteger(truncate(value));
+        }
+        x = this;
+        y = Integer[1];
+        while (true) {
+          if (b & true) {
+            y = y.times(x);
+            --b;
+          }
+          if (b === 0)
+            break;
+          b /= 2;
+          x = x.square();
+        }
+        return y;
+      };
+      SmallInteger.prototype.pow = BigInteger.prototype.pow;
+      NativeBigInt.prototype.pow = function(v) {
+        var n = parseValue(v);
+        var a = this.value, b = n.value;
+        var _0 = BigInt(0), _1 = BigInt(1), _2 = BigInt(2);
+        if (b === _0)
+          return Integer[1];
+        if (a === _0)
+          return Integer[0];
+        if (a === _1)
+          return Integer[1];
+        if (a === BigInt(-1))
+          return n.isEven() ? Integer[1] : Integer[-1];
+        if (n.isNegative())
+          return new NativeBigInt(_0);
+        var x = this;
+        var y = Integer[1];
+        while (true) {
+          if ((b & _1) === _1) {
+            y = y.times(x);
+            --b;
+          }
+          if (b === _0)
+            break;
+          b /= _2;
+          x = x.square();
+        }
+        return y;
+      };
+      BigInteger.prototype.modPow = function(exp, mod) {
+        exp = parseValue(exp);
+        mod = parseValue(mod);
+        if (mod.isZero())
+          throw new Error("Cannot take modPow with modulus 0");
+        var r = Integer[1], base = this.mod(mod);
+        if (exp.isNegative()) {
+          exp = exp.multiply(Integer[-1]);
+          base = base.modInv(mod);
+        }
+        while (exp.isPositive()) {
+          if (base.isZero())
+            return Integer[0];
+          if (exp.isOdd())
+            r = r.multiply(base).mod(mod);
+          exp = exp.divide(2);
+          base = base.square().mod(mod);
+        }
+        return r;
+      };
+      NativeBigInt.prototype.modPow = SmallInteger.prototype.modPow = BigInteger.prototype.modPow;
+      function compareAbs(a, b) {
+        if (a.length !== b.length) {
+          return a.length > b.length ? 1 : -1;
+        }
+        for (var i2 = a.length - 1; i2 >= 0; i2--) {
+          if (a[i2] !== b[i2])
+            return a[i2] > b[i2] ? 1 : -1;
+        }
+        return 0;
+      }
+      BigInteger.prototype.compareAbs = function(v) {
+        var n = parseValue(v), a = this.value, b = n.value;
+        if (n.isSmall)
+          return 1;
+        return compareAbs(a, b);
+      };
+      SmallInteger.prototype.compareAbs = function(v) {
+        var n = parseValue(v), a = Math.abs(this.value), b = n.value;
+        if (n.isSmall) {
+          b = Math.abs(b);
+          return a === b ? 0 : a > b ? 1 : -1;
+        }
+        return -1;
+      };
+      NativeBigInt.prototype.compareAbs = function(v) {
+        var a = this.value;
+        var b = parseValue(v).value;
+        a = a >= 0 ? a : -a;
+        b = b >= 0 ? b : -b;
+        return a === b ? 0 : a > b ? 1 : -1;
+      };
+      BigInteger.prototype.compare = function(v) {
+        if (v === Infinity) {
+          return -1;
+        }
+        if (v === -Infinity) {
+          return 1;
+        }
+        var n = parseValue(v), a = this.value, b = n.value;
+        if (this.sign !== n.sign) {
+          return n.sign ? 1 : -1;
+        }
+        if (n.isSmall) {
+          return this.sign ? -1 : 1;
+        }
+        return compareAbs(a, b) * (this.sign ? -1 : 1);
+      };
+      BigInteger.prototype.compareTo = BigInteger.prototype.compare;
+      SmallInteger.prototype.compare = function(v) {
+        if (v === Infinity) {
+          return -1;
+        }
+        if (v === -Infinity) {
+          return 1;
+        }
+        var n = parseValue(v), a = this.value, b = n.value;
+        if (n.isSmall) {
+          return a == b ? 0 : a > b ? 1 : -1;
+        }
+        if (a < 0 !== n.sign) {
+          return a < 0 ? -1 : 1;
+        }
+        return a < 0 ? 1 : -1;
+      };
+      SmallInteger.prototype.compareTo = SmallInteger.prototype.compare;
+      NativeBigInt.prototype.compare = function(v) {
+        if (v === Infinity) {
+          return -1;
+        }
+        if (v === -Infinity) {
+          return 1;
+        }
+        var a = this.value;
+        var b = parseValue(v).value;
+        return a === b ? 0 : a > b ? 1 : -1;
+      };
+      NativeBigInt.prototype.compareTo = NativeBigInt.prototype.compare;
+      BigInteger.prototype.equals = function(v) {
+        return this.compare(v) === 0;
+      };
+      NativeBigInt.prototype.eq = NativeBigInt.prototype.equals = SmallInteger.prototype.eq = SmallInteger.prototype.equals = BigInteger.prototype.eq = BigInteger.prototype.equals;
+      BigInteger.prototype.notEquals = function(v) {
+        return this.compare(v) !== 0;
+      };
+      NativeBigInt.prototype.neq = NativeBigInt.prototype.notEquals = SmallInteger.prototype.neq = SmallInteger.prototype.notEquals = BigInteger.prototype.neq = BigInteger.prototype.notEquals;
+      BigInteger.prototype.greater = function(v) {
+        return this.compare(v) > 0;
+      };
+      NativeBigInt.prototype.gt = NativeBigInt.prototype.greater = SmallInteger.prototype.gt = SmallInteger.prototype.greater = BigInteger.prototype.gt = BigInteger.prototype.greater;
+      BigInteger.prototype.lesser = function(v) {
+        return this.compare(v) < 0;
+      };
+      NativeBigInt.prototype.lt = NativeBigInt.prototype.lesser = SmallInteger.prototype.lt = SmallInteger.prototype.lesser = BigInteger.prototype.lt = BigInteger.prototype.lesser;
+      BigInteger.prototype.greaterOrEquals = function(v) {
+        return this.compare(v) >= 0;
+      };
+      NativeBigInt.prototype.geq = NativeBigInt.prototype.greaterOrEquals = SmallInteger.prototype.geq = SmallInteger.prototype.greaterOrEquals = BigInteger.prototype.geq = BigInteger.prototype.greaterOrEquals;
+      BigInteger.prototype.lesserOrEquals = function(v) {
+        return this.compare(v) <= 0;
+      };
+      NativeBigInt.prototype.leq = NativeBigInt.prototype.lesserOrEquals = SmallInteger.prototype.leq = SmallInteger.prototype.lesserOrEquals = BigInteger.prototype.leq = BigInteger.prototype.lesserOrEquals;
+      BigInteger.prototype.isEven = function() {
+        return (this.value[0] & 1) === 0;
+      };
+      SmallInteger.prototype.isEven = function() {
+        return (this.value & 1) === 0;
+      };
+      NativeBigInt.prototype.isEven = function() {
+        return (this.value & BigInt(1)) === BigInt(0);
+      };
+      BigInteger.prototype.isOdd = function() {
+        return (this.value[0] & 1) === 1;
+      };
+      SmallInteger.prototype.isOdd = function() {
+        return (this.value & 1) === 1;
+      };
+      NativeBigInt.prototype.isOdd = function() {
+        return (this.value & BigInt(1)) === BigInt(1);
+      };
+      BigInteger.prototype.isPositive = function() {
+        return !this.sign;
+      };
+      SmallInteger.prototype.isPositive = function() {
+        return this.value > 0;
+      };
+      NativeBigInt.prototype.isPositive = SmallInteger.prototype.isPositive;
+      BigInteger.prototype.isNegative = function() {
+        return this.sign;
+      };
+      SmallInteger.prototype.isNegative = function() {
+        return this.value < 0;
+      };
+      NativeBigInt.prototype.isNegative = SmallInteger.prototype.isNegative;
+      BigInteger.prototype.isUnit = function() {
+        return false;
+      };
+      SmallInteger.prototype.isUnit = function() {
+        return Math.abs(this.value) === 1;
+      };
+      NativeBigInt.prototype.isUnit = function() {
+        return this.abs().value === BigInt(1);
+      };
+      BigInteger.prototype.isZero = function() {
+        return false;
+      };
+      SmallInteger.prototype.isZero = function() {
+        return this.value === 0;
+      };
+      NativeBigInt.prototype.isZero = function() {
+        return this.value === BigInt(0);
+      };
+      BigInteger.prototype.isDivisibleBy = function(v) {
+        var n = parseValue(v);
+        if (n.isZero())
+          return false;
+        if (n.isUnit())
+          return true;
+        if (n.compareAbs(2) === 0)
+          return this.isEven();
+        return this.mod(n).isZero();
+      };
+      NativeBigInt.prototype.isDivisibleBy = SmallInteger.prototype.isDivisibleBy = BigInteger.prototype.isDivisibleBy;
+      function isBasicPrime(v) {
+        var n = v.abs();
+        if (n.isUnit())
+          return false;
+        if (n.equals(2) || n.equals(3) || n.equals(5))
+          return true;
+        if (n.isEven() || n.isDivisibleBy(3) || n.isDivisibleBy(5))
+          return false;
+        if (n.lesser(49))
+          return true;
+      }
+      function millerRabinTest(n, a) {
+        var nPrev = n.prev(), b = nPrev, r = 0, d, t, i2, x;
+        while (b.isEven())
+          b = b.divide(2), r++;
+        next:
+          for (i2 = 0; i2 < a.length; i2++) {
+            if (n.lesser(a[i2]))
+              continue;
+            x = bigInt(a[i2]).modPow(b, n);
+            if (x.isUnit() || x.equals(nPrev))
+              continue;
+            for (d = r - 1; d != 0; d--) {
+              x = x.square().mod(n);
+              if (x.isUnit())
+                return false;
+              if (x.equals(nPrev))
+                continue next;
+            }
+            return false;
+          }
+        return true;
+      }
+      BigInteger.prototype.isPrime = function(strict) {
+        var isPrime = isBasicPrime(this);
+        if (isPrime !== undefined2)
+          return isPrime;
+        var n = this.abs();
+        var bits = n.bitLength();
+        if (bits <= 64)
+          return millerRabinTest(n, [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]);
+        var logN = Math.log(2) * bits.toJSNumber();
+        var t = Math.ceil(strict === true ? 2 * Math.pow(logN, 2) : logN);
+        for (var a = [], i2 = 0; i2 < t; i2++) {
+          a.push(bigInt(i2 + 2));
+        }
+        return millerRabinTest(n, a);
+      };
+      NativeBigInt.prototype.isPrime = SmallInteger.prototype.isPrime = BigInteger.prototype.isPrime;
+      BigInteger.prototype.isProbablePrime = function(iterations, rng) {
+        var isPrime = isBasicPrime(this);
+        if (isPrime !== undefined2)
+          return isPrime;
+        var n = this.abs();
+        var t = iterations === undefined2 ? 5 : iterations;
+        for (var a = [], i2 = 0; i2 < t; i2++) {
+          a.push(bigInt.randBetween(2, n.minus(2), rng));
+        }
+        return millerRabinTest(n, a);
+      };
+      NativeBigInt.prototype.isProbablePrime = SmallInteger.prototype.isProbablePrime = BigInteger.prototype.isProbablePrime;
+      BigInteger.prototype.modInv = function(n) {
+        var t = bigInt.zero, newT = bigInt.one, r = parseValue(n), newR = this.abs(), q, lastT, lastR;
+        while (!newR.isZero()) {
+          q = r.divide(newR);
+          lastT = t;
+          lastR = r;
+          t = newT;
+          r = newR;
+          newT = lastT.subtract(q.multiply(newT));
+          newR = lastR.subtract(q.multiply(newR));
+        }
+        if (!r.isUnit())
+          throw new Error(this.toString() + " and " + n.toString() + " are not co-prime");
+        if (t.compare(0) === -1) {
+          t = t.add(n);
+        }
+        if (this.isNegative()) {
+          return t.negate();
+        }
+        return t;
+      };
+      NativeBigInt.prototype.modInv = SmallInteger.prototype.modInv = BigInteger.prototype.modInv;
+      BigInteger.prototype.next = function() {
+        var value = this.value;
+        if (this.sign) {
+          return subtractSmall(value, 1, this.sign);
+        }
+        return new BigInteger(addSmall(value, 1), this.sign);
+      };
+      SmallInteger.prototype.next = function() {
+        var value = this.value;
+        if (value + 1 < MAX_INT)
+          return new SmallInteger(value + 1);
+        return new BigInteger(MAX_INT_ARR, false);
+      };
+      NativeBigInt.prototype.next = function() {
+        return new NativeBigInt(this.value + BigInt(1));
+      };
+      BigInteger.prototype.prev = function() {
+        var value = this.value;
+        if (this.sign) {
+          return new BigInteger(addSmall(value, 1), true);
+        }
+        return subtractSmall(value, 1, this.sign);
+      };
+      SmallInteger.prototype.prev = function() {
+        var value = this.value;
+        if (value - 1 > -MAX_INT)
+          return new SmallInteger(value - 1);
+        return new BigInteger(MAX_INT_ARR, true);
+      };
+      NativeBigInt.prototype.prev = function() {
+        return new NativeBigInt(this.value - BigInt(1));
+      };
+      var powersOfTwo = [1];
+      while (2 * powersOfTwo[powersOfTwo.length - 1] <= BASE)
+        powersOfTwo.push(2 * powersOfTwo[powersOfTwo.length - 1]);
+      var powers2Length = powersOfTwo.length, highestPower2 = powersOfTwo[powers2Length - 1];
+      function shift_isSmall(n) {
+        return Math.abs(n) <= BASE;
+      }
+      BigInteger.prototype.shiftLeft = function(v) {
+        var n = parseValue(v).toJSNumber();
+        if (!shift_isSmall(n)) {
+          throw new Error(String(n) + " is too large for shifting.");
+        }
+        if (n < 0)
+          return this.shiftRight(-n);
+        var result = this;
+        if (result.isZero())
+          return result;
+        while (n >= powers2Length) {
+          result = result.multiply(highestPower2);
+          n -= powers2Length - 1;
+        }
+        return result.multiply(powersOfTwo[n]);
+      };
+      NativeBigInt.prototype.shiftLeft = SmallInteger.prototype.shiftLeft = BigInteger.prototype.shiftLeft;
+      BigInteger.prototype.shiftRight = function(v) {
+        var remQuo;
+        var n = parseValue(v).toJSNumber();
+        if (!shift_isSmall(n)) {
+          throw new Error(String(n) + " is too large for shifting.");
+        }
+        if (n < 0)
+          return this.shiftLeft(-n);
+        var result = this;
+        while (n >= powers2Length) {
+          if (result.isZero() || result.isNegative() && result.isUnit())
+            return result;
+          remQuo = divModAny(result, highestPower2);
+          result = remQuo[1].isNegative() ? remQuo[0].prev() : remQuo[0];
+          n -= powers2Length - 1;
+        }
+        remQuo = divModAny(result, powersOfTwo[n]);
+        return remQuo[1].isNegative() ? remQuo[0].prev() : remQuo[0];
+      };
+      NativeBigInt.prototype.shiftRight = SmallInteger.prototype.shiftRight = BigInteger.prototype.shiftRight;
+      function bitwise(x, y, fn) {
+        y = parseValue(y);
+        var xSign = x.isNegative(), ySign = y.isNegative();
+        var xRem = xSign ? x.not() : x, yRem = ySign ? y.not() : y;
+        var xDigit = 0, yDigit = 0;
+        var xDivMod = null, yDivMod = null;
+        var result = [];
+        while (!xRem.isZero() || !yRem.isZero()) {
+          xDivMod = divModAny(xRem, highestPower2);
+          xDigit = xDivMod[1].toJSNumber();
+          if (xSign) {
+            xDigit = highestPower2 - 1 - xDigit;
+          }
+          yDivMod = divModAny(yRem, highestPower2);
+          yDigit = yDivMod[1].toJSNumber();
+          if (ySign) {
+            yDigit = highestPower2 - 1 - yDigit;
+          }
+          xRem = xDivMod[0];
+          yRem = yDivMod[0];
+          result.push(fn(xDigit, yDigit));
+        }
+        var sum = fn(xSign ? 1 : 0, ySign ? 1 : 0) !== 0 ? bigInt(-1) : bigInt(0);
+        for (var i2 = result.length - 1; i2 >= 0; i2 -= 1) {
+          sum = sum.multiply(highestPower2).add(bigInt(result[i2]));
+        }
+        return sum;
+      }
+      BigInteger.prototype.not = function() {
+        return this.negate().prev();
+      };
+      NativeBigInt.prototype.not = SmallInteger.prototype.not = BigInteger.prototype.not;
+      BigInteger.prototype.and = function(n) {
+        return bitwise(this, n, function(a, b) {
+          return a & b;
+        });
+      };
+      NativeBigInt.prototype.and = SmallInteger.prototype.and = BigInteger.prototype.and;
+      BigInteger.prototype.or = function(n) {
+        return bitwise(this, n, function(a, b) {
+          return a | b;
+        });
+      };
+      NativeBigInt.prototype.or = SmallInteger.prototype.or = BigInteger.prototype.or;
+      BigInteger.prototype.xor = function(n) {
+        return bitwise(this, n, function(a, b) {
+          return a ^ b;
+        });
+      };
+      NativeBigInt.prototype.xor = SmallInteger.prototype.xor = BigInteger.prototype.xor;
+      var LOBMASK_I = 1 << 30, LOBMASK_BI = (BASE & -BASE) * (BASE & -BASE) | LOBMASK_I;
+      function roughLOB(n) {
+        var v = n.value, x = typeof v === "number" ? v | LOBMASK_I : typeof v === "bigint" ? v | BigInt(LOBMASK_I) : v[0] + v[1] * BASE | LOBMASK_BI;
+        return x & -x;
+      }
+      function integerLogarithm(value, base) {
+        if (base.compareTo(value) <= 0) {
+          var tmp = integerLogarithm(value, base.square(base));
+          var p = tmp.p;
+          var e = tmp.e;
+          var t = p.multiply(base);
+          return t.compareTo(value) <= 0 ? { p: t, e: e * 2 + 1 } : { p, e: e * 2 };
+        }
+        return { p: bigInt(1), e: 0 };
+      }
+      BigInteger.prototype.bitLength = function() {
+        var n = this;
+        if (n.compareTo(bigInt(0)) < 0) {
+          n = n.negate().subtract(bigInt(1));
+        }
+        if (n.compareTo(bigInt(0)) === 0) {
+          return bigInt(0);
+        }
+        return bigInt(integerLogarithm(n, bigInt(2)).e).add(bigInt(1));
+      };
+      NativeBigInt.prototype.bitLength = SmallInteger.prototype.bitLength = BigInteger.prototype.bitLength;
+      function max(a, b) {
+        a = parseValue(a);
+        b = parseValue(b);
+        return a.greater(b) ? a : b;
+      }
+      function min(a, b) {
+        a = parseValue(a);
+        b = parseValue(b);
+        return a.lesser(b) ? a : b;
+      }
+      function gcd(a, b) {
+        a = parseValue(a).abs();
+        b = parseValue(b).abs();
+        if (a.equals(b))
+          return a;
+        if (a.isZero())
+          return b;
+        if (b.isZero())
+          return a;
+        var c2 = Integer[1], d, t;
+        while (a.isEven() && b.isEven()) {
+          d = min(roughLOB(a), roughLOB(b));
+          a = a.divide(d);
+          b = b.divide(d);
+          c2 = c2.multiply(d);
+        }
+        while (a.isEven()) {
+          a = a.divide(roughLOB(a));
+        }
+        do {
+          while (b.isEven()) {
+            b = b.divide(roughLOB(b));
+          }
+          if (a.greater(b)) {
+            t = b;
+            b = a;
+            a = t;
+          }
+          b = b.subtract(a);
+        } while (!b.isZero());
+        return c2.isUnit() ? a : a.multiply(c2);
+      }
+      function lcm(a, b) {
+        a = parseValue(a).abs();
+        b = parseValue(b).abs();
+        return a.divide(gcd(a, b)).multiply(b);
+      }
+      function randBetween(a, b, rng) {
+        a = parseValue(a);
+        b = parseValue(b);
+        var usedRNG = rng || Math.random;
+        var low = min(a, b), high = max(a, b);
+        var range = high.subtract(low).add(1);
+        if (range.isSmall)
+          return low.add(Math.floor(usedRNG() * range));
+        var digits = toBase(range, BASE).value;
+        var result = [], restricted = true;
+        for (var i2 = 0; i2 < digits.length; i2++) {
+          var top = restricted ? digits[i2] + (i2 + 1 < digits.length ? digits[i2 + 1] / BASE : 0) : BASE;
+          var digit = truncate(usedRNG() * top);
+          result.push(digit);
+          if (digit < digits[i2])
+            restricted = false;
+        }
+        return low.add(Integer.fromArray(result, BASE, false));
+      }
+      var parseBase = function(text, base, alphabet, caseSensitive) {
+        alphabet = alphabet || DEFAULT_ALPHABET;
+        text = String(text);
+        if (!caseSensitive) {
+          text = text.toLowerCase();
+          alphabet = alphabet.toLowerCase();
+        }
+        var length = text.length;
+        var i2;
+        var absBase = Math.abs(base);
+        var alphabetValues = {};
+        for (i2 = 0; i2 < alphabet.length; i2++) {
+          alphabetValues[alphabet[i2]] = i2;
+        }
+        for (i2 = 0; i2 < length; i2++) {
+          var c2 = text[i2];
+          if (c2 === "-")
+            continue;
+          if (c2 in alphabetValues) {
+            if (alphabetValues[c2] >= absBase) {
+              if (c2 === "1" && absBase === 1)
+                continue;
+              throw new Error(c2 + " is not a valid digit in base " + base + ".");
+            }
+          }
+        }
+        base = parseValue(base);
+        var digits = [];
+        var isNegative = text[0] === "-";
+        for (i2 = isNegative ? 1 : 0; i2 < text.length; i2++) {
+          var c2 = text[i2];
+          if (c2 in alphabetValues)
+            digits.push(parseValue(alphabetValues[c2]));
+          else if (c2 === "<") {
+            var start = i2;
+            do {
+              i2++;
+            } while (text[i2] !== ">" && i2 < text.length);
+            digits.push(parseValue(text.slice(start + 1, i2)));
+          } else
+            throw new Error(c2 + " is not a valid character");
+        }
+        return parseBaseFromArray(digits, base, isNegative);
+      };
+      function parseBaseFromArray(digits, base, isNegative) {
+        var val = Integer[0], pow = Integer[1], i2;
+        for (i2 = digits.length - 1; i2 >= 0; i2--) {
+          val = val.add(digits[i2].times(pow));
+          pow = pow.times(base);
+        }
+        return isNegative ? val.negate() : val;
+      }
+      function stringify(digit, alphabet) {
+        alphabet = alphabet || DEFAULT_ALPHABET;
+        if (digit < alphabet.length) {
+          return alphabet[digit];
+        }
+        return "<" + digit + ">";
+      }
+      function toBase(n, base) {
+        base = bigInt(base);
+        if (base.isZero()) {
+          if (n.isZero())
+            return { value: [0], isNegative: false };
+          throw new Error("Cannot convert nonzero numbers to base 0.");
+        }
+        if (base.equals(-1)) {
+          if (n.isZero())
+            return { value: [0], isNegative: false };
+          if (n.isNegative())
+            return {
+              value: [].concat.apply([], Array.apply(null, Array(-n.toJSNumber())).map(Array.prototype.valueOf, [1, 0])),
+              isNegative: false
+            };
+          var arr = Array.apply(null, Array(n.toJSNumber() - 1)).map(Array.prototype.valueOf, [0, 1]);
+          arr.unshift([1]);
+          return {
+            value: [].concat.apply([], arr),
+            isNegative: false
+          };
+        }
+        var neg = false;
+        if (n.isNegative() && base.isPositive()) {
+          neg = true;
+          n = n.abs();
+        }
+        if (base.isUnit()) {
+          if (n.isZero())
+            return { value: [0], isNegative: false };
+          return {
+            value: Array.apply(null, Array(n.toJSNumber())).map(Number.prototype.valueOf, 1),
+            isNegative: neg
+          };
+        }
+        var out = [];
+        var left = n, divmod;
+        while (left.isNegative() || left.compareAbs(base) >= 0) {
+          divmod = left.divmod(base);
+          left = divmod.quotient;
+          var digit = divmod.remainder;
+          if (digit.isNegative()) {
+            digit = base.minus(digit).abs();
+            left = left.next();
+          }
+          out.push(digit.toJSNumber());
+        }
+        out.push(left.toJSNumber());
+        return { value: out.reverse(), isNegative: neg };
+      }
+      function toBaseString(n, base, alphabet) {
+        var arr = toBase(n, base);
+        return (arr.isNegative ? "-" : "") + arr.value.map(function(x) {
+          return stringify(x, alphabet);
+        }).join("");
+      }
+      BigInteger.prototype.toArray = function(radix) {
+        return toBase(this, radix);
+      };
+      SmallInteger.prototype.toArray = function(radix) {
+        return toBase(this, radix);
+      };
+      NativeBigInt.prototype.toArray = function(radix) {
+        return toBase(this, radix);
+      };
+      BigInteger.prototype.toString = function(radix, alphabet) {
+        if (radix === undefined2)
+          radix = 10;
+        if (radix !== 10)
+          return toBaseString(this, radix, alphabet);
+        var v = this.value, l = v.length, str = String(v[--l]), zeros = "0000000", digit;
+        while (--l >= 0) {
+          digit = String(v[l]);
+          str += zeros.slice(digit.length) + digit;
+        }
+        var sign = this.sign ? "-" : "";
+        return sign + str;
+      };
+      SmallInteger.prototype.toString = function(radix, alphabet) {
+        if (radix === undefined2)
+          radix = 10;
+        if (radix != 10)
+          return toBaseString(this, radix, alphabet);
+        return String(this.value);
+      };
+      NativeBigInt.prototype.toString = SmallInteger.prototype.toString;
+      NativeBigInt.prototype.toJSON = BigInteger.prototype.toJSON = SmallInteger.prototype.toJSON = function() {
+        return this.toString();
+      };
+      BigInteger.prototype.valueOf = function() {
+        return parseInt(this.toString(), 10);
+      };
+      BigInteger.prototype.toJSNumber = BigInteger.prototype.valueOf;
+      SmallInteger.prototype.valueOf = function() {
+        return this.value;
+      };
+      SmallInteger.prototype.toJSNumber = SmallInteger.prototype.valueOf;
+      NativeBigInt.prototype.valueOf = NativeBigInt.prototype.toJSNumber = function() {
+        return parseInt(this.toString(), 10);
+      };
+      function parseStringValue(v) {
+        if (isPrecise(+v)) {
+          var x = +v;
+          if (x === truncate(x))
+            return supportsNativeBigInt ? new NativeBigInt(BigInt(x)) : new SmallInteger(x);
+          throw new Error("Invalid integer: " + v);
+        }
+        var sign = v[0] === "-";
+        if (sign)
+          v = v.slice(1);
+        var split = v.split(/e/i);
+        if (split.length > 2)
+          throw new Error("Invalid integer: " + split.join("e"));
+        if (split.length === 2) {
+          var exp = split[1];
+          if (exp[0] === "+")
+            exp = exp.slice(1);
+          exp = +exp;
+          if (exp !== truncate(exp) || !isPrecise(exp))
+            throw new Error("Invalid integer: " + exp + " is not a valid exponent.");
+          var text = split[0];
+          var decimalPlace = text.indexOf(".");
+          if (decimalPlace >= 0) {
+            exp -= text.length - decimalPlace - 1;
+            text = text.slice(0, decimalPlace) + text.slice(decimalPlace + 1);
+          }
+          if (exp < 0)
+            throw new Error("Cannot include negative exponent part for integers");
+          text += new Array(exp + 1).join("0");
+          v = text;
+        }
+        var isValid = /^([0-9][0-9]*)$/.test(v);
+        if (!isValid)
+          throw new Error("Invalid integer: " + v);
+        if (supportsNativeBigInt) {
+          return new NativeBigInt(BigInt(sign ? "-" + v : v));
+        }
+        var r = [], max2 = v.length, l = LOG_BASE, min2 = max2 - l;
+        while (max2 > 0) {
+          r.push(+v.slice(min2, max2));
+          min2 -= l;
+          if (min2 < 0)
+            min2 = 0;
+          max2 -= l;
+        }
+        trim(r);
+        return new BigInteger(r, sign);
+      }
+      function parseNumberValue(v) {
+        if (supportsNativeBigInt) {
+          return new NativeBigInt(BigInt(v));
+        }
+        if (isPrecise(v)) {
+          if (v !== truncate(v))
+            throw new Error(v + " is not an integer.");
+          return new SmallInteger(v);
+        }
+        return parseStringValue(v.toString());
+      }
+      function parseValue(v) {
+        if (typeof v === "number") {
+          return parseNumberValue(v);
+        }
+        if (typeof v === "string") {
+          return parseStringValue(v);
+        }
+        if (typeof v === "bigint") {
+          return new NativeBigInt(v);
+        }
+        return v;
+      }
+      for (var i = 0; i < 1e3; i++) {
+        Integer[i] = parseValue(i);
+        if (i > 0)
+          Integer[-i] = parseValue(-i);
+      }
+      Integer.one = Integer[1];
+      Integer.zero = Integer[0];
+      Integer.minusOne = Integer[-1];
+      Integer.max = max;
+      Integer.min = min;
+      Integer.gcd = gcd;
+      Integer.lcm = lcm;
+      Integer.isInstance = function(x) {
+        return x instanceof BigInteger || x instanceof SmallInteger || x instanceof NativeBigInt;
+      };
+      Integer.randBetween = randBetween;
+      Integer.fromArray = function(digits, base, isNegative) {
+        return parseBaseFromArray(digits.map(parseValue), parseValue(base || 10), isNegative);
+      };
+      return Integer;
+    }();
+    if (typeof module2 !== "undefined" && module2.hasOwnProperty("exports")) {
+      module2.exports = bigInt;
+    }
+    if (typeof define === "function" && define.amd) {
+      define(function() {
+        return bigInt;
+      });
+    }
+  }
+});
+
+// node_modules/app-info-parser/node_modules/bplist-parser/bplistParser.js
+var require_bplistParser2 = __commonJS({
+  "node_modules/app-info-parser/node_modules/bplist-parser/bplistParser.js"(exports) {
+    "use strict";
+    var fs2 = require("fs");
+    var bigInt = require_BigInteger();
+    var debug = false;
+    exports.maxObjectSize = 100 * 1e3 * 1e3;
+    exports.maxObjectCount = 32768;
+    var EPOCH = 9783072e5;
+    var UID = exports.UID = function(id) {
+      this.UID = id;
+    };
+    var parseFile = exports.parseFile = function(fileNameOrBuffer, callback) {
+      return new Promise(function(resolve, reject) {
+        function tryParseBuffer(buffer) {
+          let err = null;
+          let result;
+          try {
+            result = parseBuffer(buffer);
+            resolve(result);
+          } catch (ex) {
+            err = ex;
+            reject(err);
+          } finally {
+            if (callback)
+              callback(err, result);
+          }
+        }
+        if (Buffer.isBuffer(fileNameOrBuffer)) {
+          return tryParseBuffer(fileNameOrBuffer);
+        }
+        fs2.readFile(fileNameOrBuffer, function(err, data) {
+          if (err) {
+            reject(err);
+            return callback(err);
+          }
+          tryParseBuffer(data);
+        });
+      });
+    };
+    var parseBuffer = exports.parseBuffer = function(buffer) {
+      const header = buffer.slice(0, "bplist".length).toString("utf8");
+      if (header !== "bplist") {
+        throw new Error("Invalid binary plist. Expected 'bplist' at offset 0.");
+      }
+      const trailer = buffer.slice(buffer.length - 32, buffer.length);
+      const offsetSize = trailer.readUInt8(6);
+      if (debug) {
+        console.log("offsetSize: " + offsetSize);
+      }
+      const objectRefSize = trailer.readUInt8(7);
+      if (debug) {
+        console.log("objectRefSize: " + objectRefSize);
+      }
+      const numObjects = readUInt64BE(trailer, 8);
+      if (debug) {
+        console.log("numObjects: " + numObjects);
+      }
+      const topObject = readUInt64BE(trailer, 16);
+      if (debug) {
+        console.log("topObject: " + topObject);
+      }
+      const offsetTableOffset = readUInt64BE(trailer, 24);
+      if (debug) {
+        console.log("offsetTableOffset: " + offsetTableOffset);
+      }
+      if (numObjects > exports.maxObjectCount) {
+        throw new Error("maxObjectCount exceeded");
+      }
+      const offsetTable = [];
+      for (let i = 0; i < numObjects; i++) {
+        const offsetBytes = buffer.slice(offsetTableOffset + i * offsetSize, offsetTableOffset + (i + 1) * offsetSize);
+        offsetTable[i] = readUInt(offsetBytes, 0);
+        if (debug) {
+          console.log("Offset for Object #" + i + " is " + offsetTable[i] + " [" + offsetTable[i].toString(16) + "]");
+        }
+      }
+      function parseObject(tableOffset) {
+        const offset = offsetTable[tableOffset];
+        const type = buffer[offset];
+        const objType = (type & 240) >> 4;
+        const objInfo = type & 15;
+        switch (objType) {
+          case 0:
+            return parseSimple();
+          case 1:
+            return parseInteger();
+          case 8:
+            return parseUID();
+          case 2:
+            return parseReal();
+          case 3:
+            return parseDate();
+          case 4:
+            return parseData();
+          case 5:
+            return parsePlistString();
+          case 6:
+            return parsePlistString(true);
+          case 10:
+            return parseArray();
+          case 13:
+            return parseDictionary();
+          default:
+            throw new Error("Unhandled type 0x" + objType.toString(16));
+        }
+        function parseSimple() {
+          switch (objInfo) {
+            case 0:
+              return null;
+            case 8:
+              return false;
+            case 9:
+              return true;
+            case 15:
+              return null;
+            default:
+              throw new Error("Unhandled simple type 0x" + objType.toString(16));
+          }
+        }
+        function bufferToHexString(buffer2) {
+          let str = "";
+          let i;
+          for (i = 0; i < buffer2.length; i++) {
+            if (buffer2[i] != 0) {
+              break;
+            }
+          }
+          for (; i < buffer2.length; i++) {
+            const part = "00" + buffer2[i].toString(16);
+            str += part.substr(part.length - 2);
+          }
+          return str;
+        }
+        function parseInteger() {
+          const length = Math.pow(2, objInfo);
+          if (objInfo == 4) {
+            const data = buffer.slice(offset + 1, offset + 1 + length);
+            const str = bufferToHexString(data);
+            return bigInt(str, 16);
+          }
+          if (objInfo == 3) {
+            return buffer.readInt32BE(offset + 1);
+          }
+          if (length < exports.maxObjectSize) {
+            return readUInt(buffer.slice(offset + 1, offset + 1 + length));
+          }
+          throw new Error("To little heap space available! Wanted to read " + length + " bytes, but only " + exports.maxObjectSize + " are available.");
+        }
+        function parseUID() {
+          const length = objInfo + 1;
+          if (length < exports.maxObjectSize) {
+            return new UID(readUInt(buffer.slice(offset + 1, offset + 1 + length)));
+          }
+          throw new Error("To little heap space available! Wanted to read " + length + " bytes, but only " + exports.maxObjectSize + " are available.");
+        }
+        function parseReal() {
+          const length = Math.pow(2, objInfo);
+          if (length < exports.maxObjectSize) {
+            const realBuffer = buffer.slice(offset + 1, offset + 1 + length);
+            if (length === 4) {
+              return realBuffer.readFloatBE(0);
+            }
+            if (length === 8) {
+              return realBuffer.readDoubleBE(0);
+            }
+          } else {
+            throw new Error("To little heap space available! Wanted to read " + length + " bytes, but only " + exports.maxObjectSize + " are available.");
+          }
+        }
+        function parseDate() {
+          if (objInfo != 3) {
+            console.error("Unknown date type :" + objInfo + ". Parsing anyway...");
+          }
+          const dateBuffer = buffer.slice(offset + 1, offset + 9);
+          return new Date(EPOCH + 1e3 * dateBuffer.readDoubleBE(0));
+        }
+        function parseData() {
+          let dataoffset = 1;
+          let length = objInfo;
+          if (objInfo == 15) {
+            const int_type = buffer[offset + 1];
+            const intType = (int_type & 240) / 16;
+            if (intType != 1) {
+              console.error("0x4: UNEXPECTED LENGTH-INT TYPE! " + intType);
+            }
+            const intInfo = int_type & 15;
+            const intLength = Math.pow(2, intInfo);
+            dataoffset = 2 + intLength;
+            if (intLength < 3) {
+              length = readUInt(buffer.slice(offset + 2, offset + 2 + intLength));
+            } else {
+              length = readUInt(buffer.slice(offset + 2, offset + 2 + intLength));
+            }
+          }
+          if (length < exports.maxObjectSize) {
+            return buffer.slice(offset + dataoffset, offset + dataoffset + length);
+          }
+          throw new Error("To little heap space available! Wanted to read " + length + " bytes, but only " + exports.maxObjectSize + " are available.");
+        }
+        function parsePlistString(isUtf16) {
+          isUtf16 = isUtf16 || 0;
+          let enc = "utf8";
+          let length = objInfo;
+          let stroffset = 1;
+          if (objInfo == 15) {
+            const int_type = buffer[offset + 1];
+            const intType = (int_type & 240) / 16;
+            if (intType != 1) {
+              console.err("UNEXPECTED LENGTH-INT TYPE! " + intType);
+            }
+            const intInfo = int_type & 15;
+            const intLength = Math.pow(2, intInfo);
+            stroffset = 2 + intLength;
+            if (intLength < 3) {
+              length = readUInt(buffer.slice(offset + 2, offset + 2 + intLength));
+            } else {
+              length = readUInt(buffer.slice(offset + 2, offset + 2 + intLength));
+            }
+          }
+          length *= isUtf16 + 1;
+          if (length < exports.maxObjectSize) {
+            let plistString = Buffer.from(buffer.slice(offset + stroffset, offset + stroffset + length));
+            if (isUtf16) {
+              plistString = swapBytes(plistString);
+              enc = "ucs2";
+            }
+            return plistString.toString(enc);
+          }
+          throw new Error("To little heap space available! Wanted to read " + length + " bytes, but only " + exports.maxObjectSize + " are available.");
+        }
+        function parseArray() {
+          let length = objInfo;
+          let arrayoffset = 1;
+          if (objInfo == 15) {
+            const int_type = buffer[offset + 1];
+            const intType = (int_type & 240) / 16;
+            if (intType != 1) {
+              console.error("0xa: UNEXPECTED LENGTH-INT TYPE! " + intType);
+            }
+            const intInfo = int_type & 15;
+            const intLength = Math.pow(2, intInfo);
+            arrayoffset = 2 + intLength;
+            if (intLength < 3) {
+              length = readUInt(buffer.slice(offset + 2, offset + 2 + intLength));
+            } else {
+              length = readUInt(buffer.slice(offset + 2, offset + 2 + intLength));
+            }
+          }
+          if (length * objectRefSize > exports.maxObjectSize) {
+            throw new Error("To little heap space available!");
+          }
+          const array = [];
+          for (let i = 0; i < length; i++) {
+            const objRef = readUInt(buffer.slice(offset + arrayoffset + i * objectRefSize, offset + arrayoffset + (i + 1) * objectRefSize));
+            array[i] = parseObject(objRef);
+          }
+          return array;
+        }
+        function parseDictionary() {
+          let length = objInfo;
+          let dictoffset = 1;
+          if (objInfo == 15) {
+            const int_type = buffer[offset + 1];
+            const intType = (int_type & 240) / 16;
+            if (intType != 1) {
+              console.error("0xD: UNEXPECTED LENGTH-INT TYPE! " + intType);
+            }
+            const intInfo = int_type & 15;
+            const intLength = Math.pow(2, intInfo);
+            dictoffset = 2 + intLength;
+            if (intLength < 3) {
+              length = readUInt(buffer.slice(offset + 2, offset + 2 + intLength));
+            } else {
+              length = readUInt(buffer.slice(offset + 2, offset + 2 + intLength));
+            }
+          }
+          if (length * 2 * objectRefSize > exports.maxObjectSize) {
+            throw new Error("To little heap space available!");
+          }
+          if (debug) {
+            console.log("Parsing dictionary #" + tableOffset);
+          }
+          const dict = {};
+          for (let i = 0; i < length; i++) {
+            const keyRef = readUInt(buffer.slice(offset + dictoffset + i * objectRefSize, offset + dictoffset + (i + 1) * objectRefSize));
+            const valRef = readUInt(buffer.slice(offset + dictoffset + length * objectRefSize + i * objectRefSize, offset + dictoffset + length * objectRefSize + (i + 1) * objectRefSize));
+            const key = parseObject(keyRef);
+            const val = parseObject(valRef);
+            if (debug) {
+              console.log("  DICT #" + tableOffset + ": Mapped " + key + " to " + val);
+            }
+            dict[key] = val;
+          }
+          return dict;
+        }
+      }
+      return [parseObject(topObject)];
+    };
+    function readUInt(buffer, start) {
+      start = start || 0;
+      let l = 0;
+      for (let i = start; i < buffer.length; i++) {
+        l <<= 8;
+        l |= buffer[i] & 255;
+      }
+      return l;
+    }
+    function readUInt64BE(buffer, start) {
+      const data = buffer.slice(start, start + 8);
+      return data.readUInt32BE(4, 8);
+    }
+    function swapBytes(buffer) {
+      const len = buffer.length;
+      for (let i = 0; i < len; i += 2) {
+        const a = buffer[i];
+        buffer[i] = buffer[i + 1];
+        buffer[i + 1] = a;
+      }
+      return buffer;
+    }
+  }
+});
+
+// node_modules/app-info-parser/src/ipa.js
+var require_ipa = __commonJS({
+  "node_modules/app-info-parser/src/ipa.js"(exports, module2) {
+    "use strict";
+    function _typeof(obj) {
+      "@babel/helpers - typeof";
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+        _typeof = function _typeof2(obj2) {
+          return typeof obj2;
+        };
+      } else {
+        _typeof = function _typeof2(obj2) {
+          return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+        };
+      }
+      return _typeof(obj);
+    }
+    function _toConsumableArray(arr) {
+      return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+    }
+    function _nonIterableSpread() {
+      throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }
+    function _unsupportedIterableToArray(o, minLen) {
+      if (!o)
+        return;
+      if (typeof o === "string")
+        return _arrayLikeToArray(o, minLen);
+      var n = Object.prototype.toString.call(o).slice(8, -1);
+      if (n === "Object" && o.constructor)
+        n = o.constructor.name;
+      if (n === "Map" || n === "Set")
+        return Array.from(o);
+      if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
+        return _arrayLikeToArray(o, minLen);
+    }
+    function _iterableToArray(iter) {
+      if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
+        return Array.from(iter);
+    }
+    function _arrayWithoutHoles(arr) {
+      if (Array.isArray(arr))
+        return _arrayLikeToArray(arr);
+    }
+    function _arrayLikeToArray(arr, len) {
+      if (len == null || len > arr.length)
+        len = arr.length;
+      for (var i = 0, arr2 = new Array(len); i < len; i++) {
+        arr2[i] = arr[i];
+      }
+      return arr2;
+    }
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
+    }
+    function _defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    function _createClass(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        _defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        _defineProperties(Constructor, staticProps);
+      return Constructor;
+    }
+    function _inherits(subClass, superClass) {
+      if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function");
+      }
+      subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
+      if (superClass)
+        _setPrototypeOf(subClass, superClass);
+    }
+    function _setPrototypeOf(o, p) {
+      _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf2(o2, p2) {
+        o2.__proto__ = p2;
+        return o2;
+      };
+      return _setPrototypeOf(o, p);
+    }
+    function _createSuper(Derived) {
+      var hasNativeReflectConstruct = _isNativeReflectConstruct();
+      return function _createSuperInternal() {
+        var Super = _getPrototypeOf(Derived), result;
+        if (hasNativeReflectConstruct) {
+          var NewTarget = _getPrototypeOf(this).constructor;
+          result = Reflect.construct(Super, arguments, NewTarget);
+        } else {
+          result = Super.apply(this, arguments);
+        }
+        return _possibleConstructorReturn(this, result);
+      };
+    }
+    function _possibleConstructorReturn(self, call) {
+      if (call && (_typeof(call) === "object" || typeof call === "function")) {
+        return call;
+      }
+      return _assertThisInitialized(self);
+    }
+    function _assertThisInitialized(self) {
+      if (self === void 0) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+      }
+      return self;
+    }
+    function _isNativeReflectConstruct() {
+      if (typeof Reflect === "undefined" || !Reflect.construct)
+        return false;
+      if (Reflect.construct.sham)
+        return false;
+      if (typeof Proxy === "function")
+        return true;
+      try {
+        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
+        }));
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+    function _getPrototypeOf(o) {
+      _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf2(o2) {
+        return o2.__proto__ || Object.getPrototypeOf(o2);
+      };
+      return _getPrototypeOf(o);
+    }
+    var parsePlist = require_plist2().parse;
+    var parseBplist = require_bplistParser2().parseBuffer;
+    var cgbiToPng = require_cgbi_to_png();
+    var Zip = require_zip();
+    var _require = require_utils3();
+    var findIpaIconPath = _require.findIpaIconPath;
+    var getBase64FromBuffer = _require.getBase64FromBuffer;
+    var isBrowser = _require.isBrowser;
+    var PlistName = new RegExp("payload/.+?.app/info.plist$", "i");
+    var ProvisionName = /payload\/.+?\.app\/embedded.mobileprovision/;
+    var IpaParser = /* @__PURE__ */ function(_Zip) {
+      _inherits(IpaParser2, _Zip);
+      var _super = _createSuper(IpaParser2);
+      function IpaParser2(file) {
+        var _this;
+        _classCallCheck(this, IpaParser2);
+        _this = _super.call(this, file);
+        if (!(_assertThisInitialized(_this) instanceof IpaParser2)) {
+          return _possibleConstructorReturn(_this, new IpaParser2(file));
+        }
+        return _this;
+      }
+      _createClass(IpaParser2, [{
+        key: "parse",
+        value: function parse() {
+          var _this2 = this;
+          return new Promise(function(resolve, reject) {
+            _this2.getEntries([PlistName, ProvisionName]).then(function(buffers) {
+              if (!buffers[PlistName]) {
+                throw new Error("Info.plist can't be found.");
+              }
+              var plistInfo = _this2._parsePlist(buffers[PlistName]);
+              var provisionInfo = _this2._parseProvision(buffers[ProvisionName]);
+              plistInfo.mobileProvision = provisionInfo;
+              var iconRegex = new RegExp(findIpaIconPath(plistInfo).toLowerCase());
+              _this2.getEntry(iconRegex).then(function(iconBuffer) {
+                try {
+                  plistInfo.icon = iconBuffer ? getBase64FromBuffer(cgbiToPng.revert(iconBuffer)) : null;
+                } catch (err) {
+                  if (isBrowser()) {
+                    plistInfo.icon = iconBuffer ? getBase64FromBuffer(window.btoa(String.fromCharCode.apply(String, _toConsumableArray(iconBuffer)))) : null;
+                  } else {
+                    plistInfo.icon = null;
+                    console.warn("[Warning] failed to parse icon: ", err);
+                  }
+                }
+                resolve(plistInfo);
+              })["catch"](function(e) {
+                reject(e);
+              });
+            })["catch"](function(e) {
+              reject(e);
+            });
+          });
+        }
+      }, {
+        key: "_parsePlist",
+        value: function _parsePlist(buffer) {
+          var result;
+          var bufferType = buffer[0];
+          if (bufferType === 60 || bufferType === "<" || bufferType === 239) {
+            result = parsePlist(buffer.toString());
+          } else if (bufferType === 98) {
+            result = parseBplist(buffer)[0];
+          } else {
+            throw new Error("Unknown plist buffer type.");
+          }
+          return result;
+        }
+      }, {
+        key: "_parseProvision",
+        value: function _parseProvision(buffer) {
+          var info = {};
+          if (buffer) {
+            var content = buffer.toString("utf-8");
+            var firstIndex = content.indexOf("<?xml");
+            var endIndex = content.indexOf("</plist>");
+            content = content.slice(firstIndex, endIndex + 8);
+            if (content) {
+              info = parsePlist(content);
+            }
+          }
+          return info;
+        }
+      }]);
+      return IpaParser2;
+    }(Zip);
+    module2.exports = IpaParser;
+  }
+});
+
+// node_modules/app-info-parser/src/index.js
+var require_src = __commonJS({
+  "node_modules/app-info-parser/src/index.js"(exports, module2) {
+    "use strict";
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
+    }
+    function _defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    function _createClass(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        _defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        _defineProperties(Constructor, staticProps);
+      return Constructor;
+    }
+    var ApkParser = require_apk();
+    var IpaParser = require_ipa();
+    var supportFileTypes = ["ipa", "apk"];
+    var AppInfoParser = /* @__PURE__ */ function() {
+      function AppInfoParser2(file) {
+        _classCallCheck(this, AppInfoParser2);
+        if (!file) {
+          throw new Error("Param miss: file(file's path in Node, instance of File or Blob in browser).");
+        }
+        var splits = (file.name || file).split(".");
+        var fileType = splits[splits.length - 1].toLowerCase();
+        if (!supportFileTypes.includes(fileType)) {
+          throw new Error("Unsupported file type, only support .ipa or .apk file.");
+        }
+        this.file = file;
+        switch (fileType) {
+          case "ipa":
+            this.parser = new IpaParser(this.file);
+            break;
+          case "apk":
+            this.parser = new ApkParser(this.file);
+            break;
+        }
+      }
+      _createClass(AppInfoParser2, [{
+        key: "parse",
+        value: function parse() {
+          return this.parser.parse();
+        }
+      }]);
+      return AppInfoParser2;
+    }();
+    module2.exports = AppInfoParser;
+  }
+});
+
 // index.ts
 var s3_slurp_exports = {};
 __export(s3_slurp_exports, {
@@ -18358,49 +29550,54 @@ var core = __toESM(require_core());
 var fs = __toESM(require("fs"));
 var import_glob = __toESM(require_glob());
 var import_ipa_bundler = __toESM(require_ipa_bundler());
-var ABI = __toESM(require_app_bundle_info());
-var path = __toESM(require("path"));
+var path2 = __toESM(require("path"));
 var os = __toESM(require("os"));
 var import_util = require("util");
 var import_path = require("path");
 var import_child_process = require("child_process");
+var ABI = require_src();
 run().catch(console.error);
 async function run() {
   const bucket = s3name(core.getInput("bucket", { required: true }));
   const destinationPath = core.getInput("destinationPath", { required: false }) || "/";
-  const destinationUrl = core.getInput("destinationUrl", { required: false }) || `https://${bucket}.s3.amazonaws.com${path.join("/", destinationPath, "/")}`;
+  const destinationUrl = core.getInput("destinationUrl", { required: false }) || `https://${bucket}.s3.amazonaws.com${path2.join("/", destinationPath, "/")}`;
   const sourcePaths = core.getInput("sourcePaths", { required: true });
-  const dest = await (0, import_util.promisify)(fs.mkdtemp)(path.join(os.tmpdir(), "hubrise"));
+  const dest = await (0, import_util.promisify)(fs.mkdtemp)(path2.join(os.tmpdir(), "hubrise"));
   const files = await glop(sourcePaths, {});
   const data = await Promise.all(files.map((file, index) => handleFile(file, index).catch((e) => {
     console.error(`Failed to process file '${file}': ${e}`);
   })));
   const apps = data.filter((v) => v && true);
-  console.log(data);
-  await (0, import_util.promisify)(fs.writeFile)(path.join(dest, "index.json"), JSON.stringify(data, null, 2));
-  await (0, import_util.promisify)(fs.writeFile)(path.join(dest, "index.html"), landing(apps, `${destinationUrl}/index.html`));
-  core.setOutput("url", `${destinationUrl}/index.html`);
-  const remote = `s3://${path.join(bucket, destinationPath)}`;
+  console.log(apps);
+  const indexUrl = `${destinationUrl}index.html`;
+  await (0, import_util.promisify)(fs.writeFile)(path2.join(dest, "index.json"), JSON.stringify(apps, null, 2));
+  await (0, import_util.promisify)(fs.writeFile)(path2.join(dest, "index.html"), landing(apps, indexUrl));
+  core.setOutput("url", indexUrl);
+  if (process.env.SKIP_UPLOAD) {
+    console.log("Skipping upload", dest);
+    return;
+  }
+  const remote = `s3://${path2.join(bucket, destinationPath)}`;
   console.log(`Syncing ${dest} to ${remote}`);
   await (0, import_util.promisify)(import_child_process.exec)(`aws s3 sync ${dest} ${remote} --acl public-read;`);
   async function handleFile(file, index) {
-    const bundle = await autodetect2(fs.createReadStream(file)).catch((e) => {
+    const bundle = await new ABI(file).parse().catch((e) => {
       throw e;
     });
     const destFile = `${index}-${(0, import_path.basename)(file)}`;
-    await (0, import_util.promisify)(fs.copyFile)(file, path.join(dest, destFile));
+    await (0, import_util.promisify)(fs.copyFile)(file, path2.join(dest, destFile));
     const destUrl = new URL(destFile, destinationUrl).toString();
     const icon = await parseImage(bundle);
-    await (0, import_util.promisify)(fs.writeFile)(path.join(path.join(dest, `${index}-icon.${extension(icon)}`)), icon);
-    if (bundle.type === "ios") {
-      const info = await new Promise((r, e) => bundle.loadInfo((err, info2) => err ? e(err) : r(info2)));
+    await (0, import_util.promisify)(fs.writeFile)(path2.join(path2.join(dest, `${index}-icon.${extension(icon)}`)), icon);
+    if ("CFBundleName" in bundle) {
+      const info = bundle;
       const details = {
         bundleIdentifier: info.CFBundleIdentifier,
         bundleVersion: info.CFBundleVersion,
         bundleMarketingVersion: info.CFBundleShortVersionString,
         appTitle: info.CFBundleDisplayName || info.CFBundleName
       };
-      await (0, import_util.promisify)(fs.writeFile)(path.join(path.join(dest, `${index}-manifest.plist`)), (0, import_ipa_bundler.manifest)(destUrl, { ...details, appIcon: icon }));
+      await (0, import_util.promisify)(fs.writeFile)(path2.join(path2.join(dest, `${index}-manifest.plist`)), (0, import_ipa_bundler.manifest)(destUrl, { ...details, appIcon: icon }));
       return {
         ...details,
         appFile: file,
@@ -18411,10 +29608,10 @@ async function run() {
         }
       };
     } else {
-      const info = await new Promise((r, e) => bundle.loadInfo((err, info2) => err ? e(err) : r(info2)));
+      const info = bundle;
       return {
         bundleIdentifier: info.package,
-        bundleVersion: info.versionCode || info.versionName,
+        bundleVersion: info.versionCode.toString() || info.versionName,
         bundleMarketingVersion: info.versionName,
         appTitle: info.package,
         appFile: file,
@@ -18432,21 +29629,13 @@ function s3name(s3scheme) {
   }
   return s3scheme;
 }
-function autodetect2(stream) {
-  return new Promise((resolve, reject) => ABI.autodetect(stream, (err, data) => err ? reject(err) : resolve(data)));
-}
 function glop(glb, options) {
   return new Promise((resolve, reject) => (0, import_glob.default)(glb, {}, (err, paths) => err ? reject(err) : resolve(paths)));
 }
 function parseImage(bundle) {
-  return new Promise((resolve, reject) => bundle.getIconFile((err, iconStream) => {
-    if (err) {
-      return reject(err);
-    }
-    var bufs = [];
-    iconStream.on("data", (d) => bufs.push(d));
-    iconStream.on("end", () => resolve(Buffer.concat(bufs)));
-  }));
+  if (!bundle || !bundle.icon)
+    return Buffer.alloc(0);
+  return Buffer.from(bundle.icon.substring(bundle.icon.indexOf(",")), "base64");
 }
 function extension(buf) {
   switch (buf.slice(0, 2).toString("hex")) {
@@ -18501,4 +29690,15 @@ module.exports = __toCommonJS(s3_slurp_exports);
  * Copyright (c) 2011-2015 KARASZI Istvan <github@spam.raszi.hu>
  *
  * MIT Licensed
+ */
+/**
+ * @license bytebuffer.js (c) 2015 Daniel Wirtz <dcode@dcode.io>
+ * Backing buffer / Accessor: node Buffer
+ * Released under the Apache License, Version 2.0
+ * see: https://github.com/dcodeIO/bytebuffer.js for details
+ */
+/**
+ * @license long.js (c) 2013 Daniel Wirtz <dcode@dcode.io>
+ * Released under the Apache License, Version 2.0
+ * see: https://github.com/dcodeIO/long.js for details
  */

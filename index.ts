@@ -1,9 +1,8 @@
 import * as core from "@actions/core";
-import * as github from "@actions/github";
 import * as fs from "fs";
 import glob from "glob";
 import { link, manifest } from "ipa-bundler";
-import * as ABI from "app-bundle-info";
+import ABI = require('app-info-parser');
 import * as path from "path";
 import * as os from "os";
 import { promisify } from "util";
@@ -41,12 +40,17 @@ async function run() {
   const apps = data.filter((v): v is AppDetails => v && true);
 
   // Write landing page
-  console.log(data);
-  await promisify(fs.writeFile)(path.join(dest, "index.json"), JSON.stringify(data, null, 2));
-  await promisify(fs.writeFile)(path.join(dest, "index.html"), landing(apps, `${destinationUrl}/index.html`));
-  core.setOutput("url", `${destinationUrl}/index.html`);
+  console.log(apps);
+  const indexUrl = `${destinationUrl}index.html`;
+  await promisify(fs.writeFile)(path.join(dest, "index.json"), JSON.stringify(apps, null, 2));
+  await promisify(fs.writeFile)(path.join(dest, "index.html"), landing(apps, indexUrl));
+  core.setOutput("url", indexUrl);
 
   // Sync dest to bucket
+  if (process.env.SKIP_UPLOAD) {
+    console.log("Skipping upload", dest);
+    return;
+  }
   const remote = `s3://${path.join(bucket, destinationPath)}`;
   console.log(`Syncing ${dest} to ${remote}`);
   await promisify(exec)(`aws s3 sync ${dest} ${remote} --acl public-read;`);
@@ -54,7 +58,7 @@ async function run() {
   // Processing of individual files
   async function handleFile(file: string, index: number): Promise<AppDetails> {
     // Read bundle info
-    const bundle = await autodetect(fs.createReadStream(file)).catch((e) => { throw e; });
+    const bundle = await (new ABI(file)).parse().catch((e) => { throw e; });
 
     // Drop to target
     const destFile = `${index}-${basename(file)}`;
@@ -66,8 +70,8 @@ async function run() {
     await promisify(fs.writeFile)(path.join(path.join(dest, `${index}-icon.${extension(icon)}`)), icon);
 
     // Write manifest
-    if (bundle.type === "ios") {
-      const info = await new Promise<ABI.iOSInformation>((r, e) => bundle.loadInfo((err, info) => err ? e(err) : r(info)));
+    if ("CFBundleName" in bundle) {
+      const info: ABI.iOS = bundle as ABI.iOS;
       const details = {
         bundleIdentifier: info.CFBundleIdentifier,
         bundleVersion: info.CFBundleVersion,
@@ -85,10 +89,10 @@ async function run() {
         },
       }
     } else {
-      const info = await new Promise<ABI.AndroidInformation>((r, e) => bundle.loadInfo((err, info) => err ? e(err) : r(info)));
+      const info: ABI.Android = bundle as ABI.Android;
       return {
         bundleIdentifier: info.package,
-        bundleVersion: info.versionCode || info.versionName,
+        bundleVersion: info.versionCode.toString() || info.versionName,
         bundleMarketingVersion: info.versionName,
         appTitle: info.package,
         appFile: file,
@@ -108,10 +112,6 @@ function s3name(s3scheme: string) {
   return s3scheme;
 }
 
-function autodetect(stream: fs.ReadStream) {
-  return new Promise<ABI.Android|ABI.iOS>((resolve, reject) => ABI.autodetect(stream, (err, data) => err ? reject(err) : resolve(data)));
-}
-
 function glop(glb: string, options: Parameters<typeof glob>[1]) {
   return new Promise<string[]>((resolve, reject) =>
     glob(glb, {}, (err, paths) => err ? reject(err) : resolve(paths)));
@@ -119,14 +119,8 @@ function glop(glb: string, options: Parameters<typeof glob>[1]) {
 
 
 function parseImage(bundle: ABI.iOS | ABI.Android) {
-  return new Promise<Buffer>((resolve, reject) => bundle.getIconFile((err, iconStream) => {
-    if (err) {
-      return reject(err);
-    }
-    var bufs = [];
-    iconStream.on('data', (d) => bufs.push(d));
-    iconStream.on('end', () => resolve(Buffer.concat(bufs)));
-  }));
+  if (!bundle || !bundle.icon) return Buffer.alloc(0);
+  return Buffer.from(bundle.icon.substring(bundle.icon.indexOf(",")), "base64");
 }
 
 // https://stackoverflow.com/questions/27886677/javascript-get-extension-from-base64-image

@@ -17,6 +17,9 @@ inputs:
     description: "files or directory to slurp, supports globs; defaults to all APK and IPA the current dir"
     default: "**/*.{apk,ipa}"
     required: false
+  extraArgs:
+    description: "extra aws cli args"
+    required: false
 outputs:
   url:
     description: "url of the generated download page (https://$bucket.s3.amazonaws.com/$path/index.html)"

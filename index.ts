@@ -28,7 +28,8 @@ async function run() {
   const destinationPath = core.getInput("destinationPath", { required: false }) || "/";
   const destinationUrl = core.getInput("destinationUrl", { required: false }) || `https://${bucket}.s3.amazonaws.com${path.join("/", destinationPath, "/")}`;
   const sourcePaths = core.getInput("sourcePaths", { required: true });
-
+  const extraArgs = core.getInput("extraArgs", { required: false });
+  
   // Temporary directory to collect files
   const dest = await promisify(fs.mkdtemp)(path.join(os.tmpdir(), "hubrise"));
 
@@ -53,7 +54,7 @@ async function run() {
   }
   const remote = `s3://${path.join(bucket, destinationPath)}`;
   console.log(`Syncing ${dest} to ${remote}`);
-  await promisify(exec)(`aws s3 sync ${dest} ${remote} --acl public-read;`);
+  await promisify(exec)(`aws s3 sync ${dest} ${remote} --acl public-read ${extraArgs};`);
 
   // Processing of individual files
   async function handleFile(file: string, index: number): Promise<AppDetails> {
@@ -145,7 +146,7 @@ function landing(data: AppDetails[], rootUrl: string) {
   });
   return `
 <div>
-  <a href="${rootUrl}"><img src="${qr(rootUrl, 200)}" />
+  <a href="${rootUrl}"><img src="${qr(rootUrl, 90)}" />
   Scan the QR to open this page on a mobile device.
 </a></div>
 <ul>${items.map((html) => `<li>${html}</li>`).join("")}</ul>

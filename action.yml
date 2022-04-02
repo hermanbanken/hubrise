@@ -1,4 +1,4 @@
-name: "HubRise"
+name: "HubRise ipa/apk upload to S3"
 description: "Uploads/slurps all ipa/apk files to S3 (and adds a manifest for easy adhoc downloading)"
 runs:
   using: "node16"

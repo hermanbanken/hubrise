@@ -1,5 +1,5 @@
-name: "S3 ipa/apk slurp"
-description: "Uploads all ipa/apk files (with manifest) to S3"
+name: "HubRise"
+description: "Uploads/slurps all ipa/apk files to S3 (and adds a manifest for easy adhoc downloading)"
 runs:
   using: "node16"
   main: "bundle.js"

@@ -135,7 +135,7 @@ function extension(buf: Buffer) {
 
 function landing(data: AppDetails[], rootUrl: string) {
   const items = data.map((options) => {
-    const maybeImage = options.urls.icon ? `<img width=200 height=200 src="${options.urls.icon}" /> ` : "";
+    const maybeImage = options.urls.icon ? `<img width=90 height=90 src="${options.urls.icon}" /> ` : "";
     const href = options.urls.manifest ? link(options.urls.manifest) : options.urls.abi;
     return `
 <a href="${href}">
@@ -146,7 +146,7 @@ function landing(data: AppDetails[], rootUrl: string) {
   });
   return `
 <div>
-  <a href="${rootUrl}"><img src="${qr(rootUrl, 90)}" />
+  <a href="${rootUrl}"><img src="${qr(rootUrl, 200)}" />
   Scan the QR to open this page on a mobile device.
 </a></div>
 <ul>${items.map((html) => `<li>${html}</li>`).join("")}</ul>

@@ -29560,7 +29560,7 @@ run().catch(console.error);
 async function run() {
   const bucket = s3name(core.getInput("bucket", { required: true }));
   const destinationPath = core.getInput("destinationPath", { required: false }) || "/";
-  const destinationUrl = core.getInput("destinationUrl", { required: false }) || `https://${bucket}.storage.googleapis.com${path2.join("/", destinationPath, "/")}`;
+  const destinationUrl = core.getInput("destinationUrl", { required: false }) || `https://${bucket}.s3.amazonaws.com${path2.join("/", destinationPath, "/")}`;
   const sourcePaths = core.getInput("sourcePaths", { required: true });
   const extraArgs = core.getInput("extraArgs", { required: false });
   const dest = await (0, import_util.promisify)(fs.mkdtemp)(path2.join(os.tmpdir(), "hubrise"));

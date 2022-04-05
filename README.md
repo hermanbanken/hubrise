@@ -9,7 +9,7 @@ and hosting them in S3 with a very lightweight HTML page.
 ### Usage
 
 <details><summary>
-  For Android
+  For Android (with React Native file structure):
 
   ```yaml
      - name: Upload apk to S3
@@ -64,7 +64,7 @@ and hosting them in S3 with a very lightweight HTML page.
 </details>
 
 <details><summary>
-  For iOS:
+  For iOS  (with React Native file structure):
   
   ```yaml
      - name: Upload ipa to S3

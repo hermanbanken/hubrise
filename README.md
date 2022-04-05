@@ -15,7 +15,7 @@ and hosting them in S3 with a very lightweight HTML page.
      - name: Upload apk to S3
        id: s3
        if: ${{ steps.apk.outcome == 'success' }}
-       uses: hermanbanken/hubrise@v0.0.6
+       uses: hermanbanken/hubrise@v0.0.5
        with:
          bucket: s3://your-bucket
          destinationPath: ${{ github.run_number }}-${{ steps.uuid.outputs.uuid }}
@@ -36,7 +36,7 @@ and hosting them in S3 with a very lightweight HTML page.
           ANDROID_SIGNING_KEY_PASSWORD: ${{ secrets.ANDROID_SIGNING_KEY_PASSWORD }}
 
       # Upload apk to S3
-      - name: Configure AWS credentials from sandbox account
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ secrets.AWS_ROLE }}
@@ -47,7 +47,7 @@ and hosting them in S3 with a very lightweight HTML page.
       - name: Upload apk to S3
         id: s3
         if: ${{ steps.apk.outcome == 'success' }}
-        uses: hermanbanken/hubrise@v0.0.6
+        uses: hermanbanken/hubrise@v0.0.5
         with:
           bucket: s3://your-bucket
           destinationPath: ${{ github.run_number }}-${{ steps.uuid.outputs.uuid }}
@@ -70,7 +70,7 @@ and hosting them in S3 with a very lightweight HTML page.
      - name: Upload ipa to S3
        id: s3
        if: ${{ steps.apk.outcome == 'success' }}
-       uses: hermanbanken/hubrise@v0.0.6
+       uses: hermanbanken/hubrise@v0.0.5
        with:
          bucket: s3://your-bucket
          destinationPath: ${{ github.run_number }}-${{ steps.uuid.outputs.uuid }}
@@ -92,7 +92,7 @@ and hosting them in S3 with a very lightweight HTML page.
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
       # Upload ipa to S3
-      - name: Configure AWS credentials from sandbox account
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ secrets.AWS_ROLE }}
@@ -103,7 +103,7 @@ and hosting them in S3 with a very lightweight HTML page.
       - name: Upload ipa to S3
         id: s3
         if: ${{ steps.ipa.outcome == 'success' }}
-        uses: hermanbanken/hubrise@v0.0.6
+        uses: hermanbanken/hubrise@v0.0.5
         with:
           bucket: s3://your-bucket
           destinationPath: ${{ github.run_number }}-${{ steps.uuid.outputs.uuid }}

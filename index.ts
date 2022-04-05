@@ -28,7 +28,8 @@ async function run() {
   const destinationPath = core.getInput("destinationPath", { required: false }) || "/";
   const destinationUrl = core.getInput("destinationUrl", { required: false }) || `https://${bucket}.s3.amazonaws.com${path.join("/", destinationPath, "/")}`;
   const sourcePaths = core.getInput("sourcePaths", { required: true });
-
+  const extraArgs = core.getInput("extraArgs", { required: false });
+  
   // Temporary directory to collect files
   const dest = await promisify(fs.mkdtemp)(path.join(os.tmpdir(), "hubrise"));
 
@@ -53,7 +54,7 @@ async function run() {
   }
   const remote = `s3://${path.join(bucket, destinationPath)}`;
   console.log(`Syncing ${dest} to ${remote}`);
-  await promisify(exec)(`aws s3 sync ${dest} ${remote} --acl public-read;`);
+  await promisify(exec)(`aws s3 sync ${dest} ${remote} --acl public-read ${extraArgs};`);
 
   // Processing of individual files
   async function handleFile(file: string, index: number): Promise<AppDetails> {
@@ -134,7 +135,7 @@ function extension(buf: Buffer) {
 
 function landing(data: AppDetails[], rootUrl: string) {
   const items = data.map((options) => {
-    const maybeImage = options.urls.icon ? `<img width=200 height=200 src="${options.urls.icon}" /> ` : "";
+    const maybeImage = options.urls.icon ? `<img width=90 height=90 src="${options.urls.icon}" /> ` : "";
     const href = options.urls.manifest ? link(options.urls.manifest) : options.urls.abi;
     return `
 <a href="${href}">

@@ -29542,8 +29542,8 @@ var require_src = __commonJS({
 });
 
 // index.ts
-var s3_slurp_exports = {};
-__export(s3_slurp_exports, {
+var hubrise_exports = {};
+__export(hubrise_exports, {
   qr: () => qr
 });
 var core = __toESM(require_core());
@@ -29562,6 +29562,7 @@ async function run() {
   const destinationPath = core.getInput("destinationPath", { required: false }) || "/";
   const destinationUrl = core.getInput("destinationUrl", { required: false }) || `https://${bucket}.s3.amazonaws.com${path2.join("/", destinationPath, "/")}`;
   const sourcePaths = core.getInput("sourcePaths", { required: true });
+  const extraArgs = core.getInput("extraArgs", { required: false });
   const dest = await (0, import_util.promisify)(fs.mkdtemp)(path2.join(os.tmpdir(), "hubrise"));
   const files = await glop(sourcePaths, {});
   const data = await Promise.all(files.map((file, index) => handleFile(file, index).catch((e) => {
@@ -29579,7 +29580,7 @@ async function run() {
   }
   const remote = `s3://${path2.join(bucket, destinationPath)}`;
   console.log(`Syncing ${dest} to ${remote}`);
-  await (0, import_util.promisify)(import_child_process.exec)(`aws s3 sync ${dest} ${remote} --acl public-read;`);
+  await (0, import_util.promisify)(import_child_process.exec)(`aws s3 sync ${dest} ${remote} --acl public-read ${extraArgs};`);
   async function handleFile(file, index) {
     const bundle = await new ABI(file).parse().catch((e) => {
       throw e;
@@ -29649,7 +29650,7 @@ function extension(buf) {
 }
 function landing(data, rootUrl) {
   const items = data.map((options) => {
-    const maybeImage = options.urls.icon ? `<img width=200 height=200 src="${options.urls.icon}" /> ` : "";
+    const maybeImage = options.urls.icon ? `<img width=90 height=90 src="${options.urls.icon}" /> ` : "";
     const href = options.urls.manifest ? (0, import_ipa_bundler.link)(options.urls.manifest) : options.urls.abi;
     return `
 <a href="${href}">
@@ -29675,7 +29676,7 @@ function qr(url, size) {
     return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(url)}`;
   }
 }
-module.exports = __toCommonJS(s3_slurp_exports);
+module.exports = __toCommonJS(hubrise_exports);
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   qr
